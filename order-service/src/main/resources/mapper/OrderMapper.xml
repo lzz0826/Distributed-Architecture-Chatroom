@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.OrderMapper">
+  <resultMap id="BaseResultMap" type="org.server.pojo.Order">
+    <id property="id" column="id" jdbcType="VARCHAR"/>
+    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="name" column="name" jdbcType="VARCHAR"/>
+    <result property="price" column="price" jdbcType="INTEGER"/>
+    <result property="num" column="num" jdbcType="INTEGER"/>
+  </resultMap>
+
+
+
+  <insert id="insertOrder">
+    insert into tb_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="userId != null">user_id,</if>
+      <if test="name != null">name,</if>
+      <if test="price != null">price,</if>
+      <if test="num != null">num,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+      <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+      <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+      <if test="price != null">#{price,jdbcType=INTEGER},</if>
+      <if test="num != null">#{num,jdbcType=INTEGER},</if>
+    </trim>
+  </insert>
+
+
+  <select id="selectAll" resultType="org.server.pojo.Order">
+     select * from tb_order;
+  </select>
+
+
+  <select id="selectById" resultType="org.server.pojo.Order">
+    select * from tb_order where id = #{id} ;
+  </select>
+
+
+</mapper>
