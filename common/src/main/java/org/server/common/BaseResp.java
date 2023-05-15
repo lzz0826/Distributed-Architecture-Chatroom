@@ -54,7 +54,7 @@ public class BaseResp<T> {
   }
 
 
-  public static <T> BaseResp<T> fall(T data , StatusCode statusCode){
+  public static <T> BaseResp<T> fail(T data , StatusCode statusCode){
     return (BaseResp<T>) BaseResp
         .builder()
         .data(data)
@@ -62,6 +62,14 @@ public class BaseResp<T> {
         .build();
   }
 
+
+  public static <T> BaseResp<T> fail(StatusCode statusCode){
+    return (BaseResp<T>) BaseResp
+        .builder()
+        .data(statusCode)
+        .statusCode(statusCode)
+        .build();
+  }
 
 
 
