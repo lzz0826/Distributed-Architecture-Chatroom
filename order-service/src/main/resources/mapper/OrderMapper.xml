@@ -31,6 +31,9 @@
       <if test="num != null">#{num,jdbcType=INTEGER},</if>
     </trim>
   </insert>
+  <update id="updateByName">
+    update tb_order set price = #{price} where name = #{name}
+  </update>
 
 
   <select id="selectAll" resultType="org.server.pojo.Order">

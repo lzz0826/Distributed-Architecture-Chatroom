@@ -17,4 +17,6 @@ public class OrderVO {
 
   private int num ;
 
+  private UserVO userVO;
+
 }

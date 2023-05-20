@@ -17,6 +17,9 @@ public class UserService {
   public UserVO gitUserById(String id){
 
     User user = userMapper.selectById(id);
+    if(user == null){
+      return null;
+    }
 
     return UserVO
         .builder()

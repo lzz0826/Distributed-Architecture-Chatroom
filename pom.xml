@@ -12,17 +12,17 @@
     <module>order-service</module>
     <module>user-service</module>
     <module>common</module>
+    <module>eureka-server</module>
   </modules>
 
   <parent>
     <groupId>org.springframework.boot</groupId>
     <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.4.0</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <version>2.3.9.RELEASE</version>
+    <relativePath/>
   </parent>
 
   <dependencies>
-
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-web</artifactId>
@@ -34,37 +34,13 @@
       </exclusions>
     </dependency>
 
-
-
-    <!-- Spring Boot Starter -->
+    <!-- Spring Boot Starter** -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter</artifactId>
     </dependency>
 
-    <!-- Spring Boot MyBatis Starter -->
-    <dependency>
-      <groupId>org.mybatis.spring.boot</groupId>
-      <artifactId>mybatis-spring-boot-starter</artifactId>
-      <version>2.2.0</version>
-    </dependency>
-
-    <!-- MyBatis -->
-    <dependency>
-      <groupId>org.mybatis</groupId>
-      <artifactId>mybatis</artifactId>
-      <version>3.5.6</version>
-    </dependency>
-
-    <!-- MySQL Connector -->
-    <dependency>
-      <groupId>mysql</groupId>
-      <artifactId>mysql-connector-java</artifactId>
-      <version>8.0.26</version>
-    </dependency>
-
-
-    <!-- 測試 -->
+    <!-- Testing -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
       <artifactId>spring-boot-starter-test</artifactId>
@@ -76,14 +52,6 @@
     </dependency>
 
 
-    <!-- 分頁 -->
-    <dependency>
-      <groupId>com.github.pagehelper</groupId>
-      <artifactId>pagehelper-spring-boot-starter</artifactId>
-      <version>1.4.6</version>
-    </dependency>
-
-
     <!-- Lombok -->
     <dependency>
       <groupId>org.projectlombok</groupId>
@@ -92,23 +60,32 @@
       <scope>provided</scope>
     </dependency>
 
-    <!-- json 轉換器 -->
+    <!-- JSON Converter -->
     <dependency>
       <groupId>com.alibaba</groupId>
       <artifactId>fastjson</artifactId>
       <version>2.0.23</version>
     </dependency>
 
-    <!--apache.commons-->
+    <!-- Apache Commons -->
     <dependency>
       <groupId>org.apache.commons</groupId>
       <artifactId>commons-lang3</artifactId>
       <version>3.12.0</version>
     </dependency>
-
-
   </dependencies>
 
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.springframework.cloud</groupId>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <version>Hoxton.SR10</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
 
   <properties>
     <maven.compiler.source>8</maven.compiler.source>

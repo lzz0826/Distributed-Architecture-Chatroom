@@ -15,5 +15,7 @@ public interface OrderMapper {
 
    Order selectById(@Param("id") String id);
 
+   int updateByName(@Param("name") String name ,@Param("price") int price);
+
 
 }

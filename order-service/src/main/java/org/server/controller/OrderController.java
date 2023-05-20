@@ -3,6 +3,7 @@ package org.server.controller;
 
 import javax.annotation.Resource;
 import org.server.common.BaseResp;
+import org.server.exception.NotOrderUserException;
 import org.server.service.OrderService;
 import org.server.vo.OrderVO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,7 +22,8 @@ public class OrderController {
 
 
   @GetMapping("/{id}")
-  public BaseResp<OrderVO> gitByID(@PathVariable("id") String id) {
+  public BaseResp<OrderVO> gitByID(@PathVariable("id") String id)
+      throws NotOrderUserException, NoSuchFieldException, IllegalAccessException {
 
     OrderVO byId = orderService.getById(id);
 

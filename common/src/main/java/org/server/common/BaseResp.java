@@ -72,8 +72,13 @@ public class BaseResp<T> {
   }
 
 
+  public BaseResp() {
+  }
 
-
+  public BaseResp(T data, StatusCode statusCode) {
+    this.data = data;
+    this.statusCode = statusCode;
+  }
 }
 
 

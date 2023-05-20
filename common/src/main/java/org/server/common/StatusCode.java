@@ -2,10 +2,29 @@ package org.server.common;
 
 public enum StatusCode {
 
-
+ /**
+ * 系統
+ */
   Success(0,"成功"),
 
-  SystemError(-1,"失敗");
+  SystemError(-1,"失敗"),
+
+  /**
+   * User 1000
+   */
+  NotFoundUser(1000,"使用者"),
+
+
+  /**
+   * Order 2000
+   */
+
+  NotFoundOrder(2000,"找不到訂單"),
+
+
+
+
+  ;
 
   public final int code;
 
