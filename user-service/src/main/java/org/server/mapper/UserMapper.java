@@ -15,6 +15,9 @@ public interface UserMapper {
   User selectById(@Param("id") String id);
 
 
+  User selectByUsername(@Param("username") String username);
+
+
 
 
 

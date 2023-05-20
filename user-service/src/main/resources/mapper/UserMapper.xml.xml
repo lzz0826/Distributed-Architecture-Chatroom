@@ -7,6 +7,7 @@
   <resultMap id="BaseResultMap" type="org.server.pojo.User">
     <id property="id" column="id" jdbcType="VARCHAR"/>
     <result property="username" column="username" jdbcType="VARCHAR"/>
+    <result property="password" column="password" jdbcType="VARCHAR"/>
     <result property="address" column="address" jdbcType="VARCHAR"/>
   </resultMap>
 
@@ -16,12 +17,14 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">id,</if>
       <if test="username != null">username,</if>
+      <if test="password != null">username,</if>
       <if test="address != null">address,</if>
     </trim>
     values
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">#{id,jdbcType=VARCHAR},</if>
       <if test="username != null">#{username,jdbcType=VARCHAR},</if>
+      <if test="password != null">#{username,jdbcType=VARCHAR},</if>
       <if test="address != null">#{address,jdbcType=VARCHAR},</if>
     </trim>
   </insert>
@@ -33,6 +36,11 @@
 
   <select id="selectById" resultType="org.server.pojo.User">
     select * from tb_user where id = #{id} ;
+  </select>
+
+
+  <select id="selectByUsername" resultType="org.server.pojo.User">
+    select * from tb_user where username = #{username} ;
   </select>
 
 

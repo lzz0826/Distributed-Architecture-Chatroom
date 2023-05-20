@@ -38,7 +38,8 @@ public class OrderService {
 
     String userId = order.getUserId();
 
-    String url = "http://127.0.0.1:8080/user/user/"+userId;
+    //使用user-service(服務名 讓eureka決定分配到哪台) 需要到Application配置附載均衡 @LoadBalanced
+    String url = "http://user-service/user/user/"+userId;
 
     System.out.println(url);
 

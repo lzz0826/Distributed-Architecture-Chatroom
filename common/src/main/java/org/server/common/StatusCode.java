@@ -12,7 +12,9 @@ public enum StatusCode {
   /**
    * User 1000
    */
-  NotFoundUser(1000,"使用者"),
+  NotFoundUser(1000,"找不到使用者"),
+
+  LoginError(10001,"登入失敗"),
 
 
   /**

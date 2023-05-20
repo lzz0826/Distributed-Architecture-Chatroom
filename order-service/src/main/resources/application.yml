@@ -11,11 +11,21 @@ spring:
     password: 12345678
   application:
     name: order-service
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml #MyBatis映射文件的位置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #開啟SQL語句打印
+
+#eureka
 eureka:
   client:
     service-url:
       defaultZone: http://127.0.0.1:10086/eureka
-mybatis:
-  mapper-locations: classpath*:mapper/*.xml #MyBatis映射文件的位置
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启SQL语句打印
+user-service:
+  ribbon:
+    NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #負載均衡規則
+ribbon:
+  eager-load:
+    enabled: true #開啟飢餓加載
+    clients: #指定飢餓加載的服務名
+      -user-service
