@@ -12,6 +12,20 @@ spring:
   application:
     name: user-service
 
+  redis:
+    host: 127.0.0.1
+    port: 6379
+    password: 123456
+    database: 0
+    timeout: 5000
+    lettuce:
+      shutdown-timeout: 100
+      pool:
+        max-active: 3
+        min-idle: 2
+        max-idle: 3
+        max-wait: 1
+
 #eureka
 eureka:
   client:
@@ -28,3 +42,4 @@ jwt:
   header: Authorization
   secret: 12345678
   expiration: 10000000
+  timeout: 99999 #token過期時間(秒)
