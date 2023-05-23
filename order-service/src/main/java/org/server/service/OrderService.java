@@ -28,9 +28,7 @@ public class OrderService {
   public OrderVO getById(String id)
       throws NotOrderUserException, NoSuchFieldException, IllegalAccessException {
 
-
     Order order = orderMapper.selectById(id);
-
 
     if(order == null){
       throw new NotOrderUserException();
