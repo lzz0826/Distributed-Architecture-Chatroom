@@ -147,6 +147,7 @@
       <version>1.12.0</version>
     </dependency>
 
+    <!--   loadbalancer Nacos需要 -->
     <dependency>
       <groupId>org.springframework.cloud</groupId>
       <artifactId>spring-cloud-starter-loadbalancer</artifactId>
