@@ -23,11 +23,11 @@ public class GrpcServerConfig {
 
     @PostConstruct
     private void start() throws IOException {
-        server = ServerBuilder.forPort(50051)
+        server = ServerBuilder.forPort(50053)
                 .addService(new HelloServer())
                 .build()
             .start();
-        log.info("gRPC server started, listening on {}", 50051);
+        log.info("gRPC server started, listening on {}", 50053);
     }
 
     @PreDestroy

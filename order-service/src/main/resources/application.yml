@@ -11,16 +11,32 @@ spring:
     password: 12345678
   application:
     name: order-service
+  cloud:
+    nacos:
+      discovery:
+        username: nacos
+        password: nacos
+        server-addr: 127.0.0.1:8848
+        namespace: public
+      config:
+        server-addr: 127.0.0.1:8848
 mybatis:
   mapper-locations: classpath*:mapper/*.xml #MyBatis映射文件的位置
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #開啟SQL語句打印
 
-#eureka
-eureka:
-  client:
-    service-url:
-      defaultZone: http://127.0.0.1:10086/eureka
+#分页插件
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
+
+##eureka
+#eureka:
+#  client:
+#    service-url:
+#      defaultZone: http://127.0.0.1:10086/eureka
 user-service:
   ribbon:
     NFLoadBalancerRuleClassName: com.netflix.loadbalancer.RandomRule #負載均衡規則

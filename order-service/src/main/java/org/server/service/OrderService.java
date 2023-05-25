@@ -12,6 +12,7 @@ import org.server.mapper.OrderMapper;
 import org.server.pojo.Order;
 import org.server.vo.OrderVO;
 import org.server.vo.UserVO;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -22,11 +23,15 @@ public class OrderService {
   @Resource
   private OrderMapper orderMapper;
 
+
   @Resource
+  @LoadBalanced
   private RestTemplate restTemplate;
 
   public OrderVO getById(String id)
       throws NotOrderUserException, NoSuchFieldException, IllegalAccessException {
+
+
 
     Order order = orderMapper.selectById(id);
 
@@ -37,9 +42,10 @@ public class OrderService {
     String userId = order.getUserId();
 
     //使用user-service(服務名 讓eureka決定分配到哪台) 需要到Application配置附載均衡 @LoadBalanced
-    String url = "http://user-service/user/user/"+userId;
+    String url = "http://user-service/user/user/" + userId;
 
     System.out.println(url);
+
 
     BaseResp baseResp = restTemplate.getForObject(url, BaseResp.class);
 

@@ -40,11 +40,17 @@
       <version>2.4.0-b180830.0359</version>
     </dependency>
 
-    <!-- eureka client-->
     <dependency>
-      <groupId>org.springframework.cloud</groupId>
-      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+      <groupId>com.alibaba.cloud</groupId>
+      <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+      <version>2021.1</version>
     </dependency>
+
+<!--    &lt;!&ndash; eureka client&ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework.cloud</groupId>-->
+<!--      <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>-->
+<!--    </dependency>-->
 
     <!-- MyBatis -->
     <dependency>
