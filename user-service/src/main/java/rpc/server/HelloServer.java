@@ -1,4 +1,4 @@
-package org.server.server;
+package rpc.server;
 
 
 import io.grpc.stub.StreamObserver;
