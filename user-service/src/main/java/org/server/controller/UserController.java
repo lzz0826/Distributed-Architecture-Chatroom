@@ -9,7 +9,7 @@ import org.server.common.StatusCode;
 import org.server.controller.req.LoginReq;
 import org.server.exception.LoginErrorException;
 import org.server.exception.UserException;
-import org.server.service.UserService;
+import org.server.service.JwtService;
 import org.server.vo.LoginVO;
 import org.server.vo.UserVO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController()
 @RequestMapping("/user")
 public class UserController extends BaseController{
+
 
   @GetMapping("/{id}")
   public BaseResp<UserVO> queryById(@PathVariable("id") String id) throws UserException {
@@ -52,6 +53,8 @@ public class UserController extends BaseController{
     String ip = request.getRemoteAddr();
 
     LoginVO login = userService.login(username, password);
+
+
 
     return BaseResp.ok(login,StatusCode.Success);
 

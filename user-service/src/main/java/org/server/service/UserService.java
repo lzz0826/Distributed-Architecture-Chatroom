@@ -16,6 +16,10 @@ import org.springframework.util.DigestUtils;
 public class UserService extends BasicService{
 
 
+  @Resource
+  private JwtCacheService jwtCacheService;
+
+
 
   public UserVO gitUserVO(String id){
     User user = gitUserById(id);
@@ -47,6 +51,12 @@ public class UserService extends BasicService{
     }
 
     String jwtToken = jwtService.generateToken(userDAO);
+
+    jwtCacheService.newToken(jwtToken,userDAO);
+
+
+
+
 
     return LoginVO
         .builder()

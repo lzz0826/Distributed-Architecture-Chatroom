@@ -3,13 +3,13 @@ package org.server.cache;
 import com.alibaba.fastjson.JSON;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
-import org.server.vo.UserVO;
+import org.server.pojo.User;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
 
 @Component
-public class JwtTokenIdCache {
+public class JwtTokenUserCache {
 
 
     @Value("${jwt.timeout}")
@@ -19,17 +19,17 @@ public class JwtTokenIdCache {
     private RedisTemplate<String, String> redisTemplate;
 
     /**
-     * 暫時使用 key: jwtToken, val: userVO
+     * 暫時使用 key: jwtToken, val: User
      */
-    public void putByJwtToken(String jwtToken, UserVO userVO) {
+    public void putByJwtToken(String jwtToken, User user) {
 
-        String objStr = JSON.toJSONString(userVO);
+        String objStr = JSON.toJSONString(user);
         redisTemplate.opsForValue().set(getKey(jwtToken), objStr, timeout, TimeUnit.SECONDS);
     }
 
-    public UserVO getByJwtToken(String jwtToken) {
+    public User getByJwtToken(String jwtToken) {
         String objStr = redisTemplate.opsForValue().get(getKey(jwtToken));
-        return JSON.parseObject(objStr, UserVO.class);
+        return JSON.parseObject(objStr, User.class);
     }
 
     public void delByJwtToken(String jwtToken) {

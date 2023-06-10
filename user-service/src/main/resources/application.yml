@@ -3,6 +3,8 @@ server:
   port: 8080
   servlet:
     context-path: /user
+netty:
+  port: 7891
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -59,3 +61,14 @@ jwt:
   secret: 12345678
   expiration: 10000000
   timeout: 99999 #token過期時間(秒)
+
+# 异步线程配置
+async:
+  executor:
+    thread:
+      core_pool_size: 5 # 配置核心线程数
+      max_pool_size: 5 # 配置最大线程数
+      queue_capacity: 99999 # 配置队列大小
+      name:
+        prefix: async-service- # 配置线程池中的线程的名称前缀
+
