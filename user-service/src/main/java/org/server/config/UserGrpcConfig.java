@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import lombok.extern.log4j.Log4j2;
 
-import rpc.server.HelloServer;
+import org.server.rpc.server.HelloServer;
 import org.springframework.stereotype.Component;
 
 @Log4j2

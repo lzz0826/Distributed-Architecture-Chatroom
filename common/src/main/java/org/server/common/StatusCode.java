@@ -24,6 +24,13 @@ public enum StatusCode {
   NotFoundOrder(2000,"找不到訂單"),
 
 
+  /**
+   * WS 9000
+   */
+
+  NeedToken(9000,"請填入token或token錯誤"),
+
+
 
 
   ;
