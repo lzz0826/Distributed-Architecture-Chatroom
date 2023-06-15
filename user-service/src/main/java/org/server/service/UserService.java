@@ -19,8 +19,6 @@ public class UserService extends BasicService{
   @Resource
   private JwtCacheService jwtCacheService;
 
-
-
   public UserVO gitUserVO(String id){
     User user = gitUserById(id);
     if(user == null){
@@ -55,9 +53,6 @@ public class UserService extends BasicService{
     jwtCacheService.newToken(jwtToken,userDAO);
 
 
-
-
-
     return LoginVO
         .builder()
         .jwtToken(jwtToken)
@@ -65,6 +60,12 @@ public class UserService extends BasicService{
 
 
   }
+
+
+
+
+
+
 
 
 

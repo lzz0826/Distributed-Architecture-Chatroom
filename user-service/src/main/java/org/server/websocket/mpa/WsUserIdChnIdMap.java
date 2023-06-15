@@ -1,6 +1,10 @@
 package org.server.websocket.mpa;
 
 import io.netty.channel.ChannelId;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 
 /**
@@ -26,6 +30,17 @@ public class WsUserIdChnIdMap {
       return null;
     }
     return map.get(userId);
+  }
+
+  public static List<ChannelId> getAll(){
+    if (map.isEmpty()) {
+      return Collections.emptyList();
+    }
+    List<ChannelId> channelIds = new ArrayList<>();
+    for (Entry<String, ChannelId> stringChannelIdEntry : map.entrySet()) {
+      channelIds.add(stringChannelIdEntry.getValue());
+    }
+    return channelIds;
   }
 
 

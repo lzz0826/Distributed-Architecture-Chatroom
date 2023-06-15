@@ -1,4 +1,4 @@
-package org.server.websocket;
+package org.server.websocket.demo;
 
 
 import io.netty.channel.ChannelHandlerContext;

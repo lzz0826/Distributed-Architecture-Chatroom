@@ -1,5 +1,6 @@
 package org.server.websocket;
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -8,9 +9,12 @@ import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.handler.codec.http.FullHttpRequest;
 import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.extern.log4j.Log4j2;
 
+import org.apache.commons.lang3.StringUtils;
+import org.server.common.StatusCode;
 import org.server.pojo.User;
 import org.server.service.JwtCacheService;
 
@@ -18,6 +22,9 @@ import org.server.service.UserService;
 import org.server.util.FastJsonUtil;
 import org.server.util.SpringUtil;
 import org.server.websocket.entity.WsRep;
+import org.server.websocket.entity.WsReq;
+import org.server.websocket.enums.EMsgType;
+import org.server.websocket.enums.EWsMsgType;
 import org.server.websocket.mpa.WsChnIdCtxMap;
 import org.server.websocket.mpa.WsChnIdUserIdMap;
 import org.server.websocket.mpa.WsUserIdChnIdMap;
@@ -43,7 +50,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     public void channelInactive(ChannelHandlerContext ctx) {
         ChannelId chnId = ctx.channel().id();
         String userId = WsChnIdUserIdMap.get(chnId);
-        log.info("與客戶端斷開连接，通道關閉！ chnId = {}, adminId = {}", chnId, userId);
+        log.info("與客戶端斷開连接，通道關閉！ chnId = {}, userId = {}", chnId, userId);
         WsChnIdUserIdMap.del(chnId);
         if (userId != null) {
             WsUserIdChnIdMap.del(userId);
@@ -65,7 +72,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             } else {
                 String userId = user.getId();
                 ChannelId chnId = ctx.channel().id();
-
                 WsUserIdChnIdMap.put(userId, chnId);
                 WsChnIdUserIdMap.put(chnId, userId);
                 WsChnIdCtxMap.put(chnId, ctx.channel());
@@ -74,10 +80,12 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             TextWebSocketFrame frame = (TextWebSocketFrame) msg;
             // 正常的text消息類型
             log.info("客戶端收到服務器數據：{}", frame.text());
+            //聊天室
+            setChatroom(frame);
+
+
         }
-
         super.channelRead(ctx, msg);
-
         if (msg instanceof FullHttpRequest) {
             if (!checkIsLogin) {
                 sendMsgByCtx(ctx, SyncMsgUtil.getNeedTokenMsg());
@@ -94,6 +102,8 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, TextWebSocketFrame textWebSocketFrame) throws Exception {
     }
+
+
     /**
      * 推送信息(私聊)
      * @param rep
@@ -105,6 +115,26 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             return;
         }
         ChannelId channelId = WsUserIdChnIdMap.get(userid);
+        checkChannelId(channelId,rep);
+    }
+
+    /**
+     * 推送信息(公告)
+     * @param rep
+     */
+    public static void sendMsgToAll(WsRep<?> rep) {
+        List<ChannelId> channelIds = WsUserIdChnIdMap.getAll();
+        if (channelIds.isEmpty() || channelIds.size() == 0) {
+            log.error("無法傳送信息，聊天室裡沒人");
+            return;
+        }
+        for (ChannelId channelId : channelIds) {
+            checkChannelId(channelId,rep);
+
+        }
+    }
+
+    public static void checkChannelId(ChannelId channelId,WsRep<?> rep){
         if (channelId != null) {
             Channel ct = WsChnIdCtxMap.get(channelId);
             if (ct != null) {
@@ -116,6 +146,8 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             log.error("無法傳送信息，找不到Chn, chnId為空");
         }
     }
+
+
 
     /**
      * 解析url中的參數
@@ -167,4 +199,36 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
         String msg = JSONObject.toJSONString(rep, FastJsonUtil.getCommonSerializeConfig());
         ctx.channel().writeAndFlush(new TextWebSocketFrame(msg));
     }
+
+    private void setChatroom(TextWebSocketFrame frame){
+        WsReq<String> wsReq = JSON.parseObject(frame.text(), WsReq.class);
+        String userId = wsReq.getUserId();
+        EMsgType eMsgType = wsReq.getEMsgType();
+        EWsMsgType eWsMsgType = wsReq.getEWsMsgType();
+        String request = wsReq.getRequest();
+        if(eWsMsgType.equals(EWsMsgType.Chatroom)){
+            System.out.println("聊天");
+            WsRep<Object> wsRep = WsRep
+                .builder()
+                .userId(userId)
+                .eMsgType(eMsgType)
+                .eWsMsgType(eWsMsgType)
+                .statusCode(StatusCode.Success)
+                .response(request)
+                .build();
+            System.out.println(wsRep);
+            if(!StringUtils.isBlank(userId)){
+                System.out.println("私聊");
+//                [2023-06-15 08:44:47] {"EMsgType":"System","EWsMsgType":"Chatroom","msg":"成功","response":"jj","statusCode":0,"userId":"2891919273143823671"}
+                sendMsgToUser(wsRep);
+            } else {
+                System.out.println("公告");
+                sendMsgToAll(wsRep);
+            }
+
+        }
+        log.error("無法傳送信息,其他錯誤");
+    }
+
+
 }
