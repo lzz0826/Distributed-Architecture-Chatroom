@@ -3,6 +3,13 @@
 
 # 1.使用 docker compose up -d 分別啟用 docker裡的 Mysql , Redis .Nacos
 
+## 後段運用:
+1.Netty
+2.Websocket
+3.GRPC
+4.Redis
+5.Nacos
+
 使用的表結構
 
 CREATE DATABASE `cloud_order`
