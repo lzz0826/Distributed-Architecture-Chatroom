@@ -9,12 +9,20 @@ public enum StatusCode {
 
   SystemError(-1,"失敗"),
 
+  MissingParameter(10,"缺少必要參數"),
+
   /**
    * User 1000
    */
   NotFoundUser(1000,"找不到使用者"),
+  LoginError(1001,"登入失敗"),
 
-  LoginError(10001,"登入失敗"),
+  NeedUserName(1002,"需要UserName"),
+
+  NeedPassword(1003,"需要Password"),
+
+  AddUserFail(1003,"新增失敗"),
+
 
 
   /**

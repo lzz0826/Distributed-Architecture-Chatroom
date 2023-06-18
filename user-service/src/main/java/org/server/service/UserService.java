@@ -6,10 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.server.exception.AddUserErrorException;
 import org.server.exception.LoginErrorException;
 import org.server.exception.UserException;
 import org.server.mapper.UserMapper;
 import org.server.pojo.User;
+import org.server.sercice.IdGeneratorService;
 import org.server.vo.LoginVO;
 import org.server.vo.UserVO;
 import org.springframework.stereotype.Service;
@@ -22,12 +24,39 @@ public class UserService{
   @Resource
   private JwtCacheService jwtCacheService;
 
+  @Resource
+  private IdGeneratorService idGeneratorService;
+
 
   @Resource
   private UserMapper userMapper;
 
   @Resource
   protected JwtService jwtService;
+
+
+  public void addUser(String username , String password ,String address)
+      throws AddUserErrorException {
+
+    User user = User
+        .builder()
+        .id(idGeneratorService.getNextId())
+        .username(username)
+        .password(password)
+        .address(address)
+        .build();
+
+    System.out.println(user);
+
+
+
+    int i = userMapper.insertUser(user);
+
+    if(i == 0){
+      throw new AddUserErrorException();
+    }
+
+  }
 
 
   public User getUserByUsername(String username){

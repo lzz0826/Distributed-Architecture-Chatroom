@@ -17,7 +17,7 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">id,</if>
       <if test="username != null">username,</if>
-      <if test="password != null">username,</if>
+      <if test="password != null">password,</if>
       <if test="address != null">address,</if>
     </trim>
     values

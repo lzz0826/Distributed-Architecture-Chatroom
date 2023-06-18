@@ -5,10 +5,14 @@ import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
+import org.redisson.MapWriterTask.Add;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
 import org.server.controller.req.LoginReq;
+import org.server.controller.req.UserAddReq;
+import org.server.exception.AddUserErrorException;
 import org.server.exception.LoginErrorException;
+import org.server.exception.MissingParameterErrorException;
 import org.server.exception.UserException;
 import org.server.pojo.User;
 import org.server.service.UserService;
@@ -28,6 +32,28 @@ public class UserController{
 
   @Resource
   protected UserService userService;
+
+  @PostMapping("/add")
+  public BaseResp<String> addUser(@RequestBody UserAddReq userAddReq)
+      throws AddUserErrorException, MissingParameterErrorException {
+    if(StringUtils.isBlank(userAddReq.getUsername())){
+      throw new MissingParameterErrorException();
+    }
+
+    if(StringUtils.isBlank(userAddReq.getPassword())){
+      throw new MissingParameterErrorException();
+    }
+
+    String username = userAddReq.getUsername();
+    String password = userAddReq.getPassword();
+    String address = userAddReq.getAddress();
+
+    userService.addUser(username,password,address);
+
+    return BaseResp.ok(StatusCode.Success);
+
+
+  }
 
 
   @GetMapping("/{id}")
