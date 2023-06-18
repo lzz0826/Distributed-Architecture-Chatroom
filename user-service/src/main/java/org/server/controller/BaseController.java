@@ -6,13 +6,6 @@ import org.server.service.UserService;
 public class BaseController {
 
 
-  @Resource
-  protected UserService userService;
-
-
-
-
-
 
 
 

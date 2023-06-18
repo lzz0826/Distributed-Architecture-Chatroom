@@ -2,9 +2,12 @@ package org.server.service;
 
 
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.exception.LoginErrorException;
+import org.server.exception.UserException;
 import org.server.mapper.UserMapper;
 import org.server.pojo.User;
 import org.server.vo.LoginVO;
@@ -13,14 +16,56 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
 @Service
-public class UserService extends BasicService{
+public class UserService{
 
 
   @Resource
   private JwtCacheService jwtCacheService;
 
-  public UserVO gitUserVO(String id){
-    User user = gitUserById(id);
+
+  @Resource
+  private UserMapper userMapper;
+
+  @Resource
+  protected JwtService jwtService;
+
+
+  public User getUserByUsername(String username){
+    return userMapper.selectByUsername(username);
+  }
+
+
+  public User getUserById(String id){
+    return userMapper.selectById(id);
+  }
+
+  public List<User> getAllUsers(){
+
+    System.out.println("2222" + userMapper.selectAllUsers());
+    return userMapper.selectAllUsers();
+  }
+
+  public List<UserVO> getAllUserVOs(){
+    List<User> allUsers = getAllUsers();
+
+    if (allUsers.size() == 0 || allUsers.isEmpty()) {
+      return null;
+    }
+    List<UserVO> userVOs = new ArrayList<>();
+    for (User allUser : allUsers) {
+      UserVO userVO = UserVO.builder()
+          .id(allUser.getId())
+          .username(allUser.getUsername())
+          .address(allUser.getAddress())
+          .build();
+
+      userVOs.add(userVO);
+    }
+    return userVOs;
+  }
+
+  public UserVO getUserVO(String id){
+    User user = getUserById(id);
     if(user == null){
       return null;
     }

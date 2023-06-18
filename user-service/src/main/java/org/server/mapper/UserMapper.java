@@ -1,5 +1,6 @@
 package org.server.mapper;
 
+import java.util.List;
 import org.server.pojo.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -16,6 +17,8 @@ public interface UserMapper {
 
 
   User selectByUsername(@Param("username") String username);
+
+  List<User> selectAllUsers();
 
 
 

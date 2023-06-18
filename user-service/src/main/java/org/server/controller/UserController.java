@@ -1,6 +1,7 @@
 package org.server.controller;
 
 
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
@@ -9,7 +10,8 @@ import org.server.common.StatusCode;
 import org.server.controller.req.LoginReq;
 import org.server.exception.LoginErrorException;
 import org.server.exception.UserException;
-import org.server.service.JwtService;
+import org.server.pojo.User;
+import org.server.service.UserService;
 import org.server.vo.LoginVO;
 import org.server.vo.UserVO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +24,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController()
 @RequestMapping("/user")
-public class UserController extends BaseController{
+public class UserController{
+
+  @Resource
+  protected UserService userService;
 
 
   @GetMapping("/{id}")
@@ -31,8 +36,19 @@ public class UserController extends BaseController{
     if(StringUtils.isBlank(id)){
       throw new UserException();
     }
-    UserVO userVO = userService.gitUserVO(id);
+    UserVO userVO = userService.getUserVO(id);
     return BaseResp.ok(userVO, StatusCode.Success);
+  }
+
+  @GetMapping("/gitAllUser")
+  public BaseResp<List<UserVO>> gitAllUser(){
+
+    List<UserVO> allUserVOs = userService.getAllUserVOs();
+
+    return BaseResp.ok(allUserVOs,StatusCode.Success);
+
+
+
   }
 
   @PostMapping("/login")

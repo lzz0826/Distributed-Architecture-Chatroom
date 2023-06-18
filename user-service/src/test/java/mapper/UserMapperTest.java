@@ -1,5 +1,6 @@
 package mapper;
 
+import java.util.List;
 import org.server.mapper.UserMapper;
 import org.server.pojo.User;
 import org.server.sercice.IdGeneratorService;
@@ -17,7 +18,15 @@ public class UserMapperTest extends BaseTest{
 
 
   @Test
-  public void test(){
+  public void selectAllUsersTest(){
+    List<User> users = userMapper.selectAllUsers();
+    System.out.println(users);
+
+  }
+
+
+  @Test
+  public void selectByIdTest(){
 
     User user = userMapper.selectById("2891681402151164817");
     System.out.println(user);

@@ -216,7 +216,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
                 .statusCode(StatusCode.Success)
                 .response(request)
                 .build();
-            System.out.println(wsRep);
             if(!StringUtils.isBlank(userId)){
                 System.out.println("私聊");
 //                [2023-06-15 08:44:47] {"EMsgType":"System","EWsMsgType":"Chatroom","msg":"成功","response":"jj","statusCode":0,"userId":"2891919273143823671"}
@@ -226,8 +225,10 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
                 sendMsgToAll(wsRep);
             }
 
+        }else {
+            log.error("無法傳送信息,其他錯誤");
+
         }
-        log.error("無法傳送信息,其他錯誤");
     }
 
 

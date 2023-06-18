@@ -44,4 +44,9 @@
   </select>
 
 
+  <select id="selectAllUsers" resultType="org.server.pojo.User">
+    select * from tb_user
+  </select>
+
+
 </mapper>
