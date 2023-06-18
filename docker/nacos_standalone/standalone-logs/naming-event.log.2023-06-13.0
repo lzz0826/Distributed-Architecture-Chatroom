@@ -1,0 +1,18 @@
+2023-06-13 09:59:59,675 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1686621578621
+
+2023-06-13 10:00:03,526 INFO service: grpc@@user-grpc {POS} {IP-ENABLED} valid: 192.168.141.62:50052@DEFAULT, region: unknown, msg: client beat ok
+
+2023-06-13 12:30:26,205 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:8082@DEFAULT@user-service, region: unknown, msg: client last beat: 1686629552692
+
+2023-06-13 15:33:33,173 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:8082@DEFAULT@user-service, region: unknown, msg: client last beat: 1686641515206
+
+2023-06-13 15:33:37,280 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1686641518556
+
+2023-06-13 15:44:53,627 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:8082@DEFAULT@user-service, region: unknown, msg: client last beat: 1686641639730
+
+2023-06-13 19:17:36,000 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:8082@DEFAULT@user-service, region: unknown, msg: client last beat: 1686654901320
+
+2023-06-13 21:42:44,783 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1686663672111
+
+2023-06-13 21:42:45,572 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:8082@DEFAULT@user-service, region: unknown, msg: client last beat: 1686663672956
+

@@ -1,0 +1,4 @@
+2023-04-24 10:18:45,476|5526c4fb73a6|cloud-producer-server-dev.yaml|DEFAULT_GROUP|58a1abba-9735-41cd-9343-19806b443a9d|null|1682302725457|5526c4fb73a6|persist|pub|-1|928e37fe400c22c3f2a1360b32f4e731
+2023-04-24 10:18:45,531|5526c4fb73a6|cloud-producer-server-dev.yaml|DEFAULT_GROUP|58a1abba-9735-41cd-9343-19806b443a9d|null|1682302725457|192.168.200.7|dump|ok|74|39
+2023-04-24 10:37:52,269|5526c4fb73a6|cloud-producer-server-dev.yaml|DEFAULT_GROUP|null|null|1682303872211|5526c4fb73a6|persist|pub|-1|1a46a1ae22b76699a1ffd2ee968c116e
+2023-04-24 10:37:52,362|5526c4fb73a6|cloud-producer-server-dev.yaml|DEFAULT_GROUP|null|null|1682303872211|192.168.200.7|dump|ok|151|39

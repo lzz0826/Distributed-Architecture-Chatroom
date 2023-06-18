@@ -1,0 +1,840 @@
+2023-06-11 12:26:46,933 INFO Client connection 192.168.141.62:50051#true connect
+
+2023-06-11 12:26:46,934 INFO Client change for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=0}, 192.168.141.62:50051#true
+
+2023-06-11 12:26:49,360 INFO Client connection 127.0.0.1:54670#true connect
+
+2023-06-11 12:26:49,461 INFO Client connection 192.168.141.62:8081#true connect
+
+2023-06-11 12:26:49,461 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=0}, 192.168.141.62:8081#true
+
+2023-06-11 12:27:03,985 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 12:27:03,985 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=0}, 192.168.141.62:50052#true
+
+2023-06-11 12:27:06,079 INFO Client connection 127.0.0.1:62506#true connect
+
+2023-06-11 12:27:06,366 INFO Client connection 192.168.141.62:8083#true connect
+
+2023-06-11 12:27:06,366 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=0}, 192.168.141.62:8083#true
+
+2023-06-11 12:27:44,701 INFO Client connection 127.0.0.1:50231#true connect
+
+2023-06-11 12:27:52,899 INFO Client connection 127.0.0.1:63051#true connect
+
+2023-06-11 12:27:53,606 INFO Client connection 127.0.0.1:58072#true connect
+
+2023-06-11 12:27:54,165 INFO Client connection 127.0.0.1:58229#true connect
+
+2023-06-11 12:27:54,748 INFO Client connection 127.0.0.1:56126#true connect
+
+2023-06-11 12:27:55,295 INFO Client connection 127.0.0.1:55520#true connect
+
+2023-06-11 12:28:15,202 INFO Client connection 127.0.0.1:52297#true connect
+
+2023-06-11 12:28:15,976 INFO Client connection 127.0.0.1:64955#true connect
+
+2023-06-11 12:28:25,389 INFO Client connection 127.0.0.1:65215#true connect
+
+2023-06-11 12:29:13,020 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=1}, 192.168.141.62:50052#true
+
+2023-06-11 12:29:15,700 INFO Client connection 127.0.0.1:56609#true connect
+
+2023-06-11 12:29:16,031 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 12:29:16,031 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=1}, 192.168.141.62:8082#true
+
+2023-06-11 12:29:22,842 INFO Client connection 127.0.0.1:55002#true connect
+
+2023-06-11 12:29:23,366 INFO Client connection 127.0.0.1:51383#true connect
+
+2023-06-11 12:29:35,856 INFO Client connection 127.0.0.1:56963#true connect
+
+2023-06-11 12:29:36,634 INFO Client connection 127.0.0.1:58926#true connect
+
+2023-06-11 12:29:41,576 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=2}, 192.168.141.62:8083#true
+
+2023-06-11 12:29:55,815 INFO Client connection 127.0.0.1:51107#true connect
+
+2023-06-11 12:30:10,065 INFO Client connection 127.0.0.1:62506#true disconnect, remove instances and subscribers
+
+2023-06-11 12:30:15,081 INFO Client connection 192.168.141.62:8083#true disconnect, remove instances and subscribers
+
+2023-06-11 12:30:35,050 INFO Client connection 127.0.0.1:56273#true connect
+
+2023-06-11 12:31:46,417 INFO Client connection 127.0.0.1:52113#true connect
+
+2023-06-11 12:32:10,364 INFO Client connection 127.0.0.1:54741#true connect
+
+2023-06-11 12:32:11,135 INFO Client connection 127.0.0.1:60477#true connect
+
+2023-06-11 12:32:49,843 INFO Client connection 127.0.0.1:59933#true connect
+
+2023-06-11 12:32:55,003 INFO Client connection 127.0.0.1:57550#true connect
+
+2023-06-11 12:32:55,785 INFO Client connection 127.0.0.1:53319#true connect
+
+2023-06-11 12:33:26,809 INFO Client connection 127.0.0.1:50191#true connect
+
+2023-06-11 12:33:36,985 INFO Client connection 127.0.0.1:50229#true connect
+
+2023-06-11 12:33:50,208 INFO Client connection 127.0.0.1:59228#true connect
+
+2023-06-11 12:34:55,726 INFO Client connection 127.0.0.1:61572#true connect
+
+2023-06-11 12:34:59,705 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=3}, 192.168.141.62:8082#true
+
+2023-06-11 12:35:20,586 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=2}, 192.168.141.62:50052#true
+
+2023-06-11 12:35:22,542 INFO Client connection 127.0.0.1:62173#true connect
+
+2023-06-11 12:35:22,814 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=4}, 192.168.141.62:8082#true
+
+2023-06-11 12:35:28,275 INFO Client connection 127.0.0.1:60380#true connect
+
+2023-06-11 12:35:30,176 INFO Client connection 127.0.0.1:56609#true disconnect, remove instances and subscribers
+
+2023-06-11 12:35:36,457 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=1}, 192.168.141.62:8081#true
+
+2023-06-11 12:35:50,326 INFO Client change for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=1}, 192.168.141.62:50051#true
+
+2023-06-11 12:35:52,419 INFO Client connection 127.0.0.1:51706#true connect
+
+2023-06-11 12:35:52,536 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=2}, 192.168.141.62:8081#true
+
+2023-06-11 12:36:02,039 INFO Client connection 127.0.0.1:51797#true connect
+
+2023-06-11 12:36:05,179 INFO Client connection 127.0.0.1:54670#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:05,179 INFO Client connection 127.0.0.1:63051#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:05,180 INFO Client connection 127.0.0.1:55002#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,182 INFO Client connection 127.0.0.1:61572#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,192 INFO Client connection 127.0.0.1:55520#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,192 INFO Client connection 127.0.0.1:58229#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,192 INFO Client connection 127.0.0.1:52113#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,192 INFO Client connection 127.0.0.1:64955#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,192 INFO Client connection 127.0.0.1:56126#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,192 INFO Client connection 127.0.0.1:60380#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:51107#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:65215#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:56963#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:50231#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:50229#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:58072#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:53319#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:51383#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:57550#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:56273#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:58926#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:52297#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,193 INFO Client connection 127.0.0.1:50191#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:10,224 INFO Client connection 127.0.0.1:64450#true connect
+
+2023-06-11 12:36:15,193 INFO Client connection 127.0.0.1:59933#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:15,194 INFO Client connection 127.0.0.1:59228#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:15,194 INFO Client connection 127.0.0.1:54741#true disconnect, remove instances and subscribers
+
+2023-06-11 12:36:15,194 INFO Client connection 127.0.0.1:60477#true disconnect, remove instances and subscribers
+
+2023-06-11 12:37:30,704 INFO Client connection 127.0.0.1:55003#true connect
+
+2023-06-11 12:39:30,481 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=3}, 192.168.141.62:50052#true
+
+2023-06-11 12:39:33,001 INFO Client connection 127.0.0.1:64191#true connect
+
+2023-06-11 12:39:33,305 INFO Client connection 192.168.141.62:8083#true connect
+
+2023-06-11 12:39:33,305 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=5}, 192.168.141.62:8083#true
+
+2023-06-11 12:39:41,662 INFO Client connection 127.0.0.1:63929#true connect
+
+2023-06-11 12:40:07,898 INFO Client connection 127.0.0.1:62291#true connect
+
+2023-06-11 12:40:08,507 INFO Client connection 127.0.0.1:54651#true connect
+
+2023-06-11 12:41:05,238 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=6}, 192.168.141.62:8082#true
+
+2023-06-11 12:41:27,232 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=4}, 192.168.141.62:50052#true
+
+2023-06-11 12:41:29,746 INFO Client connection 127.0.0.1:57688#true connect
+
+2023-06-11 12:41:29,877 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=7}, 192.168.141.62:8082#true
+
+2023-06-11 12:41:35,271 INFO Client connection 127.0.0.1:62173#true disconnect, remove instances and subscribers
+
+2023-06-11 12:41:39,338 INFO Client connection 127.0.0.1:63703#true connect
+
+2023-06-11 12:41:43,146 INFO Client connection 127.0.0.1:54168#true connect
+
+2023-06-11 12:42:02,884 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=8}, 192.168.141.62:8082#true
+
+2023-06-11 12:42:02,918 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=9}, 192.168.141.62:8083#true
+
+2023-06-11 12:42:03,044 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=3}, 192.168.141.62:8081#true
+
+2023-06-11 12:42:30,281 INFO Client connection 127.0.0.1:54651#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:30,282 INFO Client connection 127.0.0.1:62291#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,282 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,283 INFO Client connection 127.0.0.1:54168#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 192.168.141.62:8083#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:55003#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:51797#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:64450#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:63929#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:57688#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:51706#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:64191#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 127.0.0.1:63703#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:35,284 INFO Client connection 192.168.141.62:8081#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:37,236 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=2}, ip: {"ip":"192.168.141.62","port":50051,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50051#DEFAULT#grpc@@order-grpc"},"lastHeartBeatTime":1686458526981,"metadataId":"192.168.141.62:50051:DEFAULT"}
+
+2023-06-11 12:42:37,236 INFO Client remove for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=2}, 192.168.141.62:50051#true
+
+2023-06-11 12:42:39,411 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=5}, ip: {"ip":"192.168.141.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686458527342,"metadataId":"192.168.141.62:50052:DEFAULT"}
+
+2023-06-11 12:42:39,412 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=5}, 192.168.141.62:50052#true
+
+2023-06-11 12:42:40,286 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 12:42:40,293 INFO Client connection 192.168.141.62:50051#true disconnect, remove instances and subscribers
+
+2023-06-11 12:43:05,302 INFO Remove expired metadata ExpiredMetadataInfo{service=Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=10}, metadataId='192.168.141.62:8082:DEFAULT', createTime=Sun Jun 11 12:42:02 CST 2023}
+
+2023-06-11 12:43:07,095 INFO Client connection 192.168.141.62:50051#true connect
+
+2023-06-11 12:43:07,096 INFO Client change for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=3}, 192.168.141.62:50051#true
+
+2023-06-11 12:43:09,350 INFO Client connection 127.0.0.1:63498#true connect
+
+2023-06-11 12:43:09,450 INFO Client connection 192.168.141.62:8081#true connect
+
+2023-06-11 12:43:09,450 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=4}, 192.168.141.62:8081#true
+
+2023-06-11 12:43:22,163 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 12:43:22,164 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=6}, 192.168.141.62:50052#true
+
+2023-06-11 12:43:24,282 INFO Client connection 127.0.0.1:50769#true connect
+
+2023-06-11 12:43:24,637 INFO Client connection 192.168.141.62:8083#true connect
+
+2023-06-11 12:43:24,638 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=10}, 192.168.141.62:8083#true
+
+2023-06-11 12:43:30,770 INFO Client connection 127.0.0.1:52722#true connect
+
+2023-06-11 12:43:32,303 INFO Client connection 127.0.0.1:54477#true connect
+
+2023-06-11 12:44:25,437 INFO Client connection 127.0.0.1:64190#true connect
+
+2023-06-11 12:44:26,286 INFO Client connection 127.0.0.1:52093#true connect
+
+2023-06-11 12:44:36,262 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=11}, 192.168.141.62:8083#true
+
+2023-06-11 12:44:36,316 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=5}, 192.168.141.62:8081#true
+
+2023-06-11 12:45:00,112 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=7}, 192.168.141.62:50052#true
+
+2023-06-11 12:45:02,495 INFO Client connection 127.0.0.1:53644#true connect
+
+2023-06-11 12:45:02,827 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=12}, 192.168.141.62:8083#true
+
+2023-06-11 12:45:10,357 INFO Client connection 127.0.0.1:50769#true disconnect, remove instances and subscribers
+
+2023-06-11 12:45:10,359 INFO Client connection 127.0.0.1:64190#true disconnect, remove instances and subscribers
+
+2023-06-11 12:45:10,360 INFO Client connection 127.0.0.1:52093#true disconnect, remove instances and subscribers
+
+2023-06-11 12:45:10,360 INFO Client connection 192.168.141.62:8081#true disconnect, remove instances and subscribers
+
+2023-06-11 12:45:15,360 INFO Client connection 127.0.0.1:52722#true disconnect, remove instances and subscribers
+
+2023-06-11 12:45:15,361 INFO Client connection 127.0.0.1:63498#true disconnect, remove instances and subscribers
+
+2023-06-11 12:45:15,361 INFO Client connection 127.0.0.1:54477#true disconnect, remove instances and subscribers
+
+2023-06-11 12:45:17,171 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=4}, ip: {"ip":"192.168.141.62","port":50051,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50051#DEFAULT#grpc@@order-grpc"},"lastHeartBeatTime":1686458682379,"metadataId":"192.168.141.62:50051:DEFAULT"}
+
+2023-06-11 12:45:17,171 INFO Client remove for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=4}, 192.168.141.62:50051#true
+
+2023-06-11 12:45:20,362 INFO Client connection 192.168.141.62:50051#true disconnect, remove instances and subscribers
+
+2023-06-11 12:46:06,899 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=8}, 192.168.141.62:50052#true
+
+2023-06-11 12:46:09,081 INFO Client connection 127.0.0.1:53655#true connect
+
+2023-06-11 12:46:09,401 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 12:46:09,401 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=13}, 192.168.141.62:8082#true
+
+2023-06-11 12:46:32,815 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=14}, 192.168.141.62:8082#true
+
+2023-06-11 12:46:34,926 WARN namespace : public, [DEFAULT_GROUP@@order-service] services are automatically cleaned
+
+2023-06-11 12:46:34,926 WARN namespace : public, [grpc@@order-grpc] services are automatically cleaned
+
+2023-06-11 12:46:51,618 INFO Client connection 192.168.141.62:50054#true connect
+
+2023-06-11 12:46:51,619 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=9}, 192.168.141.62:50054#true
+
+2023-06-11 12:46:53,541 INFO Client connection 127.0.0.1:56411#true connect
+
+2023-06-11 12:46:53,824 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=15}, 192.168.141.62:8082#true
+
+2023-06-11 12:47:05,379 INFO Client connection 127.0.0.1:53655#true disconnect, remove instances and subscribers
+
+2023-06-11 12:47:37,130 INFO Client connection 192.168.141.62:50051#true connect
+
+2023-06-11 12:47:37,131 INFO Client change for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=0}, 192.168.141.62:50051#true
+
+2023-06-11 12:47:39,317 INFO Client connection 127.0.0.1:54531#true connect
+
+2023-06-11 12:47:39,424 INFO Client connection 192.168.141.62:8081#true connect
+
+2023-06-11 12:47:39,424 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=0}, 192.168.141.62:8081#true
+
+2023-06-11 12:47:55,328 INFO Client connection 127.0.0.1:56482#true connect
+
+2023-06-11 12:47:57,514 INFO Client connection 127.0.0.1:65041#true connect
+
+2023-06-11 12:47:58,111 INFO Client connection 127.0.0.1:53625#true connect
+
+2023-06-11 12:48:08,756 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=16}, 192.168.141.62:8082#true
+
+2023-06-11 12:48:18,957 INFO Client connection 127.0.0.1:60127#true connect
+
+2023-06-11 12:48:35,422 INFO Client connection 127.0.0.1:56411#true disconnect, remove instances and subscribers
+
+2023-06-11 12:48:40,424 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 12:48:46,674 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=10}, ip: {"ip":"192.168.141.62","port":50054,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50054#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686458891996,"metadataId":"192.168.141.62:50054:DEFAULT"}
+
+2023-06-11 12:48:46,674 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=10}, 192.168.141.62:50054#true
+
+2023-06-11 12:48:50,425 INFO Client connection 192.168.141.62:50054#true disconnect, remove instances and subscribers
+
+2023-06-11 12:48:52,591 INFO Client connection 127.0.0.1:63654#true connect
+
+2023-06-11 12:49:03,396 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=1}, 192.168.141.62:8081#true
+
+2023-06-11 12:49:03,413 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=17}, 192.168.141.62:8083#true
+
+2023-06-11 12:49:35,440 INFO Client connection 127.0.0.1:54531#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:35,443 INFO Client connection 127.0.0.1:63654#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:35,443 INFO Client connection 192.168.141.62:8083#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:35,444 INFO Client connection 127.0.0.1:53644#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:35,444 INFO Client connection 192.168.141.62:8081#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:37,291 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=11}, ip: {"ip":"192.168.141.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686458946180,"metadataId":"192.168.141.62:50052:DEFAULT"}
+
+2023-06-11 12:49:37,291 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=11}, 192.168.141.62:50052#true
+
+2023-06-11 12:49:40,451 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:40,452 INFO Client connection 127.0.0.1:56482#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:40,452 INFO Client connection 127.0.0.1:53625#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:40,452 INFO Client connection 127.0.0.1:60127#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:40,452 INFO Client connection 127.0.0.1:65041#true disconnect, remove instances and subscribers
+
+2023-06-11 12:49:42,175 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=1}, ip: {"ip":"192.168.141.62","port":50051,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50051#DEFAULT#grpc@@order-grpc"},"lastHeartBeatTime":1686458947483,"metadataId":"192.168.141.62:50051:DEFAULT"}
+
+2023-06-11 12:49:42,175 INFO Client remove for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=1}, 192.168.141.62:50051#true
+
+2023-06-11 12:49:45,452 INFO Client connection 192.168.141.62:50051#true disconnect, remove instances and subscribers
+
+2023-06-11 12:50:34,949 WARN namespace : public, [DEFAULT_GROUP@@user-service] services are automatically cleaned
+
+2023-06-11 12:50:34,951 WARN namespace : public, [DEFAULT_GROUP@@order-service] services are automatically cleaned
+
+2023-06-11 12:51:34,969 WARN namespace : public, [grpc@@user-grpc] services are automatically cleaned
+
+2023-06-11 12:51:34,971 WARN namespace : public, [grpc@@order-grpc] services are automatically cleaned
+
+2023-06-11 12:51:51,490 INFO Client connection 192.168.141.62:50051#true connect
+
+2023-06-11 12:51:51,493 INFO Client change for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=0}, 192.168.141.62:50051#true
+
+2023-06-11 12:51:54,151 INFO Client connection 127.0.0.1:58699#true connect
+
+2023-06-11 12:51:54,305 INFO Client connection 192.168.141.62:8081#true connect
+
+2023-06-11 12:51:54,305 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=0}, 192.168.141.62:8081#true
+
+2023-06-11 12:52:28,139 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 12:52:28,140 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=0}, 192.168.141.62:50052#true
+
+2023-06-11 12:52:31,229 INFO Client connection 127.0.0.1:58968#true connect
+
+2023-06-11 12:52:31,751 INFO Client connection 192.168.141.62:8083#true connect
+
+2023-06-11 12:52:31,751 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=0}, 192.168.141.62:8083#true
+
+2023-06-11 12:52:41,647 INFO Client connection 127.0.0.1:54887#true connect
+
+2023-06-11 12:54:07,460 INFO Client connection 192.168.141.62:50053#true connect
+
+2023-06-11 12:54:07,464 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=1}, 192.168.141.62:50053#true
+
+2023-06-11 12:54:09,602 INFO Client connection 127.0.0.1:55510#true connect
+
+2023-06-11 12:54:09,903 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 12:54:09,903 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=1}, 192.168.141.62:8082#true
+
+2023-06-11 12:54:38,715 INFO Client connection 127.0.0.1:55287#true connect
+
+2023-06-11 12:54:52,934 INFO Client connection 127.0.0.1:55199#true connect
+
+2023-06-11 12:55:08,926 INFO Client connection 127.0.0.1:52068#true connect
+
+2023-06-11 12:55:27,156 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=2}, 192.168.141.62:8082#true
+
+2023-06-11 12:55:45,613 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=2}, 192.168.141.62:50053#true
+
+2023-06-11 12:55:47,646 INFO Client connection 127.0.0.1:55383#true connect
+
+2023-06-11 12:55:47,967 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=3}, 192.168.141.62:8082#true
+
+2023-06-11 12:55:56,261 INFO Client connection 127.0.0.1:55161#true connect
+
+2023-06-11 12:56:04,193 INFO Client connection 127.0.0.1:51797#true connect
+
+2023-06-11 12:56:05,517 INFO Client connection 127.0.0.1:55510#true disconnect, remove instances and subscribers
+
+2023-06-11 12:56:35,469 INFO Client connection 127.0.0.1:54741#true connect
+
+2023-06-11 12:56:59,893 INFO Client connection 127.0.0.1:60093#true connect
+
+2023-06-11 12:57:00,594 INFO Client connection 127.0.0.1:58466#true connect
+
+2023-06-11 12:57:15,054 INFO Client connection 127.0.0.1:50536#true connect
+
+2023-06-11 12:57:15,864 INFO Client connection 127.0.0.1:64979#true connect
+
+2023-06-11 12:57:32,441 INFO Client connection 127.0.0.1:63560#true connect
+
+2023-06-11 12:57:33,173 INFO Client connection 127.0.0.1:49166#true connect
+
+2023-06-11 12:57:46,014 INFO Client connection 127.0.0.1:64441#true connect
+
+2023-06-11 12:57:46,645 INFO Client connection 127.0.0.1:64863#true connect
+
+2023-06-11 12:57:47,243 INFO Client connection 127.0.0.1:65162#true connect
+
+2023-06-11 12:57:53,918 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=4}, 192.168.141.62:8082#true
+
+2023-06-11 12:57:53,918 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=5}, 192.168.141.62:8083#true
+
+2023-06-11 12:57:54,187 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='order-service', ephemeral=true, revision=1}, 192.168.141.62:8081#true
+
+2023-06-11 12:58:20,549 INFO Client connection 127.0.0.1:55287#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:20,550 INFO Client connection 127.0.0.1:52068#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,550 INFO Client connection 127.0.0.1:55199#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 127.0.0.1:63560#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 192.168.141.62:8083#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 127.0.0.1:54887#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 127.0.0.1:58466#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 127.0.0.1:60093#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 127.0.0.1:49166#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 127.0.0.1:58968#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:25,551 INFO Client connection 192.168.141.62:8081#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,551 INFO Client connection 127.0.0.1:64441#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:64863#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:55383#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:55161#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:65162#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:54741#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:64979#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:51797#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:58699#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:30,552 INFO Client connection 127.0.0.1:50536#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:31,592 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=1}, ip: {"ip":"192.168.141.62","port":50051,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50051#DEFAULT#grpc@@order-grpc"},"lastHeartBeatTime":1686459477792,"metadataId":"192.168.141.62:50051:DEFAULT"}
+
+2023-06-11 12:58:31,592 INFO Client remove for service Service{namespace='public', group='grpc', name='order-grpc', ephemeral=true, revision=1}, 192.168.141.62:50051#true
+
+2023-06-11 12:58:32,565 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=3}, ip: {"ip":"192.168.141.62","port":50053,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50053#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686459481068,"metadataId":"192.168.141.62:50053:DEFAULT"}
+
+2023-06-11 12:58:32,565 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=3}, 192.168.141.62:50053#true
+
+2023-06-11 12:58:33,209 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=4}, ip: {"ip":"192.168.141.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686459479320,"metadataId":"192.168.141.62:50052:DEFAULT"}
+
+2023-06-11 12:58:33,210 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=4}, 192.168.141.62:50052#true
+
+2023-06-11 12:58:35,553 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:35,555 INFO Client connection 192.168.141.62:50051#true disconnect, remove instances and subscribers
+
+2023-06-11 12:58:35,555 INFO Client connection 192.168.141.62:50053#true disconnect, remove instances and subscribers
+
+2023-06-11 12:59:34,961 WARN namespace : public, [DEFAULT_GROUP@@order-service] services are automatically cleaned
+
+2023-06-11 12:59:34,963 WARN namespace : public, [DEFAULT_GROUP@@user-service] services are automatically cleaned
+
+2023-06-11 12:59:34,965 WARN namespace : public, [grpc@@user-grpc] services are automatically cleaned
+
+2023-06-11 12:59:34,966 WARN namespace : public, [grpc@@order-grpc] services are automatically cleaned
+
+2023-06-11 12:59:35,590 INFO Remove expired metadata ExpiredMetadataInfo{service=Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=5}, metadataId='192.168.141.62:50053:DEFAULT', createTime=Sun Jun 11 12:58:32 CST 2023}
+
+2023-06-11 12:59:35,616 INFO Remove expired metadata ExpiredMetadataInfo{service=Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=5}, metadataId='192.168.141.62:50052:DEFAULT', createTime=Sun Jun 11 12:58:33 CST 2023}
+
+2023-06-11 16:03:16,981 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 16:03:17,020 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=0}, 192.168.141.62:50052#true
+
+2023-06-11 16:03:20,520 INFO Client connection 127.0.0.1:58233#true connect
+
+2023-06-11 16:03:21,150 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 16:03:21,150 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=0}, 192.168.141.62:8082#true
+
+2023-06-11 16:06:07,686 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=1}, 192.168.141.62:8082#true
+
+2023-06-11 16:06:30,324 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=1}, 192.168.141.62:50052#true
+
+2023-06-11 16:06:32,915 INFO Client connection 127.0.0.1:62434#true connect
+
+2023-06-11 16:06:33,213 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=2}, 192.168.141.62:8082#true
+
+2023-06-11 16:06:45,173 INFO Client connection 127.0.0.1:58233#true disconnect, remove instances and subscribers
+
+2023-06-11 16:10:00,957 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=3}, 192.168.141.62:8082#true
+
+2023-06-11 16:10:25,275 INFO Client connection 127.0.0.1:62434#true disconnect, remove instances and subscribers
+
+2023-06-11 16:10:32,189 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=2}, ip: {"ip":"192.168.141.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686471001224,"metadataId":"192.168.141.62:50052:DEFAULT"}
+
+2023-06-11 16:10:32,189 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=2}, 192.168.141.62:50052#true
+
+2023-06-11 16:10:35,272 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 16:10:35,272 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 16:11:35,548 WARN namespace : public, [DEFAULT_GROUP@@user-service] services are automatically cleaned
+
+2023-06-11 16:11:35,550 WARN namespace : public, [grpc@@user-grpc] services are automatically cleaned
+
+2023-06-11 19:20:07,043 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 19:20:07,045 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=0}, 192.168.141.62:50052#true
+
+2023-06-11 19:20:09,162 INFO Client connection 127.0.0.1:55033#true connect
+
+2023-06-11 19:20:09,491 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 19:20:09,491 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=0}, 192.168.141.62:8082#true
+
+2023-06-11 20:01:49,593 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=1}, 192.168.141.62:8082#true
+
+2023-06-11 20:02:15,725 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=1}, 192.168.141.62:50052#true
+
+2023-06-11 20:02:21,144 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 20:02:26,145 INFO Client connection 127.0.0.1:55033#true disconnect, remove instances and subscribers
+
+2023-06-11 20:02:48,004 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=2}, ip: {"ip":"192.168.141.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686484935725,"metadataId":"192.168.141.62:50052:DEFAULT"}
+
+2023-06-11 20:02:48,005 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=2}, 192.168.141.62:50052#true
+
+2023-06-11 20:02:51,164 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 20:03:13,858 WARN namespace : public, [DEFAULT_GROUP@@user-service] services are automatically cleaned
+
+2023-06-11 20:03:24,852 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 20:03:24,853 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=3}, 192.168.141.62:50052#true
+
+2023-06-11 20:03:54,866 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=4}, ip: {"ip":"192.168.141.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686485004853,"metadataId":"192.168.141.62:50052:DEFAULT"}
+
+2023-06-11 20:03:54,867 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=4}, 192.168.141.62:50052#true
+
+2023-06-11 20:03:56,185 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 20:04:04,387 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 20:04:04,389 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=5}, 192.168.141.62:50052#true
+
+2023-06-11 20:04:34,424 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=6}, ip: {"ip":"192.168.141.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.141.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686485044388,"metadataId":"192.168.141.62:50052:DEFAULT"}
+
+2023-06-11 20:04:34,425 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=6}, 192.168.141.62:50052#true
+
+2023-06-11 20:04:36,201 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 20:04:49,723 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 20:04:49,724 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=7}, 192.168.141.62:50052#true
+
+2023-06-11 20:04:51,988 INFO Client connection 127.0.0.1:59072#true connect
+
+2023-06-11 20:04:52,280 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 20:04:52,280 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=0}, 192.168.141.62:8082#true
+
+2023-06-11 20:12:09,159 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=1}, 192.168.141.62:8082#true
+
+2023-06-11 20:12:29,947 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=8}, 192.168.141.62:50052#true
+
+2023-06-11 20:12:31,933 INFO Client connection 127.0.0.1:58496#true connect
+
+2023-06-11 20:12:32,206 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=2}, 192.168.141.62:8082#true
+
+2023-06-11 20:12:46,372 INFO Client connection 127.0.0.1:59072#true disconnect, remove instances and subscribers
+
+2023-06-11 20:21:55,219 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=3}, 192.168.141.62:8082#true
+
+2023-06-11 20:22:17,176 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=9}, 192.168.141.62:50052#true
+
+2023-06-11 20:22:19,335 INFO Client connection 127.0.0.1:61256#true connect
+
+2023-06-11 20:22:19,627 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=4}, 192.168.141.62:8082#true
+
+2023-06-11 20:22:26,572 INFO Client connection 127.0.0.1:58496#true disconnect, remove instances and subscribers
+
+2023-06-11 20:23:10,789 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=5}, 192.168.141.62:8082#true
+
+2023-06-11 20:23:30,945 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=10}, 192.168.141.62:50052#true
+
+2023-06-11 20:23:32,947 INFO Client connection 127.0.0.1:51354#true connect
+
+2023-06-11 20:23:33,218 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=6}, 192.168.141.62:8082#true
+
+2023-06-11 20:23:41,614 INFO Client connection 127.0.0.1:61256#true disconnect, remove instances and subscribers
+
+2023-06-11 20:27:08,836 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=7}, 192.168.141.62:8082#true
+
+2023-06-11 20:27:27,944 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=11}, 192.168.141.62:50052#true
+
+2023-06-11 20:27:30,205 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 20:27:30,480 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=8}, 192.168.141.62:8082#true
+
+2023-06-11 20:27:36,700 INFO Client connection 127.0.0.1:51354#true disconnect, remove instances and subscribers
+
+2023-06-11 21:04:07,135 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 21:04:07,136 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 21:04:07,136 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 21:04:08,529 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 21:04:08,530 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=13}, 192.168.141.62:50052#true
+
+2023-06-11 21:04:10,693 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 21:04:10,693 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=10}, 192.168.141.62:8082#true
+
+2023-06-11 21:04:14,591 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 21:12:59,337 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 21:12:59,339 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 21:12:59,339 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 21:13:00,956 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 21:13:00,957 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=15}, 192.168.141.62:50052#true
+
+2023-06-11 21:13:03,069 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 21:13:03,069 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=12}, 192.168.141.62:8082#true
+
+2023-06-11 21:13:06,901 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 22:12:27,282 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 22:12:27,283 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 22:12:27,283 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 22:12:28,970 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 22:12:29,406 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 22:12:29,406 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=14}, 192.168.141.62:8082#true
+
+2023-06-11 22:12:32,021 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 22:12:32,021 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=17}, 192.168.141.62:50052#true
+
+2023-06-11 22:28:15,640 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 22:28:15,641 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 22:28:15,641 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 22:28:17,895 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 22:28:17,896 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=16}, 192.168.141.62:8082#true
+
+2023-06-11 22:28:19,453 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 22:28:20,536 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 22:28:20,536 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=19}, 192.168.141.62:50052#true
+
+2023-06-11 22:45:59,261 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 22:45:59,262 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 22:45:59,262 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 22:45:59,424 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 22:45:59,424 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=21}, 192.168.141.62:50052#true
+
+2023-06-11 22:46:01,876 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 22:46:01,876 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=18}, 192.168.141.62:8082#true
+
+2023-06-11 22:46:03,225 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 23:02:42,640 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 23:02:42,641 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 23:02:42,641 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 23:02:42,984 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 23:02:42,984 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=23}, 192.168.141.62:50052#true
+
+2023-06-11 23:02:45,456 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 23:02:45,456 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=20}, 192.168.141.62:8082#true
+
+2023-06-11 23:02:46,701 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 23:32:42,688 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 23:32:42,688 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 23:32:42,688 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 23:32:43,296 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 23:32:43,297 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=22}, 192.168.141.62:8082#true
+
+2023-06-11 23:32:45,954 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 23:32:45,954 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=25}, 192.168.141.62:50052#true
+
+2023-06-11 23:32:47,918 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 23:41:43,024 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 23:41:43,024 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 23:41:43,024 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 23:41:43,826 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 23:41:43,826 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=24}, 192.168.141.62:8082#true
+
+2023-06-11 23:41:46,564 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 23:41:46,564 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=27}, 192.168.141.62:50052#true
+
+2023-06-11 23:41:48,313 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 23:47:12,971 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 23:47:12,972 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 23:47:12,972 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 23:47:13,911 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 23:47:13,911 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=26}, 192.168.141.62:8082#true
+
+2023-06-11 23:47:16,651 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 23:47:16,651 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=29}, 192.168.141.62:50052#true
+
+2023-06-11 23:47:18,294 INFO Client connection 127.0.0.1:54992#true connect
+
+2023-06-11 23:53:13,378 INFO Client connection 192.168.141.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-11 23:53:13,379 INFO Client connection 192.168.141.62:8082#true disconnect, remove instances and subscribers
+
+2023-06-11 23:53:13,379 INFO Client connection 127.0.0.1:54992#true disconnect, remove instances and subscribers
+
+2023-06-11 23:53:14,550 INFO Client connection 192.168.141.62:8082#true connect
+
+2023-06-11 23:53:14,550 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=28}, 192.168.141.62:8082#true
+
+2023-06-11 23:53:17,314 INFO Client connection 192.168.141.62:50052#true connect
+
+2023-06-11 23:53:17,314 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=31}, 192.168.141.62:50052#true
+
+2023-06-11 23:53:18,778 INFO Client connection 127.0.0.1:54992#true connect
+

@@ -1,0 +1,866 @@
+2023-06-13 00:04:11,523 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248202895846829
+
+2023-06-13 00:04:11,553 ERROR [PUSH-FAIL] 986442ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=135}, reason=null, target=127.0.0.1
+
+2023-06-13 00:04:21,534 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 00:04:21,542 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248232936773260
+
+2023-06-13 00:04:21,548 INFO send udp packet: 127.0.0.1,54992,248232936773260
+
+2023-06-13 00:04:31,556 INFO retry to push data, key: 127.0.0.1,54992,248232936773260
+
+2023-06-13 00:04:41,575 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248232936773260
+
+2023-06-13 00:04:41,584 ERROR [PUSH-FAIL] 20051ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=137}, reason=null, target=127.0.0.1
+
+2023-06-13 00:23:05,040 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 00:23:05,042 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248293048230829
+
+2023-06-13 00:23:05,043 INFO send udp packet: 127.0.0.1,54992,248293048230829
+
+2023-06-13 00:23:15,049 INFO retry to push data, key: 127.0.0.1,54992,248293048230829
+
+2023-06-13 00:41:06,314 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248293048230829
+
+2023-06-13 00:41:06,319 ERROR [PUSH-FAIL] 1081279ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=140}, reason=null, target=127.0.0.1
+
+2023-06-13 00:41:16,329 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 00:41:16,333 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248323095715384
+
+2023-06-13 00:41:16,335 INFO send udp packet: 127.0.0.1,54992,248323095715384
+
+2023-06-13 00:41:26,338 INFO retry to push data, key: 127.0.0.1,54992,248323095715384
+
+2023-06-13 00:41:36,349 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248323095715384
+
+2023-06-13 00:41:36,351 ERROR [PUSH-FAIL] 20022ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=141}, reason=null, target=127.0.0.1
+
+2023-06-13 00:59:12,462 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 00:59:12,486 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248383151771495
+
+2023-06-13 00:59:12,489 INFO send udp packet: 127.0.0.1,54992,248383151771495
+
+2023-06-13 00:59:22,497 INFO retry to push data, key: 127.0.0.1,54992,248383151771495
+
+2023-06-13 01:14:39,211 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248383151771495
+
+2023-06-13 01:14:39,222 ERROR [PUSH-FAIL] 926760ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=144}, reason=null, target=127.0.0.1
+
+2023-06-13 01:14:49,304 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 01:14:49,320 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248413283984842
+
+2023-06-13 01:14:49,321 INFO send udp packet: 127.0.0.1,54992,248413283984842
+
+2023-06-13 01:14:59,327 INFO retry to push data, key: 127.0.0.1,54992,248413283984842
+
+2023-06-13 01:15:09,346 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248413283984842
+
+2023-06-13 01:15:09,361 ERROR [PUSH-FAIL] 20058ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=145}, reason=null, target=127.0.0.1
+
+2023-06-13 01:32:53,748 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 01:32:53,753 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248473370654661
+
+2023-06-13 01:32:53,754 INFO send udp packet: 127.0.0.1,54992,248473370654661
+
+2023-06-13 01:33:03,757 INFO retry to push data, key: 127.0.0.1,54992,248473370654661
+
+2023-06-13 01:33:13,783 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248473370654661
+
+2023-06-13 01:33:13,798 ERROR [PUSH-FAIL] 20050ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=147}, reason=null, target=127.0.0.1
+
+2023-06-13 01:48:53,277 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 01:48:53,295 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248533522533480
+
+2023-06-13 01:48:53,298 INFO send udp packet: 127.0.0.1,54992,248533522533480
+
+2023-06-13 01:49:03,305 INFO retry to push data, key: 127.0.0.1,54992,248533522533480
+
+2023-06-13 02:04:12,499 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248533522533480
+
+2023-06-13 02:04:12,514 ERROR [PUSH-FAIL] 919237ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=150}, reason=null, target=127.0.0.1
+
+2023-06-13 02:04:12,624 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:04:12,636 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248553674371781
+
+2023-06-13 02:04:12,640 INFO send udp packet: 127.0.0.1,54992,248553674371781
+
+2023-06-13 02:04:16,670 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:04:16,684 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248557721580949
+
+2023-06-13 02:04:16,691 INFO send udp packet: 127.0.0.1,54992,248557721580949
+
+2023-06-13 02:04:22,645 INFO retry to push data, key: 127.0.0.1,54992,248553674371781
+
+2023-06-13 02:04:26,694 INFO retry to push data, key: 127.0.0.1,54992,248557721580949
+
+2023-06-13 02:04:32,669 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248553674371781
+
+2023-06-13 02:04:32,671 ERROR [PUSH-FAIL] 20048ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=151}, reason=null, target=127.0.0.1
+
+2023-06-13 02:04:36,698 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248557721580949
+
+2023-06-13 02:04:36,719 ERROR [PUSH-FAIL] 20049ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=151}, reason=null, target=127.0.0.1
+
+2023-06-13 02:20:11,311 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:20:11,329 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248613687868849
+
+2023-06-13 02:20:11,332 INFO send udp packet: 127.0.0.1,54992,248613687868849
+
+2023-06-13 02:20:15,573 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:20:15,585 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248617943552393
+
+2023-06-13 02:20:15,599 INFO send udp packet: 127.0.0.1,54992,248617943552393
+
+2023-06-13 02:20:21,342 INFO retry to push data, key: 127.0.0.1,54992,248613687868849
+
+2023-06-13 02:20:25,603 INFO retry to push data, key: 127.0.0.1,54992,248617943552393
+
+2023-06-13 02:20:31,361 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248613687868849
+
+2023-06-13 02:20:31,363 ERROR [PUSH-FAIL] 20052ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=153}, reason=null, target=127.0.0.1
+
+2023-06-13 02:20:35,605 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248617943552393
+
+2023-06-13 02:20:35,613 ERROR [PUSH-FAIL] 20041ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=153}, reason=null, target=127.0.0.1
+
+2023-06-13 02:35:40,257 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=154}
+
+2023-06-13 02:35:40,752 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:35:40,764 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248643690335612
+
+2023-06-13 02:35:40,774 INFO send udp packet: 127.0.0.1,54992,248643690335612
+
+2023-06-13 02:35:45,223 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:35:45,228 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248648154548031
+
+2023-06-13 02:35:45,230 INFO send udp packet: 127.0.0.1,54992,248648154548031
+
+2023-06-13 02:35:50,781 INFO retry to push data, key: 127.0.0.1,54992,248643690335612
+
+2023-06-13 02:35:55,240 INFO retry to push data, key: 127.0.0.1,54992,248648154548031
+
+2023-06-13 02:36:00,792 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248643690335612
+
+2023-06-13 02:36:00,794 ERROR [PUSH-FAIL] 20043ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=155}, reason=null, target=127.0.0.1
+
+2023-06-13 02:36:05,247 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248648154548031
+
+2023-06-13 02:36:05,255 ERROR [PUSH-FAIL] 20032ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=155}, reason=null, target=127.0.0.1
+
+2023-06-13 02:51:39,868 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=156}
+
+2023-06-13 02:51:40,321 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:51:40,329 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248703775328056
+
+2023-06-13 02:51:40,335 INFO send udp packet: 127.0.0.1,54992,248703775328056
+
+2023-06-13 02:51:44,878 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 02:51:44,883 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248708328590225
+
+2023-06-13 02:51:44,887 INFO send udp packet: 127.0.0.1,54992,248708328590225
+
+2023-06-13 02:51:50,340 INFO retry to push data, key: 127.0.0.1,54992,248703775328056
+
+2023-06-13 02:51:54,889 INFO retry to push data, key: 127.0.0.1,54992,248708328590225
+
+2023-06-13 02:52:00,348 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248703775328056
+
+2023-06-13 02:52:00,351 ERROR [PUSH-FAIL] 20030ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=157}, reason=null, target=127.0.0.1
+
+2023-06-13 02:52:04,895 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248708328590225
+
+2023-06-13 02:52:04,908 ERROR [PUSH-FAIL] 20029ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=157}, reason=null, target=127.0.0.1
+
+2023-06-13 03:08:03,765 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=158}
+
+2023-06-13 03:08:04,117 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 03:08:04,124 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248733750963903
+
+2023-06-13 03:08:04,132 INFO send udp packet: 127.0.0.1,54992,248733750963903
+
+2023-06-13 03:08:08,796 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 03:08:08,801 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248738429189322
+
+2023-06-13 03:08:08,804 INFO send udp packet: 127.0.0.1,54992,248738429189322
+
+2023-06-13 03:08:14,136 INFO retry to push data, key: 127.0.0.1,54992,248733750963903
+
+2023-06-13 03:08:18,807 INFO retry to push data, key: 127.0.0.1,54992,248738429189322
+
+2023-06-13 03:08:24,139 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248733750963903
+
+2023-06-13 03:08:24,140 ERROR [PUSH-FAIL] 20023ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=159}, reason=null, target=127.0.0.1
+
+2023-06-13 03:08:28,825 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248738429189322
+
+2023-06-13 03:08:28,835 ERROR [PUSH-FAIL] 20039ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=159}, reason=null, target=127.0.0.1
+
+2023-06-13 03:24:58,946 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 03:24:58,967 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248794115434972
+
+2023-06-13 03:24:58,970 INFO send udp packet: 127.0.0.1,54992,248794115434972
+
+2023-06-13 03:25:08,973 INFO retry to push data, key: 127.0.0.1,54992,248794115434972
+
+2023-06-13 03:25:18,989 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248794115434972
+
+2023-06-13 03:25:18,993 ERROR [PUSH-FAIL] 20048ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=159}, reason=null, target=127.0.0.1
+
+2023-06-13 03:41:56,131 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 03:41:56,148 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248824201769528
+
+2023-06-13 03:41:56,155 INFO send udp packet: 127.0.0.1,54992,248824201769528
+
+2023-06-13 03:42:06,162 INFO retry to push data, key: 127.0.0.1,54992,248824201769528
+
+2023-06-13 03:42:16,177 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248824201769528
+
+2023-06-13 03:42:16,181 ERROR [PUSH-FAIL] 20051ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=159}, reason=null, target=127.0.0.1
+
+2023-06-13 03:59:37,821 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=161}
+
+2023-06-13 03:59:38,019 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=161}
+
+2023-06-13 03:59:38,056 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 03:59:38,062 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248883751346681
+
+2023-06-13 03:59:38,066 INFO send udp packet: 127.0.0.1,54992,248883751346681
+
+2023-06-13 03:59:48,074 INFO retry to push data, key: 127.0.0.1,54992,248883751346681
+
+2023-06-13 03:59:58,083 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248883751346681
+
+2023-06-13 03:59:58,085 ERROR [PUSH-FAIL] 20029ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=161}, reason=null, target=127.0.0.1
+
+2023-06-13 04:17:45,906 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=163}
+
+2023-06-13 04:17:46,650 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 04:17:46,662 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248944479374625
+
+2023-06-13 04:17:46,670 INFO send udp packet: 127.0.0.1,54992,248944479374625
+
+2023-06-13 04:17:56,675 INFO retry to push data, key: 127.0.0.1,54992,248944479374625
+
+2023-06-13 04:18:06,693 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248944479374625
+
+2023-06-13 04:18:06,696 ERROR [PUSH-FAIL] 20047ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=163}, reason=null, target=127.0.0.1
+
+2023-06-13 04:35:56,750 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=165}
+
+2023-06-13 04:35:57,199 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 04:35:57,210 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,248974400897097
+
+2023-06-13 04:35:57,224 INFO send udp packet: 127.0.0.1,54992,248974400897097
+
+2023-06-13 04:36:07,229 INFO retry to push data, key: 127.0.0.1,54992,248974400897097
+
+2023-06-13 04:36:17,239 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,248974400897097
+
+2023-06-13 04:36:17,246 ERROR [PUSH-FAIL] 20046ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=165}, reason=null, target=127.0.0.1
+
+2023-06-13 04:52:00,860 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 04:52:00,861 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249036613318459
+
+2023-06-13 04:52:00,863 INFO send udp packet: 127.0.0.1,54992,249036613318459
+
+2023-06-13 04:52:10,866 INFO retry to push data, key: 127.0.0.1,54992,249036613318459
+
+2023-06-13 04:52:20,875 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249036613318459
+
+2023-06-13 04:52:20,880 ERROR [PUSH-FAIL] 20019ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=167}, reason=null, target=127.0.0.1
+
+2023-06-13 05:10:22,375 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 05:10:22,378 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249066724419222
+
+2023-06-13 05:10:22,380 INFO send udp packet: 127.0.0.1,54992,249066724419222
+
+2023-06-13 05:10:32,386 INFO retry to push data, key: 127.0.0.1,54992,249066724419222
+
+2023-06-13 05:10:42,403 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249066724419222
+
+2023-06-13 05:10:42,406 ERROR [PUSH-FAIL] 20031ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=169}, reason=null, target=127.0.0.1
+
+2023-06-13 05:28:20,888 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 05:28:20,890 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249126824695624
+
+2023-06-13 05:28:20,893 INFO send udp packet: 127.0.0.1,54992,249126824695624
+
+2023-06-13 05:28:30,897 INFO retry to push data, key: 127.0.0.1,54992,249126824695624
+
+2023-06-13 05:28:40,918 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249126824695624
+
+2023-06-13 05:28:40,921 ERROR [PUSH-FAIL] 20033ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=171}, reason=null, target=127.0.0.1
+
+2023-06-13 05:46:24,903 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 05:46:24,908 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249186956349527
+
+2023-06-13 05:46:24,913 INFO send udp packet: 127.0.0.1,54992,249186956349527
+
+2023-06-13 05:46:34,914 INFO retry to push data, key: 127.0.0.1,54992,249186956349527
+
+2023-06-13 05:46:44,928 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249186956349527
+
+2023-06-13 05:46:44,934 ERROR [PUSH-FAIL] 20031ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=173}, reason=null, target=127.0.0.1
+
+2023-06-13 06:05:10,406 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 06:05:10,408 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249247110883220
+
+2023-06-13 06:05:10,410 INFO send udp packet: 127.0.0.1,54992,249247110883220
+
+2023-06-13 06:05:20,413 INFO retry to push data, key: 127.0.0.1,54992,249247110883220
+
+2023-06-13 06:05:30,419 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249247110883220
+
+2023-06-13 06:05:30,421 ERROR [PUSH-FAIL] 20015ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=175}, reason=null, target=127.0.0.1
+
+2023-06-13 06:21:09,935 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 06:21:09,950 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249277247699442
+
+2023-06-13 06:21:09,956 INFO send udp packet: 127.0.0.1,54992,249277247699442
+
+2023-06-13 06:21:19,959 INFO retry to push data, key: 127.0.0.1,54992,249277247699442
+
+2023-06-13 06:21:29,965 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249277247699442
+
+2023-06-13 06:21:29,971 ERROR [PUSH-FAIL] 20036ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=177}, reason=null, target=127.0.0.1
+
+2023-06-13 06:37:55,330 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 06:37:55,333 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249337309598845
+
+2023-06-13 06:37:55,336 INFO send udp packet: 127.0.0.1,54992,249337309598845
+
+2023-06-13 06:38:05,342 INFO retry to push data, key: 127.0.0.1,54992,249337309598845
+
+2023-06-13 06:38:15,358 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249337309598845
+
+2023-06-13 06:38:15,363 ERROR [PUSH-FAIL] 20033ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=179}, reason=null, target=127.0.0.1
+
+2023-06-13 06:54:34,954 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 06:54:34,961 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249397505603706
+
+2023-06-13 06:54:34,964 INFO send udp packet: 127.0.0.1,54992,249397505603706
+
+2023-06-13 06:54:44,969 INFO retry to push data, key: 127.0.0.1,54992,249397505603706
+
+2023-06-13 06:54:54,984 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249397505603706
+
+2023-06-13 06:54:54,989 ERROR [PUSH-FAIL] 20035ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=181}, reason=null, target=127.0.0.1
+
+2023-06-13 07:11:42,404 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 07:11:42,407 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249427518771845
+
+2023-06-13 07:11:42,409 INFO send udp packet: 127.0.0.1,54992,249427518771845
+
+2023-06-13 07:11:52,411 INFO retry to push data, key: 127.0.0.1,54992,249427518771845
+
+2023-06-13 07:12:02,423 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249427518771845
+
+2023-06-13 07:12:02,427 ERROR [PUSH-FAIL] 20023ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=183}, reason=null, target=127.0.0.1
+
+2023-06-13 07:27:43,654 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 07:27:43,658 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249487685125913
+
+2023-06-13 07:27:43,660 INFO send udp packet: 127.0.0.1,54992,249487685125913
+
+2023-06-13 07:27:53,663 INFO retry to push data, key: 127.0.0.1,54992,249487685125913
+
+2023-06-13 07:28:03,680 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249487685125913
+
+2023-06-13 07:28:03,684 ERROR [PUSH-FAIL] 20030ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=185}, reason=null, target=127.0.0.1
+
+2023-06-13 07:45:40,902 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=184}
+
+2023-06-13 07:45:45,114 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 07:45:45,118 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249517704926761
+
+2023-06-13 07:45:45,122 INFO send udp packet: 127.0.0.1,54992,249517704926761
+
+2023-06-13 07:45:55,130 INFO retry to push data, key: 127.0.0.1,54992,249517704926761
+
+2023-06-13 07:46:05,156 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249517704926761
+
+2023-06-13 07:46:05,169 ERROR [PUSH-FAIL] 20055ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=187}, reason=null, target=127.0.0.1
+
+2023-06-13 08:02:43,020 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=186}
+
+2023-06-13 08:02:47,049 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 08:02:47,060 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249577760730121
+
+2023-06-13 08:02:47,065 INFO send udp packet: 127.0.0.1,54992,249577760730121
+
+2023-06-13 08:02:57,068 INFO retry to push data, key: 127.0.0.1,54992,249577760730121
+
+2023-06-13 08:03:07,087 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249577760730121
+
+2023-06-13 08:03:07,094 ERROR [PUSH-FAIL] 20045ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=189}, reason=null, target=127.0.0.1
+
+2023-06-13 08:19:40,582 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=188}
+
+2023-06-13 08:19:44,497 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 08:19:44,510 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249607822877593
+
+2023-06-13 08:19:44,518 INFO send udp packet: 127.0.0.1,54992,249607822877593
+
+2023-06-13 08:19:54,527 INFO retry to push data, key: 127.0.0.1,54992,249607822877593
+
+2023-06-13 08:20:04,538 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249607822877593
+
+2023-06-13 08:20:04,545 ERROR [PUSH-FAIL] 20048ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=191}, reason=null, target=127.0.0.1
+
+2023-06-13 08:37:26,972 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 08:37:26,974 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249667865743996
+
+2023-06-13 08:37:26,975 INFO send udp packet: 127.0.0.1,54992,249667865743996
+
+2023-06-13 08:37:36,978 INFO retry to push data, key: 127.0.0.1,54992,249667865743996
+
+2023-06-13 08:37:47,003 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249667865743996
+
+2023-06-13 08:37:47,014 ERROR [PUSH-FAIL] 20042ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=193}, reason=null, target=127.0.0.1
+
+2023-06-13 08:54:43,843 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=195}
+
+2023-06-13 08:54:43,848 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 08:54:43,849 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249697407867592
+
+2023-06-13 08:54:43,852 INFO send udp packet: 127.0.0.1,54992,249697407867592
+
+2023-06-13 08:54:53,853 INFO retry to push data, key: 127.0.0.1,54992,249697407867592
+
+2023-06-13 08:55:03,856 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249697407867592
+
+2023-06-13 08:55:03,857 ERROR [PUSH-FAIL] 20009ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=195}, reason=null, target=127.0.0.1
+
+2023-06-13 08:58:51,317 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 08:58:51,332 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,249760106841080
+
+2023-06-13 08:58:51,340 INFO send udp packet: 127.0.0.1,54992,249760106841080
+
+2023-06-13 08:59:01,343 INFO retry to push data, key: 127.0.0.1,54992,249760106841080
+
+2023-06-13 08:59:11,347 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,249760106841080
+
+2023-06-13 08:59:11,394 ERROR [PUSH-FAIL] 20077ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=197}, reason=null, target=127.0.0.1
+
+2023-06-13 09:29:15,517 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=196}
+
+2023-06-13 09:29:23,927 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 09:29:23,940 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,251082389798765
+
+2023-06-13 09:29:23,945 INFO send udp packet: 127.0.0.1,54992,251082389798765
+
+2023-06-13 09:29:33,953 INFO retry to push data, key: 127.0.0.1,54992,251082389798765
+
+2023-06-13 09:29:43,957 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,251082389798765
+
+2023-06-13 09:29:43,972 ERROR [PUSH-FAIL] 20045ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=199}, reason=null, target=127.0.0.1
+
+2023-06-13 09:36:39,426 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=198}
+
+2023-06-13 09:36:47,791 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 09:36:47,794 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,251112462201487
+
+2023-06-13 09:36:47,796 INFO send udp packet: 127.0.0.1,54992,251112462201487
+
+2023-06-13 09:36:57,797 INFO retry to push data, key: 127.0.0.1,54992,251112462201487
+
+2023-06-13 09:37:07,804 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,251112462201487
+
+2023-06-13 09:37:07,817 ERROR [PUSH-FAIL] 20026ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=201}, reason=null, target=127.0.0.1
+
+2023-06-13 10:17:30,872 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 10:17:30,876 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,252514802158373
+
+2023-06-13 10:17:30,879 INFO send udp packet: 127.0.0.1,54992,252514802158373
+
+2023-06-13 10:17:32,279 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 10:17:32,285 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,252516210300582
+
+2023-06-13 10:17:32,288 INFO send udp packet: 127.0.0.1,54992,252516210300582
+
+2023-06-13 10:17:40,882 INFO retry to push data, key: 127.0.0.1,54992,252514802158373
+
+2023-06-13 10:17:42,292 INFO retry to push data, key: 127.0.0.1,54992,252516210300582
+
+2023-06-13 10:17:50,900 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,252514802158373
+
+2023-06-13 10:17:50,903 ERROR [PUSH-FAIL] 20031ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=203}, reason=null, target=127.0.0.1
+
+2023-06-13 10:17:52,301 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,252516210300582
+
+2023-06-13 10:17:52,315 ERROR [PUSH-FAIL] 20036ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=203}, reason=null, target=127.0.0.1
+
+2023-06-13 12:30:26,210 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=204}
+
+2023-06-13 12:30:26,734 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 12:30:26,750 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,259418364532932
+
+2023-06-13 12:30:26,762 INFO send udp packet: 127.0.0.1,54992,259418364532932
+
+2023-06-13 12:30:34,725 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 12:30:34,729 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,259426345122519
+
+2023-06-13 12:30:34,732 INFO send udp packet: 127.0.0.1,54992,259426345122519
+
+2023-06-13 12:30:36,769 INFO retry to push data, key: 127.0.0.1,54992,259418364532932
+
+2023-06-13 12:30:44,733 INFO retry to push data, key: 127.0.0.1,54992,259426345122519
+
+2023-06-13 12:30:46,776 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,259418364532932
+
+2023-06-13 12:30:46,794 ERROR [PUSH-FAIL] 20061ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=205}, reason=null, target=127.0.0.1
+
+2023-06-13 12:30:54,755 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,259426345122519
+
+2023-06-13 12:30:54,762 ERROR [PUSH-FAIL] 20037ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=205}, reason=null, target=127.0.0.1
+
+2023-06-13 15:33:33,183 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=206}
+
+2023-06-13 15:33:33,708 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 15:33:33,713 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,270310814565649
+
+2023-06-13 15:33:33,719 INFO send udp packet: 127.0.0.1,54992,270310814565649
+
+2023-06-13 15:33:35,203 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 15:33:35,207 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,270312308326358
+
+2023-06-13 15:33:35,209 INFO send udp packet: 127.0.0.1,54992,270312308326358
+
+2023-06-13 15:33:37,281 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=201}
+
+2023-06-13 15:33:39,683 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 15:33:39,699 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,270316799688110
+
+2023-06-13 15:33:39,706 INFO send udp packet: 127.0.0.1,54992,270316799688110
+
+2023-06-13 15:33:43,725 INFO retry to push data, key: 127.0.0.1,54992,270310814565649
+
+2023-06-13 15:33:45,214 INFO retry to push data, key: 127.0.0.1,54992,270312308326358
+
+2023-06-13 15:33:49,712 INFO retry to push data, key: 127.0.0.1,54992,270316799688110
+
+2023-06-13 15:33:53,740 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,270310814565649
+
+2023-06-13 15:33:53,764 ERROR [PUSH-FAIL] 20069ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=207}, reason=null, target=127.0.0.1
+
+2023-06-13 15:33:55,235 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,270312308326358
+
+2023-06-13 15:33:55,252 ERROR [PUSH-FAIL] 20050ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=207}, reason=null, target=127.0.0.1
+
+2023-06-13 15:33:59,730 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,270316799688110
+
+2023-06-13 15:33:59,736 ERROR [PUSH-FAIL] 20053ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=207}, reason=null, target=127.0.0.1
+
+2023-06-13 15:44:53,628 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=208}
+
+2023-06-13 15:44:54,187 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 15:44:54,190 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,270340874319788
+
+2023-06-13 15:44:54,192 INFO send udp packet: 127.0.0.1,54992,270340874319788
+
+2023-06-13 15:44:55,705 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 15:44:55,715 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,270342399611997
+
+2023-06-13 15:44:55,718 INFO send udp packet: 127.0.0.1,54992,270342399611997
+
+2023-06-13 15:45:00,198 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 15:45:00,223 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,270346906928207
+
+2023-06-13 15:45:00,227 INFO send udp packet: 127.0.0.1,54992,270346906928207
+
+2023-06-13 15:45:04,193 INFO retry to push data, key: 127.0.0.1,54992,270340874319788
+
+2023-06-13 15:45:05,726 INFO retry to push data, key: 127.0.0.1,54992,270342399611997
+
+2023-06-13 15:45:10,231 INFO retry to push data, key: 127.0.0.1,54992,270346906928207
+
+2023-06-13 15:45:14,199 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,270340874319788
+
+2023-06-13 15:45:14,201 ERROR [PUSH-FAIL] 20014ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=209}, reason=null, target=127.0.0.1
+
+2023-06-13 15:45:15,746 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,270342399611997
+
+2023-06-13 15:45:15,752 ERROR [PUSH-FAIL] 20048ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=209}, reason=null, target=127.0.0.1
+
+2023-06-13 15:45:20,243 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,270346906928207
+
+2023-06-13 15:45:20,250 ERROR [PUSH-FAIL] 20052ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=209}, reason=null, target=127.0.0.1
+
+2023-06-13 19:17:35,236 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 19:17:35,252 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,282949157477357
+
+2023-06-13 19:17:35,260 INFO send udp packet: 127.0.0.1,54992,282949157477357
+
+2023-06-13 19:17:36,014 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=210}
+
+2023-06-13 19:17:36,312 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=211}
+
+2023-06-13 19:17:36,556 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 19:17:36,572 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,282950478864774
+
+2023-06-13 19:17:36,575 INFO send udp packet: 127.0.0.1,54992,282950478864774
+
+2023-06-13 19:17:45,263 INFO retry to push data, key: 127.0.0.1,54992,282949157477357
+
+2023-06-13 19:17:46,583 INFO retry to push data, key: 127.0.0.1,54992,282950478864774
+
+2023-06-13 19:17:55,266 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,282949157477357
+
+2023-06-13 19:17:55,279 ERROR [PUSH-FAIL] 20043ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=211}, reason=null, target=127.0.0.1
+
+2023-06-13 19:17:56,595 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,282950478864774
+
+2023-06-13 19:17:56,600 ERROR [PUSH-FAIL] 20044ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=211}, reason=null, target=127.0.0.1
+
+2023-06-13 19:35:22,987 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 19:35:23,001 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,283009378505135
+
+2023-06-13 19:35:23,009 INFO send udp packet: 127.0.0.1,54992,283009378505135
+
+2023-06-13 19:35:24,626 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 19:35:24,647 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,283011024620844
+
+2023-06-13 19:35:24,650 INFO send udp packet: 127.0.0.1,54992,283011024620844
+
+2023-06-13 19:35:33,013 INFO retry to push data, key: 127.0.0.1,54992,283009378505135
+
+2023-06-13 19:35:34,656 INFO retry to push data, key: 127.0.0.1,54992,283011024620844
+
+2023-06-13 19:35:43,016 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,283009378505135
+
+2023-06-13 19:35:43,026 ERROR [PUSH-FAIL] 20039ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=213}, reason=null, target=127.0.0.1
+
+2023-06-13 19:35:44,671 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,283011024620844
+
+2023-06-13 19:35:44,673 ERROR [PUSH-FAIL] 20047ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=213}, reason=null, target=127.0.0.1
+
+2023-06-13 19:51:54,165 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 19:51:54,191 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,283075541092540
+
+2023-06-13 19:51:54,194 INFO send udp packet: 127.0.0.1,54992,283075541092540
+
+2023-06-13 19:52:04,196 INFO retry to push data, key: 127.0.0.1,54992,283075541092540
+
+2023-06-13 19:52:14,200 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,283075541092540
+
+2023-06-13 19:52:14,218 ERROR [PUSH-FAIL] 20053ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=213}, reason=null, target=127.0.0.1
+
+2023-06-13 20:08:17,735 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 20:08:17,741 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,283135632628151
+
+2023-06-13 20:08:17,746 INFO send udp packet: 127.0.0.1,54992,283135632628151
+
+2023-06-13 20:08:27,748 INFO retry to push data, key: 127.0.0.1,54992,283135632628151
+
+2023-06-13 20:08:37,750 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,283135632628151
+
+2023-06-13 20:08:37,767 ERROR [PUSH-FAIL] 20032ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=213}, reason=null, target=127.0.0.1
+
+2023-06-13 20:24:21,168 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 20:24:21,181 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,283165738643997
+
+2023-06-13 20:24:21,186 INFO send udp packet: 127.0.0.1,54992,283165738643997
+
+2023-06-13 20:24:31,188 INFO retry to push data, key: 127.0.0.1,54992,283165738643997
+
+2023-06-13 20:24:41,197 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,283165738643997
+
+2023-06-13 20:24:41,202 ERROR [PUSH-FAIL] 20034ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=213}, reason=null, target=127.0.0.1
+
+2023-06-13 21:24:56,644 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 21:24:56,663 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,286731402649372
+
+2023-06-13 21:24:56,671 INFO send udp packet: 127.0.0.1,54992,286731402649372
+
+2023-06-13 21:25:06,684 INFO retry to push data, key: 127.0.0.1,54992,286731402649372
+
+2023-06-13 21:25:16,688 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,286731402649372
+
+2023-06-13 21:25:16,696 ERROR [PUSH-FAIL] 20053ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=213}, reason=null, target=127.0.0.1
+
+2023-06-13 21:40:47,402 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 21:40:47,415 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,286761397281469
+
+2023-06-13 21:40:47,427 INFO send udp packet: 127.0.0.1,54992,286761397281469
+
+2023-06-13 21:40:48,435 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 21:40:48,444 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,286762426208470
+
+2023-06-13 21:40:48,447 INFO send udp packet: 127.0.0.1,54992,286762426208470
+
+2023-06-13 21:40:57,430 INFO retry to push data, key: 127.0.0.1,54992,286761397281469
+
+2023-06-13 21:40:58,452 INFO retry to push data, key: 127.0.0.1,54992,286762426208470
+
+2023-06-13 21:41:07,442 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,286761397281469
+
+2023-06-13 21:41:07,452 ERROR [PUSH-FAIL] 20050ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=215}, reason=null, target=127.0.0.1
+
+2023-06-13 21:41:08,463 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,286762426208470
+
+2023-06-13 21:41:08,466 ERROR [PUSH-FAIL] 20031ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=215}, reason=null, target=127.0.0.1
+
+2023-06-13 21:42:44,784 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=215}
+
+2023-06-13 21:42:44,839 INFO [PUSH] Task merge for Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=216}
+
+2023-06-13 21:42:45,578 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=216}
+
+2023-06-13 21:42:45,718 INFO [PUSH] Task merge for Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=217}
+
+2023-06-13 21:42:47,332 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 21:42:47,335 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,286793606904234
+
+2023-06-13 21:42:47,338 INFO send udp packet: 127.0.0.1,54992,286793606904234
+
+2023-06-13 21:42:57,339 INFO retry to push data, key: 127.0.0.1,54992,286793606904234
+
+2023-06-13 21:43:07,359 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,286793606904234
+
+2023-06-13 21:43:07,373 ERROR [PUSH-FAIL] 20041ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=217}, reason=null, target=127.0.0.1
+
+2023-06-13 21:59:07,384 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 21:59:07,387 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,286853616240261
+
+2023-06-13 21:59:07,389 INFO send udp packet: 127.0.0.1,54992,286853616240261
+
+2023-06-13 21:59:17,390 INFO retry to push data, key: 127.0.0.1,54992,286853616240261
+
+2023-06-13 21:59:27,400 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,286853616240261
+
+2023-06-13 21:59:27,402 ERROR [PUSH-FAIL] 20018ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=217}, reason=null, target=127.0.0.1
+
+2023-06-13 22:29:12,989 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 22:29:13,003 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,287755283432423
+
+2023-06-13 22:29:13,010 INFO send udp packet: 127.0.0.1,54992,287755283432423
+
+2023-06-13 22:29:23,015 INFO retry to push data, key: 127.0.0.1,54992,287755283432423
+
+2023-06-13 22:29:33,040 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,287755283432423
+
+2023-06-13 22:29:33,047 ERROR [PUSH-FAIL] 20058ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=219}, reason=null, target=127.0.0.1
+
+2023-06-13 22:46:52,915 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 22:46:52,917 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,287875480476812
+
+2023-06-13 22:46:52,919 INFO send udp packet: 127.0.0.1,54992,287875480476812
+
+2023-06-13 22:47:02,922 INFO retry to push data, key: 127.0.0.1,54992,287875480476812
+
+2023-06-13 22:47:12,930 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,287875480476812
+
+2023-06-13 22:47:12,938 ERROR [PUSH-FAIL] 20024ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=221}, reason=null, target=127.0.0.1
+
+2023-06-13 23:04:08,299 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 23:04:08,309 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,287935532611505
+
+2023-06-13 23:04:08,315 INFO send udp packet: 127.0.0.1,54992,287935532611505
+
+2023-06-13 23:04:18,320 INFO retry to push data, key: 127.0.0.1,54992,287935532611505
+
+2023-06-13 23:04:28,330 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,287935532611505
+
+2023-06-13 23:04:28,340 ERROR [PUSH-FAIL] 20041ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=223}, reason=null, target=127.0.0.1
+
+2023-06-13 23:21:18,713 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 23:21:18,733 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,287965678326519
+
+2023-06-13 23:21:18,738 INFO send udp packet: 127.0.0.1,54992,287965678326519
+
+2023-06-13 23:21:28,740 INFO retry to push data, key: 127.0.0.1,54992,287965678326519
+
+2023-06-13 23:21:38,764 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,287965678326519
+
+2023-06-13 23:21:38,767 ERROR [PUSH-FAIL] 20054ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=225}, reason=null, target=127.0.0.1
+
+2023-06-13 23:37:53,150 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 23:37:53,154 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,288025721598712
+
+2023-06-13 23:37:53,159 INFO send udp packet: 127.0.0.1,54992,288025721598712
+
+2023-06-13 23:38:03,161 INFO retry to push data, key: 127.0.0.1,54992,288025721598712
+
+2023-06-13 23:38:13,166 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,288025721598712
+
+2023-06-13 23:38:13,168 ERROR [PUSH-FAIL] 20018ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=227}, reason=null, target=127.0.0.1
+
+2023-06-13 23:54:22,663 INFO DEFAULT_GROUP@@user-service is changed, add it to push queue.
+
+2023-06-13 23:54:22,672 INFO serviceName: DEFAULT_GROUP@@user-service@@DEFAULT changed, schedule push for: 127.0.0.1:54992, agent: Nacos-Java-Client:v1.4.1, key: 127.0.0.1,54992,288085905198989
+
+2023-06-13 23:54:22,678 INFO send udp packet: 127.0.0.1,54992,288085905198989
+
+2023-06-13 23:54:32,681 INFO retry to push data, key: 127.0.0.1,54992,288085905198989
+
+2023-06-13 23:54:42,690 WARN max re-push times reached, retry times 2, key: 127.0.0.1,54992,288085905198989
+
+2023-06-13 23:54:42,697 ERROR [PUSH-FAIL] 20034ms, Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=229}, reason=null, target=127.0.0.1
+

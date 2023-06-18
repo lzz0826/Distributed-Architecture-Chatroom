@@ -1,0 +1,118 @@
+2023-06-15 08:07:34,679 WARN naming.distro config will be removed, please use core.protocol.distro replace.
+
+2023-06-15 08:07:34,679 WARN Using naming.distro config to replace core.distro config
+
+2023-06-15 08:07:34,851 INFO open empty service auto clean job, initialDelay : 50000 ms, period : 30000 ms
+
+2023-06-15 08:07:34,852 INFO listen for service meta change
+
+2023-06-15 08:07:34,859 INFO upgrade.state file is not exist
+
+2023-06-15 08:07:36,296 INFO [SelectorManager] Load SelectorContextBuilder(class com.alibaba.nacos.naming.selector.context.CmdbSelectorContextBuilder) contextType(CMDB) successfully.
+
+2023-06-15 08:07:36,297 INFO [SelectorManager] Load Selector(class com.alibaba.nacos.naming.selector.CmdbLabelSelector) type(label) contextType(CMDB) successfully.
+
+2023-06-15 08:07:38,285 INFO Load instance extension handler []
+
+2023-06-15 08:07:42,954 INFO Client connection 192.168.248.62:50052#true connect
+
+2023-06-15 08:07:42,967 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=0}, 192.168.248.62:50052#true
+
+2023-06-15 08:07:45,408 INFO Client connection 127.0.0.1:60576#true connect
+
+2023-06-15 08:07:45,674 INFO Client connection 192.168.248.62:8083#true connect
+
+2023-06-15 08:07:45,674 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=0}, 192.168.248.62:8083#true
+
+2023-06-15 08:44:00,688 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=1}, 192.168.248.62:8083#true
+
+2023-06-15 08:44:21,643 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=1}, 192.168.248.62:50052#true
+
+2023-06-15 08:44:23,623 INFO Client connection 127.0.0.1:49453#true connect
+
+2023-06-15 08:44:23,883 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=2}, 192.168.248.62:8083#true
+
+2023-06-15 08:44:36,798 INFO Client connection 127.0.0.1:60576#true disconnect, remove instances and subscribers
+
+2023-06-15 09:09:21,810 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=3}, 192.168.248.62:8083#true
+
+2023-06-15 09:09:42,831 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=2}, 192.168.248.62:50052#true
+
+2023-06-15 09:09:44,870 INFO Client connection 127.0.0.1:57121#true connect
+
+2023-06-15 09:09:45,191 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=4}, 192.168.248.62:8083#true
+
+2023-06-15 09:09:52,233 INFO Client connection 127.0.0.1:49453#true disconnect, remove instances and subscribers
+
+2023-06-15 09:15:12,052 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=5}, 192.168.248.62:8083#true
+
+2023-06-15 09:15:32,620 INFO Client change for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=3}, 192.168.248.62:50052#true
+
+2023-06-15 09:15:34,919 INFO Client connection 127.0.0.1:63830#true connect
+
+2023-06-15 09:15:35,222 INFO Client change for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=6}, 192.168.248.62:8083#true
+
+2023-06-15 09:15:47,337 INFO Client connection 127.0.0.1:57121#true disconnect, remove instances and subscribers
+
+2023-06-15 09:19:56,232 INFO Client remove for service Service{namespace='public', group='DEFAULT_GROUP', name='user-service', ephemeral=true, revision=7}, 192.168.248.62:8083#true
+
+2023-06-15 09:20:24,672 INFO [AUTO-DELETE-IP] service: Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=4}, ip: {"ip":"192.168.248.62","port":50052,"healthy":false,"cluster":"DEFAULT","extendDatum":{"customInstanceId":"192.168.248.62#50052#DEFAULT#grpc@@user-grpc"},"lastHeartBeatTime":1686791993800,"metadataId":"192.168.248.62:50052:DEFAULT"}
+
+2023-06-15 09:20:24,672 INFO Client remove for service Service{namespace='public', group='grpc', name='user-grpc', ephemeral=true, revision=4}, 192.168.248.62:50052#true
+
+2023-06-15 09:20:27,438 INFO Client connection 192.168.248.62:50052#true disconnect, remove instances and subscribers
+
+2023-06-15 09:20:27,438 INFO Client connection 127.0.0.1:63830#true disconnect, remove instances and subscribers
+
+2023-06-15 09:20:27,438 INFO Client connection 192.168.248.62:8083#true disconnect, remove instances and subscribers
+
+2023-06-15 09:21:07,577 WARN namespace : public, [DEFAULT_GROUP@@user-service] services are automatically cleaned
+
+2023-06-15 09:22:07,582 WARN namespace : public, [grpc@@user-grpc] services are automatically cleaned
+
+2023-06-15 11:33:52,408 WARN naming.distro config will be removed, please use core.protocol.distro replace.
+
+2023-06-15 11:33:52,408 WARN Using naming.distro config to replace core.distro config
+
+2023-06-15 11:33:52,524 INFO open empty service auto clean job, initialDelay : 50000 ms, period : 30000 ms
+
+2023-06-15 11:33:52,527 INFO listen for service meta change
+
+2023-06-15 11:33:52,533 INFO upgrade.state file is not exist
+
+2023-06-15 11:33:53,854 INFO [SelectorManager] Load SelectorContextBuilder(class com.alibaba.nacos.naming.selector.context.CmdbSelectorContextBuilder) contextType(CMDB) successfully.
+
+2023-06-15 11:33:53,856 INFO [SelectorManager] Load Selector(class com.alibaba.nacos.naming.selector.CmdbLabelSelector) type(label) contextType(CMDB) successfully.
+
+2023-06-15 11:33:54,690 INFO Load instance extension handler []
+
+2023-06-15 11:40:36,416 WARN [NamingServerHttpClientManager] Start destroying HTTP-Client
+
+2023-06-15 11:40:36,427 WARN [NamingServerHttpClientManager] Destruction of the end
+
+2023-06-15 11:40:37,047 ERROR [HEALTH-CHECK-V2] error while processing NIO task
+
+java.lang.InterruptedException: null
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2088)
+	at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+	at com.alibaba.nacos.naming.healthcheck.v2.processor.TcpHealthCheckProcessor.processTask(TcpHealthCheckProcessor.java:122)
+	at com.alibaba.nacos.naming.healthcheck.v2.processor.TcpHealthCheckProcessor.run(TcpHealthCheckProcessor.java:139)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)
+2023-06-15 11:40:37,047 ERROR [HEALTH-CHECK] error while processing NIO task
+
+java.lang.InterruptedException: null
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.reportInterruptAfterWait(AbstractQueuedSynchronizer.java:2014)
+	at java.util.concurrent.locks.AbstractQueuedSynchronizer$ConditionObject.awaitNanos(AbstractQueuedSynchronizer.java:2088)
+	at java.util.concurrent.LinkedBlockingQueue.poll(LinkedBlockingQueue.java:467)
+	at com.alibaba.nacos.naming.healthcheck.TcpSuperSenseProcessor.processTask(TcpSuperSenseProcessor.java:137)
+	at com.alibaba.nacos.naming.healthcheck.TcpSuperSenseProcessor.run(TcpSuperSenseProcessor.java:154)
+	at java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:511)
+	at java.util.concurrent.FutureTask.run(FutureTask.java:266)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1149)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:624)
+	at java.lang.Thread.run(Thread.java:748)

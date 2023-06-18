@@ -1,0 +1,10 @@
+2023-06-18 11:59:05,433 INFO {POS} {IP-DISABLED} valid: 192.168.248.62:8083@DEFAULT@user-service, region: unknown, msg: client last beat: 1687056751250
+
+2023-06-18 13:13:21,368 ERROR [UPDATE-DOMAIN] Exception while taking item from LinkedBlockingDeque.
+
+2023-06-18 14:21:23,179 INFO {POS} {IP-DISABLED} valid: 192.168.248.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1687069263216
+
+2023-06-18 14:22:59,958 INFO {POS} {IP-DISABLED} valid: 192.168.248.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1687069360085
+
+2023-06-18 14:45:55,025 INFO {POS} {IP-DISABLED} valid: 192.168.248.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1687069940491
+
