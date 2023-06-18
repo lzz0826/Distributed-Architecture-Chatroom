@@ -27,4 +27,12 @@ CREATE TABLE `tb_user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='使用者';
 
 
+# API
+WS連接
+ws://127.0.0.1:8888/ws?token=eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4NzA3NTA0MDc2MCwiZXhwIjoxNjk3MDc1MDQwLCJ1c2VybmFtZSI6InRvbnkifQ.hAmHLxTnT0hsi-0APCc9XDJe7VTbJX9kwK1GixG5QcJ9EPywC--aR8DPv5XpSB4raxI_l_OsWnGAY42ns0m90Q
+
+內容範例:
+{"eMsgType":"System","eWsMsgType":"Chatroom","request":"你好嗎","userId":"2"}
+
+
 
