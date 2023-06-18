@@ -1,8 +1,0 @@
-2023-06-14 08:54:16,978 INFO {POS} {IP-DISABLED} valid: 192.168.141.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1686704040852
-
-2023-06-14 09:09:40,215 INFO {POS} {IP-DISABLED} valid: 192.168.37.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1686704964759
-
-2023-06-14 09:20:40,387 INFO {POS} {IP-DISABLED} valid: 192.168.37.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1686705623985
-
-2023-06-14 09:37:10,729 INFO {POS} {IP-DISABLED} valid: 192.168.37.62:50052@DEFAULT@user-grpc, region: unknown, msg: client last beat: 1686706611072
-
