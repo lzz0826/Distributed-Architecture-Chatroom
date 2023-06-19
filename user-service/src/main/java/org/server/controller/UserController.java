@@ -33,7 +33,7 @@ public class UserController{
   @Resource
   protected UserService userService;
 
-  @PostMapping("/add")
+  @PostMapping("/addUser")
   public BaseResp<String> addUser(@RequestBody UserAddReq userAddReq)
       throws AddUserErrorException, MissingParameterErrorException {
     if(StringUtils.isBlank(userAddReq.getUsername())){
