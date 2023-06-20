@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.ChatroomMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.dao.ChatroomDAO">
+    <id property="id" column="id" jdbcType="VARCHAR"/>
+    <result property="name" column="name" jdbcType="VARCHAR"/>
+    <result property="adminUserId" column="admin_user_id" jdbcType="VARCHAR"/>
+    <result property="status" column="price" jdbcType="INTEGER"/>
+  </resultMap>
+
+  <insert id="insertChatroom">
+    insert into tb_chatroom
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="name != null">name,</if>
+      <if test="adminUserId != null">admin_user_id,</if>
+      <if test="status != null">status,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+      <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+      <if test="adminUserId != null">#{adminUserId,jdbcType=VARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+    </trim>
+
+  </insert>
+
+
+</mapper>

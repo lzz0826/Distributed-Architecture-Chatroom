@@ -1,4 +1,4 @@
-package org.server.pojo;
+package org.server.dao;
 
 
 import lombok.Builder;
@@ -6,7 +6,7 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Order {
+public class OrderDAO {
 
   private String id;
 

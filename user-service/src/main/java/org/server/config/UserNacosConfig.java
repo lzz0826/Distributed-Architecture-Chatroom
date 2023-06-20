@@ -27,7 +27,7 @@ public class UserNacosConfig {
     String serviceName = "user-grpc";
     String groupName = "grpc";
     String ip = IpUtil.getLocalIpAddress();
-    int port = 50052;
+    int port = 50061;
 
     log.info("以 serviceName:{}, groupName:{}, ip: {}, port: {} 註冊Nacos服務", serviceName, groupName, ip, port);
 

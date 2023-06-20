@@ -8,9 +8,8 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.exception.AddUserErrorException;
 import org.server.exception.LoginErrorException;
-import org.server.exception.UserException;
 import org.server.mapper.UserMapper;
-import org.server.pojo.User;
+import org.server.dao.UserDAO;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.LoginVO;
 import org.server.vo.UserVO;
@@ -38,11 +37,13 @@ public class UserService{
   public void addUser(String username , String password ,String address)
       throws AddUserErrorException {
 
-    User user = User
+    String md5token = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
+
+    UserDAO user = UserDAO
         .builder()
         .id(idGeneratorService.getNextId())
         .username(username)
-        .password(password)
+        .password(md5token)
         .address(address)
         .build();
 
@@ -59,29 +60,29 @@ public class UserService{
   }
 
 
-  public User getUserByUsername(String username){
+  public UserDAO getUserByUsername(String username){
     return userMapper.selectByUsername(username);
   }
 
 
-  public User getUserById(String id){
+  public UserDAO getUserById(String id){
     return userMapper.selectById(id);
   }
 
-  public List<User> getAllUsers(){
+  public List<UserDAO> getAllUsers(){
 
     System.out.println("2222" + userMapper.selectAllUsers());
     return userMapper.selectAllUsers();
   }
 
   public List<UserVO> getAllUserVOs(){
-    List<User> allUsers = getAllUsers();
+    List<UserDAO> allUsers = getAllUsers();
 
     if (allUsers.size() == 0 || allUsers.isEmpty()) {
       return null;
     }
     List<UserVO> userVOs = new ArrayList<>();
-    for (User allUser : allUsers) {
+    for (UserDAO allUser : allUsers) {
       UserVO userVO = UserVO.builder()
           .id(allUser.getId())
           .username(allUser.getUsername())
@@ -94,7 +95,7 @@ public class UserService{
   }
 
   public UserVO getUserVO(String id){
-    User user = getUserById(id);
+    UserDAO user = getUserById(id);
     if(user == null){
       return null;
     }
@@ -109,7 +110,7 @@ public class UserService{
 
 
   public LoginVO login(String username , String password) throws LoginErrorException {
-    User userDAO = getUserByUsername(username);
+    UserDAO userDAO = getUserByUsername(username);
     if(userDAO == null){
       throw new LoginErrorException();
     }

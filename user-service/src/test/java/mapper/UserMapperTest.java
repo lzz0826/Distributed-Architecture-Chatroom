@@ -2,7 +2,7 @@ package mapper;
 
 import java.util.List;
 import org.server.mapper.UserMapper;
-import org.server.pojo.User;
+import org.server.dao.UserDAO;
 import org.server.sercice.IdGeneratorService;
 import javax.annotation.Resource;
 import org.junit.Test;
@@ -19,7 +19,7 @@ public class UserMapperTest extends BaseTest{
 
   @Test
   public void selectAllUsersTest(){
-    List<User> users = userMapper.selectAllUsers();
+    List<UserDAO> users = userMapper.selectAllUsers();
     System.out.println(users);
 
   }
@@ -28,7 +28,7 @@ public class UserMapperTest extends BaseTest{
   @Test
   public void selectByIdTest(){
 
-    User user = userMapper.selectById("2891681402151164817");
+    UserDAO user = userMapper.selectById("2891681402151164817");
     System.out.println(user);
   }
 
@@ -36,7 +36,7 @@ public class UserMapperTest extends BaseTest{
   @Test
   public void selectAllTest(){
 
-    User user = userMapper.selectAll();
+    UserDAO user = userMapper.selectAll();
     System.out.println(user);
 
   }
@@ -45,7 +45,7 @@ public class UserMapperTest extends BaseTest{
   @Test
   public void insertUserTest(){
 
-    User build = User
+    UserDAO build = UserDAO
         .builder()
         .id(idGeneratorService.getNextId())
         .username("sdfgfdgdf")

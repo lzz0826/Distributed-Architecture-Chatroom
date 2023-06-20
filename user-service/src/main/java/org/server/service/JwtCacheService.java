@@ -5,7 +5,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.server.cache.JwtTokenUserCache;
 import org.server.cache.UserIdJwtTokenCache;
-import org.server.pojo.User;
+import org.server.dao.UserDAO;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
@@ -24,7 +24,7 @@ public class JwtCacheService {
 
 
 
-  public void newToken(String newJwtToken, User user) {
+  public void newToken(String newJwtToken, UserDAO user) {
     String userId = user.getId();
     String oldJwtToken = userIdJwtTokenCache.getByUserId(userId);
     jwtTokenUserCache.delByJwtToken(oldJwtToken);
@@ -41,7 +41,7 @@ public class JwtCacheService {
 
 
   public void deleteTokenByJwtToken(String jwtToken){
-    User user = jwtTokenUserCache.getByJwtToken(jwtToken);
+    UserDAO user = jwtTokenUserCache.getByJwtToken(jwtToken);
     if(user != null){
       String userId = user.getId();
       userIdJwtTokenCache.delByUserId(userId);
@@ -50,7 +50,7 @@ public class JwtCacheService {
   }
 
 
-  public User getUserByJwtToken(String jwtToken) {
+  public UserDAO getUserByJwtToken(String jwtToken) {
     return jwtTokenUserCache.getByJwtToken(jwtToken);
   }
 

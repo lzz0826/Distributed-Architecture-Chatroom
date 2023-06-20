@@ -1,15 +1,12 @@
 package org.server.service;
 
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.JSONObject;
 import java.lang.reflect.Field;
-import java.util.HashMap;
-import java.util.Map;
 import javax.annotation.Resource;
 import org.server.common.BaseResp;
 import org.server.exception.NotOrderUserException;
 import org.server.mapper.OrderMapper;
-import org.server.pojo.Order;
+import org.server.dao.OrderDAO;
 import org.server.vo.OrderVO;
 import org.server.vo.UserVO;
 import org.springframework.cloud.client.loadbalancer.LoadBalanced;
@@ -33,7 +30,7 @@ public class OrderService {
 
 
 
-    Order order = orderMapper.selectById(id);
+    OrderDAO order = orderMapper.selectById(id);
 
     if(order == null){
       throw new NotOrderUserException();

@@ -1,6 +1,6 @@
 package org.server.mapper;
 
-import org.server.pojo.Order;
+import org.server.dao.OrderDAO;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -9,11 +9,11 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface OrderMapper {
 
-   int insertOrder(Order order);
+   int insertOrder(OrderDAO order);
 
-   List<Order> selectAll();
+   List<OrderDAO> selectAll();
 
-   Order selectById(@Param("id") String id);
+   OrderDAO selectById(@Param("id") String id);
 
    int updateByName(@Param("name") String name ,@Param("price") int price);
 

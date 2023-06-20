@@ -2,7 +2,7 @@ package mapper;
 
 
 import org.server.mapper.OrderMapper;
-import org.server.pojo.Order;
+import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
 import java.util.List;
 import javax.annotation.Resource;
@@ -31,19 +31,19 @@ public class OrderMapperTest extends BaseTest{
 
   @Test
   public void selectByIdTest(){
-    Order order = orderMapper.selectById("2890589042718397264");
+    OrderDAO order = orderMapper.selectById("2890589042718397264");
     System.out.println(order);
   }
 
   @Test
   public void selectAllTest(){
-    List<Order> orders = orderMapper.selectAll();
+    List<OrderDAO> orders = orderMapper.selectAll();
     System.out.println(orders);
   }
 
   @Test
   public void insertOrderTest(){
-    Order tony = Order
+    OrderDAO tony = OrderDAO
         .builder()
         .id(idGeneratorService.getNextId())
         .userId(idGeneratorService.getNextId())

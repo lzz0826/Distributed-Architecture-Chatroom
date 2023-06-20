@@ -18,7 +18,7 @@ public class UserGrpcConfig {
 
     @PostConstruct
     private void start() throws IOException {
-        int serverGrpcPort = 50052;
+        int serverGrpcPort = 50061;
         server = ServerBuilder.forPort(serverGrpcPort)
 //            .addService(new RpcDispublogService(dispublogService))
             .addService(new HelloServer())

@@ -15,7 +15,7 @@ import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.StatusCode;
-import org.server.pojo.User;
+import org.server.dao.UserDAO;
 import org.server.service.JwtCacheService;
 
 import org.server.service.UserService;
@@ -65,7 +65,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
         // 首次連接是FullHttpRequest，把用戶id和對應的channel對象存儲起来
         if (msg instanceof FullHttpRequest) {
             FullHttpRequest request = (FullHttpRequest) msg;
-            User user = getUserDetailsByRequest(request);
+            UserDAO user = getUserDetailsByRequest(request);
             if (user == null) {
                 //jwt裡沒有token代表沒登入
                 checkIsLogin = false;
@@ -171,7 +171,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
         return map;
     }
 
-    private User getUserDetailsByRequest(FullHttpRequest request) {
+    private UserDAO getUserDetailsByRequest(FullHttpRequest request) {
         String uri = request.uri();
 
         if (uri.contains("?")) {

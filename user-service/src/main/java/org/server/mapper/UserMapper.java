@@ -1,24 +1,24 @@
 package org.server.mapper;
 
 import java.util.List;
-import org.server.pojo.User;
+import org.server.dao.UserDAO;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface UserMapper {
 
-  User selectAll();
+  UserDAO selectAll();
 
-  int insertUser(User user);
-
-
-  User selectById(@Param("id") String id);
+  int insertUser(UserDAO user);
 
 
-  User selectByUsername(@Param("username") String username);
+  UserDAO selectById(@Param("id") String id);
 
-  List<User> selectAllUsers();
+
+  UserDAO selectByUsername(@Param("username") String username);
+
+  List<UserDAO> selectAllUsers();
 
 
 

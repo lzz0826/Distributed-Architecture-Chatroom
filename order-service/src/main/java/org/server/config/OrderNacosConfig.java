@@ -30,7 +30,7 @@ public class OrderNacosConfig {
     String serviceName = "order-grpc";
     String groupName = "grpc";
     String ip = IpUtil.getLocalIpAddress();
-    int port = 50051;
+    int port = 50071;
 
     log.info("以 serviceName:{}, groupName:{}, ip: {}, port: {} 註冊Nacos服務", serviceName, groupName, ip, port);
 

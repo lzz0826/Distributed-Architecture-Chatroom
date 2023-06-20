@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="org.server.mapper.UserMapper">
-  <resultMap id="BaseResultMap" type="org.server.pojo.User">
+  <resultMap id="BaseResultMap" type="org.server.dao.UserDAO">
     <id property="id" column="id" jdbcType="VARCHAR"/>
     <result property="username" column="username" jdbcType="VARCHAR"/>
     <result property="password" column="password" jdbcType="VARCHAR"/>
@@ -24,27 +24,27 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">#{id,jdbcType=VARCHAR},</if>
       <if test="username != null">#{username,jdbcType=VARCHAR},</if>
-      <if test="password != null">#{username,jdbcType=VARCHAR},</if>
+      <if test="password != null">#{password,jdbcType=VARCHAR},</if>
       <if test="address != null">#{address,jdbcType=VARCHAR},</if>
     </trim>
   </insert>
 
-  <select id="selectAll" resultType="org.server.pojo.User">
+  <select id="selectAll" resultType="org.server.dao.UserDAO">
     select * from tb_user;
   </select>
 
 
-  <select id="selectById" resultType="org.server.pojo.User">
+  <select id="selectById" resultType="org.server.dao.UserDAO">
     select * from tb_user where id = #{id} ;
   </select>
 
 
-  <select id="selectByUsername" resultType="org.server.pojo.User">
+  <select id="selectByUsername" resultType="org.server.dao.UserDAO">
     select * from tb_user where username = #{username} ;
   </select>
 
 
-  <select id="selectAllUsers" resultType="org.server.pojo.User">
+  <select id="selectAllUsers" resultType="org.server.dao.UserDAO">
     select * from tb_user
   </select>
 

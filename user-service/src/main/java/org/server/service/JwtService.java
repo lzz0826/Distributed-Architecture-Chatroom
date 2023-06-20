@@ -6,7 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.server.pojo.User;
+import org.server.dao.UserDAO;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -68,7 +68,7 @@ public class JwtService {
         return expiration.before(new Date());
     }
 
-    public String generateToken(User user) {
+    public String generateToken(UserDAO user) {
         Map<String, Object> claims = new HashMap<>();
         claims.put(CLAIM_KEY_USERNAME, user.getUsername());
         claims.put(CLAIM_KEY_PASSWORD, user.getPassword());
@@ -98,7 +98,7 @@ public class JwtService {
         return refreshedToken;
     }
 
-    public Boolean validateToken(String token, User user) {
+    public Boolean validateToken(String token, UserDAO user) {
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);
 

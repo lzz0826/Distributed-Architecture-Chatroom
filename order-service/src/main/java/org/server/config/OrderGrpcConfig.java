@@ -19,8 +19,6 @@ public class OrderGrpcConfig {
   private Server server;
 
 
-
-
 //目前無
   @PostConstruct
   private void start() throws IOException {
