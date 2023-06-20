@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
-import org.server.exception.AddUserErrorException;
+import org.server.exception.AddErrorException;
 import org.server.exception.LoginErrorException;
 import org.server.mapper.UserMapper;
 import org.server.dao.UserDAO;
@@ -35,7 +35,7 @@ public class UserService{
 
 
   public void addUser(String username , String password ,String address)
-      throws AddUserErrorException {
+      throws AddErrorException {
 
     String md5token = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
 
@@ -47,14 +47,11 @@ public class UserService{
         .address(address)
         .build();
 
-    System.out.println(user);
-
-
 
     int i = userMapper.insertUser(user);
 
     if(i == 0){
-      throw new AddUserErrorException();
+      throw new AddErrorException();
     }
 
   }
@@ -71,7 +68,6 @@ public class UserService{
 
   public List<UserDAO> getAllUsers(){
 
-    System.out.println("2222" + userMapper.selectAllUsers());
     return userMapper.selectAllUsers();
   }
 
@@ -126,7 +122,6 @@ public class UserService{
     String jwtToken = jwtService.generateToken(userDAO);
 
     jwtCacheService.newToken(jwtToken,userDAO);
-
 
     return LoginVO
         .builder()

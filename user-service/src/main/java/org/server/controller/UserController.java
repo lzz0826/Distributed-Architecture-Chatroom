@@ -9,7 +9,7 @@ import org.server.common.BaseResp;
 import org.server.common.StatusCode;
 import org.server.controller.req.LoginReq;
 import org.server.controller.req.UserAddReq;
-import org.server.exception.AddUserErrorException;
+import org.server.exception.AddErrorException;
 import org.server.exception.LoginErrorException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.UserException;
@@ -33,7 +33,7 @@ public class UserController{
 
   @PostMapping("/addUser")
   public BaseResp<String> addUser(@RequestBody UserAddReq userAddReq)
-      throws AddUserErrorException, MissingParameterErrorException {
+      throws AddErrorException, MissingParameterErrorException {
     if(StringUtils.isBlank(userAddReq.getUsername())){
       throw new MissingParameterErrorException();
     }

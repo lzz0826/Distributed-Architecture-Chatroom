@@ -11,6 +11,9 @@ public enum StatusCode {
 
   MissingParameter(10,"缺少必要參數"),
 
+  AddFail(11,"新增失敗"),
+
+
   /**
    * User 1000
    */
@@ -21,8 +24,6 @@ public enum StatusCode {
 
   NeedPassword(1003,"需要Password"),
 
-  AddUserFail(1003,"新增失敗"),
-
 
 
   /**
@@ -30,6 +31,14 @@ public enum StatusCode {
    */
 
   NotFoundOrder(2000,"找不到訂單"),
+
+
+  /**
+   * 聊天室 3000
+   */
+
+  NeedChatroomName(3000,"需要聊天室名稱"),
+
 
 
   /**

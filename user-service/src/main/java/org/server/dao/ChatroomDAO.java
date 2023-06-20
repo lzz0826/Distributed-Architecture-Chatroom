@@ -1,5 +1,6 @@
 package org.server.dao;
 
+import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
 
@@ -15,6 +16,10 @@ public class ChatroomDAO {
   private String adminUserId;
 
   private Boolean status;
+
+  private Date updateTime;
+
+  private Date createTime;
 
 
 

@@ -10,4 +10,6 @@ public interface ChatroomMapper {
   int insertChatroom(ChatroomDAO dao);
 
 
+
+
 }

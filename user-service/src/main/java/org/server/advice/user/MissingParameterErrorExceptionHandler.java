@@ -3,7 +3,6 @@ package org.server.advice.user;
 import lombok.extern.log4j.Log4j2;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
-import org.server.exception.AddUserErrorException;
 import org.server.exception.MissingParameterErrorException;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

@@ -8,7 +8,9 @@
     <id property="id" column="id" jdbcType="VARCHAR"/>
     <result property="name" column="name" jdbcType="VARCHAR"/>
     <result property="adminUserId" column="admin_user_id" jdbcType="VARCHAR"/>
-    <result property="status" column="price" jdbcType="INTEGER"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
   </resultMap>
 
   <insert id="insertChatroom">
@@ -18,6 +20,8 @@
       <if test="name != null">name,</if>
       <if test="adminUserId != null">admin_user_id,</if>
       <if test="status != null">status,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
     </trim>
     values
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -25,6 +29,8 @@
       <if test="name != null">#{name,jdbcType=VARCHAR},</if>
       <if test="adminUserId != null">#{adminUserId,jdbcType=VARCHAR},</if>
       <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
     </trim>
 
   </insert>
