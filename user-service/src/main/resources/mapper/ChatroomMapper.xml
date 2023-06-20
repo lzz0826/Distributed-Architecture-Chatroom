@@ -36,4 +36,9 @@
   </insert>
 
 
+  <select id="selectById" resultType="org.server.dao.ChatroomDAO">
+    select * from tb_chatroom where id = #{id};
+  </select>
+
+
 </mapper>
