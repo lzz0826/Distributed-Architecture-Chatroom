@@ -37,7 +37,12 @@
 
 
   <select id="selectById" resultType="org.server.dao.ChatroomDAO">
-    select * from tb_chatroom where id = #{id};
+    select * from tb_chatroom where id = #{id}
+  </select>
+
+
+  <select id="selectAll" resultType="org.server.dao.ChatroomDAO">
+    select * from tb_chatroom
   </select>
 
 

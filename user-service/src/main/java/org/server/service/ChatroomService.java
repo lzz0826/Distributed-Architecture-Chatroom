@@ -1,13 +1,18 @@
 package org.server.service;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import org.server.dao.ChatroomDAO;
 import org.server.exception.AddErrorException;
 import org.server.mapper.ChatroomMapper;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.ChatroomVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,6 +24,25 @@ public class ChatroomService {
 
   @Resource
   private IdGeneratorService idGeneratorService;
+
+
+  public Page<ChatroomVO> getChatroomAll(int page, int pageSize){
+    Page<ChatroomVO> vos = new Page<>();
+    System.out.println(page+"   ee   " + pageSize );
+    Page<ChatroomDAO> daos = PageHelper.startPage(page,pageSize)
+        .doSelectPage(() -> chatroomMapper.selectAll());
+    if(daos.isEmpty()){
+      return vos;
+    }
+
+    BeanUtils.copyProperties(daos,vos);
+
+    for (ChatroomDAO dao : daos) {
+      ChatroomVO vo = convertDAOToVO(dao);
+      vos.add(vo);
+    }
+    return vos;
+  }
 
 
   public ChatroomVO getChatroomById(String id){

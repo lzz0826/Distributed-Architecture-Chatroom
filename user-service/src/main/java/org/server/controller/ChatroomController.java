@@ -1,10 +1,12 @@
 package org.server.controller;
 
 
+import com.github.pagehelper.Page;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
+import org.server.controller.rep.chatroom.ListRep;
 import org.server.controller.req.AddChatroomReq;
 import org.server.controller.req.GetChatroomByIdReq;
 import org.server.dao.ChatroomDAO;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -29,8 +32,26 @@ public class ChatroomController {
   @Resource
   private ChatroomService chatroomService;
 
-  @GetMapping("getChatroomById")
 
+
+  @GetMapping("/list")
+  public BaseResp<ListRep> list(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize){
+    Page<ChatroomVO> vos = chatroomService.getChatroomAll(page,pageSize);
+    ListRep rep = ListRep
+        .builder()
+        .chatrooms(vos)
+        .build();
+    rep.setPage(vos.getPageNum());
+    rep.setPageSize(vos.getPageSize());
+    rep.setTotal(vos.getTotal());
+    rep.setTotalPage(vos.getPages());
+
+    return BaseResp.ok(rep);
+
+
+  }
+
+  @GetMapping("getChatroomById")
   public BaseResp<ChatroomVO> getChatroomById(@RequestBody GetChatroomByIdReq req)
       throws MissingParameterErrorException {
     if(StringUtils.isBlank(req.getId())){
