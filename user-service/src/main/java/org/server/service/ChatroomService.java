@@ -28,7 +28,6 @@ public class ChatroomService {
 
   public Page<ChatroomVO> getChatroomAll(int page, int pageSize){
     Page<ChatroomVO> vos = new Page<>();
-    System.out.println(page+"   ee   " + pageSize );
     Page<ChatroomDAO> daos = PageHelper.startPage(page,pageSize)
         .doSelectPage(() -> chatroomMapper.selectAll());
     if(daos.isEmpty()){
@@ -90,6 +89,7 @@ public class ChatroomService {
     if(i == 0){
       throw new AddErrorException();
     }
+
 
   }
 
