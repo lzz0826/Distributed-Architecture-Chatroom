@@ -31,8 +31,8 @@ public class UserIdJwtTokenCache {
     redisTemplate.delete(getKey(userId));
   }
 
-  private String getKey(String adminId) {
-    return "UserId_CACHE::" + adminId;
+  private String getKey(String userId) {
+    return "UserId_CACHE::" + userId;
   }
 }
 

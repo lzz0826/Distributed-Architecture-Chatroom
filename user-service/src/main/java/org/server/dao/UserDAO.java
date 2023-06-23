@@ -16,5 +16,7 @@ public class UserDAO {
 
   private String address;
 
+  private String role;
+
 
 }

@@ -1,13 +1,11 @@
 package org.server.service;
-
-
-import java.util.List;
+import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
+import java.util.List;
 import org.server.cache.JwtTokenUserCache;
 import org.server.cache.UserIdJwtTokenCache;
-import org.server.dao.UserDAO;
+import org.server.entity.CustomUserDetails;
 import org.springframework.scheduling.annotation.Async;
-import org.springframework.stereotype.Service;
 
 @Service
 public class JwtCacheService {
@@ -19,17 +17,15 @@ public class JwtCacheService {
   private UserIdJwtTokenCache userIdJwtTokenCache;
 
 
-  @Resource
-  private UserService userService;
 
 
 
-  public void newToken(String newJwtToken, UserDAO user) {
-    String userId = user.getId();
+  public void newToken(String newJwtToken, CustomUserDetails customUserDetails) {
+    String userId = customUserDetails.getId();
     String oldJwtToken = userIdJwtTokenCache.getByUserId(userId);
     jwtTokenUserCache.delByJwtToken(oldJwtToken);
     userIdJwtTokenCache.delByUserId(userId);
-    jwtTokenUserCache.putByJwtToken(newJwtToken, user);
+    jwtTokenUserCache.putByJwtToken(newJwtToken, customUserDetails);
     userIdJwtTokenCache.putByUserId(userId, newJwtToken);
   }
 
@@ -41,7 +37,7 @@ public class JwtCacheService {
 
 
   public void deleteTokenByJwtToken(String jwtToken){
-    UserDAO user = jwtTokenUserCache.getByJwtToken(jwtToken);
+    CustomUserDetails user = jwtTokenUserCache.getByJwtToken(jwtToken);
     if(user != null){
       String userId = user.getId();
       userIdJwtTokenCache.delByUserId(userId);
@@ -50,7 +46,7 @@ public class JwtCacheService {
   }
 
 
-  public UserDAO getUserByJwtToken(String jwtToken) {
+  public CustomUserDetails getUserByJwtToken(String jwtToken) {
     return jwtTokenUserCache.getByJwtToken(jwtToken);
   }
 

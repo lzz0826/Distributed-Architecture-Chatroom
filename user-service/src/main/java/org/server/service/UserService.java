@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
+import org.server.entity.CustomUserDetails;
 import org.server.exception.AddErrorException;
 import org.server.exception.LoginErrorException;
 import org.server.mapper.UserMapper;
@@ -31,7 +32,10 @@ public class UserService{
   private UserMapper userMapper;
 
   @Resource
-  protected JwtService jwtService;
+  private JwtService jwtService;
+
+  @Resource
+  private CustomUserDetailsService customUserDetailsService;
 
 
   public void addUser(String username , String password ,String address)
@@ -106,22 +110,20 @@ public class UserService{
 
 
   public LoginVO login(String username , String password) throws LoginErrorException {
-    UserDAO userDAO = getUserByUsername(username);
-    if(userDAO == null){
-      throw new LoginErrorException();
-    }
+
+
+
     String md5token = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
 
-    if(StringUtils.isBlank(userDAO.getPassword())){
-      throw new LoginErrorException();
-    }
-    if(!md5token.equals(userDAO.getPassword())){
+    CustomUserDetails customUserDetails = customUserDetailsService.loadUserByUsername(username);
+    if(!md5token.equals(customUserDetails.getPassword())){
       throw new LoginErrorException();
     }
 
-    String jwtToken = jwtService.generateToken(userDAO);
 
-    jwtCacheService.newToken(jwtToken,userDAO);
+    String jwtToken = jwtService.generateToken(customUserDetails);
+
+    jwtCacheService.newToken(jwtToken,customUserDetails);
 
     return LoginVO
         .builder()

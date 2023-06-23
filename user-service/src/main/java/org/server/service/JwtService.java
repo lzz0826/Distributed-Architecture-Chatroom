@@ -6,7 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import org.server.dao.UserDAO;
+import org.server.entity.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -68,10 +68,10 @@ public class JwtService {
         return expiration.before(new Date());
     }
 
-    public String generateToken(UserDAO user) {
+    public String generateToken(CustomUserDetails customUserDetails) {
         Map<String, Object> claims = new HashMap<>();
-        claims.put(CLAIM_KEY_USERNAME, user.getUsername());
-        claims.put(CLAIM_KEY_PASSWORD, user.getPassword());
+        claims.put(CLAIM_KEY_USERNAME, customUserDetails.getUsername());
+        claims.put(CLAIM_KEY_PASSWORD, customUserDetails.getPassword());
         claims.put(CLAIM_KEY_CREATTIME, new Date());
 
         return generateToken(claims);
@@ -98,12 +98,12 @@ public class JwtService {
         return refreshedToken;
     }
 
-    public Boolean validateToken(String token, UserDAO user) {
+    public Boolean validateToken(String token, CustomUserDetails customUserDetails) {
         final String username = getUsernameFromToken(token);
         final Date created = getCreatedDateFromToken(token);
 
         //final Date expiration = getExpirationDateFromToken(token);
-        return (username.equals(user.getUsername()) && !isTokenExpired(token));
+        return (username.equals(customUserDetails.getUsername()) && !isTokenExpired(token));
     }
 
     private Claims getClaimsFromToken(String token) {

@@ -24,6 +24,8 @@ public enum StatusCode {
 
   NeedPassword(1003,"需要Password"),
 
+  NeedLogin(1004,"需要登入"),
+
 
 
   /**
@@ -31,6 +33,13 @@ public enum StatusCode {
    */
 
   NotFoundOrder(2000,"找不到訂單"),
+
+
+
+  /**
+   * 權限 3000
+   */
+  AccessDenied(3000, "沒有權限"),
 
 
   /**

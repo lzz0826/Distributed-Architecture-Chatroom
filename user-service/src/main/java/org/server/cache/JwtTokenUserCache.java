@@ -3,7 +3,7 @@ package org.server.cache;
 import com.alibaba.fastjson.JSON;
 import javax.annotation.Resource;
 import java.util.concurrent.TimeUnit;
-import org.server.dao.UserDAO;
+import org.server.entity.CustomUserDetails;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Component;
@@ -19,17 +19,17 @@ public class JwtTokenUserCache {
     private RedisTemplate<String, String> redisTemplate;
 
     /**
-     * 暫時使用 key: jwtToken, val: User
+     * 暫時使用 key: jwtToken, val: CustomUserDetails
      */
-    public void putByJwtToken(String jwtToken, UserDAO user) {
+    public void putByJwtToken(String jwtToken, CustomUserDetails customUserDetails) {
 
-        String objStr = JSON.toJSONString(user);
+        String objStr = JSON.toJSONString(customUserDetails);
         redisTemplate.opsForValue().set(getKey(jwtToken), objStr, timeout, TimeUnit.SECONDS);
     }
 
-    public UserDAO getByJwtToken(String jwtToken) {
+    public CustomUserDetails getByJwtToken(String jwtToken) {
         String objStr = redisTemplate.opsForValue().get(getKey(jwtToken));
-        return JSON.parseObject(objStr, UserDAO.class);
+        return JSON.parseObject(objStr, CustomUserDetails.class);
     }
 
     public void delByJwtToken(String jwtToken) {
