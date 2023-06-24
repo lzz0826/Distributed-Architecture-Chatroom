@@ -21,6 +21,11 @@ public class WsReq<T> {
   private String userId;
 
   /**
+   * 聊天室ID
+   */
+  private String chatroomId;
+
+  /**
    * 消息種類
    */
   private EWsMsgType eWsMsgType;

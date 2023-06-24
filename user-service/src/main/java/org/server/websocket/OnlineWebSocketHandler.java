@@ -16,6 +16,7 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.StatusCode;
 import org.server.entity.CustomUserDetails;
+import org.server.exception.NotFoundChatroomException;
 import org.server.service.JwtCacheService;
 
 import org.server.service.UserService;
@@ -25,6 +26,7 @@ import org.server.websocket.entity.WsRep;
 import org.server.websocket.entity.WsReq;
 import org.server.websocket.enums.EMsgType;
 import org.server.websocket.enums.EWsMsgType;
+import org.server.websocket.mpa.WsChatRoom;
 import org.server.websocket.mpa.WsChnIdCtxMap;
 import org.server.websocket.mpa.WsChnIdUserIdMap;
 import org.server.websocket.mpa.WsUserIdChnIdMap;
@@ -83,7 +85,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             //聊天室
             setChatroom(ctx , frame);
 
-
         }
         super.channelRead(ctx, msg);
         if (msg instanceof FullHttpRequest) {
@@ -110,12 +111,39 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
      */
     public static void sendMsgToUser(WsRep<?> rep) {
         String userid = rep.getReceiverUserId();
-        if (userid == null) {
+        if (StringUtils.isBlank(userid)) {
             log.error("無法傳送信息，userId為空");
             return;
         }
         ChannelId channelId = WsUserIdChnIdMap.get(userid);
         checkChannelId(channelId,rep);
+    }
+
+
+    /**
+     * 推送信息(聊天室)
+     * @param rep
+     */
+    public static void sendMsgToChatRoom(WsRep<?> rep) {
+        String chatroomId = rep.getChatroomId();
+        if (StringUtils.isBlank(chatroomId)) {
+            log.error("無法傳送信息，chatroomId為空");
+            return;
+        }
+        List<String> users = WsChatRoom.get(chatroomId);
+        if(users != null){
+            for (String user : users) {
+                ChannelId channelId = WsUserIdChnIdMap.get(user);
+                try {
+                    checkChannelId(channelId,rep);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+
+
     }
 
     /**
@@ -203,31 +231,37 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     private void setChatroom(ChannelHandlerContext ctx,TextWebSocketFrame frame){
         WsReq<String> wsReq = JSON.parseObject(frame.text(), WsReq.class);
         String receiverUserId = wsReq.getUserId();
+        String chatroomId = wsReq.getChatroomId();
         ChannelId channelId = ctx.channel().id();
         String senderUserId = WsChnIdUserIdMap.get(channelId);
         EMsgType eMsgType = wsReq.getEMsgType();
         EWsMsgType eWsMsgType = wsReq.getEWsMsgType();
         String request = wsReq.getRequest();
-        if(eWsMsgType.equals(EWsMsgType.Chatroom)){
-            System.out.println("聊天");
-            WsRep<Object> wsRep = WsRep
-                .builder()
-                .receiverUserId(receiverUserId)
-                .senderUserId(senderUserId)
-                .eMsgType(eMsgType)
-                .eWsMsgType(eWsMsgType)
-                .statusCode(StatusCode.Success)
-                .response(request)
-                .build();
-            if(!StringUtils.isBlank(receiverUserId)){
-                System.out.println("私聊");
-//                [2023-06-15 08:44:47] {"EMsgType":"System","EWsMsgType":"Chatroom","msg":"成功","response":"jj","statusCode":0,"userId":"2891919273143823671"}
-                sendMsgToUser(wsRep);
-            } else {
-                System.out.println("公告");
-                sendMsgToAll(wsRep);
-            }
 
+
+
+
+        WsRep<Object> wsRep = WsRep
+            .builder()
+            .receiverUserId(receiverUserId)
+            .senderUserId(senderUserId)
+            .chatroomId(chatroomId)
+            .eMsgType(eMsgType)
+            .eWsMsgType(eWsMsgType)
+            .statusCode(StatusCode.Success)
+            .response(request)
+            .build();
+        if(eWsMsgType.equals(EWsMsgType.Chatroom)){
+            System.out.println("聊天室");
+            sendMsgToChatRoom(wsRep);
+        }
+        if(eWsMsgType.equals(EWsMsgType.PrivateChat)){
+            System.out.println("私聊");
+            sendMsgToUser(wsRep);
+        if(eWsMsgType.equals(EWsMsgType.All)){
+            System.out.println("公告");
+            sendMsgToAll(wsRep);
+        }
         }else {
             log.error("無法傳送信息,其他錯誤");
 

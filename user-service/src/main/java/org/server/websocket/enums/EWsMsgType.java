@@ -2,7 +2,12 @@ package org.server.websocket.enums;
 
 public enum EWsMsgType {
 
-  Chatroom("chatroom");
+  Chatroom("chatroom"),
+
+  PrivateChat("privateChat"),
+
+  All("all");
+
 
   public final String code;
 

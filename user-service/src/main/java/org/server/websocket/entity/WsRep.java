@@ -44,6 +44,16 @@ public class WsRep<T> {
    */
   private String senderUserId;
 
+
+
+  /**
+   * 聊天室ID
+   */
+  private String chatroomId;
+
+
+
+
   public String getMsg() {
     if(statusCode == null){
       return null;
