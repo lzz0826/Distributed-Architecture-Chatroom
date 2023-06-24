@@ -8,7 +8,6 @@ import lombok.NoArgsConstructor;
 import org.server.common.StatusCode;
 import org.server.websocket.enums.EMsgType;
 import org.server.websocket.enums.EWsMsgType;
-import org.springframework.stereotype.Component;
 
 @Data
 @Builder
@@ -34,7 +33,16 @@ public class WsRep<T> {
 
   private StatusCode statusCode;
 
-  private String userId;
+
+  /**
+   * 接收者
+   */
+  private String receiverUserId;
+
+  /**
+   * 發送者
+   */
+  private String senderUserId;
 
   public String getMsg() {
     if(statusCode == null){

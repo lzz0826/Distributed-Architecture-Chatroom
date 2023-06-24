@@ -81,7 +81,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             // 正常的text消息類型
             log.info("客戶端收到服務器數據：{}", frame.text());
             //聊天室
-            setChatroom(frame);
+            setChatroom(ctx , frame);
 
 
         }
@@ -109,7 +109,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
      * @param rep
      */
     public static void sendMsgToUser(WsRep<?> rep) {
-        String userid = rep.getUserId();
+        String userid = rep.getReceiverUserId();
         if (userid == null) {
             log.error("無法傳送信息，userId為空");
             return;
@@ -200,9 +200,11 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
         ctx.channel().writeAndFlush(new TextWebSocketFrame(msg));
     }
 
-    private void setChatroom(TextWebSocketFrame frame){
+    private void setChatroom(ChannelHandlerContext ctx,TextWebSocketFrame frame){
         WsReq<String> wsReq = JSON.parseObject(frame.text(), WsReq.class);
-        String userId = wsReq.getUserId();
+        String receiverUserId = wsReq.getUserId();
+        ChannelId channelId = ctx.channel().id();
+        String senderUserId = WsChnIdUserIdMap.get(channelId);
         EMsgType eMsgType = wsReq.getEMsgType();
         EWsMsgType eWsMsgType = wsReq.getEWsMsgType();
         String request = wsReq.getRequest();
@@ -210,13 +212,14 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             System.out.println("聊天");
             WsRep<Object> wsRep = WsRep
                 .builder()
-                .userId(userId)
+                .receiverUserId(receiverUserId)
+                .senderUserId(senderUserId)
                 .eMsgType(eMsgType)
                 .eWsMsgType(eWsMsgType)
                 .statusCode(StatusCode.Success)
                 .response(request)
                 .build();
-            if(!StringUtils.isBlank(userId)){
+            if(!StringUtils.isBlank(receiverUserId)){
                 System.out.println("私聊");
 //                [2023-06-15 08:44:47] {"EMsgType":"System","EWsMsgType":"Chatroom","msg":"成功","response":"jj","statusCode":0,"userId":"2891919273143823671"}
                 sendMsgToUser(wsRep);

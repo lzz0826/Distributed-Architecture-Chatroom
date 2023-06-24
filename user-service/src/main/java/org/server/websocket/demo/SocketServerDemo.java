@@ -12,12 +12,6 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 
-/**
- * @program: netty4demo
- * @description: 基于WebSocket协议的服务端
- * @author: 波波烤鸭
- * @create: 2019-12-30 22:31
- */
 public class SocketServerDemo {
 
   public static void main(String[] args) throws Exception {
