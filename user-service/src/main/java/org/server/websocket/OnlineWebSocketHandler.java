@@ -251,20 +251,23 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             .statusCode(StatusCode.Success)
             .response(request)
             .build();
-        if(eWsMsgType.equals(EWsMsgType.Chatroom)){
-            System.out.println("聊天室");
-            sendMsgToChatRoom(wsRep);
-        }
-        if(eWsMsgType.equals(EWsMsgType.PrivateChat)){
-            System.out.println("私聊");
-            sendMsgToUser(wsRep);
-        if(eWsMsgType.equals(EWsMsgType.All)){
-            System.out.println("公告");
-            sendMsgToAll(wsRep);
-        }
-        }else {
-            log.error("無法傳送信息,其他錯誤");
 
+        switch (eWsMsgType) {
+            case Chatroom:
+                System.out.println("聊天室");
+                sendMsgToChatRoom(wsRep);
+                break;
+            case PrivateChat:
+                System.out.println("私聊");
+                sendMsgToUser(wsRep);
+                break;
+            case All:
+                System.out.println("公告");
+                sendMsgToAll(wsRep);
+                break;
+            default:
+                log.error("無法發送信息，其他錯誤");
+                break;
         }
     }
 

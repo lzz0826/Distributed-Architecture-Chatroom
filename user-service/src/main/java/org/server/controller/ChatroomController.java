@@ -6,15 +6,20 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
+import org.server.controller.rep.chatroom.JoinChatroomRep;
 import org.server.controller.rep.chatroom.ListRep;
 import org.server.controller.req.AddChatroomReq;
 import org.server.controller.req.GetChatroomByIdReq;
+import org.server.controller.req.JoinChatroomReq;
 import org.server.dao.ChatroomDAO;
+import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.MissingParameterErrorException;
+import org.server.exception.NeedChatroomIdException;
 import org.server.exception.NeedChatroomNameException;
 import org.server.service.ChatroomService;
 import org.server.vo.ChatroomVO;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -26,7 +31,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/chatroom")
-public class ChatroomController {
+public class ChatroomController extends BaseController {
 
 
   @Resource
@@ -51,7 +56,7 @@ public class ChatroomController {
 
   }
 
-  @GetMapping("getChatroomById")
+  @GetMapping("/getChatroomById")
   public BaseResp<ChatroomVO> getChatroomById(@RequestBody GetChatroomByIdReq req)
       throws MissingParameterErrorException {
     if(StringUtils.isBlank(req.getId())){
@@ -64,7 +69,7 @@ public class ChatroomController {
 
 
 
-  @PostMapping("addChatroom")
+  @PostMapping("/addChatroom")
   public BaseResp<String> addChatroom(@RequestBody AddChatroomReq req)
       throws NeedChatroomNameException, AddErrorException {
     if(StringUtils.isBlank(req.getName())){
@@ -74,5 +79,35 @@ public class ChatroomController {
     chatroomService.addChatroom(name);
     return BaseResp.ok(StatusCode.Success);
   }
+
+
+
+  @PostMapping("/joinChatroom")
+  private BaseResp<JoinChatroomRep> joinChatroom(@RequestBody JoinChatroomReq req)
+      throws NeedChatroomIdException {
+    if (StringUtils.isBlank(req.getId())){
+      throw new NeedChatroomIdException();
+    }
+    String chatroomId = req.getId();
+    String userId = req.getUserId();
+
+    if(StringUtils.isBlank(req.getUserId())){
+      UserDAO curUser = getCurUser();
+      userId = curUser.getId();
+    }
+
+    chatroomService.joinChatroom(chatroomId,userId);
+
+    JoinChatroomRep rep = JoinChatroomRep
+        .builder()
+        .chatroomId(chatroomId)
+        .userId(userId)
+        .build();
+    return BaseResp.ok(rep,StatusCode.Success);
+
+
+  }
+
+
 
 }

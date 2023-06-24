@@ -12,7 +12,7 @@ public class WsChatRoom {
    * chatroomId, userIds
    */
 
-  private static void addUserToChatRoom(String chatroomId, String userId) {
+  public static void addUserToChatRoom(String chatroomId, String userId) {
     List<String> list = map.get(chatroomId);
     if (list == null) {
       list = new ArrayList<>();

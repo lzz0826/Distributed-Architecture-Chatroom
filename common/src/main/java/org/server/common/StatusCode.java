@@ -48,7 +48,9 @@ public enum StatusCode {
 
   NeedChatroomName(3000,"需要聊天室名稱"),
 
-  NotFoundChatroom(3001,"找不到聊天室"),
+  NeedChatroomId(3001,"需要聊天室id"),
+
+  NotFoundChatroom(3002,"找不到聊天室"),
 
 
 

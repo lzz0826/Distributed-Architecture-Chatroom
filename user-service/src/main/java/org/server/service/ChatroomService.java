@@ -12,6 +12,7 @@ import org.server.exception.AddErrorException;
 import org.server.mapper.ChatroomMapper;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.ChatroomVO;
+import org.server.websocket.mpa.WsChatRoom;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -72,7 +73,6 @@ public class ChatroomService {
 
   public void addChatroom(String name) throws AddErrorException {
 
-
     ChatroomDAO dao = ChatroomDAO
         .builder()
         .id(idGeneratorService.getNextId())
@@ -90,9 +90,11 @@ public class ChatroomService {
       throw new AddErrorException();
     }
 
-
   }
 
+  public void joinChatroom(String chatroomId ,String userId){
+    WsChatRoom.addUserToChatRoom(chatroomId,userId);
+  }
 
 
 }
