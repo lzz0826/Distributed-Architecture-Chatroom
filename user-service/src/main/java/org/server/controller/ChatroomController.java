@@ -14,6 +14,7 @@ import org.server.controller.req.JoinChatroomReq;
 import org.server.dao.ChatroomDAO;
 import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
+import org.server.exception.ChatroomNotOpenException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.NeedChatroomIdException;
 import org.server.exception.NeedChatroomNameException;
@@ -75,8 +76,18 @@ public class ChatroomController extends BaseController {
     if(StringUtils.isBlank(req.getName())){
       throw new NeedChatroomNameException();
     }
+
+    String adminUserId = req.getAdminUserId();
     String name = req.getName();
-    chatroomService.addChatroom(name);
+
+
+    if(StringUtils.isBlank(req.getAdminUserId())){
+      UserDAO curUser = getCurUser();
+      adminUserId = curUser.getUsername();
+    }
+
+
+    chatroomService.addChatroom(name,adminUserId);
     return BaseResp.ok(StatusCode.Success);
   }
 
@@ -84,7 +95,7 @@ public class ChatroomController extends BaseController {
 
   @PostMapping("/joinChatroom")
   private BaseResp<JoinChatroomRep> joinChatroom(@RequestBody JoinChatroomReq req)
-      throws NeedChatroomIdException {
+      throws NeedChatroomIdException, ChatroomNotOpenException {
     if (StringUtils.isBlank(req.getId())){
       throw new NeedChatroomIdException();
     }
@@ -96,12 +107,14 @@ public class ChatroomController extends BaseController {
       userId = curUser.getId();
     }
 
-    chatroomService.joinChatroom(chatroomId,userId);
+    ChatroomVO vo = chatroomService.joinChatroom(chatroomId, userId);
 
     JoinChatroomRep rep = JoinChatroomRep
         .builder()
-        .chatroomId(chatroomId)
+        .chatroomId(vo.getId())
         .userId(userId)
+        .adminUserId(vo.getAdminUserId())
+        .status(vo.getStatus())
         .build();
     return BaseResp.ok(rep,StatusCode.Success);
 

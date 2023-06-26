@@ -9,6 +9,8 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.server.dao.ChatroomDAO;
 import org.server.exception.AddErrorException;
+import org.server.exception.ChatroomNotOpenException;
+import org.server.exception.NotFoundChatroomException;
 import org.server.mapper.ChatroomMapper;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.ChatroomVO;
@@ -71,14 +73,13 @@ public class ChatroomService {
 
 
 
-  public void addChatroom(String name) throws AddErrorException {
+  public void addChatroom(String name,String adminUserId) throws AddErrorException {
 
     ChatroomDAO dao = ChatroomDAO
         .builder()
         .id(idGeneratorService.getNextId())
         .name(name)
-//        TODO
-        .adminUserId("e44354")
+        .adminUserId(adminUserId)
         .status(false)
         .updateTime(new Date())
         .createTime(new Date())
@@ -92,8 +93,22 @@ public class ChatroomService {
 
   }
 
-  public void joinChatroom(String chatroomId ,String userId){
+  public ChatroomVO joinChatroom(String chatroomId ,String userId) throws ChatroomNotOpenException {
+
+    ChatroomVO vo = getChatroomById(chatroomId);
+
+    if(vo == null){
+      throw new NotFoundChatroomException();
+    }
+
+    if(!vo.getStatus()){
+      throw new ChatroomNotOpenException();
+    }
+
     WsChatRoom.addUserToChatRoom(chatroomId,userId);
+
+    return vo;
+
   }
 
 

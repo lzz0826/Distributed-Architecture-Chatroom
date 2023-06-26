@@ -52,7 +52,7 @@ public enum StatusCode {
 
   NotFoundChatroom(3002,"找不到聊天室"),
 
-
+  ChatroomNotOpen(3003,"聊天室沒開放"),
 
 
   /**
