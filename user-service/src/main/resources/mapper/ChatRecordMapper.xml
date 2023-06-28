@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.ChatRecordMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.dao.ChatRecordDAO">
+    <id property="id" column="id" jdbcType="VARCHAR"/>
+    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="receiverUserId" column="receiver_user_id" jdbcType="VARCHAR"/>
+    <result property="chatroomId" column="chatroom_id" jdbcType="VARCHAR"/>
+    <result property="msgType" column="msg_type" jdbcType="VARCHAR"/>
+    <result property="content" column="content" jdbcType="LONGNVARCHAR"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <insert id="insertChatRecord">
+    insert into tb_chat_record
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="userId != null">user_id,</if>
+      <if test="receiverUserId != null">receiver_user_id,</if>
+      <if test="chatroomId != null">chatroom_id,</if>
+      <if test="msgType != null">msg_type,</if>
+      <if test="content != null">content,</if>
+      <if test="status != null">status,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+      <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+      <if test="receiverUserId != null">#{receiverUserId,jdbcType=VARCHAR},</if>
+      <if test="chatroomId != null">#{chatroomId,jdbcType=VARCHAR},</if>
+      <if test="msgType != null">#{msgType,jdbcType=VARCHAR},</if>
+      <if test="content != null">#{content,jdbcType=LONGVARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+
+  </insert>
+
+
+
+
+
+
+</mapper>

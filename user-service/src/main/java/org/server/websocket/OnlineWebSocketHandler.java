@@ -17,10 +17,9 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.StatusCode;
 import org.server.entity.CustomUserDetails;
-import org.server.exception.NotFoundChatroomException;
+import org.server.service.ChatRecordService;
 import org.server.service.JwtCacheService;
 
-import org.server.service.UserService;
 import org.server.util.FastJsonUtil;
 import org.server.util.SpringUtil;
 import org.server.websocket.entity.WsRep;
@@ -39,7 +38,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
 
 
 
-    private final UserService userService = SpringUtil.getBean(UserService.class);
+    private final ChatRecordService chatRecordService = SpringUtil.getBean(ChatRecordService.class);
 
 
     private final JwtCacheService jwtCacheService = SpringUtil.getBean(JwtCacheService.class);
@@ -246,7 +245,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             return;
         }
         Set<String> users = WsChatRoom.get(chatroomId);
-        System.out.println("userdd : " + users);
         if(users != null){
             for (String user : users) {
                 ChannelId channelId = WsUserIdChnIdMap.get(user);
