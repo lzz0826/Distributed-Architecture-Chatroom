@@ -57,6 +57,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
         WsChnIdUserIdMap.del(chnId);
         if (userId != null) {
             WsUserIdChnIdMap.del(userId);
+            WsChatRoom.removeUserChatRoomAll(userId);
         }
 
         WsChnIdCtxMap.del(chnId);
@@ -106,62 +107,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     }
 
 
-    /**
-     * 推送信息(私聊)
-     * @param rep
-     */
-    public static void sendMsgToUser(WsRep<?> rep) {
-        String userid = rep.getReceiverUserId();
-        if (StringUtils.isBlank(userid)) {
-            log.error("無法傳送信息，userId為空");
-            return;
-        }
-        ChannelId channelId = WsUserIdChnIdMap.get(userid);
-        checkChannelId(channelId,rep);
-    }
 
-
-    /**
-     * 推送信息(聊天室)
-     * @param rep
-     */
-    public static void sendMsgToChatRoom(WsRep<?> rep) {
-        String chatroomId = rep.getChatroomId();
-        if (StringUtils.isBlank(chatroomId)) {
-            log.error("無法傳送信息，chatroomId為空");
-            return;
-        }
-        Set<String> users = WsChatRoom.get(chatroomId);
-        if(users != null){
-            for (String user : users) {
-                ChannelId channelId = WsUserIdChnIdMap.get(user);
-                try {
-                    checkChannelId(channelId,rep);
-                } catch (Exception e) {
-                    throw new RuntimeException(e);
-                }
-            }
-        }
-
-
-
-    }
-
-    /**
-     * 推送信息(公告)
-     * @param rep
-     */
-    public static void sendMsgToAll(WsRep<?> rep) {
-        List<ChannelId> channelIds = WsUserIdChnIdMap.getAll();
-        if (channelIds.isEmpty() || channelIds.size() == 0) {
-            log.error("無法傳送信息，聊天室裡沒人");
-            return;
-        }
-        for (ChannelId channelId : channelIds) {
-            checkChannelId(channelId,rep);
-
-        }
-    }
 
     public static void checkChannelId(ChannelId channelId,WsRep<?> rep){
         if (channelId != null) {
@@ -229,6 +175,8 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
         ctx.channel().writeAndFlush(new TextWebSocketFrame(msg));
     }
 
+
+//    TODO 聊天室邏輯
     private void setChatroom(ChannelHandlerContext ctx,TextWebSocketFrame frame){
         WsReq<String> wsReq = JSON.parseObject(frame.text(), WsReq.class);
         String receiverUserId = wsReq.getUserId();
@@ -269,6 +217,64 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             default:
                 log.error("無法發送信息，其他錯誤");
                 break;
+        }
+    }
+
+    /**
+     * 推送信息(私聊)
+     * @param rep
+     */
+    public static void sendMsgToUser(WsRep<?> rep) {
+        String userid = rep.getReceiverUserId();
+        if (StringUtils.isBlank(userid)) {
+            log.error("無法傳送信息，userId為空");
+            return;
+        }
+        ChannelId channelId = WsUserIdChnIdMap.get(userid);
+        checkChannelId(channelId,rep);
+    }
+
+
+    /**
+     * 推送信息(聊天室)
+     * @param rep
+     */
+    public static void sendMsgToChatRoom(WsRep<?> rep) {
+        String chatroomId = rep.getChatroomId();
+        if (StringUtils.isBlank(chatroomId)) {
+            log.error("無法傳送信息，chatroomId為空");
+            return;
+        }
+        Set<String> users = WsChatRoom.get(chatroomId);
+        System.out.println("userdd : " + users);
+        if(users != null){
+            for (String user : users) {
+                ChannelId channelId = WsUserIdChnIdMap.get(user);
+                try {
+                    checkChannelId(channelId,rep);
+                } catch (Exception e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+
+
+
+    }
+
+    /**
+     * 推送信息(公告)
+     * @param rep
+     */
+    public static void sendMsgToAll(WsRep<?> rep) {
+        List<ChannelId> channelIds = WsUserIdChnIdMap.getAll();
+        if (channelIds.isEmpty() || channelIds.size() == 0) {
+            log.error("無法傳送信息，聊天室裡沒人");
+            return;
+        }
+        for (ChannelId channelId : channelIds) {
+            checkChannelId(channelId,rep);
+
         }
     }
 

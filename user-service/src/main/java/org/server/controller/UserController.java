@@ -7,12 +7,16 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
+import org.server.controller.rep.LogoutRep;
 import org.server.controller.req.LoginReq;
 import org.server.controller.req.UserAddReq;
 import org.server.exception.AddErrorException;
 import org.server.exception.LoginErrorException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.UserException;
+import org.server.service.ChatroomService;
+import org.server.service.JwtCacheService;
+import org.server.service.JwtService;
 import org.server.service.UserService;
 import org.server.vo.LoginVO;
 import org.server.vo.UserVO;
@@ -20,6 +24,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +34,13 @@ import org.springframework.web.bind.annotation.RestController;
 public class UserController{
 
   @Resource
-  protected UserService userService;
+  private UserService userService;
+
+  @Resource
+  private JwtCacheService jwtCacheService;
+
+  @Resource
+  private ChatroomService chatroomService;
 
   @PostMapping("/addUser")
   public BaseResp<String> addUser(@RequestBody UserAddReq userAddReq)
@@ -98,6 +109,15 @@ public class UserController{
 
     return BaseResp.ok(login,StatusCode.Success);
 
+  }
+
+
+  @PostMapping("/logout")
+  public BaseResp<LogoutRep> logout(@RequestHeader("Authorization") String jwtToken) {
+
+    jwtCacheService.deleteTokenByJwtToken(jwtToken);
+
+    return BaseResp.ok(LogoutRep.builder().build());
   }
 
 }
