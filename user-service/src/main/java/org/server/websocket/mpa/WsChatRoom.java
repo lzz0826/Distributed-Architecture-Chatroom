@@ -42,7 +42,6 @@ public class WsChatRoom {
   public static void removeUserChatRoomAll(String userId) {
     for (Entry<String, Set<String>> entry : map.entrySet()) {
       Set<String> list = entry.getValue();
-      System.out.println("list"+list);
       Iterator<String> iterator = list.iterator();
       while (iterator.hasNext()) {
         String s = iterator.next();
@@ -50,8 +49,6 @@ public class WsChatRoom {
           iterator.remove();
         }
       }
-      System.out.println("listNew"+list);
-
     }
   }
 

@@ -9,6 +9,9 @@
     <result property="username" column="username" jdbcType="VARCHAR"/>
     <result property="password" column="password" jdbcType="VARCHAR"/>
     <result property="address" column="address" jdbcType="VARCHAR"/>
+    <result property="role" column="role" jdbcType="VARCHAR"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
   </resultMap>
 
 
@@ -19,6 +22,10 @@
       <if test="username != null">username,</if>
       <if test="password != null">password,</if>
       <if test="address != null">address,</if>
+      <if test="role != null">role,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+
     </trim>
     values
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -26,6 +33,9 @@
       <if test="username != null">#{username,jdbcType=VARCHAR},</if>
       <if test="password != null">#{password,jdbcType=VARCHAR},</if>
       <if test="address != null">#{address,jdbcType=VARCHAR},</if>
+      <if test="role != null">#{role,jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
     </trim>
   </insert>
 

@@ -3,6 +3,7 @@ package org.server.service;
 
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
@@ -49,6 +50,10 @@ public class UserService{
         .username(username)
         .password(md5token)
         .address(address)
+//        TODO 角色
+        .role("ROLE_ADMIN")
+        .updateTime(new Date())
+        .createTime(new Date())
         .build();
 
 

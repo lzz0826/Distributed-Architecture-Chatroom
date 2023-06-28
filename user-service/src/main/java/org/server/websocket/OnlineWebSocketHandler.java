@@ -132,7 +132,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             return;
         }
         Set<String> users = WsChatRoom.get(chatroomId);
-        System.out.println("users"+users);
         if(users != null){
             for (String user : users) {
                 ChannelId channelId = WsUserIdChnIdMap.get(user);

@@ -1,6 +1,7 @@
 package org.server.dao;
 
 
+import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
 
@@ -17,6 +18,11 @@ public class UserDAO {
   private String address;
 
   private String role;
+
+  private Date updateTime;
+
+  private Date createTime;
+
 
 
 }
