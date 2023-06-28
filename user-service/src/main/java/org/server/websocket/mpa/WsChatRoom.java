@@ -1,21 +1,27 @@
 package org.server.websocket.mpa;
 
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WsChatRoom {
-  private final static ConcurrentHashMap<String, List<String>> map = new ConcurrentHashMap<>();
+  private final static ConcurrentHashMap<String, Set<String>> map = new ConcurrentHashMap<>();
 
   /**
    * key:       value:
    * chatroomId, userIds
    */
 
+
+
   public static void addUserToChatRoom(String chatroomId, String userId) {
-    List<String> list = map.get(chatroomId);
+    Set<String> list = map.get(chatroomId);
     if (list == null) {
-      list = new ArrayList<>();
+      list = new HashSet<>();
       map.put(chatroomId, list);
     }
     list.add(userId);
@@ -23,7 +29,7 @@ public class WsChatRoom {
   }
 
   public static void removeUserFromChatRoom(String chatroomId, String userId) {
-    List<String> list = map.get(chatroomId);
+    Set<String> list = map.get(chatroomId);
     if (list != null) {
       list.remove(userId);
       map.put(chatroomId,list);
@@ -33,11 +39,27 @@ public class WsChatRoom {
     }
   }
 
-  public static void put(String chatroomId, List<String> userIds) {
+  public static void removeUserChatRoomAll(String userId) {
+    for (Entry<String, Set<String>> entry : map.entrySet()) {
+      Set<String> list = entry.getValue();
+      System.out.println("list"+list);
+      Iterator<String> iterator = list.iterator();
+      while (iterator.hasNext()) {
+        String s = iterator.next();
+        if (s.contains(userId)) {
+          iterator.remove();
+        }
+      }
+      System.out.println("listNew"+list);
+
+    }
+  }
+
+  public static void put(String chatroomId, Set<String> userIds) {
     map.put(chatroomId, userIds);
   }
 
-  public static List<String> get(String chatroomId) {
+  public static Set<String> get(String chatroomId) {
     return map.get(chatroomId);
   }
 

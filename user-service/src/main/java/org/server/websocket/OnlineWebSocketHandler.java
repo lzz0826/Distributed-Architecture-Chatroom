@@ -11,6 +11,7 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.lang3.StringUtils;
@@ -130,7 +131,8 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
             log.error("無法傳送信息，chatroomId為空");
             return;
         }
-        List<String> users = WsChatRoom.get(chatroomId);
+        Set<String> users = WsChatRoom.get(chatroomId);
+        System.out.println("users"+users);
         if(users != null){
             for (String user : users) {
                 ChannelId channelId = WsUserIdChnIdMap.get(user);

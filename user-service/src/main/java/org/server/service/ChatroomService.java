@@ -111,5 +111,9 @@ public class ChatroomService {
 
   }
 
+  public void leaveChatroom(String userId){
+    WsChatRoom.removeUserChatRoomAll(userId);
+  }
+
 
 }

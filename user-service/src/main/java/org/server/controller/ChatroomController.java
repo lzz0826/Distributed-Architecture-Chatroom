@@ -11,7 +11,7 @@ import org.server.controller.rep.chatroom.ListRep;
 import org.server.controller.req.AddChatroomReq;
 import org.server.controller.req.GetChatroomByIdReq;
 import org.server.controller.req.JoinChatroomReq;
-import org.server.dao.ChatroomDAO;
+import org.server.controller.req.LeaveChatroomReq;
 import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.ChatroomNotOpenException;
@@ -20,8 +20,6 @@ import org.server.exception.NeedChatroomIdException;
 import org.server.exception.NeedChatroomNameException;
 import org.server.service.ChatroomService;
 import org.server.vo.ChatroomVO;
-import org.springframework.security.core.parameters.P;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -117,6 +115,20 @@ public class ChatroomController extends BaseController {
         .status(vo.getStatus())
         .build();
     return BaseResp.ok(rep,StatusCode.Success);
+
+
+  }
+
+
+
+  @PostMapping("/leaveChatroom")
+  private BaseResp<String> leaveChatroom(@RequestBody LeaveChatroomReq req) throws NeedChatroomIdException {
+
+    String userId = req.getUserId();
+
+    chatroomService.leaveChatroom(userId);
+
+    return BaseResp.ok(StatusCode.Success);
 
 
   }
