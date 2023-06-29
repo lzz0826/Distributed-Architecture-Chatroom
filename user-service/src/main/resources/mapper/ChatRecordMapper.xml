@@ -45,8 +45,40 @@
   </insert>
 
 
-
-
+  <select id="selectChatRecords" resultType="org.server.dao.ChatRecordDAO">
+    SELECT * FROM tb_chat_record
+    <where>
+      <if test="id != null">
+        AND id = #{id}
+      </if>
+      <if test="userId != null">
+        AND user_id = #{userId}
+      </if>
+      <if test="receiverUserId != null">
+        AND receiver_user_id = #{receiverUserId}
+      </if>
+      <if test="chatroomId != null">
+        AND chatroom_id = #{chatroomId}
+      </if>
+      <if test="msgType != null">
+        AND msg_type = #{msgType}
+      </if>
+      <if test="content != null">
+        AND content LIKE CONCAT('%', #{content}, '%')
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+      <if test="updateTime != null">
+        AND update_time = #{updateTime}
+      </if>
+      <if test="createTime != null">
+        AND create_time = #{createTime}
+      </if>
+    </where>
+--     ORDER BY create_time DESC
+--     LIMIT 0, 10
+  </select>
 
 
 </mapper>

@@ -1,6 +1,7 @@
 package mapper;
 
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import org.junit.Test;
 import org.server.dao.ChatRecordDAO;
@@ -13,6 +14,22 @@ public class ChatRecordMapperTest extends BaseTest {
 
   @Resource
   private ChatRecordMapper chatRecordMapper;
+
+
+
+  @Test
+  public void chatRecordDAOSTest(){
+
+    ChatRecordDAO build = ChatRecordDAO.builder()
+        .chatroomId("3105585082645819114")
+        .build();
+
+    List<ChatRecordDAO> chatRecordDAOS = chatRecordMapper.selectChatRecords(build);
+
+    System.out.println(chatRecordDAOS);
+
+
+  }
 
   @Test
   public void chatRecordMapperTest(){
