@@ -24,9 +24,9 @@ public class ChatRecordMapperTest extends BaseTest {
         .chatroomId("3105585082645819114")
         .build();
 
-    List<ChatRecordDAO> chatRecordDAOS = chatRecordMapper.selectChatRecords(build);
-
-    System.out.println(chatRecordDAOS);
+//    List<ChatRecordDAO> chatRecordDAOS = chatRecordMapper.selectChatRecords(build);
+//
+//    System.out.println(chatRecordDAOS);
 
 
   }

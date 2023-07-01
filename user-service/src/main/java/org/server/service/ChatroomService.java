@@ -3,14 +3,12 @@ package org.server.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.annotation.Resource;
 import org.server.dao.ChatroomDAO;
 import org.server.exception.AddErrorException;
-import org.server.exception.ChatroomNotOpenException;
-import org.server.exception.NotFoundChatroomException;
+import org.server.exception.chatroom.ChatroomNotOpenException;
+import org.server.exception.chatroom.NotFoundChatroomException;
 import org.server.mapper.ChatroomMapper;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.ChatroomVO;

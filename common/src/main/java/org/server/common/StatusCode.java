@@ -13,6 +13,11 @@ public enum StatusCode {
 
   AddFail(11,"新增失敗"),
 
+  NeedPage(12,"需要頁碼"),
+
+  NeedPageSize(13,"需要頁碼大小"),
+
+
 
   /**
    * User 1000

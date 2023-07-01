@@ -1,4 +1,4 @@
-package org.server.controller.req;
+package org.server.controller.req.chatroom;
 
 
 import lombok.AllArgsConstructor;
@@ -6,12 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Builder
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class GetChatroomByIdReq {
+public class JoinChatroomReq {
 
-  public String id;
+  private String id;
+
+  private String userId;
+
 
 }

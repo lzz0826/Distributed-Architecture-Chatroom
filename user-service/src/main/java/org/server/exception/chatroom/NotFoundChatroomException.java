@@ -1,4 +1,4 @@
-package org.server.exception;
+package org.server.exception.chatroom;
 
 public class NotFoundChatroomException extends RuntimeException{
 

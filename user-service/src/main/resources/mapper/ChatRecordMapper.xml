@@ -48,36 +48,41 @@
   <select id="selectChatRecords" resultType="org.server.dao.ChatRecordDAO">
     SELECT * FROM tb_chat_record
     <where>
-      <if test="id != null">
+      <if test="id != null and id != ''">
         AND id = #{id}
       </if>
-      <if test="userId != null">
+      <if test="userId != null and userId != ''">
         AND user_id = #{userId}
       </if>
-      <if test="receiverUserId != null">
+      <if test="receiverUserId != null and receiverUserId != ''">
         AND receiver_user_id = #{receiverUserId}
       </if>
-      <if test="chatroomId != null">
+      <if test="chatroomId != null and chatroomId != ''">
         AND chatroom_id = #{chatroomId}
       </if>
-      <if test="msgType != null">
+      <if test="msgType != null and msgType != ''">
         AND msg_type = #{msgType}
       </if>
-      <if test="content != null">
+      <if test="content != null and content != ''">
         AND content LIKE CONCAT('%', #{content}, '%')
       </if>
       <if test="status != null">
         AND status = #{status}
       </if>
-      <if test="updateTime != null">
-        AND update_time = #{updateTime}
+      <if test="updateTimeStart != null">
+        AND update_time &gt;= #{updateTimeStart}
       </if>
-      <if test="createTime != null">
-        AND create_time = #{createTime}
+      <if test="updateTimeEnd != null">
+        AND update_time &lt;= #{updateTimeEnd}
+      </if>
+      <if test="createTimeStart != null">
+        AND create_time &gt;= #{createTimeStart}
+      </if>
+      <if test="createTimeEnd != null">
+        AND create_time &lt;= #{createTimeEnd}
       </if>
     </where>
---     ORDER BY create_time DESC
---     LIMIT 0, 10
+    ORDER BY create_time DESC
   </select>
 
 
