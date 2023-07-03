@@ -33,4 +33,16 @@ public class SyncMsgUtil {
                 .eMsgType(EMsgType.System)
             .build();
     }
+
+
+    public static WsRep<Object> isSilenceCache() {
+        return WsRep.builder()
+            .eWsMsgType(EWsMsgType.Chatroom)
+            .statusCode(StatusCode.IsSilenceCache)
+            .eMsgType(EMsgType.System)
+            .build();
+    }
+
+
+
 }

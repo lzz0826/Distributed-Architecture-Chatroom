@@ -2,7 +2,6 @@ package org.server.service;
 
 import javax.annotation.Resource;
 import org.server.cache.ChatSilenceCache;
-import org.server.exception.NotFoundUserException;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -11,8 +10,6 @@ public class ChatSilenceCacheService {
   @Resource
   private ChatSilenceCache chatSilenceCache;
 
-  @Resource
-  private UserService userService;
 
 
 

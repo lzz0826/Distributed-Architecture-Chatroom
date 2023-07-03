@@ -18,6 +18,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.server.common.StatusCode;
 import org.server.entity.CustomUserDetails;
 import org.server.service.ChatRecordService;
+import org.server.service.ChatSilenceCacheService;
 import org.server.service.JwtCacheService;
 
 import org.server.util.FastJsonUtil;
@@ -41,6 +42,9 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
 
 
   private final JwtCacheService jwtCacheService = SpringUtil.getBean(JwtCacheService.class);
+
+  private final ChatSilenceCacheService chatSilenceCacheService = SpringUtil.getBean(ChatSilenceCacheService.class);
+
 
   @Override
   public void channelActive(ChannelHandlerContext ctx) {
@@ -82,8 +86,16 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
       TextWebSocketFrame frame = (TextWebSocketFrame) msg;
       // 正常的text消息類型
       log.info("客戶端收到服務器數據：{}", frame.text());
+
       //聊天室
-      setChatroom(ctx, frame);
+      WsReq<String> wsReq = JSON.parseObject(frame.text(), WsReq.class);
+      ChannelId channelId = ctx.channel().id();
+      String senderUserId = WsChnIdUserIdMap.get(channelId);
+      if(isSilenceCache(senderUserId)){
+        sendMsgByCtx(ctx, SyncMsgUtil.isSilenceCache());
+      }else {
+        setChatroom(wsReq, senderUserId);
+      }
 
     }
     super.channelRead(ctx, msg);
@@ -174,12 +186,9 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
 
 
   //    TODO 聊天室邏輯
-  private void setChatroom(ChannelHandlerContext ctx, TextWebSocketFrame frame) {
-    WsReq<String> wsReq = JSON.parseObject(frame.text(), WsReq.class);
+  private void setChatroom(WsReq<String> wsReq, String senderUserId) {
     String receiverUserId = wsReq.getUserId();
     String chatroomId = wsReq.getChatroomId();
-    ChannelId channelId = ctx.channel().id();
-    String senderUserId = WsChnIdUserIdMap.get(channelId);
     EMsgType eMsgType = wsReq.getEMsgType();
     EWsMsgType eWsMsgType = wsReq.getEWsMsgType();
     String request = wsReq.getRequest();
@@ -276,6 +285,20 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     for (ChannelId channelId : channelIds) {
       checkChannelId(channelId, rep);
 
+    }
+  }
+
+  /**
+   * 檢查(是否禁言)
+   *
+   * @param userId
+   */
+  public Boolean isSilenceCache(String userId){
+    String chatroomId = chatSilenceCacheService.getSilenceCacheByUserId(userId);
+    if(StringUtils.isBlank(chatroomId)){
+      return false;
+    }else {
+      return true;
     }
   }
 

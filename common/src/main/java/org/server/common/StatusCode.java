@@ -58,6 +58,9 @@ public enum StatusCode {
 
   ChatroomNotOpen(3003,"聊天室沒開放"),
 
+  IsSilenceCache(3004,"已被禁言"),
+
+
 
   /**
    * WS 9000
