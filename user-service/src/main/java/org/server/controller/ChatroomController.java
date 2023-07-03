@@ -14,6 +14,7 @@ import org.server.controller.req.chatroom.GetChatroomByIdReq;
 import org.server.controller.req.chatroom.JoinChatroomReq;
 import org.server.controller.req.LeaveChatroomReq;
 import org.server.controller.req.chatroomRecord.AddChatSilenceCacheReq;
+import org.server.controller.req.chatroomRecord.DelSilenceCacheReq;
 import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.NotFoundUserException;
@@ -188,6 +189,22 @@ public class ChatroomController extends BaseController {
     rep.setUserId(userId);
     rep.setChatroomId(chatroomId);
     return BaseResp.ok(rep,StatusCode.Success);
+
+  }
+
+  @PostMapping("/delSilenceCache")
+  public BaseResp<String> delSilenceCache(@RequestBody DelSilenceCacheReq req)
+      throws NotFoundUserException {
+    if(StringUtils.isBlank(req.getUserId())){
+      throw new NotFoundUserException();
+    }
+    String userId = req.getUserId();
+
+    chatSilenceCacheService.delSilenceCacheByUserId(userId);
+
+    return BaseResp.ok(StatusCode.Success);
+
+    
 
   }
 
