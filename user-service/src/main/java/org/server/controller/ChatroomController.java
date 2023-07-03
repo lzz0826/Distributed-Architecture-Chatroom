@@ -6,19 +6,24 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
+import org.server.controller.rep.chatroom.GetSilenceCacheRep;
 import org.server.controller.rep.chatroom.JoinChatroomRep;
 import org.server.controller.rep.chatroom.ListRep;
 import org.server.controller.req.chatroom.AddChatroomReq;
 import org.server.controller.req.chatroom.GetChatroomByIdReq;
 import org.server.controller.req.chatroom.JoinChatroomReq;
 import org.server.controller.req.LeaveChatroomReq;
+import org.server.controller.req.chatroomRecord.AddChatSilenceCacheReq;
 import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
+import org.server.exception.NotFoundUserException;
 import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.chatroom.NeedChatroomIdException;
 import org.server.exception.chatroom.NeedChatroomNameException;
+import org.server.service.ChatSilenceCacheService;
 import org.server.service.ChatroomService;
+import org.server.service.UserService;
 import org.server.vo.ChatroomVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,6 +40,12 @@ public class ChatroomController extends BaseController {
 
   @Resource
   private ChatroomService chatroomService;
+
+  @Resource
+  private ChatSilenceCacheService chatSilenceCacheService;
+
+  @Resource
+  private UserService userService;
 
 
 
@@ -120,7 +131,6 @@ public class ChatroomController extends BaseController {
   }
 
 
-
   @PostMapping("/leaveChatroom")
   private BaseResp<String> leaveChatroom(@RequestBody LeaveChatroomReq req) throws NeedChatroomIdException {
 
@@ -130,8 +140,58 @@ public class ChatroomController extends BaseController {
 
     return BaseResp.ok(StatusCode.Success);
 
+  }
+
+  @PostMapping("/addChatSilenceCache")
+  private BaseResp<String> addChatSilenceCache(@RequestBody AddChatSilenceCacheReq req)
+      throws NotFoundUserException, MissingParameterErrorException {
+
+    if(StringUtils.isBlank(req.getUserId())){
+      throw new NotFoundUserException();
+    }
+
+    if (req.getTimeout() == null || req.getTimeout() <= 0 || req.getTimeout() % 1 != 0) {
+      throw new MissingParameterErrorException();
+    }
+
+    String userId = req.getUserId();
+
+    String chatroomId = req.getChatroomId();
+
+    Integer timeout = req.getTimeout();
+
+
+    UserDAO dao = userService.getUserById(req.getUserId());
+    if(dao == null){
+      throw new NotFoundUserException();
+    }
+
+    chatSilenceCacheService.addChatSilenceCacheByUserId(userId,chatroomId,timeout);
+
+    return BaseResp.ok(StatusCode.Success);
 
   }
+
+
+  @GetMapping("/getSilenceCache")
+  public BaseResp<GetSilenceCacheRep> getSilenceCache(@RequestParam String userId)
+      throws NotFoundUserException {
+    if(StringUtils.isBlank(userId)){
+      throw new NotFoundUserException();
+    }
+    String chatroomId = chatSilenceCacheService.getSilenceCacheByUserId(userId);
+
+    GetSilenceCacheRep rep = GetSilenceCacheRep.builder().build();
+    if(StringUtils.isBlank(chatroomId)){
+      return BaseResp.ok(rep,StatusCode.Success);
+    }
+    rep.setUserId(userId);
+    rep.setChatroomId(chatroomId);
+    return BaseResp.ok(rep,StatusCode.Success);
+
+  }
+
+
 
 
 

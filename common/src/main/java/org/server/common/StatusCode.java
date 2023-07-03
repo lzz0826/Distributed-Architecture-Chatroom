@@ -28,7 +28,6 @@ public enum StatusCode {
   NeedUserName(1002,"需要UserName"),
 
   NeedPassword(1003,"需要Password"),
-
   NeedLogin(1004,"需要登入"),
 
 

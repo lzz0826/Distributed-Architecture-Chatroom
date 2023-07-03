@@ -72,3 +72,5 @@ async:
       name:
         prefix: async-service- # 配置线程池中的线程的名称前缀
 
+chatroom:
+  silenceCache_prefix: ChatSilenceCache- #
