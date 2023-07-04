@@ -11,6 +11,8 @@ public interface InterpersonalMapper {
 
   InterpersonalDAO selectByUserId(String userId);
 
+  int update(InterpersonalDAO dao);
+
 
 
 

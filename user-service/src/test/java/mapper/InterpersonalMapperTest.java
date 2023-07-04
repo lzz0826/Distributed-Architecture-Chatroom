@@ -16,6 +16,21 @@ public class InterpersonalMapperTest extends BaseTest{
 
 
   @Test
+  public void interpersonalMapperTest(){
+    InterpersonalDAO build = InterpersonalDAO
+        .builder()
+        .id("63543")
+        .userId("")
+        .blacklisted(null)
+        .banChatRoom("yyyyyyyy")
+        .build();
+
+    int update = interpersonalMapper.update(build);
+    System.out.println(update);
+  }
+
+
+  @Test
   public void selectByUserIdTest(){
     InterpersonalDAO dao = interpersonalMapper.selectByUserId("4241");
     System.out.println(dao);

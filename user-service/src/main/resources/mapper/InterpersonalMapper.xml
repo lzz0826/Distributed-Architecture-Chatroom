@@ -38,12 +38,25 @@
     </trim>
 
   </insert>
+
   <select id="selectByUserId" resultType="org.server.dao.InterpersonalDAO">
     select * from tb_interpersonal where user_id = #{userId}
   </select>
 
 
-
+  <update id="update" parameterType="org.server.dao.InterpersonalDAO">
+    UPDATE `tb_interpersonal`
+    <trim prefix='set' suffixOverrides=','>
+    <if test="id != null"> id = #{id},</if>
+    <if test="userId != null"> user_id = #{userId},</if>
+    <if test="blacklist != null"> blacklist = #{blacklist},</if>
+    <if test="blacklisted != null"> blacklisted = #{blacklisted},</if>
+    <if test="banChatRoom != null"> ban_chat_room = #{banChatRoom},</if>
+    <if test="createTime != null"> create_time = #{createTime},</if>
+    <if test="updateTime != null"> update_time = #{updateTime},</if>
+    </trim>
+    WHERE id = #{id}
+  </update>
 
 
 
