@@ -14,12 +14,12 @@ public enum StatusCode {
   AddFail(11,"新增失敗"),
 
   NeedPage(12,"需要頁碼"),
-
   NeedPageSize(13,"需要頁碼大小"),
 
+  NotAllowedNullStr(14,"不允許空的字串"),
 
 
-  /**
+ /**
    * User 1000
    */
   NotFoundUser(1000,"找不到使用者"),
@@ -59,6 +59,10 @@ public enum StatusCode {
   ChatroomNotOpen(3003,"聊天室沒開放"),
 
   IsSilenceCache(3004,"已被禁言"),
+
+  AddInterpersonalFail(3005,"新增人際關係表失敗"),
+
+  EditInterpersonalFail(3006,"編輯人際關係表失敗"),
 
 
 

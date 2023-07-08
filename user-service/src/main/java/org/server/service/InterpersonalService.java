@@ -1,13 +1,20 @@
 package org.server.service;
 
 import static org.server.util.StringUtil.strListToString;
+import static org.server.util.StringUtil.strSetToString;
+import static org.server.util.StringUtil.stringToStrSet;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 import javax.annotation.Resource;
 import org.server.dao.InterpersonalDAO;
+import org.server.exception.Interpersonal.AddInterpersonalFailException;
+import org.server.exception.Interpersonal.EditInterpersonalException;
 import org.server.mapper.InterpersonalMapper;
 import org.server.sercice.IdGeneratorService;
+import org.server.vo.InterpersonalVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -19,8 +26,8 @@ public class InterpersonalService {
   @Resource
   private IdGeneratorService idGeneratorService;
 
-  public void addInsertInterpersonal(String userId, List<String> blacklist,
-      List<String> blacklisted, List<String> banChatRoom) {
+  public InterpersonalVO addInsertInterpersonal(String userId, List<String> blacklist,
+      List<String> blacklisted, List<String> banChatRoom) throws AddInterpersonalFailException {
 
     String blacklistStr = null;
 
@@ -51,9 +58,58 @@ public class InterpersonalService {
 
     int i = interpersonalMapper.insertInterpersonal(dao);
 
+    if(i == 0){
+      throw new AddInterpersonalFailException();
+
+    }
+
+    InterpersonalVO vo = InterpersonalVO.builder().build();
+    BeanUtils.copyProperties(dao,vo);
+    return vo;
   }
 
+  public InterpersonalVO editAddInterpersonal(String userId, List<String> blacklist,
+      List<String> blacklisted, List<String> banChatRoom)
+      throws AddInterpersonalFailException, EditInterpersonalException {
 
+    InterpersonalVO vo = InterpersonalVO.builder().build();
 
+    InterpersonalDAO dao = interpersonalMapper.selectByUserId(userId);
+
+    if(dao == null){
+      vo = addInsertInterpersonal(userId, blacklist, blacklisted, banChatRoom);
+    }else {
+
+      String id = dao.getId();
+
+      Set<String> blacklistSet = stringToStrSet(dao.getBlacklist());
+
+      Set<String> blacklistedSet = stringToStrSet(dao.getBlacklisted());
+
+      Set<String> banChatRoomSet= stringToStrSet(dao.getBanChatRoom());
+
+      blacklistSet.addAll(blacklist);
+      blacklistedSet.addAll(blacklisted);
+      banChatRoomSet.addAll(banChatRoom);
+
+      InterpersonalDAO newDao = InterpersonalDAO
+          .builder()
+          .id(id)
+          .blacklist(strSetToString(blacklistSet))
+          .blacklisted(strSetToString(blacklistedSet))
+          .banChatRoom(strSetToString(banChatRoomSet))
+          .updateTime(new Date())
+          .build();
+      int update = interpersonalMapper.update(newDao);
+
+      if(update == 0){
+        throw new EditInterpersonalException();
+      }
+      BeanUtils.copyProperties(newDao,vo);
+      vo.setUserId(dao.getUserId());
+      vo.setCreateTime(dao.getCreateTime());
+    }
+    return vo;
+  }
 
 }
