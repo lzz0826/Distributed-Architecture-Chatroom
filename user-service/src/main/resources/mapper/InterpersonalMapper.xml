@@ -39,6 +39,10 @@
 
   </insert>
 
+  <select id="selectById" resultType="org.server.dao.InterpersonalDAO">
+    select * from tb_interpersonal where id = #{id}
+  </select>
+
   <select id="selectByUserId" resultType="org.server.dao.InterpersonalDAO">
     select * from tb_interpersonal where user_id = #{userId}
   </select>

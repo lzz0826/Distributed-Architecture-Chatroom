@@ -54,29 +54,17 @@ public class InterpersonalController {
   public BaseResp<InterpersonalVO> editAddInterpersonal(@RequestBody EditInterpersonalReq req)
       throws MissingParameterErrorException, AddInterpersonalFailException, EditInterpersonalException, NotAllowedNullStrException {
 
-    if(StringUtils.isBlank(req.getUserId())){
-      throw new MissingParameterErrorException();
-    }
 
-    String userId = req.getUserId();
+    checkReq(req);
 
     List<String> blacklist = req.getBlacklist();
-    if(blacklist.contains("")){
-      throw new NotAllowedNullStrException();
-    }
 
     List<String> blacklisted = req.getBlacklisted();
 
-    if(blacklisted.contains("")){
-      throw new NotAllowedNullStrException();
-    }
-
-
     List<String> banChatRoom = req.getBanChatRoom();
 
-    if(banChatRoom.contains("")){
-      throw new NotAllowedNullStrException();
-    }
+    String userId = req.getUserId();
+
 
     InterpersonalVO vo = interpersonalService.editAddInterpersonal(userId, blacklist, blacklisted,
         banChatRoom);
@@ -85,6 +73,52 @@ public class InterpersonalController {
 
 
   }
+
+
+  @PostMapping("/editDelInterpersonal")
+  public BaseResp<InterpersonalVO> editDelInterpersonal(@RequestBody EditInterpersonalReq req)
+      throws NotAllowedNullStrException, MissingParameterErrorException, EditInterpersonalException {
+
+    checkReq(req);
+
+    List<String> blacklist = req.getBlacklist();
+
+    List<String> blacklisted = req.getBlacklisted();
+
+    List<String> banChatRoom = req.getBanChatRoom();
+
+    String userId = req.getUserId();
+
+    InterpersonalVO vo = interpersonalService.editDelInterpersonal(userId, blacklist, blacklisted,
+        banChatRoom);
+
+    return BaseResp.ok(vo,StatusCode.Success);
+
+
+  }
+
+
+  private void checkReq(EditInterpersonalReq req ) throws MissingParameterErrorException,
+      NotAllowedNullStrException {
+
+    if(StringUtils.isBlank(req.getUserId())){
+      throw new MissingParameterErrorException();
+    }
+    if(req.getBlacklist().contains("")){
+      throw new NotAllowedNullStrException();
+    }
+
+    if(req.getBlacklisted().contains("")){
+      throw new NotAllowedNullStrException();
+    }
+
+    if(req.getBanChatRoom().contains("")){
+      throw new NotAllowedNullStrException();
+    }
+  }
+
+
+
 
 
 
