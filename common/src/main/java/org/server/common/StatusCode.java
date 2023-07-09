@@ -64,6 +64,8 @@ public enum StatusCode {
 
   EditInterpersonalFail(3006,"編輯人際關係表失敗"),
 
+  Blacklisted(3007,"被加入黑名單"),
+
 
 
   /**

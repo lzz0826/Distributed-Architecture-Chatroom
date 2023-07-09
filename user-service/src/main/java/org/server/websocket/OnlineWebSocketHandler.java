@@ -250,16 +250,16 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     String senderUserId = rep.getSenderUserId();
     InterpersonalVO vo = interpersonalService.getByUserId(senderUserId);
     if(vo !=null && !StringUtils.isBlank(vo.getBlacklisted())){
-      System.out.println("sssss : "+vo.getBlacklisted());
-
       List<String> blacklisteds = stringToStrList(vo.getBlacklisted());
-
       if(blacklisteds.contains(receiverUserid)){
+        ChannelId channelId = WsUserIdChnIdMap.get(senderUserId);
         log.error("被對方加入黑名單");
+        rep.setEMsgType(EMsgType.System);
+        rep.setStatusCode(StatusCode.Blacklisted);
+        checkChannelId(channelId, rep);
         return;
       }
     }
-
     ChannelId channelId = WsUserIdChnIdMap.get(receiverUserid);
     checkChannelId(channelId, rep);
   }
