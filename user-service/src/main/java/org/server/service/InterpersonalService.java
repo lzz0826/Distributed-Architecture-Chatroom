@@ -7,7 +7,6 @@ import static org.server.util.StringUtil.stringToStrSet;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
@@ -15,13 +14,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.server.dao.InterpersonalDAO;
 import org.server.exception.Interpersonal.AddInterpersonalFailException;
 import org.server.exception.Interpersonal.EditInterpersonalException;
-import org.server.exception.NotFoundUserException;
 import org.server.mapper.InterpersonalMapper;
 import org.server.sercice.IdGeneratorService;
-import org.server.util.SpringUtil;
 import org.server.vo.InterpersonalVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class InterpersonalService {
@@ -32,6 +31,14 @@ public class InterpersonalService {
   @Resource
   private IdGeneratorService idGeneratorService;
 
+
+  public InterpersonalDAO findByUserId(String userId){
+    return interpersonalMapper.selectByUserId(userId);
+  }
+
+
+
+  @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public InterpersonalVO addInsertInterpersonal(String userId, List<String> blacklist,
       List<String> blacklisted, List<String> banChatRoom) throws AddInterpersonalFailException {
 
@@ -74,16 +81,18 @@ public class InterpersonalService {
     return vo;
   }
 
+  @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public InterpersonalVO editAddInterpersonal(String userId, List<String> blacklist,
       List<String> blacklisted, List<String> banChatRoom)
       throws AddInterpersonalFailException, EditInterpersonalException {
 
     InterpersonalVO vo = InterpersonalVO.builder().build();
-
-    InterpersonalDAO dao = interpersonalMapper.selectByUserId(userId);
-
+    InterpersonalDAO dao = findByUserId(userId);
     if(dao == null){
       vo = addInsertInterpersonal(userId, blacklist, blacklisted, banChatRoom);
+      if(blacklist != null || !blacklist.isEmpty()){
+        addBlacklist(blacklist,userId);
+      }
     }else {
 
       String id = dao.getId();
@@ -111,11 +120,53 @@ public class InterpersonalService {
       if(update == 0){
         throw new EditInterpersonalException();
       }
+
       BeanUtils.copyProperties(updateDao,vo);
       vo.setUserId(dao.getUserId());
       vo.setCreateTime(dao.getCreateTime());
+      // 添加對方的被黑名單
+      if(blacklist != null || !blacklist.isEmpty()){
+        addBlacklist(blacklist,userId);
+      }
+
     }
     return vo;
+  }
+
+
+
+
+  /**
+   * 添加被黑名單對象的表
+   * @param blacklistSet 要添加的對象名單
+   * @param userId 需要被添加的userId
+   */
+  @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  public void addBlacklist(List<String> blacklistSet,String userId)
+      throws AddInterpersonalFailException {
+
+    for (String setUserid : blacklistSet) {
+      InterpersonalDAO dao = findByUserId(setUserid);
+      if(dao == null ){
+        List<String> userIdList = new ArrayList<>();
+        userIdList.add(userId);
+        addInsertInterpersonal(setUserid,null,userIdList,null);
+
+      }else {
+        Set<String> blacklists = stringToStrSet(dao.getBlacklist());
+        blacklists.add(userId);
+
+        String id = dao.getId();
+        InterpersonalDAO updateDao = InterpersonalDAO
+            .builder()
+            .id(id)
+            .blacklisted(strSetToString(blacklists))
+            .build();
+        interpersonalMapper.update(updateDao);
+      }
+    }
+
+
   }
 
 
