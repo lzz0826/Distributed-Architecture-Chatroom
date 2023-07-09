@@ -11,12 +11,14 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import javax.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
 import org.server.dao.InterpersonalDAO;
 import org.server.exception.Interpersonal.AddInterpersonalFailException;
 import org.server.exception.Interpersonal.EditInterpersonalException;
 import org.server.exception.NotFoundUserException;
 import org.server.mapper.InterpersonalMapper;
 import org.server.sercice.IdGeneratorService;
+import org.server.util.SpringUtil;
 import org.server.vo.InterpersonalVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -163,12 +165,33 @@ public class InterpersonalService {
     return vo;
   }
 
+  public InterpersonalVO getByUserId(String userId){
+    InterpersonalVO vo = InterpersonalVO.builder().build();
+    if(StringUtils.isBlank(userId)){
+      return vo;
+    }
+    InterpersonalDAO dao = interpersonalMapper.selectByUserId(userId);
+    if(dao == null){
+      return vo;
+    }
+    BeanUtils.copyProperties(dao,vo);
+    return vo;
+  }
+
+
+
 
   public List<String> removeList(List<String> oldList ,List<String> removeList){
     List<String> newList = new ArrayList<>(oldList);
     newList.removeAll(removeList);
     return newList;
   }
+
+
+
+
+
+
 
 }
 

@@ -1,5 +1,7 @@
 package org.server.websocket;
 
+import static org.server.util.StringUtil.stringToStrList;
+
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.Channel;
@@ -19,10 +21,12 @@ import org.server.common.StatusCode;
 import org.server.entity.CustomUserDetails;
 import org.server.service.ChatRecordService;
 import org.server.service.ChatSilenceCacheService;
+import org.server.service.InterpersonalService;
 import org.server.service.JwtCacheService;
 
 import org.server.util.FastJsonUtil;
 import org.server.util.SpringUtil;
+import org.server.vo.InterpersonalVO;
 import org.server.websocket.entity.WsRep;
 import org.server.websocket.entity.WsReq;
 import org.server.websocket.enums.EMsgType;
@@ -45,6 +49,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
 
   private final ChatSilenceCacheService chatSilenceCacheService = SpringUtil.getBean(ChatSilenceCacheService.class);
 
+  private final InterpersonalService interpersonalService = SpringUtil.getBean(InterpersonalService.class);
 
   @Override
   public void channelActive(ChannelHandlerContext ctx) {
@@ -234,13 +239,28 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
    *
    * @param rep
    */
-  public static void sendMsgToUser(WsRep<?> rep) {
-    String userid = rep.getReceiverUserId();
-    if (StringUtils.isBlank(userid)) {
+  public void sendMsgToUser(WsRep<?> rep) {
+
+    String receiverUserid = rep.getReceiverUserId();
+    if (StringUtils.isBlank(receiverUserid)) {
       log.error("無法傳送信息，userId為空");
       return;
     }
-    ChannelId channelId = WsUserIdChnIdMap.get(userid);
+
+    String senderUserId = rep.getSenderUserId();
+    InterpersonalVO vo = interpersonalService.getByUserId(senderUserId);
+    if(vo !=null && !StringUtils.isBlank(vo.getBlacklisted())){
+      System.out.println("sssss : "+vo.getBlacklisted());
+
+      List<String> blacklisteds = stringToStrList(vo.getBlacklisted());
+
+      if(blacklisteds.contains(receiverUserid)){
+        log.error("被對方加入黑名單");
+        return;
+      }
+    }
+
+    ChannelId channelId = WsUserIdChnIdMap.get(receiverUserid);
     checkChannelId(channelId, rep);
   }
 

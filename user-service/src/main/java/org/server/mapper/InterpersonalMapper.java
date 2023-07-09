@@ -8,7 +8,6 @@ public interface InterpersonalMapper {
 
   int insertInterpersonal(InterpersonalDAO dao);
 
-
   InterpersonalDAO selectById(String id);
 
   InterpersonalDAO selectByUserId(String userId);
