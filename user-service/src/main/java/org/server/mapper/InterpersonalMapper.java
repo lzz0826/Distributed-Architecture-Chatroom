@@ -14,6 +14,8 @@ public interface InterpersonalMapper {
 
   int update(InterpersonalDAO dao);
 
+  int insertOrUpdate(InterpersonalDAO dao);
+
 
 
 

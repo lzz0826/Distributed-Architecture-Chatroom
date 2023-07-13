@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.BlackListMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.dao.BlackListDAO">
+    <id property="id" column="id" jdbcType="VARCHAR"/>
+    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="blacklist" column="blacklist" jdbcType="VARCHAR"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+
+  <insert id="insertBlackList">
+    insert into tb_black_list
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="userId != null">user_id,</if>
+      <if test="blacklist != null">blacklist,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+      <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+      <if test="blacklist != null">#{blacklist,jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+  <insert id="insertBlackLists" parameterType="java.util.List">
+    INSERT IGNORE INTO tb_black_list (id, user_id, blacklist, update_time, create_time)
+    VALUES
+    <foreach collection="list" item="item" separator=",">
+      (#{item.id}, #{item.userId}, #{item.blacklist}, #{item.updateTime}, #{item.createTime})
+    </foreach>
+  </insert>
+
+
+
+  <update id="update">
+    UPDATE `tb_black_list`
+    <trim prefix='set' suffixOverrides=','>
+      <if test="id != null"> id = #{id},</if>
+      <if test="userId != null"> user_id = #{userId},</if>
+      <if test="blacklist != null"> blacklist = #{blacklist},</if>
+      <if test="createTime != null"> create_time = #{createTime},</if>
+      <if test="updateTime != null"> update_time = #{updateTime},</if>
+    </trim>
+    WHERE id = #{id}
+  </update>
+
+
+  <delete id="deleteByUserIds" parameterType="java.util.List">
+    DELETE FROM tb_black_list
+    WHERE user_id IN
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+
+
+  </delete>
+  <delete id="deleteByIds" parameterType="java.util.List">
+    DELETE FROM tb_black_list
+    WHERE id IN
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+        #{item}
+    </foreach>
+  </delete>
+
+
+  <select id="selectById" resultType="org.server.dao.BlackListDAO">
+    select * from tb_black_list where id = #{id}
+  </select>
+
+  <select id="selectByUserId" resultType="org.server.dao.BlackListDAO">
+    select * from tb_black_list where user_id = #{userId}
+  </select>
+
+
+
+
+
+</mapper>

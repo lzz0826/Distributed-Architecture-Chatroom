@@ -138,14 +138,14 @@ public class InterpersonalService {
 
   /**
    * 添加被黑名單對象的表
-   * @param blacklistSet 要添加的對象名單
+   * @param blacklistList 要添加的對象名單
    * @param userId 需要被添加的userId
    */
   @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
-  public void addBlacklist(List<String> blacklistSet,String userId)
+  public void addBlacklist(List<String> blacklistList,String userId)
       throws AddInterpersonalFailException {
 
-    for (String setUserid : blacklistSet) {
+    for (String setUserid : blacklistList) {
       InterpersonalDAO dao = findByUserId(setUserid);
       if(dao == null ){
         List<String> userIdList = new ArrayList<>();
@@ -169,7 +169,7 @@ public class InterpersonalService {
 
   }
 
-
+  @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
   public InterpersonalVO editDelInterpersonal(String userId, List<String> blacklist,
       List<String> blacklisted, List<String> banChatRoom)
       throws  EditInterpersonalException {
@@ -212,8 +212,38 @@ public class InterpersonalService {
       BeanUtils.copyProperties(newDao,vo);
       vo.setUserId(dao.getUserId());
       vo.setCreateTime(dao.getCreateTime());
+
+      if(blacklist != null || !blacklist.isEmpty()){
+        System.out.println("blacklist : "+blacklist);
+        delBlacklist(blacklist,userId);
+      }
     }
     return vo;
+  }
+
+  /**
+   * 刪除被黑名單對象的表
+   * @param blacklistList 要添加的對象名單
+   * @param userId 需要被移除的userId
+   */
+  @Transactional(propagation = Propagation.REQUIRED, rollbackFor = Exception.class)
+  public void delBlacklist(List<String> blacklistList ,String userId ){
+    for (String id : blacklistList) {
+      InterpersonalDAO dao = findByUserId(id);
+      System.out.println("dao : " + dao);
+      if (dao != null) {
+        Set<String> blacklisted = stringToStrSet(dao.getBlacklisted());
+        blacklisted.remove(userId);
+
+        System.out.println("blacklistedddd dd : "+blacklisted);
+        InterpersonalDAO updateDao = InterpersonalDAO
+            .builder()
+            .id(dao.getUserId())
+            .blacklisted(strSetToString(blacklisted))
+            .build();
+        interpersonalMapper.update(updateDao);
+      }
+    }
   }
 
   public InterpersonalVO getByUserId(String userId){

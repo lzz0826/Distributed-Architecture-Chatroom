@@ -14,6 +14,21 @@ public class InterpersonalMapperTest extends BaseTest{
   @Resource
   private InterpersonalMapper interpersonalMapper;
 
+  @Test
+  public void testInsertOrUpdate(){
+    InterpersonalDAO build = InterpersonalDAO
+        .builder()
+        .id("63588843")
+        .userId("hohiohio")
+        .blacklisted(null)
+        .banChatRoom("99999")
+        .updateTime(new Date())
+        .createTime(new Date())
+        .build();
+    int i = interpersonalMapper.insertOrUpdate(build);
+    System.out.println(i);
+  }
+
 
   @Test
   public void interpersonalMapperTest(){

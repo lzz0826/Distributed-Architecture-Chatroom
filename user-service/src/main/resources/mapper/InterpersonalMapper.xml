@@ -39,6 +39,43 @@
 
   </insert>
 
+
+  <insert id="insertOrUpdate" parameterType="org.server.dao.InterpersonalDAO">
+    INSERT INTO tb_interpersonal
+    (
+    <trim prefix="" suffix="" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="userId != null">user_id,</if>
+      <if test="blacklist != null">blacklist,</if>
+      <if test="blacklisted != null">blacklisted,</if>
+      <if test="banChatRoom != null">ban_chat_room,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    )
+    VALUES
+    (
+    <trim prefix="" suffix="" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+      <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+      <if test="blacklist != null">#{blacklist,jdbcType=VARCHAR},</if>
+      <if test="blacklisted != null">#{blacklisted,jdbcType=VARCHAR},</if>
+      <if test="banChatRoom != null">#{banChatRoom,jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+    )
+    ON DUPLICATE KEY UPDATE
+    id = IF(VALUES(id) IS NOT NULL, VALUES(id), id),
+    user_id = IF(VALUES(user_id) IS NOT NULL, VALUES(user_id), user_id),
+    blacklist = IF(VALUES(blacklist) IS NOT NULL, VALUES(blacklist), blacklist),
+    blacklisted = IF(VALUES(blacklisted) IS NOT NULL, VALUES(blacklisted), blacklisted),
+    ban_chat_room = IF(VALUES(ban_chat_room) IS NOT NULL, VALUES(ban_chat_room), ban_chat_room),
+    update_time = IF(VALUES(update_time) IS NOT NULL, VALUES(update_time), update_time),
+    create_time = IF(VALUES(create_time) IS NOT NULL, VALUES(create_time), create_time);
+  </insert>
+
+
   <select id="selectById" resultType="org.server.dao.InterpersonalDAO">
     select * from tb_interpersonal where id = #{id}
   </select>

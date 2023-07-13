@@ -64,7 +64,11 @@ public enum StatusCode {
 
   EditInterpersonalFail(3006,"編輯人際關係表失敗"),
 
-  Blacklisted(3007,"被加入黑名單"),
+  AddBlackListFail(3007,"加入黑名單失敗"),
+
+  Blacklisted(3008,"被加入黑名單"),
+
+  DelBlackListFail(3008,"刪除黑名單失敗"),
 
 
 
