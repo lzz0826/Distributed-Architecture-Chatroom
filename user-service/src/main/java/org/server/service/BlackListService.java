@@ -26,16 +26,18 @@ public class BlackListService {
   @Resource
   private IdGeneratorService idGeneratorService;
 
+  public List<BlackListDAO> findByBlacklist(String blacklist){
+    List<BlackListDAO> daos = blackListMapper.selectByBlacklist(blacklist);
+    return daos;
+  }
 
-  private List<BlackListDAO> findByUserIdDAOs(String userId){
+
+  public List<BlackListDAO> findByUserIdDAOs(String userId){
     List<BlackListDAO> daos = blackListMapper.selectByUserId(userId);
     return daos;
   }
 
-  public List<BlackLisVO> findByUserIdVOs(String userId) throws MissingParameterErrorException {
-    if(StringUtils.isBlank(userId)){
-      throw new MissingParameterErrorException();
-    }
+  public List<BlackLisVO> findByUserIdVOs(String userId) {
     List<BlackListDAO> byUserIdDAOs = findByUserIdDAOs(userId);
     List<BlackLisVO> vos = daosToVos(byUserIdDAOs);
     return vos;

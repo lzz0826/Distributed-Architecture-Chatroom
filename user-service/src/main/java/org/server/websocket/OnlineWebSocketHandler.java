@@ -1,6 +1,5 @@
 package org.server.websocket;
 
-import static org.server.util.StringUtil.stringToStrList;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
@@ -18,7 +17,9 @@ import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.StatusCode;
+import org.server.dao.BlackListDAO;
 import org.server.entity.CustomUserDetails;
+import org.server.service.BlackListService;
 import org.server.service.ChatRecordService;
 import org.server.service.ChatSilenceCacheService;
 import org.server.service.InterpersonalService;
@@ -26,7 +27,6 @@ import org.server.service.JwtCacheService;
 
 import org.server.util.FastJsonUtil;
 import org.server.util.SpringUtil;
-import org.server.vo.InterpersonalVO;
 import org.server.websocket.entity.WsRep;
 import org.server.websocket.entity.WsReq;
 import org.server.websocket.enums.EMsgType;
@@ -43,13 +43,10 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
 
 
   private final ChatRecordService chatRecordService = SpringUtil.getBean(ChatRecordService.class);
-
-
   private final JwtCacheService jwtCacheService = SpringUtil.getBean(JwtCacheService.class);
-
   private final ChatSilenceCacheService chatSilenceCacheService = SpringUtil.getBean(ChatSilenceCacheService.class);
 
-  private final InterpersonalService interpersonalService = SpringUtil.getBean(InterpersonalService.class);
+  private final BlackListService blackListService = SpringUtil.getBean(BlackListService.class);
 
   @Override
   public void channelActive(ChannelHandlerContext ctx) {
@@ -247,6 +244,23 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
       return;
     }
 
+    String senderUserId = rep.getSenderUserId();
+
+
+    List<BlackListDAO> blackListDAOS = blackListService.findByBlacklist(senderUserId);
+    if(blackListDAOS !=null && !blackListDAOS.isEmpty()){
+      for (BlackListDAO blackListDAO : blackListDAOS) {
+        String blackedUserId = blackListDAO.getUserId();
+        if(blackedUserId.equals(receiverUserid)){
+          ChannelId channelId = WsUserIdChnIdMap.get(senderUserId);
+          log.error("被對方加入黑名單");
+          rep.setEMsgType(EMsgType.System);
+          rep.setStatusCode(StatusCode.Blacklisted);
+          checkChannelId(channelId, rep);
+          return;
+        }
+      }
+    }
 //    String senderUserId = rep.getSenderUserId();
 //    InterpersonalVO vo = interpersonalService.getByUserId(senderUserId);
 //    if(vo !=null && !StringUtils.isBlank(vo.getBlacklisted())){

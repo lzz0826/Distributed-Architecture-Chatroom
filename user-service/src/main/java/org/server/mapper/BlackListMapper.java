@@ -17,6 +17,8 @@ public interface BlackListMapper {
 
   List<BlackListDAO> selectByUserId(String userId);
 
+  List<BlackListDAO> selectByBlacklist(String blacklist);
+
   int update(BlackListDAO dao);
 
   int deleteByIds(List<String> ids);

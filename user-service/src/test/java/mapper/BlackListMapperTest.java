@@ -13,6 +13,12 @@ public class BlackListMapperTest extends BaseTest{
   @Resource
   private BlackListMapper blackListMapper;
 
+  @Test
+  public void testSelectByBlacklist(){
+    List<BlackListDAO> daos = blackListMapper.selectByBlacklist("33333333");
+    System.out.println(daos);
+  }
+
 
   @Test
   public void testInsertBlackLists(){
@@ -99,8 +105,6 @@ public class BlackListMapperTest extends BaseTest{
 
   @Test
   public void testInsertBlackList (){
-
-
     BlackListDAO build = BlackListDAO
         .builder()
         .id("123")

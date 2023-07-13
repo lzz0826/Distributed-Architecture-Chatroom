@@ -81,8 +81,9 @@
     select * from tb_black_list where user_id = #{userId}
   </select>
 
-
-
+  <select id="selectByBlacklist" resultType="org.server.dao.BlackListDAO">
+    select * from tb_black_list where blacklist = #{blacklist}
+  </select>
 
 
 </mapper>
