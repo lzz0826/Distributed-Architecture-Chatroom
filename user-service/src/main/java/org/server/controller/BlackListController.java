@@ -1,5 +1,8 @@
 package org.server.controller;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.List;
 import javax.annotation.Resource;
 import lombok.Builder;
@@ -22,6 +25,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Api(tags = "黑名單 相關API")
 @RestController
 @RequestMapping("/blackList")
 public class BlackListController extends BaseController{
@@ -29,8 +33,9 @@ public class BlackListController extends BaseController{
   @Resource
   private BlackListService blackListService;
 
+  @ApiOperation("新增黑名單")
   @PostMapping("/addBlackList")
-  public BaseResp<List> addBlackList(@RequestBody AddBlackListReq req)
+  public BaseResp<List> addBlackList(@RequestBody @ApiParam("addBlackList請求")AddBlackListReq req)
       throws MissingParameterErrorException, AddBlackListException, NotAllowedNullStrException {
 
     if(StringUtils.isBlank(req.getUserId())){
@@ -54,8 +59,9 @@ public class BlackListController extends BaseController{
   }
 
 
+  @ApiOperation("刪除黑名單")
   @PostMapping("/delIds")
-  public BaseResp<String> delIds(@RequestBody DelIdsReq req)
+  public BaseResp<String> delIds(@RequestBody @ApiParam("delIds請求") DelIdsReq req)
       throws MissingParameterErrorException, NotAllowedNullStrException, DelBlackListException {
     if(req.getIds() == null || req.getIds().isEmpty()){
       throw new MissingParameterErrorException();
@@ -69,8 +75,10 @@ public class BlackListController extends BaseController{
     return BaseResp.ok(StatusCode.Success);
   }
 
+
+  @ApiOperation("取得黑名單")
   @GetMapping("/getBlackList")
-  public BaseResp<ListRep> getBlackList(@RequestParam() String userId)
+  public BaseResp<ListRep> getBlackList(@RequestParam() @ApiParam("userId(必須)")  String userId)
       throws MissingParameterErrorException {
 
     if(StringUtils.isBlank(userId)){

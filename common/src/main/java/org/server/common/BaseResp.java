@@ -1,5 +1,6 @@
 package org.server.common;
 
+import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Data;
 
@@ -7,8 +8,12 @@ import lombok.Data;
 @Builder
 public class BaseResp<T> {
 
+
+  @ApiModelProperty(value="返回DATA")
   private T data;
 
+
+  @ApiModelProperty(value="狀態碼")
   private StatusCode statusCode;
 
   public Integer getStatusCode(){
