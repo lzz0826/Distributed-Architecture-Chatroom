@@ -35,7 +35,7 @@ public class BlackListController extends BaseController{
 
   @ApiOperation("新增黑名單")
   @PostMapping("/addBlackList")
-  public BaseResp<List> addBlackList(@RequestBody @ApiParam("addBlackList請求")AddBlackListReq req)
+  public BaseResp<ListRep> addBlackList(@RequestBody @ApiParam("addBlackList請求")AddBlackListReq req)
       throws MissingParameterErrorException, AddBlackListException, NotAllowedNullStrException {
 
     if(StringUtils.isBlank(req.getUserId())){
@@ -52,9 +52,13 @@ public class BlackListController extends BaseController{
       throw new NotAllowedNullStrException();
     }
 
+    List<BlackLisVO> vos = blackListService.addBlackLists(userId,blackLists);
 
-    List<BlackLisVO> blackLisVOS = blackListService.addBlackLists(userId,blackLists);
-    return BaseResp.ok(blackLisVOS, StatusCode.Success);
+    ListRep listRep = ListRep
+        .builder()
+        .blackLis(vos)
+        .build();
+    return BaseResp.ok(listRep,StatusCode.Success);
 
   }
 

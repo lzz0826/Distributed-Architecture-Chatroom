@@ -27,14 +27,16 @@ public class SwaggerConfig {
         .apiInfo(apiInfo());
   }
 
+
+
   private ApiInfo apiInfo() {
     return new ApiInfo(
         "聊天室",
         "聊天室side project",
         "v1.0",
         "",
-        new Contact("TonyHsu", "",
-            "https://github.com/lzz0826/Distributed-Architecture"),
+        new Contact("TonyHsu", "https://github.com/lzz0826/Distributed-Architecture",
+            ""),
         "", "", Collections.emptyList());
   }
 }

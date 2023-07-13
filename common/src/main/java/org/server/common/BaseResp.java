@@ -13,7 +13,7 @@ public class BaseResp<T> {
   private T data;
 
 
-  @ApiModelProperty(value="狀態碼")
+  @ApiModelProperty(value="返回訊息")
   private StatusCode statusCode;
 
   public Integer getStatusCode(){
