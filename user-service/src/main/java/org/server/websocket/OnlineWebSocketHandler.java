@@ -22,7 +22,6 @@ import org.server.entity.CustomUserDetails;
 import org.server.service.BlackListService;
 import org.server.service.ChatRecordService;
 import org.server.service.ChatSilenceCacheService;
-import org.server.service.InterpersonalService;
 import org.server.service.JwtCacheService;
 
 import org.server.util.FastJsonUtil;
