@@ -85,7 +85,7 @@ public class BlackListMapperTest extends BaseTest{
 
   @Test
   public void testSelectByUserId(){
-    BlackListDAO blackListDAO = blackListMapper.selectByUserId("456");
+    List<BlackListDAO> blackListDAO = blackListMapper.selectByUserId("000001");
     System.out.println(blackListDAO);
 
   }

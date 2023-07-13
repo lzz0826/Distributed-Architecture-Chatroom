@@ -27,6 +27,19 @@ public class BlackListService {
   private IdGeneratorService idGeneratorService;
 
 
+  private List<BlackListDAO> findByUserIdDAOs(String userId){
+    List<BlackListDAO> daos = blackListMapper.selectByUserId(userId);
+    return daos;
+  }
+
+  public List<BlackLisVO> findByUserIdVOs(String userId) throws MissingParameterErrorException {
+    if(StringUtils.isBlank(userId)){
+      throw new MissingParameterErrorException();
+    }
+    List<BlackListDAO> byUserIdDAOs = findByUserIdDAOs(userId);
+    List<BlackLisVO> vos = daosToVos(byUserIdDAOs);
+    return vos;
+  }
 
   public BlackListDAO addBlackList(String userId , String blackList)
       throws AddBlackListException, MissingParameterErrorException {
@@ -104,10 +117,9 @@ public class BlackListService {
       throw new MissingParameterErrorException();
     }
     int i = blackListMapper.deleteByIds(ids);
-    if(i == 0){
-      throw new DelBlackListException();
-    }
   }
+
+
 
 
 

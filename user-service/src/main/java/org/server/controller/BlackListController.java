@@ -6,6 +6,7 @@ import lombok.Builder;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
+import org.server.controller.rep.blackList.ListRep;
 import org.server.controller.req.blackList.AddBlackListReq;
 import org.server.controller.req.blackList.DelIdsReq;
 import org.server.exception.BlackListException.AddBlackListException;
@@ -14,9 +15,11 @@ import org.server.exception.MissingParameterErrorException;
 import org.server.exception.NotAllowedNullStrException;
 import org.server.service.BlackListService;
 import org.server.vo.BlackLisVO;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -64,6 +67,22 @@ public class BlackListController extends BaseController{
     }
     blackListService.delIds(ids);
     return BaseResp.ok(StatusCode.Success);
+  }
+
+  @GetMapping("/getBlackList")
+  public BaseResp<ListRep> getBlackList(@RequestParam() String userId)
+      throws MissingParameterErrorException {
+
+    if(StringUtils.isBlank(userId)){
+      throw new MissingParameterErrorException();
+    }
+
+    List<BlackLisVO> vos = blackListService.findByUserIdVOs(userId);
+    ListRep listRep = ListRep
+        .builder()
+        .blackLis(vos)
+        .build();
+    return BaseResp.ok(listRep,StatusCode.Success);
   }
 
 
