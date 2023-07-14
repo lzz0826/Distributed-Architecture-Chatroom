@@ -1,11 +1,11 @@
 package org.server.controller;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.List;
 import javax.annotation.Resource;
-import lombok.Builder;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
@@ -30,12 +30,11 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/blackList")
 public class BlackListController extends BaseController{
 
-  @Resource
-  private BlackListService blackListService;
-
-  @ApiOperation("新增黑名單")
   @PostMapping("/addBlackList")
-  public BaseResp<ListRep> addBlackList(@RequestBody @ApiParam("addBlackList請求")AddBlackListReq req)
+  @ApiOperation("新增黑名單")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<ListRep> addBlackList(@RequestBody @ApiParam("新增黑名單請求")AddBlackListReq req)
       throws MissingParameterErrorException, AddBlackListException, NotAllowedNullStrException {
 
     if(StringUtils.isBlank(req.getUserId())){
@@ -62,10 +61,16 @@ public class BlackListController extends BaseController{
 
   }
 
+  @Resource
+  private BlackListService blackListService;
 
-  @ApiOperation("刪除黑名單")
+
+
   @PostMapping("/delIds")
-  public BaseResp<String> delIds(@RequestBody @ApiParam("delIds請求") DelIdsReq req)
+  @ApiOperation("刪除黑名單")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> delIds(@RequestBody @ApiParam("刪除黑名單請求") DelIdsReq req)
       throws MissingParameterErrorException, NotAllowedNullStrException, DelBlackListException {
     if(req.getIds() == null || req.getIds().isEmpty()){
       throw new MissingParameterErrorException();
@@ -79,9 +84,10 @@ public class BlackListController extends BaseController{
     return BaseResp.ok(StatusCode.Success);
   }
 
-
-  @ApiOperation("取得黑名單")
   @GetMapping("/getBlackList")
+  @ApiOperation("取得黑名單")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
   public BaseResp<ListRep> getBlackList(@RequestParam() @ApiParam("userId(必須)")  String userId)
       throws MissingParameterErrorException {
 

@@ -9,7 +9,7 @@ import org.server.vo.BlackLisVO;
 @Data
 @Builder
 public class ListRep {
-  @ApiModelProperty(value="BlackLisVO Lsit)")
+  @ApiModelProperty(value="黑名單 List)")
   public List<BlackLisVO> blackLis;
 
 }

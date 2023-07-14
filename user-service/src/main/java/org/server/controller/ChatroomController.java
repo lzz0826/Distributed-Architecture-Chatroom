@@ -2,6 +2,10 @@ package org.server.controller;
 
 
 import com.github.pagehelper.Page;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
@@ -34,6 +38,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
+@Api(tags = "聊天室 相關API")
 @RestController
 @RequestMapping("/chatroom")
 public class ChatroomController extends BaseController {
@@ -51,7 +56,11 @@ public class ChatroomController extends BaseController {
 
 
   @GetMapping("/list")
-  public BaseResp<ListRep> list(@RequestParam("page") Integer page, @RequestParam("pageSize") Integer pageSize){
+  @ApiOperation("查詢聊天室List")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<ListRep> list(@RequestParam("page")@ApiParam("頁碼(*必須)") Integer page,
+      @RequestParam("pageSize")@ApiParam("每頁顯示大小(*必須)") Integer pageSize){
     Page<ChatroomVO> vos = chatroomService.getChatroomAll(page,pageSize);
     ListRep rep = ListRep
         .builder()
@@ -68,7 +77,10 @@ public class ChatroomController extends BaseController {
   }
 
   @GetMapping("/getChatroomById")
-  public BaseResp<ChatroomVO> getChatroomById(@RequestBody GetChatroomByIdReq req)
+  @ApiOperation("查詢聊天室BY ID")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<ChatroomVO> getChatroomById(@RequestBody @ApiParam("查詢聊天室請求") GetChatroomByIdReq req)
       throws MissingParameterErrorException {
     if(StringUtils.isBlank(req.getId())){
       throw new MissingParameterErrorException();
@@ -81,7 +93,10 @@ public class ChatroomController extends BaseController {
 
 
   @PostMapping("/addChatroom")
-  public BaseResp<String> addChatroom(@RequestBody AddChatroomReq req)
+  @ApiOperation("新增聊天室")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> addChatroom(@RequestBody @ApiParam("新增聊天室請求") AddChatroomReq req)
       throws NeedChatroomNameException, AddErrorException {
     if(StringUtils.isBlank(req.getName())){
       throw new NeedChatroomNameException();
@@ -104,7 +119,10 @@ public class ChatroomController extends BaseController {
 
 
   @PostMapping("/joinChatroom")
-  private BaseResp<JoinChatroomRep> joinChatroom(@RequestBody JoinChatroomReq req)
+  @ApiOperation("加入聊天室")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  private BaseResp<JoinChatroomRep> joinChatroom(@RequestBody @ApiParam("加入聊天室請求") JoinChatroomReq req)
       throws NeedChatroomIdException, ChatroomNotOpenException {
     if (StringUtils.isBlank(req.getId())){
       throw new NeedChatroomIdException();
@@ -133,7 +151,10 @@ public class ChatroomController extends BaseController {
 
 
   @PostMapping("/leaveChatroom")
-  private BaseResp<String> leaveChatroom(@RequestBody LeaveChatroomReq req) throws NeedChatroomIdException {
+  @ApiOperation("離開聊天室")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  private BaseResp<String> leaveChatroom(@RequestBody @ApiParam("離開聊天室請求") LeaveChatroomReq req) {
 
     String userId = req.getUserId();
 
@@ -144,7 +165,10 @@ public class ChatroomController extends BaseController {
   }
 
   @PostMapping("/addChatSilenceCache")
-  private BaseResp<String> addChatSilenceCache(@RequestBody AddChatSilenceCacheReq req)
+  @ApiOperation("新增禁言")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  private BaseResp<String> addChatSilenceCache(@RequestBody @ApiParam("新增禁言請求") AddChatSilenceCacheReq req)
       throws NotFoundUserException, MissingParameterErrorException {
 
     if(StringUtils.isBlank(req.getUserId())){
@@ -175,8 +199,12 @@ public class ChatroomController extends BaseController {
 
 
   @GetMapping("/getSilenceCache")
-  public BaseResp<GetSilenceCacheRep> getSilenceCache(@RequestParam String userId)
+  @ApiOperation("查詢是否被禁言")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<GetSilenceCacheRep> getSilenceCache(@RequestParam @ApiParam("用戶Id*(必須)") String userId)
       throws NotFoundUserException {
+    //TODO 尚未實現針對聊天室靜言(目前全禁)
     if(StringUtils.isBlank(userId)){
       throw new NotFoundUserException();
     }
@@ -193,7 +221,10 @@ public class ChatroomController extends BaseController {
   }
 
   @PostMapping("/delSilenceCache")
-  public BaseResp<String> delSilenceCache(@RequestBody DelSilenceCacheReq req)
+  @ApiOperation("移除禁言人員")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> delSilenceCache(@RequestBody @ApiParam("移除禁言人員請求") DelSilenceCacheReq req)
       throws NotFoundUserException {
     if(StringUtils.isBlank(req.getUserId())){
       throw new NotFoundUserException();

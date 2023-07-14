@@ -1,5 +1,6 @@
 package org.server.controller.rep.chatroomRecord;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.util.List;
 import lombok.Builder;
 import lombok.Data;
@@ -11,5 +12,7 @@ import org.server.vo.ChatroomRecordVO;
 @Data
 @EqualsAndHashCode(callSuper = true)
 public class ListRep extends BasePageRep {
+
+  @ApiModelProperty(value="聊天記錄 List)")
   List<ChatroomRecordVO> chatroomRecords;
 }

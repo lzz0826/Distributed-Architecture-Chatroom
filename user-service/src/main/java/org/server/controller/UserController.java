@@ -1,6 +1,10 @@
 package org.server.controller;
 
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -16,7 +20,6 @@ import org.server.exception.MissingParameterErrorException;
 import org.server.exception.UserException;
 import org.server.service.ChatroomService;
 import org.server.service.JwtCacheService;
-import org.server.service.JwtService;
 import org.server.service.UserService;
 import org.server.vo.LoginVO;
 import org.server.vo.UserVO;
@@ -29,7 +32,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 
-@RestController()
+@Api(tags = "用戶相關API")
+@RestController
 @RequestMapping("/user")
 public class UserController{
 
@@ -39,11 +43,12 @@ public class UserController{
   @Resource
   private JwtCacheService jwtCacheService;
 
-  @Resource
-  private ChatroomService chatroomService;
 
   @PostMapping("/addUser")
-  public BaseResp<String> addUser(@RequestBody UserAddReq userAddReq)
+  @ApiOperation("新增用戶")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> addUser(@RequestBody  @ApiParam("新增用戶請求") UserAddReq userAddReq)
       throws AddErrorException, MissingParameterErrorException {
     if(StringUtils.isBlank(userAddReq.getUsername())){
       throw new MissingParameterErrorException();
@@ -66,7 +71,10 @@ public class UserController{
 
 
   @GetMapping("/{id}")
-  public BaseResp<UserVO> queryById(@PathVariable("id") String id) throws UserException {
+  @ApiOperation("查詢用戶")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<UserVO> queryById(@PathVariable("id") @ApiParam("用戶id") String id) throws UserException {
 
     if(StringUtils.isBlank(id)){
       throw new UserException();
@@ -76,6 +84,9 @@ public class UserController{
   }
 
   @GetMapping("/gitAllUser")
+  @ApiOperation("查詢所有用戶")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
   public BaseResp<List<UserVO>> gitAllUser(){
 
     List<UserVO> allUserVOs = userService.getAllUserVOs();
@@ -87,7 +98,9 @@ public class UserController{
   }
 
   @PostMapping("/login")
-  public BaseResp<LoginVO> login(@RequestBody() LoginReq loginReq, HttpServletRequest request)
+  @ApiOperation("登入")
+  public BaseResp<LoginVO> login(@RequestBody() @ApiParam("登入請求") LoginReq loginReq,
+      HttpServletRequest request)
       throws LoginErrorException {
     if(StringUtils.isBlank(loginReq.getUsername())){
       throw new LoginErrorException();
@@ -96,7 +109,6 @@ public class UserController{
     if(StringUtils.isBlank(loginReq.getPassword())){
       throw new LoginErrorException();
     }
-
 
 
     String username = loginReq.getUsername();
@@ -113,8 +125,9 @@ public class UserController{
 
 
   @PostMapping("/logout")
-  public BaseResp<LogoutRep> logout(@RequestHeader("Authorization") String jwtToken) {
-
+  @ApiOperation("登出")
+  public BaseResp<LogoutRep> logout(@RequestHeader("Authorization")  @ApiParam("登出請求") String jwtToken) {
+    //TODO 登出
     jwtCacheService.deleteTokenByJwtToken(jwtToken);
 
     return BaseResp.ok(LogoutRep.builder().build());

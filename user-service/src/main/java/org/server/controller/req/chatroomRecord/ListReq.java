@@ -1,5 +1,6 @@
 package org.server.controller.req.chatroomRecord;
 
+import io.swagger.annotations.ApiModelProperty;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
@@ -8,42 +9,43 @@ import lombok.Data;
 @Data
 public class ListReq {
 
+  @ApiModelProperty(value="id(非必須)")
   private String id;
 
-  //發送者
+  @ApiModelProperty(value="發送者userId(非必須)")
   private String userId;
 
-  //接收者
+  @ApiModelProperty(value="接收者userId(非必須)")
   private String receiverUserId;
 
-  //聊天室Id
+  @ApiModelProperty(value="聊天室Id(非必須)")
   private String chatroomId;
 
-  //內容
+  @ApiModelProperty(value="內容(非必須)")
   private String content;
 
-  //聊天類型 EWsMsgType
+  @ApiModelProperty(value="聊天類型(非必須) 私聊:privateChat 公告:all 聊天室:chatroom")
   private String msgType;
 
-  //狀態
+  @ApiModelProperty(value="狀態(非必須)")
   private Boolean status;
 
-  //更新時間(起始)
+  @ApiModelProperty(value="更新時間(起始)(非必須)")
   private Date updateTimeStart;
 
-  //更新時間(結束)
+  @ApiModelProperty(value="更新時間(結束)(非必須)")
   private Date updateTimeEnd;
 
-  //創建時間(起始)
+  @ApiModelProperty(value="創建時間(起始)(非必須)")
   private Date createTimeStart;
 
-  //創建時間(結束)
+  @ApiModelProperty(value="創建時間(結束)(非必須)")
   private Date createTimeEnd;
 
-  //頁碼
+  @ApiModelProperty(value="頁碼(*必須)")
   private Integer page;
 
-  //頁碼大小
+  @ApiModelProperty(value="頁碼大小(*必須)")
   private Integer pageSize;
 
 }

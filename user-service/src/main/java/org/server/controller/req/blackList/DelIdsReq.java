@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class DelIdsReq {
 
-  @ApiModelProperty(value="id(必須,List不能含有空字串)")
+  @ApiModelProperty(value="id(*必須,List不能含有空字串)")
   List<String> ids ;
 
 }
