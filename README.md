@@ -1,6 +1,6 @@
 # Distributed-Architecture-Chatroom
 
-# 基于Netty實現的WebSocket聊天室,分布式架構
+# 這是一個基於Netty實現的分布式架構聊天室，使用WebSocket作為通信協議。
 
 ## 實現的功能如下：
 - 支持多人同時在線<br />
@@ -21,7 +21,7 @@
 -服務發現,有UI介面可以調整已啟動的服務權重<br />
 -上新代碼可使用權重分配控制流量監控<br />
 -服務的健康狀況監控<br />
--  Swagger: 串接API資訊
+-  Swagger: 用於生成和展示API文檔，方便開發者查看和調試API接口。<br />
 http://localhost:8080/user/swagger-ui.html
 
 ## 運行項目:
