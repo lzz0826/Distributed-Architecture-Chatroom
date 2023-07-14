@@ -79,6 +79,13 @@
       <version>1.4.6</version>
     </dependency>
 
+    <!-- Flyway -->
+    <dependency>
+      <groupId>org.flywaydb</groupId>
+      <artifactId>flyway-mysql</artifactId>
+      <version>8.2.1</version>
+    </dependency>
+
 
 
 

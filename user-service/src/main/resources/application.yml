@@ -14,6 +14,17 @@ spring:
   application:
     name: user-service
 
+  flyway:
+      enabled: true # 啟用 Flyway Migration
+      locations: classpath:db/migration # Migration 檔案存放的資料夾
+      # 以下是資料庫的連線設定
+      url: jdbc:mysql://localhost:3306/cloud_user?useUnicode=true&characterEncoding=utf-8
+      #       url: jdbc:mysql://localhost:3306/news01?useUnicode=true&characterEncoding=utf-8
+      user: root
+      password: 1234
+      baseline-on-migrate: true
+      # 由於是用 postgres 所以需要設定 schema，並且如果不存在會自動建立
+
   redis:
     host: 127.0.0.1
     port: 6379
