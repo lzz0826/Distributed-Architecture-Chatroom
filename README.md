@@ -1,45 +1,35 @@
-# Distributed-Architecture
-# 分布式架構
+# Distributed-Architecture-Chatroom
 
-# 1.使用 docker compose up -d 分別啟用 docker裡的 Mysql , Redis .Nacos
+# 基于Netty實現的WebSocket聊天室,分布式架構
 
-## 後段運用:
-1.Netty
-2.Websocket
-3.GRPC
-4.Redis
-5.Nacos
+## 實現的功能如下：
+1.支持多人同時在線
+2.實現公告.私聊.創建聊天室(群聊)
+3.好友.黑名單列表,黑名單可以封鎖對方訊息
+4.禁言功能
+5.使用者後台管理功能
+6.與服務器保持長連接,心跳檢測
 
-使用的表結構
+## 後端技術概覽:
 
-CREATE DATABASE `cloud_order`
+### Netty : 基於Java的高性能網絡編程框架,Netty的核心是異步、事件驅動和高效的網絡通信
 
-CREATE TABLE `tb_order` (
-  `id` varchar(40) NOT NULL COMMENT 'orderId',
-  `user_id` varchar(40) DEFAULT NULL COMMENT 'userId',
-  `name` varchar(40) DEFAULT NULL COMMENT '訂單名',
-  `price` int DEFAULT NULL COMMENT '價錢',
-  `num` int DEFAULT NULL COMMENT '數',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='使用者';
+### Websocket : 基於HTTP協議，它支持持久連接，可以實現實時的、雙向的通信。
 
-CREATE DATABASE `cloud_user` 
+### Redis : 高性能的內存數據庫，由於其快速的讀寫速度和豐富的功能，Redis被廣泛用於緩存、會話存儲、實時數據分析等場景。
+實現功能:
+存登入JWT Token,作為後續API認證身份與控制登入時過
+禁言功能,可以在多台服務確實同步禁言,可設定過期時間
 
-CREATE TABLE `tb_user` (
-  `id` varchar(40) NOT NULL COMMENT 'userId',
-  `password` varchar(40) DEFAULT NULL,
-  `username` varchar(40) DEFAULT NULL COMMENT '用戶名增',
-  `address` varchar(40) DEFAULT NULL COMMENT '地址',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='使用者';
+### Nacos : 動態服務發現、配置管理和服務治理平台,它提供了服務註冊與發現、配置管理、動態DNS、流量管理等功能。
+實現功能:
+服務發現,有UI介面可以調整已啟動的服務權重
+上新代碼可使用權重分配控制流量監控
+服務的狀況監控
 
+### Swagger: 串接API資訊
+http://localhost:8080/user/swagger-ui.html
 
-# API
-WS連接
-ws://127.0.0.1:8888/ws?token=eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4NzA3NTA0MDc2MCwiZXhwIjoxNjk3MDc1MDQwLCJ1c2VybmFtZSI6InRvbnkifQ.hAmHLxTnT0hsi-0APCc9XDJe7VTbJX9kwK1GixG5QcJ9EPywC--aR8DPv5XpSB4raxI_l_OsWnGAY42ns0m90Q
-
-內容範例:
-{"eMsgType":"System","eWsMsgType":"Chatroom","request":"你好嗎","userId":"2"}
 
 
 
