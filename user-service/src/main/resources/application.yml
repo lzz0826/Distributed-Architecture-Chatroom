@@ -58,7 +58,7 @@ mybatis:
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #开启SQL语句打印
 
-#分页插件
+#分頁插件
 pagehelper:
   helper-dialect: mysql
   reasonable: true
@@ -72,7 +72,7 @@ jwt:
   expiration: 10000000
   timeout: 99999 #token過期時間(秒)
 
-# 异步线程配置
+# 異步線程配置
 async:
   executor:
     thread:
