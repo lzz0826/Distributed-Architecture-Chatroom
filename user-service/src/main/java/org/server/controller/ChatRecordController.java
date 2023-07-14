@@ -7,7 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javax.annotation.Resource;
 import org.server.common.BaseResp;
-import org.server.controller.rep.chatroomRecord.ListRep;
+import org.server.controller.rep.chatroomRecord.ChatRecordListRep;
 import org.server.controller.req.chatroomRecord.ListReq;
 import org.server.exception.chatroomRecord.NeedPageException;
 import org.server.exception.chatroomRecord.NeedPageSizeException;
@@ -30,7 +30,7 @@ public class ChatRecordController {
   @ApiOperation("查詢聊天紀錄List")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<ListRep> list(@RequestBody @ApiParam("查詢聊天紀錄List請求")ListReq req)
+  public BaseResp<ChatRecordListRep> list(@RequestBody @ApiParam("查詢聊天紀錄List請求")ListReq req)
       throws NeedPageException, NeedPageSizeException {
 
     if(req.getPage() == null){
@@ -42,7 +42,7 @@ public class ChatRecordController {
 
     Page<ChatroomRecordVO> vos = chatRecordService.selectChatRecords(req);
 
-    ListRep rep = ListRep
+    ChatRecordListRep rep = ChatRecordListRep
         .builder()
         .chatroomRecords(vos)
         .build();

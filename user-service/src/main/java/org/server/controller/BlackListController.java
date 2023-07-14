@@ -9,7 +9,7 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
-import org.server.controller.rep.blackList.ListRep;
+import org.server.controller.rep.blackList.BlackListRep;
 import org.server.controller.req.blackList.AddBlackListReq;
 import org.server.controller.req.blackList.DelIdsReq;
 import org.server.exception.BlackListException.AddBlackListException;
@@ -34,7 +34,7 @@ public class BlackListController extends BaseController{
   @ApiOperation("新增黑名單")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<ListRep> addBlackList(@RequestBody @ApiParam("新增黑名單請求")AddBlackListReq req)
+  public BaseResp<BlackListRep> addBlackList(@RequestBody @ApiParam("新增黑名單請求")AddBlackListReq req)
       throws MissingParameterErrorException, AddBlackListException, NotAllowedNullStrException {
 
     if(StringUtils.isBlank(req.getUserId())){
@@ -53,11 +53,11 @@ public class BlackListController extends BaseController{
 
     List<BlackLisVO> vos = blackListService.addBlackLists(userId,blackLists);
 
-    ListRep listRep = ListRep
+    BlackListRep blackListRep = BlackListRep
         .builder()
         .blackLis(vos)
         .build();
-    return BaseResp.ok(listRep,StatusCode.Success);
+    return BaseResp.ok(blackListRep,StatusCode.Success);
 
   }
 
@@ -88,7 +88,7 @@ public class BlackListController extends BaseController{
   @ApiOperation("取得黑名單")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<ListRep> getBlackList(@RequestParam() @ApiParam("userId(必須)")  String userId)
+  public BaseResp<BlackListRep> getBlackList(@RequestParam() @ApiParam("userId(必須)")  String userId)
       throws MissingParameterErrorException {
 
     if(StringUtils.isBlank(userId)){
@@ -96,11 +96,11 @@ public class BlackListController extends BaseController{
     }
 
     List<BlackLisVO> vos = blackListService.findByUserIdVOs(userId);
-    ListRep listRep = ListRep
+    BlackListRep blackListRep = BlackListRep
         .builder()
         .blackLis(vos)
         .build();
-    return BaseResp.ok(listRep,StatusCode.Success);
+    return BaseResp.ok(blackListRep,StatusCode.Success);
   }
 
 

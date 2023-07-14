@@ -12,7 +12,7 @@ import org.server.common.BaseResp;
 import org.server.common.StatusCode;
 import org.server.controller.rep.chatroom.GetSilenceCacheRep;
 import org.server.controller.rep.chatroom.JoinChatroomRep;
-import org.server.controller.rep.chatroom.ListRep;
+import org.server.controller.rep.chatroom.ChatroomListRep;
 import org.server.controller.req.chatroom.AddChatroomReq;
 import org.server.controller.req.chatroom.GetChatroomByIdReq;
 import org.server.controller.req.chatroom.JoinChatroomReq;
@@ -59,10 +59,10 @@ public class ChatroomController extends BaseController {
   @ApiOperation("查詢聊天室List")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<ListRep> list(@RequestParam("page")@ApiParam("頁碼(*必須)") Integer page,
+  public BaseResp<ChatroomListRep> list(@RequestParam("page")@ApiParam("頁碼(*必須)") Integer page,
       @RequestParam("pageSize")@ApiParam("每頁顯示大小(*必須)") Integer pageSize){
     Page<ChatroomVO> vos = chatroomService.getChatroomAll(page,pageSize);
-    ListRep rep = ListRep
+    ChatroomListRep rep = ChatroomListRep
         .builder()
         .chatrooms(vos)
         .build();
@@ -80,12 +80,11 @@ public class ChatroomController extends BaseController {
   @ApiOperation("查詢聊天室BY ID")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<ChatroomVO> getChatroomById(@RequestBody @ApiParam("查詢聊天室請求") GetChatroomByIdReq req)
+  public BaseResp<ChatroomVO> getChatroomById(@RequestParam("id") @ApiParam("聊天室id") String id)
       throws MissingParameterErrorException {
-    if(StringUtils.isBlank(req.getId())){
+    if(StringUtils.isBlank(id)){
       throw new MissingParameterErrorException();
     }
-    String id = req.getId();
     ChatroomVO vo = chatroomService.getChatroomById(id);
     return BaseResp.ok(vo,StatusCode.Success);
   }

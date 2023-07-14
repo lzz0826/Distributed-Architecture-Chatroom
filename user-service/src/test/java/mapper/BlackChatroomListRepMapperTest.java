@@ -8,7 +8,7 @@ import org.junit.Test;
 import org.server.dao.BlackListDAO;
 import org.server.mapper.BlackListMapper;
 
-public class BlackListMapperTest extends BaseTest{
+public class BlackChatroomListRepMapperTest extends BaseTest{
 
   @Resource
   private BlackListMapper blackListMapper;
