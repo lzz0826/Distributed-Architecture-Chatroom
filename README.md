@@ -41,6 +41,8 @@ http://localhost:8080/user/swagger-ui.html <br />
 http://127.0.0.1:8848/nacos/#/ <br />
 ![image](https://raw.githubusercontent.com/lzz0826/Distributed-Architecture-Chatroom/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.05.png)
 
+####可以從上方的Nacos UI介面看到已啟動的 user-service
+
 
  
 
