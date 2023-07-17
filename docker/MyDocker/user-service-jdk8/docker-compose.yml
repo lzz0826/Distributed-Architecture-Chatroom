@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+    cloud:
+        image: picoded/ubuntu-openjdk-8-jdk:16.04
+        volumes:
+            - ./opt:/opt
+            - ./java/application.yml:/porperties/application.yml
+        command: /bin/bash -c "java -jar /opt/user-service.jar --spring.config.location=/porperties/application.yml"
+        networks:
+            redis-cluster-net:
+                ipv4_address: 192.168.200.151
+        ports:
+            - 8080:8080 # HTTP/1.1
+
+networks:
+    redis-cluster-net:
+        external:
+            name: redis-cluster-net
