@@ -29,7 +29,18 @@ http://localhost:8080/user/swagger-ui.html
 1.clone docker<br />
   https://github.com/lzz0826/Distributed-Architecture-Chatroom/tree/main/docker <br />
 2.依序啟動服務 mysql -> redis -> nacos -> user-java <br />
-使用cmd在各服務 docker-compose.yml 路徑中執行指令 dokcer comopose -d
+使用cmd在各服務 docker-compose.yml 路徑中執行指令 dokcer comopose -d <br />
+
+### 成功啟動後可以訪問:
+
+#### Swagger UI介面:
+http://localhost:8080/user/swagger-ui.html <br />
+
+#### Nacos UI介面:
+http://127.0.0.1:8848/nacos/#/ <br />
+
+ 
+
 
 
 
