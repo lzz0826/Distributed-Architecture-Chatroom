@@ -1,0 +1,712 @@
+{
+	"info": {
+		"_postman_id": "996fb5e3-dcba-4a9f-87a8-c5b7820df411",
+		"name": "聊天室",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "20383253"
+	},
+	"item": [
+		{
+			"name": "登入",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"tony\",\n    \"password\" : \"12345678\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/user/login",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GRPC test",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4NDcyMjU2MTY5NCwiZXhwIjoxNjk0NzIyNTYxLCJjaGFubmVsSWQiOiJhZG1pbl9ncm91cCIsInVzZXJuYW1lIjoiYWRtaW4ifQ.5eCpRfl_nVWyY9D0cRn_7r9FXGdJmO7Gs3J72w3nlXEsZ2JSedVStAy6BZRPH4msOe7x_rvBneXFQ91UorPBYg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"123\",\n    \"channelId\": \"4444\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8081/order/hello/hello?name=efefefvevev99",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"order",
+						"hello",
+						"hello"
+					],
+					"query": [
+						{
+							"key": "name",
+							"value": "efefefvevev99"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "訂單收尋",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8081/order/order/2890589042718397264",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"order",
+						"order",
+						"2890589042718397264"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得所有USER",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4NzA3NTA0MDc2MCwiZXhwIjoxNjk3MDc1MDQwLCJ1c2VybmFtZSI6InRvbnkifQ.hAmHLxTnT0hsi-0APCc9XDJe7VTbJX9kwK1GixG5QcJ9EPywC--aR8DPv5XpSB4raxI_l_OsWnGAY42ns0m90Q",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:8083/user/user/gitAllUser",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8083",
+					"path": [
+						"user",
+						"user",
+						"gitAllUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增user",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4NzkzMjk5NDI5MSwiZXhwIjoxNjk3OTMyOTk0LCJ1c2VybmFtZSI6InRvbSJ9.DxLO-JEwUAhSJjJB_vhHWslM15izjL5qGPOOMzJ04VHYX96wabE0efO9kmKaRNwquOcxfggL4VJWUW3milh9Zg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\" : \"testq990001\",\n    \"password\" : \"12345678\",\n    \"address\" : \"\",\n    \"role\" : \"ROLE_USER\"\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/user/addUser",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"user",
+						"addUser"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增聊天室",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\" : \"tete2\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/addChatroom",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"addChatroom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查詢聊天室依id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTMxOTAwOTA2NywiZXhwIjoxNjk5MzE5MDA5LCJ1c2VybmFtZSI6InRvbnkifQ.InXW192LsSef3uihnHOqef85NMcD28pYh6n43sRkUWZ6zc0awJiWGQdJxaOoB5WLYy8QiqxCt52NnNtf9SPf3g",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "id",
+							"value": "3244917978383986410",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/getChatroomById",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"getChatroomById"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "聊天室list",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/list?page=1&pageSize=2",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"list"
+					],
+					"query": [
+						{
+							"key": "page",
+							"value": "1"
+						},
+						{
+							"key": "pageSize",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "加入聊天室",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4NzU5MjU3MzA5NSwiZXhwIjoxNjk3NTkyNTczLCJ1c2VybmFtZSI6InRvbnkifQ.v-EAigC4e6VT2fYr3psNwUm7z_Fq7MpAvNcYXr1lT9D5ySDOX6Se1VB31Dz7vzegzxSLtcsnhWMZFVLudzMMnw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" : \"3\",\n    \"userId\" : \"3099538860151615210\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/joinChatroom",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"joinChatroom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "離開聊天室",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4NzgyODk3MTQ3OSwiZXhwIjoxNjk3ODI4OTcxLCJ1c2VybmFtZSI6InRvbnkifQ.aYUP3FKF-iQK7VLHNboeezOre_SyhzTanr_Bz25p0-DAQifyy4ly0p951xBf1q6GhOT7Ha7V7xII--k-IDt8kg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"3099538860151615210\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/leaveChatroom",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"leaveChatroom"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查詢聊天記錄(重最新開始)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODIwMTAyMjM4OCwiZXhwIjoxNjk4MjAxMDIyLCJ1c2VybmFtZSI6InRvbSJ9.I6QvwycTyy22T6qXvKHs7kes2kUpMLAIO4AC7rFHHKwd2MRXsNdj7i702zGgTy7wPPUdGB5oh_Wul_1XtBR6qw",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"page\" : \"1\",\n    \"pageSize\" : \"2\",\n    \"id\" : \"\",\n    \"userId\" : \"\",\n    \"receiverUserId\" : \"\",\n    \"chatroomId\" : \"\",\n    \"content\" : \"\",\n    \"msgType\" : \"\",\n    \"status\" : \"\",\n    \"updateTimeStart\" : \"\",\n    \"updateTimeEnd\" : \"\",\n    \"createTimeStart\" : \"\",\n    \"createTimeEnd\" : \"\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroomRecord/list",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroomRecord",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查詢禁言",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODM0NzkzMTQwMSwiZXhwIjoxNjk4MzQ3OTMxLCJ1c2VybmFtZSI6InRvbSJ9.GMxxRYPfLOz2vyJAeieA7JKtZd8Hgxm9dPTSuUP_Nm1JA6TKOGCwxPPw4MM9tZJ8pywg6mwGrllPyT1rlJLtkQ",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/getSilenceCache?userId=3099851793280741098",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"getSilenceCache"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "3099851793280741098"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "添加禁言",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODM0NzkzMTQwMSwiZXhwIjoxNjk4MzQ3OTMxLCJ1c2VybmFtZSI6InRvbSJ9.GMxxRYPfLOz2vyJAeieA7JKtZd8Hgxm9dPTSuUP_Nm1JA6TKOGCwxPPw4MM9tZJ8pywg6mwGrllPyT1rlJLtkQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"3099851793280741098\",\n    \"chatroomId\" : \"33\",\n    \"timeout\" : 5 \n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/addChatSilenceCache",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"addChatSilenceCache"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "解除禁言",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODM2OTgyNzA2NiwiZXhwIjoxNjk4MzY5ODI3LCJ1c2VybmFtZSI6InRvbnkifQ.e-7i6Tk8LmHUtfLW8fiCbSHMJHVfIFEJIQjeLSiUUBP6DpWPfOGv9VmkYC0OT37_qYvU5Dic6E4XIrwP2eFekg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"3099538860151615210\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/delSilenceCache",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"delSilenceCache"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "編輯人際關西(包含新增)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODc5ODgzMDU2NywiZXhwIjoxNjk4Nzk4ODMwLCJ1c2VybmFtZSI6InRvbnkifQ.fVhHvJGpexhAXO-qx15ghLhAv_aNYSTw7XVjXUtvGqr1pLE6xcYJvBpRYp1Qg8wjZcUjFt471l2M-DKEZscBtQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"123\",\n    \"blacklist\" : [\"123\", \"456\", \"789\"],\n    \"blacklisted\" : [\"111\", \"222\", \"333\"],\n    \"banChatRoom\" : [\"qqq\", \"banana\", \"orange\"]\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/interpersonal/editAddInterpersonal",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"interpersonal",
+						"editAddInterpersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除人際關西表(內容)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODc5ODgzMDU2NywiZXhwIjoxNjk4Nzk4ODMwLCJ1c2VybmFtZSI6InRvbnkifQ.fVhHvJGpexhAXO-qx15ghLhAv_aNYSTw7XVjXUtvGqr1pLE6xcYJvBpRYp1Qg8wjZcUjFt471l2M-DKEZscBtQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"123\",\n    \"blacklist\" : [\"789\"],\n    \"blacklisted\" : [\"111\"],\n    \"banChatRoom\" : [\"qqq\"]\n\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/interpersonal/editDelInterpersonal",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"interpersonal",
+						"editDelInterpersonal"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "新增黑名單",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTE0NjczNDM3OCwiZXhwIjoxNjk5MTQ2NzM0LCJ1c2VybmFtZSI6InRvbSJ9.2KV50IXtUvDd_pZhc03ZXtm999GLn9vI_-YThm0d2g-MrZEVLnlEPOy8VWoScKXhnVJSx1rhCYK0D53DS48p_A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"userId\" : \"000001\" ,\n    \"blackLists\" : [\"\", \"222\", \"333\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/blackList/addBlackList",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"blackList",
+						"addBlackList"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "刪除黑名單(根據黑名單ID)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTE0NjczNDM3OCwiZXhwIjoxNjk5MTQ2NzM0LCJ1c2VybmFtZSI6InRvbSJ9.2KV50IXtUvDd_pZhc03ZXtm999GLn9vI_-YThm0d2g-MrZEVLnlEPOy8VWoScKXhnVJSx1rhCYK0D53DS48p_A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"ids\" : [\"3238120199963884088\",\"\"]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/blackList/delIds",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"blackList",
+						"delIds"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "查詢黑名單(userId)",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTI0MTM3MjQzOSwiZXhwIjoxNjk5MjQxMzcyLCJ1c2VybmFtZSI6InRvbSJ9.Vuq07cNyqN2tJGmGoP5OR4qKfPj7uk5WUSgdbMb_3VaFsSbRN_e6YpHUxcf_-xsoKPGYw-ckjQNRa0UfiAzYCQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "urlencoded",
+					"urlencoded": [
+						{
+							"key": "",
+							"value": "",
+							"type": "text",
+							"disabled": true
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/blackList/getBlackList?userId=3099540442310192874",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"blackList",
+						"getBlackList"
+					],
+					"query": [
+						{
+							"key": "userId",
+							"value": "3099540442310192874"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
