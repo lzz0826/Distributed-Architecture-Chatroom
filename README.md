@@ -35,9 +35,12 @@ http://localhost:8080/user/swagger-ui.html
 
 #### Swagger UI介面:
 http://localhost:8080/user/swagger-ui.html <br />
+![image]([https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/%E7%99%BB%E5%85%A5.jpg](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.13.png)https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.13.png)
 
 #### Nacos UI介面:
 http://127.0.0.1:8848/nacos/#/ <br />
+![image]([[https://github.com/lzz0826/NewsProject-docker-compose/blob/main/%E7%AF%84%E4%BE%8B%E5%9C%96/%E7%99%BB%E5%85%A5.jpg](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.13.png)https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.13.png](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.05.png)https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.05.png)
+
 
  
 
