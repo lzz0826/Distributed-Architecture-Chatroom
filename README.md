@@ -43,9 +43,20 @@ http://127.0.0.1:8848/nacos/#/ <br />
 
 可以從上方的Nacos UI介面看到已啟動的 user-service
 
-#API:
+# API:
+## PostMan匯入檔: <br />
+https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/postman/chat-room-API.json <br />
 
-https://docs.google.com/document/d/1Ce4mefuPYsalm8sMI--DB0Jb11LFiNYsoy8lY3WKw9M/edit
+## ws: <br />
+### 公告: <br />
+https://docs.google.com/document/d/1Ce4mefuPYsalm8sMI--DB0Jb11LFiNYsoy8lY3WKw9M/edit <br />
+### 私聊: <br />
+https://docs.google.com/document/d/10lmVULQ4bxjI7kkBuwZuEzUyCnacE5Kp8OmvFhTfaMw/edit <br />
+### 聊天室: <br />
+https://docs.google.com/document/d/1pMlKB_5m_ScCNB3_e2EXjmlnAPqYRlig3KzMBZrxrjs/edit <br />
+
+
+
  
 
 
