@@ -30,6 +30,10 @@ http://localhost:8080/user/swagger-ui.html
 
 ## 運行項目:
 * 需要先安裝 docker-compose<br />
+
+### 運行前需要加上虛擬內部網域
+docker network create --subnet=192.168.200.0/24 redis-cluster-net<br />
+
 1.clone docker<br />
   https://github.com/lzz0826/Distributed-Architecture-Chatroom/tree/main/docker <br />
 2.依序啟動服務 mysql -> redis -> nacos -> user-java <br />
