@@ -29,10 +29,15 @@ public enum StatusCode {
 
   NeedPassword(1003,"需要Password"),
   NeedLogin(1004,"需要登入"),
+  UpdateUserFail(1005,"更新使用者失敗"),
+
+  NotFoundUserAvatarPth(1006,"使用者沒有頭像"),
 
 
 
-  /**
+
+
+ /**
    * Order 2000
    */
 
@@ -70,6 +75,13 @@ public enum StatusCode {
 
   DelBlackListFail(3008,"刪除黑名單失敗"),
 
+ /**
+  * 檔案上傳 4000
+  */
+
+ NeedFile(4000,"需要檔案"),
+
+ NonSupportExt(4001,"不支援的檔案類型"),
 
 
   /**
@@ -77,6 +89,8 @@ public enum StatusCode {
    */
 
   NeedToken(9000,"請填入token或token錯誤"),
+
+
 
 
 

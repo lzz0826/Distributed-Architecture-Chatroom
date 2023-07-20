@@ -15,6 +15,8 @@ public class UserDAO {
 
   private String password;
 
+  private String avatarPth;
+
   private String address;
 
   private String role;

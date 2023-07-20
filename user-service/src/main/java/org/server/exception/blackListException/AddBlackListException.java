@@ -1,4 +1,4 @@
-package org.server.exception.BlackListException;
+package org.server.exception.blackListException;
 
 public class AddBlackListException extends Exception{
 

@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
-import org.apache.commons.lang3.StringUtils;
 import org.server.entity.CustomUserDetails;
 import org.server.exception.AddErrorException;
 import org.server.exception.LoginErrorException;
@@ -63,6 +62,10 @@ public class UserService{
       throw new AddErrorException();
     }
 
+  }
+
+  public int updateUser(UserDAO dao){
+    return userMapper.updateUser(dao);
   }
 
 

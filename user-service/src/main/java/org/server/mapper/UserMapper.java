@@ -12,20 +12,12 @@ public interface UserMapper {
 
   int insertUser(UserDAO user);
 
-
   UserDAO selectById(@Param("id") String id);
-
 
   UserDAO selectByUsername(@Param("username") String username);
 
   List<UserDAO> selectAllUsers();
-
-
-
-
-
-
-
+  int updateUser(UserDAO dao);
 
 
 }
