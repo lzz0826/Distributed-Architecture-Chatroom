@@ -11,6 +11,21 @@ public class ChtMappert extends BaseTest{
   private ChatroomMapper chatroomMapper;
 
   @Test
+  public void updateChatroomTest(){
+
+    ChatroomDAO build = ChatroomDAO
+        .builder()
+        .id("3262035192786398954")
+        .name("ttt")
+        .adminUserId("efefef")
+        .status(true)
+        .build();
+    int i = chatroomMapper.updateChatroom(build);
+    System.out.println(i);
+
+  }
+
+  @Test
   public void chatroomMapperTest(){
 
     ChatroomDAO build = ChatroomDAO

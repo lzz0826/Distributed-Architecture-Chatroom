@@ -11,6 +11,8 @@ public interface ChatroomMapper {
 
   int insertChatroom(ChatroomDAO dao);
 
+  int updateChatroom(ChatroomDAO dao);
+
   List<ChatroomDAO> selectAll();
 
   ChatroomDAO selectById(@Param("id") String id);

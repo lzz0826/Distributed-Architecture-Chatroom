@@ -13,6 +13,22 @@
     <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
   </resultMap>
 
+
+  <update id="updateChatroom" parameterType="org.server.dao.ChatroomDAO">
+    UPDATE `tb_chatroom`
+    <trim prefix='set' suffixOverrides=','>
+      <if test="id != null"> id = #{id},</if>
+      <if test="name != null"> name = #{name},</if>
+      <if test="adminUserId != null"> admin_user_id = #{adminUserId},</if>
+      <if test="status != null"> status = #{status},</if>
+      <if test="createTime != null"> create_time = #{createTime},</if>
+      <if test="updateTime != null"> update_time = #{updateTime},</if>
+    </trim>
+    WHERE id = #{id}
+  </update>
+
+
+
   <insert id="insertChatroom">
     insert into tb_chatroom
     <trim prefix="(" suffix=")" suffixOverrides=",">

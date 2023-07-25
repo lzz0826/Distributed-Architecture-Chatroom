@@ -43,11 +43,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
 
   public OnlineWebSocketHandler() {}
 
-  public OnlineWebSocketHandler(String userId , EWsMsgType eWsMsgType,String chatroomId,String receiverUserId
-      ,String finalPath) {
-    this.setChatroom(userId,eWsMsgType,chatroomId,receiverUserId,finalPath);
-  }
-
 
   private final ChatRecordService chatRecordService = SpringUtil.getBean(ChatRecordService.class);
   private final JwtCacheService jwtCacheService = SpringUtil.getBean(JwtCacheService.class);

@@ -10,13 +10,17 @@ import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
+import org.server.controller.rep.chatroom.AddCacheRoomRep;
+import org.server.controller.rep.chatroom.GetChatroomByIdRep;
 import org.server.controller.rep.chatroom.GetSilenceCacheRep;
 import org.server.controller.rep.chatroom.JoinChatroomRep;
 import org.server.controller.rep.chatroom.ChatroomListRep;
+import org.server.controller.rep.chatroom.UpdateCacheRoomRep;
 import org.server.controller.req.chatroom.AddChatroomReq;
 import org.server.controller.req.chatroom.GetChatroomByIdReq;
 import org.server.controller.req.chatroom.JoinChatroomReq;
 import org.server.controller.req.LeaveChatroomReq;
+import org.server.controller.req.chatroom.UpdateChatroomReq;
 import org.server.controller.req.chatroomRecord.AddChatSilenceCacheReq;
 import org.server.controller.req.chatroomRecord.DelSilenceCacheReq;
 import org.server.dao.UserDAO;
@@ -26,10 +30,13 @@ import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.chatroom.NeedChatroomIdException;
 import org.server.exception.chatroom.NeedChatroomNameException;
+import org.server.exception.chatroom.NotFoundChatroomException;
+import org.server.exception.chatroom.UpdateChatroomFailException;
 import org.server.service.ChatSilenceCacheService;
 import org.server.service.ChatroomService;
 import org.server.service.UserService;
 import org.server.vo.ChatroomVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -52,7 +59,6 @@ public class ChatroomController extends BaseController {
 
   @Resource
   private UserService userService;
-
 
 
   @GetMapping("/list")
@@ -80,13 +86,19 @@ public class ChatroomController extends BaseController {
   @ApiOperation("查詢聊天室BY ID")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<ChatroomVO> getChatroomById(@RequestParam("id") @ApiParam("聊天室id") String id)
+  public BaseResp<GetChatroomByIdRep> getChatroomById(@RequestParam("id") @ApiParam("聊天室id") String id)
       throws MissingParameterErrorException {
     if(StringUtils.isBlank(id)){
       throw new MissingParameterErrorException();
     }
     ChatroomVO vo = chatroomService.getChatroomById(id);
-    return BaseResp.ok(vo,StatusCode.Success);
+
+    GetChatroomByIdRep rep = GetChatroomByIdRep
+        .builder()
+        .chatroomVO(vo)
+        .build();
+
+    return BaseResp.ok(rep,StatusCode.Success);
   }
 
 
@@ -95,7 +107,7 @@ public class ChatroomController extends BaseController {
   @ApiOperation("新增聊天室")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<String> addChatroom(@RequestBody @ApiParam("新增聊天室請求") AddChatroomReq req)
+  public BaseResp<AddCacheRoomRep> addChatroom(@RequestBody @ApiParam("新增聊天室請求") AddChatroomReq req)
       throws NeedChatroomNameException, AddErrorException {
     if(StringUtils.isBlank(req.getName())){
       throw new NeedChatroomNameException();
@@ -110,10 +122,45 @@ public class ChatroomController extends BaseController {
       adminUserId = curUser.getUsername();
     }
 
+    ChatroomVO vo = chatroomService.addChatroom(name, adminUserId);
 
-    chatroomService.addChatroom(name,adminUserId);
-    return BaseResp.ok(StatusCode.Success);
+    AddCacheRoomRep rep = AddCacheRoomRep
+        .builder()
+        .chatroomVO(vo)
+        .build();
+
+    return BaseResp.ok(rep,StatusCode.Success);
   }
+
+  @PostMapping("/updateChatroom")
+  @ApiOperation("更新聊天室")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  private BaseResp<UpdateCacheRoomRep> updateChatroom(@RequestBody @ApiParam("更新聊天室請求") UpdateChatroomReq req)
+      throws MissingParameterErrorException, UpdateChatroomFailException {
+    if(StringUtils.isBlank(req.getId())){
+      throw new MissingParameterErrorException();
+    }
+    String id = req.getId();
+
+    ChatroomVO chatroomById = chatroomService.getChatroomById(id);
+    if(chatroomById == null){
+      throw new NotFoundChatroomException();
+    }
+    String name = req.getName();
+    String adminUserId = req.getAdminUserId();
+
+    Boolean status = req.getStatus();
+    ChatroomVO vo = chatroomService.updateChatroom(id, name, adminUserId, status);
+
+    UpdateCacheRoomRep rep = UpdateCacheRoomRep
+        .builder()
+        .chatroomVO(vo)
+        .build();
+    return BaseResp.ok(rep,StatusCode.Success);
+
+  }
+
 
 
 
@@ -195,7 +242,6 @@ public class ChatroomController extends BaseController {
     return BaseResp.ok(StatusCode.Success);
 
   }
-
 
   @GetMapping("/getSilenceCache")
   @ApiOperation("查詢是否被禁言")

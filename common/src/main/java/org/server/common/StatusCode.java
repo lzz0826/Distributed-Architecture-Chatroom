@@ -75,6 +75,10 @@ public enum StatusCode {
 
   DelBlackListFail(3008,"刪除黑名單失敗"),
 
+  UpdateChatroomFail(3009,"更新聊天室失敗"),
+
+
+
  /**
   * 檔案上傳 4000
   */

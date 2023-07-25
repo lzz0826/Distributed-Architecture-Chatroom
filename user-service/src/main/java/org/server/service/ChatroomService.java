@@ -5,10 +5,12 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import java.util.Date;
 import javax.annotation.Resource;
+import org.server.controller.req.chatroom.UpdateChatroomReq;
 import org.server.dao.ChatroomDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.chatroom.NotFoundChatroomException;
+import org.server.exception.chatroom.UpdateChatroomFailException;
 import org.server.mapper.ChatroomMapper;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.ChatroomVO;
@@ -68,10 +70,7 @@ public class ChatroomService {
 
 
 
-
-
-
-  public void addChatroom(String name,String adminUserId) throws AddErrorException {
+  public ChatroomVO addChatroom(String name,String adminUserId) throws AddErrorException {
 
     ChatroomDAO dao = ChatroomDAO
         .builder()
@@ -88,6 +87,32 @@ public class ChatroomService {
     if(i == 0){
       throw new AddErrorException();
     }
+
+    ChatroomVO vo = convertDAOToVO(dao);
+    return vo;
+
+
+  }
+
+  public ChatroomVO updateChatroom(String id , String name,String adminUserId,Boolean status)
+      throws UpdateChatroomFailException {
+
+    ChatroomDAO dao = ChatroomDAO
+        .builder()
+        .id(id)
+        .name(name)
+        .adminUserId(adminUserId)
+        .status(status)
+        .updateTime(new Date())
+        .build();
+    int i = chatroomMapper.updateChatroom(dao);
+
+    if(i == 0){
+      throw new UpdateChatroomFailException();
+    }
+
+    ChatroomVO vo = convertDAOToVO(dao);
+    return vo;
 
   }
 

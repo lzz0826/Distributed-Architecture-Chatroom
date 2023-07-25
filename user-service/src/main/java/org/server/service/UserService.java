@@ -136,6 +136,7 @@ public class UserService{
     return LoginVO
         .builder()
         .jwtToken(jwtToken)
+        .userId(customUserDetails.getId())
         .build();
 
 
