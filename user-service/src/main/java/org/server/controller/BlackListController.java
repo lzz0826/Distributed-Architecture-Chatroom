@@ -11,7 +11,7 @@ import org.server.common.BaseResp;
 import org.server.common.StatusCode;
 import org.server.controller.rep.blackList.BlackListRep;
 import org.server.controller.req.blackList.AddBlackListReq;
-import org.server.controller.req.blackList.DelIdsReq;
+import org.server.controller.req.blackList.BlackListDelIdsReq;
 import org.server.exception.blackListException.AddBlackListException;
 import org.server.exception.blackListException.DelBlackListException;
 import org.server.exception.MissingParameterErrorException;
@@ -70,7 +70,7 @@ public class BlackListController extends BaseController{
   @ApiOperation("刪除黑名單")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<String> delIds(@RequestBody @ApiParam("刪除黑名單請求") DelIdsReq req)
+  public BaseResp<String> delIds(@RequestBody @ApiParam("刪除黑名單請求") BlackListDelIdsReq req)
       throws MissingParameterErrorException, NotAllowedNullStrException, DelBlackListException {
     if(req.getIds() == null || req.getIds().isEmpty()){
       throw new MissingParameterErrorException();

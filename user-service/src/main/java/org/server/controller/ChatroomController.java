@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import java.util.List;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
@@ -16,8 +17,9 @@ import org.server.controller.rep.chatroom.GetSilenceCacheRep;
 import org.server.controller.rep.chatroom.JoinChatroomRep;
 import org.server.controller.rep.chatroom.ChatroomListRep;
 import org.server.controller.rep.chatroom.UpdateCacheRoomRep;
+import org.server.controller.req.blackList.BlackListDelIdsReq;
 import org.server.controller.req.chatroom.AddChatroomReq;
-import org.server.controller.req.chatroom.GetChatroomByIdReq;
+import org.server.controller.req.chatroom.ChatroomDelIdsReq;
 import org.server.controller.req.chatroom.JoinChatroomReq;
 import org.server.controller.req.LeaveChatroomReq;
 import org.server.controller.req.chatroom.UpdateChatroomReq;
@@ -25,7 +27,9 @@ import org.server.controller.req.chatroomRecord.AddChatSilenceCacheReq;
 import org.server.controller.req.chatroomRecord.DelSilenceCacheReq;
 import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
+import org.server.exception.NotAllowedNullStrException;
 import org.server.exception.NotFoundUserException;
+import org.server.exception.blackListException.DelBlackListException;
 import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.chatroom.NeedChatroomIdException;
@@ -36,7 +40,6 @@ import org.server.service.ChatSilenceCacheService;
 import org.server.service.ChatroomService;
 import org.server.service.UserService;
 import org.server.vo.ChatroomVO;
-import org.springframework.beans.BeanUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -283,6 +286,26 @@ public class ChatroomController extends BaseController {
     
 
   }
+
+  @PostMapping("/delIds")
+  @ApiOperation("刪除聊天室")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> delIds(@RequestBody @ApiParam("刪除聊天室請求") ChatroomDelIdsReq req)
+      throws MissingParameterErrorException, NotAllowedNullStrException {
+    if(req.getIds() == null || req.getIds().isEmpty()){
+      throw new MissingParameterErrorException();
+    }
+    List<String> ids = req.getIds();
+
+    if(ids.contains("")){
+      throw new NotAllowedNullStrException();
+    }
+    chatroomService.delIds(ids);
+    return BaseResp.ok(StatusCode.Success);
+
+  }
+
 
 
 

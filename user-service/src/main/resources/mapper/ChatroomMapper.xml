@@ -62,4 +62,13 @@
   </select>
 
 
+  <delete id="deleteByIds" parameterType="java.util.List">
+    DELETE FROM tb_chatroom
+    WHERE id IN
+    <foreach item="item" collection="list" open="(" separator="," close=")">
+      #{item}
+    </foreach>
+  </delete>
+
+
 </mapper>

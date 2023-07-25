@@ -17,6 +17,8 @@ public interface ChatroomMapper {
 
   ChatroomDAO selectById(@Param("id") String id);
 
+  int deleteByIds(List<String> id);
+
 
 
 

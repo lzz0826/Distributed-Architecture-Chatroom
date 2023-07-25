@@ -4,10 +4,13 @@ package org.server.service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import java.util.Date;
+import java.util.List;
 import javax.annotation.Resource;
 import org.server.controller.req.chatroom.UpdateChatroomReq;
 import org.server.dao.ChatroomDAO;
 import org.server.exception.AddErrorException;
+import org.server.exception.MissingParameterErrorException;
+import org.server.exception.blackListException.DelBlackListException;
 import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.chatroom.NotFoundChatroomException;
 import org.server.exception.chatroom.UpdateChatroomFailException;
@@ -27,6 +30,8 @@ public class ChatroomService {
 
   @Resource
   private IdGeneratorService idGeneratorService;
+
+
 
 
   public Page<ChatroomVO> getChatroomAll(int page, int pageSize){
@@ -136,6 +141,21 @@ public class ChatroomService {
 
   public void leaveChatroom(String userId){
     WsChatRoom.removeUserChatRoomAll(userId);
+  }
+
+  public void delIds(List<String> ids) throws MissingParameterErrorException {
+    if(ids == null || ids.isEmpty()){
+      throw new MissingParameterErrorException();
+    }
+
+    int i = chatroomMapper.deleteByIds(ids);
+    if(i == 0) {
+
+    }
+    for (String id : ids) {
+      WsChatRoom.del(id);
+    }
+
   }
 
 
