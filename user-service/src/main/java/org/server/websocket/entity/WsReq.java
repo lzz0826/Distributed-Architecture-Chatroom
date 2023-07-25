@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.server.common.StatusCode;
 import org.server.websocket.enums.EMsgType;
 import org.server.websocket.enums.EWsMsgType;
 
@@ -18,7 +17,7 @@ public class WsReq<T> {
   /**
    * 私聊的對象ID
    */
-  private String userId;
+  private String receiverUserId;
 
   /**
    * 聊天室ID

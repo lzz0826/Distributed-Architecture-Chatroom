@@ -41,10 +41,17 @@ import org.server.websocket.util.SyncMsgUtil;
 public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebSocketFrame> {
 
 
+  public OnlineWebSocketHandler() {}
+
+  public OnlineWebSocketHandler(String userId , EWsMsgType eWsMsgType,String chatroomId,String receiverUserId
+      ,String finalPath) {
+    this.setChatroom(userId,eWsMsgType,chatroomId,receiverUserId,finalPath);
+  }
+
+
   private final ChatRecordService chatRecordService = SpringUtil.getBean(ChatRecordService.class);
   private final JwtCacheService jwtCacheService = SpringUtil.getBean(JwtCacheService.class);
   private final ChatSilenceCacheService chatSilenceCacheService = SpringUtil.getBean(ChatSilenceCacheService.class);
-
   private final BlackListService blackListService = SpringUtil.getBean(BlackListService.class);
 
   @Override
@@ -186,13 +193,28 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
   }
 
 
+  public void setChatroom(String userId , EWsMsgType eWsMsgType,String chatroomId,String receiverUserId
+      ,String finalPath){
+    String senderUserId = userId;
+    WsReq<String> req = WsReq.<String>builder()
+        .receiverUserId(receiverUserId)
+        .chatroomId(chatroomId)
+        .eWsMsgType(eWsMsgType)
+        .eMsgType(EMsgType.System)
+        .request(finalPath)
+        .build();
+    setChatroom(req,senderUserId);
+  }
+
   //    TODO 聊天室邏輯
   private void setChatroom(WsReq<String> wsReq, String senderUserId) {
-    String receiverUserId = wsReq.getUserId();
+    String receiverUserId = wsReq.getReceiverUserId();
     String chatroomId = wsReq.getChatroomId();
     EMsgType eMsgType = wsReq.getEMsgType();
     EWsMsgType eWsMsgType = wsReq.getEWsMsgType();
     String request = wsReq.getRequest();
+
+    System.out.println(wsReq.getReceiverUserId());
 
     WsRep<Object> wsRep = WsRep
         .builder()
@@ -239,7 +261,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
 
     String receiverUserid = rep.getReceiverUserId();
     if (StringUtils.isBlank(receiverUserid)) {
-      log.error("無法傳送信息，userId為空");
+      log.error("無法傳送信息，receiverUserId為空");
       return;
     }
 
@@ -260,19 +282,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
         }
       }
     }
-//    String senderUserId = rep.getSenderUserId();
-//    InterpersonalVO vo = interpersonalService.getByUserId(senderUserId);
-//    if(vo !=null && !StringUtils.isBlank(vo.getBlacklisted())){
-//      List<String> blacklisteds = stringToStrList(vo.getBlacklisted());
-//      if(blacklisteds.contains(receiverUserid)){
-//        ChannelId channelId = WsUserIdChnIdMap.get(senderUserId);
-//        log.error("被對方加入黑名單");
-//        rep.setEMsgType(EMsgType.System);
-//        rep.setStatusCode(StatusCode.Blacklisted);
-//        checkChannelId(channelId, rep);
-//        return;
-//      }
-//    }
     ChannelId channelId = WsUserIdChnIdMap.get(receiverUserid);
     checkChannelId(channelId, rep);
   }

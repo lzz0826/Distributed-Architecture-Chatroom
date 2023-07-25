@@ -1,5 +1,7 @@
 package org.server.websocket.enums;
 
+import org.apache.commons.lang3.StringUtils;
+
 public enum EWsMsgType {
 
   Chatroom("chatroom"),
@@ -14,4 +16,19 @@ public enum EWsMsgType {
   EWsMsgType(String code) {
     this.code = code;
   }
+
+  public static EWsMsgType parse(String code) {
+    if (!StringUtils.isBlank(code)) {
+      for (EWsMsgType info : values()) {
+        if (info.code.equals(code)) {
+          return info;
+        }
+      }
+    }
+    return null;
+  }
+
+
+
+
 }

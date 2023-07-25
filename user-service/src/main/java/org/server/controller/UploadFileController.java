@@ -6,13 +6,17 @@ import static org.server.util.FileUtil.supportedComImages;
 import static org.server.util.FileUtil.supportedCompZip;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import java.io.IOException;
 import java.nio.file.Files;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
-import org.server.controller.req.UploadImageReq;
+import org.server.controller.req.UploadAvatarReq;
+import org.server.controller.req.chatroomRecord.UploadImageReq;
 import org.server.dao.UserDAO;
 import org.server.enums.UploadType;
 import org.server.exception.MissingParameterErrorException;
@@ -21,6 +25,7 @@ import org.server.exception.NotFoundUserException;
 import org.server.exception.UpdateUserFailException;
 import org.server.service.UploadFileService;
 import org.server.service.UserService;
+import org.server.websocket.enums.EWsMsgType;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.MediaType;
@@ -43,15 +48,18 @@ public class UploadFileController extends BaseController {
 
   @Value("${tmp.upload.file-pth}")
   private String filePth;
-
   @Resource
   private UploadFileService uploadFileService;
   @Resource
   private UserService userService;
 
   @PostMapping("/uploadAvatar")
-  public BaseResp<String> uploadImage(UploadImageReq req)
+  @ApiOperation("上傳頭像")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> uploadAvatar(@ApiParam("上傳頭像請求") UploadAvatarReq req)
       throws MissingParameterErrorException, IOException, UpdateUserFailException {
+
     if(StringUtils.isBlank(req.getUserId())){
       throw new MissingParameterErrorException();
     }
@@ -78,8 +86,10 @@ public class UploadFileController extends BaseController {
 
 
   @PostMapping("/file")
-  public BaseResp<String> uploadFile(MultipartFile file) throws IOException {
-
+  @ApiOperation("上傳檔案")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> uploadFile(@ApiParam("File zip(*必須)") MultipartFile file) throws IOException {
 
     if (file == null || file.isEmpty()) {
       return BaseResp.fail(StatusCode.NeedFile);
@@ -99,7 +109,10 @@ public class UploadFileController extends BaseController {
 
 
   @GetMapping("/getAvatar")
-  public ResponseEntity<ByteArrayResource> getAvatar(@RequestParam String userId)
+  @ApiOperation("取得頭像")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public ResponseEntity<ByteArrayResource> getAvatar(@RequestParam @ApiParam("userId(*必須)") String userId)
       throws IOException, MissingParameterErrorException, NotFoundUserException, NotFoundUserAvatarPthException {
 
     if(StringUtils.isBlank(userId)){
@@ -113,7 +126,6 @@ public class UploadFileController extends BaseController {
     if(StringUtils.isBlank(avatarPth)){
       throw new NotFoundUserAvatarPthException();
     }
-
 
     Path imagePath = Paths.get(avatarPth);
 
@@ -130,6 +142,96 @@ public class UploadFileController extends BaseController {
       return ResponseEntity.notFound().build();
     }
   }
+
+
+
+  @PostMapping("/uploadImage")
+  @ApiOperation("上傳聊天圖片")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> uploadImage(@ApiParam("上傳聊天圖片請求")UploadImageReq req)
+      throws MissingParameterErrorException, IOException {
+    if(StringUtils.isBlank(req.getUserId())){
+      throw new MissingParameterErrorException();
+    }
+    if(req.getFile() == null || req.getFile().isEmpty()){
+      throw new MissingParameterErrorException();
+    }
+    String userId = req.getUserId();
+    MultipartFile file = req.getFile();
+
+    if(req.getEWsMsgType() == null){
+      throw new MissingParameterErrorException();
+    }
+    String chatroomId = null;
+    String receiverUserId = null;
+    EWsMsgType eWsMsgType = req.getEWsMsgType();
+    if(eWsMsgType.code.equals("chatroom")){
+      if(StringUtils.isBlank(req.getChatroomId())){
+        throw new MissingParameterErrorException();
+      }
+      chatroomId = req.getChatroomId();
+    }
+    if(eWsMsgType.code.equals("privateChat")){
+      if(StringUtils.isBlank(req.getReceiverUserId())){
+        throw new MissingParameterErrorException();
+      }
+      receiverUserId = req.getReceiverUserId();
+    }
+
+    String fileName = file.getOriginalFilename();
+    String extByFileName = getExtByFileName(fileName);
+
+    if(!supportedComImages.contains(extByFileName)){
+      return BaseResp.fail(StatusCode.NonSupportExt);
+    }
+    UserDAO userDAO = userService.getUserById(userId);
+    if(userDAO == null ){
+      return BaseResp.fail(StatusCode.NotFoundUser);
+    }
+
+    byte[] fileBytes = file.getBytes();
+    String fileMd5 = DigestUtils.md5DigestAsHex(fileBytes);
+    String result = uploadFileService.uploadImage(userDAO, fileName, fileMd5, fileBytes, eWsMsgType
+    , chatroomId, receiverUserId);
+    return BaseResp.ok(result);
+  }
+
+
+
+  @GetMapping("/getImage")
+  @ApiOperation("取得聊天室貼圖")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public ResponseEntity<ByteArrayResource> getImage(@RequestParam @ApiParam("圖片路徑") String imagePth)
+      throws IOException, MissingParameterErrorException {
+
+    if(StringUtils.isBlank(imagePth)){
+      throw new MissingParameterErrorException();
+    }
+    Path imagePath = Paths.get(imagePth);
+
+    if (Files.exists(imagePath) && Files.isReadable(imagePath)) {
+      byte[] imageBytes = Files.readAllBytes(imagePath);
+      ByteArrayResource resource = new ByteArrayResource(imageBytes);
+
+      HttpHeaders headers = new HttpHeaders();
+      headers.setContentType(MediaType.IMAGE_PNG); // 或者根据图片类型设置 MediaType
+      return ResponseEntity.ok()
+          .headers(headers)
+          .body(resource);
+    } else {
+      return ResponseEntity.notFound().build();
+    }
+  }
+
+
+
+
+
+
+
+
 
 }
 
