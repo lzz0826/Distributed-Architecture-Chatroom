@@ -53,10 +53,7 @@ public class NettyServer {
 //                            ch.pipeline().addLast(new MyWebSocketServerHandler()); // 添加測試客服聊天消息處理類
 //                            ch.pipeline().addLast(new SocketServerHandler());
                             ch.pipeline().addLast(new OnlineWebSocketHandler());
-
-
                             ch.pipeline().addLast(new WebSocketServerProtocolHandler("/ws", null, true, 65536 * 10));
-
                             // 避免跨域
                             CorsConfig corsConfig = CorsConfigBuilder.forAnyOrigin().allowNullOrigin().allowCredentials().build();
                             ch.pipeline().addLast(new CorsHandler(corsConfig));
@@ -64,6 +61,7 @@ public class NettyServer {
                         }
                     });
             // 服務器異步創建綁定
+            //TODO 8888 起多台時要換
             ChannelFuture cf = sb.bind(8888).sync();
             log.info("{} 啟動正在監聽: {}", NettyServer.class, cf.channel().localAddress());
             // 關閉服務器通道

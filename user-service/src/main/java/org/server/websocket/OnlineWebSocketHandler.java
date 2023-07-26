@@ -19,6 +19,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.server.common.StatusCode;
 import org.server.dao.BlackListDAO;
 import org.server.entity.CustomUserDetails;
+import org.server.mq.MsgMqSender;
 import org.server.service.BlackListService;
 import org.server.service.ChatRecordService;
 import org.server.service.ChatSilenceCacheService;
@@ -48,6 +49,10 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
   private final JwtCacheService jwtCacheService = SpringUtil.getBean(JwtCacheService.class);
   private final ChatSilenceCacheService chatSilenceCacheService = SpringUtil.getBean(ChatSilenceCacheService.class);
   private final BlackListService blackListService = SpringUtil.getBean(BlackListService.class);
+
+  private final MsgMqSender msgMqSender = SpringUtil.getBean(MsgMqSender.class);
+
+
 
   @Override
   public void channelActive(ChannelHandlerContext ctx) {
@@ -90,9 +95,8 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
       String text = frame.text();
       // 正常的text消息類型
       log.info("客戶端收到服務器數據：{}", text);
-
       //聊天室
-      chatroom(text,ctx);
+      setChatroomMq(text,ctx);
 
     }
     super.channelRead(ctx, msg);
@@ -182,18 +186,35 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
   }
 
 
-  private void chatroom(String text,ChannelHandlerContext ctx){
-    //聊天室
+  /**
+   * MQ轉發(確保起多個服務,在不同的服務上都能收到)
+   */
+  public void setChatroomMq(String text,ChannelHandlerContext ctx) {
     WsReq<String> wsReq = JSON.parseObject(text, WsReq.class);
     ChannelId channelId = ctx.channel().id();
     String senderUserId = WsChnIdUserIdMap.get(channelId);
+    wsReq.setSenderUserId(senderUserId);
+    //MQ
+    msgMqSender.send(wsReq);
+  }
+
+  /**
+   * MQ接收(確保起多個服務,在不同的服務上都能收到)
+   */
+  public void getChatroomMq(WsReq<String> wsReq) {
+    String senderUserId = wsReq.getSenderUserId();
     if(isSilenceCache(senderUserId)){
-      sendMsgByCtx(ctx, SyncMsgUtil.isSilenceCache());
+      ChannelId setUserChannelId = WsUserIdChnIdMap.get(senderUserId);
+      checkChannelId(setUserChannelId,SyncMsgUtil.isSilenceCache());
     }else {
       setChatroom(wsReq, senderUserId);
     }
   }
 
+
+  /**
+   * 供其他service調用
+   */
   public void setChatroom(String userId , EWsMsgType eWsMsgType,String chatroomId,String receiverUserId
       ,String finalPath){
     String senderUserId = userId;
@@ -207,7 +228,9 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     setChatroom(req,senderUserId);
   }
 
-  //    TODO 聊天室邏輯
+  /**
+   * 聊天室主邏輯
+   */
   private void setChatroom(WsReq<String> wsReq, String senderUserId) {
     String receiverUserId = wsReq.getReceiverUserId();
     String chatroomId = wsReq.getChatroomId();

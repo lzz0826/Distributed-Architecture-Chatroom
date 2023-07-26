@@ -37,6 +37,11 @@ spring:
         min-idle: 2
         max-idle: 3
         max-wait: 1
+  rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    username: tony
+    password: tony0204
   cloud:
     nacos:
       discovery:

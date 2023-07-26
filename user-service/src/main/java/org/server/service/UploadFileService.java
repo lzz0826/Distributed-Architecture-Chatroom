@@ -21,6 +21,9 @@ public class UploadFileService {
   @Resource
   private UserService userService;
 
+  @Resource
+  private OnlineWebSocketHandlerService onlineWebSocketHandlerService;
+
 
   public String uploadFile(UserDAO user,String fileName,String fileMd5,byte[] fileBytes ,
       UploadType uploadType) throws IOException {
@@ -70,23 +73,23 @@ public class UploadFileService {
     String finalPath = uploadFile(userDAO,fileName,fileMd5,fileBytes,UploadType.Image);
 
     String userId = userDAO.getId();
-    getOnlineWebSocketHandler(userId,eWsMsgType,chatroomId,receiverUserId,finalPath);
+    onlineWebSocketHandlerService.getOnlineWebSocketHandler(userId,eWsMsgType,chatroomId,receiverUserId,finalPath);
     return finalPath;
 
   }
 
-  private volatile OnlineWebSocketHandler onlineWebSocketHandler = null;
-  private OnlineWebSocketHandler getOnlineWebSocketHandler(String userId, EWsMsgType eWsMsgType, String chatroomId, String receiverUserId, String finalPath) {
-    if (onlineWebSocketHandler == null) {
-      synchronized (this) {
-        if (onlineWebSocketHandler == null) {
-          onlineWebSocketHandler = new OnlineWebSocketHandler();
-        }
-      }
-    }
-    onlineWebSocketHandler.setChatroom(userId, eWsMsgType, chatroomId, receiverUserId, finalPath);
-    return onlineWebSocketHandler;
-  }
+//  private volatile OnlineWebSocketHandler onlineWebSocketHandler = null;
+//  private OnlineWebSocketHandler getOnlineWebSocketHandler(String userId, EWsMsgType eWsMsgType, String chatroomId, String receiverUserId, String finalPath) {
+//    if (onlineWebSocketHandler == null) {
+//      synchronized (this) {
+//        if (onlineWebSocketHandler == null) {
+//          onlineWebSocketHandler = new OnlineWebSocketHandler();
+//        }
+//      }
+//    }
+//    onlineWebSocketHandler.setChatroom(userId, eWsMsgType, chatroomId, receiverUserId, finalPath);
+//    return onlineWebSocketHandler;
+//  }
 
 
 

@@ -7,12 +7,18 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.server.websocket.enums.EMsgType;
 import org.server.websocket.enums.EWsMsgType;
+import org.springframework.security.core.parameters.P;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class WsReq<T> {
+
+  /**
+   * 發送者的ID
+   */
+  private String senderUserId;
 
   /**
    * 私聊的對象ID
@@ -31,7 +37,7 @@ public class WsReq<T> {
   /**
    * 消息類型
    */
-  protected EMsgType eMsgType;
+  private EMsgType eMsgType;
 
   /**
    * 傳遞值
