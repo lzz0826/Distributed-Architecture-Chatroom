@@ -179,7 +179,13 @@
 			"name": "新增聊天室",
 			"request": {
 				"method": "POST",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTU3NDQwMzYyNiwiZXhwIjoxNjk5NTc0NDAzLCJ1c2VybmFtZSI6InRvbSJ9.VNNr26q0pE5IoD73OV5yH8sxcV98h5zFzpQcp7OqfPear5NKfiHPjKRSCQ5-ZZt_aXjYVmHFvXT_RlX4pzONoA",
+						"type": "text"
+					}
+				],
 				"body": {
 					"mode": "raw",
 					"raw": "{\n    \"name\" : \"tete2\"\n}",
@@ -253,7 +259,13 @@
 			"name": "聊天室list",
 			"request": {
 				"method": "GET",
-				"header": [],
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTU3NDQwMzYyNiwiZXhwIjoxNjk5NTc0NDAzLCJ1c2VybmFtZSI6InRvbSJ9.VNNr26q0pE5IoD73OV5yH8sxcV98h5zFzpQcp7OqfPear5NKfiHPjKRSCQ5-ZZt_aXjYVmHFvXT_RlX4pzONoA",
+						"type": "text"
+					}
+				],
 				"url": {
 					"raw": "127.0.0.1:8080/user/chatroom/list?page=1&pageSize=2",
 					"host": [
@@ -508,82 +520,6 @@
 			"response": []
 		},
 		{
-			"name": "編輯人際關西(包含新增)",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODc5ODgzMDU2NywiZXhwIjoxNjk4Nzk4ODMwLCJ1c2VybmFtZSI6InRvbnkifQ.fVhHvJGpexhAXO-qx15ghLhAv_aNYSTw7XVjXUtvGqr1pLE6xcYJvBpRYp1Qg8wjZcUjFt471l2M-DKEZscBtQ",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"userId\" : \"123\",\n    \"blacklist\" : [\"123\", \"456\", \"789\"],\n    \"blacklisted\" : [\"111\", \"222\", \"333\"],\n    \"banChatRoom\" : [\"qqq\", \"banana\", \"orange\"]\n\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:8080/user/interpersonal/editAddInterpersonal",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"user",
-						"interpersonal",
-						"editAddInterpersonal"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "刪除人際關西表(內容)",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Authorization",
-						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4ODc5ODgzMDU2NywiZXhwIjoxNjk4Nzk4ODMwLCJ1c2VybmFtZSI6InRvbnkifQ.fVhHvJGpexhAXO-qx15ghLhAv_aNYSTw7XVjXUtvGqr1pLE6xcYJvBpRYp1Qg8wjZcUjFt471l2M-DKEZscBtQ",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"userId\" : \"123\",\n    \"blacklist\" : [\"789\"],\n    \"blacklisted\" : [\"111\"],\n    \"banChatRoom\" : [\"qqq\"]\n\n}",
-					"options": {
-						"raw": {
-							"language": "json"
-						}
-					}
-				},
-				"url": {
-					"raw": "127.0.0.1:8080/user/interpersonal/editDelInterpersonal",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8080",
-					"path": [
-						"user",
-						"interpersonal",
-						"editDelInterpersonal"
-					]
-				}
-			},
-			"response": []
-		},
-		{
 			"name": "新增黑名單",
 			"request": {
 				"method": "POST",
@@ -703,6 +639,287 @@
 							"key": "userId",
 							"value": "3099540442310192874"
 						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "上傳檔案",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTc0ODU5MzkwNCwiZXhwIjoxNjk5NzQ4NTkzLCJ1c2VybmFtZSI6InRvbSJ9.KFX4-Soci4w4ZkMocDEeMSDfwb88WT57maw8ju54FNqpMyfGLjKSB8bdiMGJwBDBqinQLUguXVknQOn0KT_LIg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/sai/Desktop/TG機器人.txt.zip"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/upload/file",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"upload",
+						"file"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "上傳大頭照",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY4OTc0ODU5MzkwNCwiZXhwIjoxNjk5NzQ4NTkzLCJ1c2VybmFtZSI6InRvbSJ9.KFX4-Soci4w4ZkMocDEeMSDfwb88WT57maw8ju54FNqpMyfGLjKSB8bdiMGJwBDBqinQLUguXVknQOn0KT_LIg",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "3099538860151615210",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/sai/Desktop/截圖 2023-07-18 下午3.37.38.png"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/upload/uploadAvatar",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"upload",
+						"uploadAvatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "獲取頭像",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY5MDI2MzAzMTYyMCwiZXhwIjoxNzAwMjYzMDMxLCJ1c2VybmFtZSI6InRvbnkifQ.L5hxG4_QUGsABolLTN0GZNt0ZSs4rO5bgyxkD4EdiQIV2EUYJAPR5h9WPKGNnsYYOnTaORmRrW4joTHB2rY42A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "3099538860151615210",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/upload/getAvatar",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"upload",
+						"getAvatar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "上傳圖片(圖片聊天)",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY5MDI1Mjk2MDgyNywiZXhwIjoxNzAwMjUyOTYwLCJ1c2VybmFtZSI6InRvbSJ9.oXggzVSedGerqYjsYoesleVWRLryUlEjsJSpz87o67jPEV9Amzho9n-WpRYBskrHKXl5522Ocfd3ahq4dXU6NQ",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "userId",
+							"value": "3099538860151615210",
+							"type": "text"
+						},
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/sai/Desktop/截圖 2023-07-24 下午6.38.41.png"
+						},
+						{
+							"key": "eWsMsgType",
+							"value": "Chatroom",
+							"type": "text"
+						},
+						{
+							"key": "receiverUserId",
+							"value": "",
+							"type": "text"
+						},
+						{
+							"key": "chatroomId",
+							"value": "3262035192786398954",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/upload/uploadImage",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"upload",
+						"uploadImage"
+					],
+					"query": [
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": null,
+							"disabled": true
+						},
+						{
+							"key": "",
+							"value": "",
+							"disabled": true
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "取得聊天貼圖",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY5MDI2MzAzMTYyMCwiZXhwIjoxNzAwMjYzMDMxLCJ1c2VybmFtZSI6InRvbnkifQ.L5hxG4_QUGsABolLTN0GZNt0ZSs4rO5bgyxkD4EdiQIV2EUYJAPR5h9WPKGNnsYYOnTaORmRrW4joTHB2rY42A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "imagePth",
+							"value": "./uploadTmp/3099538860151615210_tom/image/5c98278c341275453301a2fef5dff262/截圖 2023-07-24 下午6.38.41.png",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/upload/getImage",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"upload",
+						"getImage"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "更新聊天室",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "eyJhbGciOiJIUzUxMiJ9.eyJwYXNzd29yZCI6IjI1ZDU1YWQyODNhYTQwMGFmNDY0Yzc2ZDcxM2MwN2FkIiwiY3JlYXRlZCI6MTY5MDI2MzAzMTYyMCwiZXhwIjoxNzAwMjYzMDMxLCJ1c2VybmFtZSI6InRvbnkifQ.L5hxG4_QUGsABolLTN0GZNt0ZSs4rO5bgyxkD4EdiQIV2EUYJAPR5h9WPKGNnsYYOnTaORmRrW4joTHB2rY42A",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"id\" : \"3262035192786398954\" ,\n    \"name\" : \"eee221\" ,\n    \"adminUserId\" : \"wwww3332\" ,\n    \"status\" : true\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "127.0.0.1:8080/user/chatroom/updateChatroom",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8080",
+					"path": [
+						"user",
+						"chatroom",
+						"updateChatroom"
 					]
 				}
 			},

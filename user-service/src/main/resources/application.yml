@@ -47,6 +47,7 @@ spring:
       config:
         server-addr: 127.0.0.1:8848
 
+#檔案上傳
 tmp:
   upload:
     file-pth: ./uploadTmp

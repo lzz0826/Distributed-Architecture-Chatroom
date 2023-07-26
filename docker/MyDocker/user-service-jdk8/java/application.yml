@@ -8,7 +8,7 @@ netty:
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://mysql:3306/cloud_user?useUnicode=true&characterEncoding=utf-8
+    url: jdbc:mysql://localhost:3306/cloud_user?useUnicode=true&characterEncoding=utf-8
     username: root
     password: tony0204
   application:
@@ -25,7 +25,7 @@ spring:
       # 由於是用 postgres 所以需要設定 schema，並且如果不存在會自動建立
 
   redis:
-    host: redis_standalone
+    host: 127.0.0.1
     port: 6379
     password: 123456
     database: 0
@@ -42,10 +42,15 @@ spring:
       discovery:
         username: nacos
         password: nacos
-        server-addr: nacos:8848
+        server-addr: 127.0.0.1:8848
         namespace: public
       config:
-        server-addr: nacos:8848
+        server-addr: 127.0.0.1:8848
+
+#檔案上傳
+tmp:
+  upload:
+    file-pth: ./uploadTmp
 
 ##eureka
 #eureka:
