@@ -87,18 +87,12 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
       }
     } else if (msg instanceof TextWebSocketFrame) {
       TextWebSocketFrame frame = (TextWebSocketFrame) msg;
+      String text = frame.text();
       // 正常的text消息類型
-      log.info("客戶端收到服務器數據：{}", frame.text());
+      log.info("客戶端收到服務器數據：{}", text);
 
       //聊天室
-      WsReq<String> wsReq = JSON.parseObject(frame.text(), WsReq.class);
-      ChannelId channelId = ctx.channel().id();
-      String senderUserId = WsChnIdUserIdMap.get(channelId);
-      if(isSilenceCache(senderUserId)){
-        sendMsgByCtx(ctx, SyncMsgUtil.isSilenceCache());
-      }else {
-        setChatroom(wsReq, senderUserId);
-      }
+      chatroom(text,ctx);
 
     }
     super.channelRead(ctx, msg);
@@ -187,6 +181,18 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     ctx.channel().writeAndFlush(new TextWebSocketFrame(msg));
   }
 
+
+  private void chatroom(String text,ChannelHandlerContext ctx){
+    //聊天室
+    WsReq<String> wsReq = JSON.parseObject(text, WsReq.class);
+    ChannelId channelId = ctx.channel().id();
+    String senderUserId = WsChnIdUserIdMap.get(channelId);
+    if(isSilenceCache(senderUserId)){
+      sendMsgByCtx(ctx, SyncMsgUtil.isSilenceCache());
+    }else {
+      setChatroom(wsReq, senderUserId);
+    }
+  }
 
   public void setChatroom(String userId , EWsMsgType eWsMsgType,String chatroomId,String receiverUserId
       ,String finalPath){
