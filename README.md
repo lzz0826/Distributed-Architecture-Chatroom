@@ -9,9 +9,8 @@
 - 禁言功能<br />
 - 使用者後台管理功能<br />
 - 與服務器保持長連接,心跳檢測<br />
-### 尚未添加功能:
-- 上傳大頭照
-- 使用貼圖聊天
+- 上傳大頭照<br />
+- 使用貼圖聊天<br />
 
 
 ## 後端技術概覽:
@@ -43,11 +42,11 @@ docker network create --subnet=192.168.200.0/24 redis-cluster-net<br />
 
 #### Swagger UI介面:
 http://localhost:8080/user/swagger-ui.html <br />
-![image](https://raw.githubusercontent.com/lzz0826/Distributed-Architecture-Chatroom/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.13.png)
+![image](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/002.png)
 
 #### Nacos UI介面:
 http://127.0.0.1:8848/nacos/#/ <br />
-![image](https://raw.githubusercontent.com/lzz0826/Distributed-Architecture-Chatroom/main/images/%E6%88%AA%E5%9C%96%202023-07-17%20%E4%B8%8B%E5%8D%883.07.05.png)
+![image](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/001.png)
 
 可以從上方的Nacos UI介面看到已啟動的 user-service
 
