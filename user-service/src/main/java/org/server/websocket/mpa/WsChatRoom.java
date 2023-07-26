@@ -9,6 +9,8 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class WsChatRoom {
+
+  //TODO 需要處理起多台一致
   private final static ConcurrentHashMap<String, Set<String>> map = new ConcurrentHashMap<>();
 
   /**
