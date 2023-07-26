@@ -40,7 +40,7 @@ docker network create --subnet=192.168.200.0/24 redis-cluster-net<br />
 
 ### 成功啟動後可以訪問:
 
-#### Swagger UI介面: *檔案上傳相關請使用 PostMam
+#### Swagger UI介面: 檔案上傳相關請使用 PostMam
 http://localhost:8080/user/swagger-ui.html <br />
 ![image](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/002.png)
 
@@ -51,6 +51,7 @@ http://127.0.0.1:8848/nacos/#/ <br />
 可以從上方的Nacos UI介面看到已啟動的 user-service
 
 # API:
+# 檔案上傳相關請使用 PostMam
 ## PostMan匯入檔: <br />
 https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/postman/chat-room-API.json <br />
 
