@@ -94,7 +94,11 @@ public class UserService{
       UserVO userVO = UserVO.builder()
           .id(allUser.getId())
           .username(allUser.getUsername())
+          .avatarPth(allUser.getAvatarPth())
           .address(allUser.getAddress())
+          .role(allUser.getRole())
+          .updateTime(allUser.getUpdateTime())
+          .createTime(allUser.getCreateTime())
           .build();
 
       userVOs.add(userVO);
@@ -111,7 +115,11 @@ public class UserService{
         .builder()
         .id(user.getId())
         .username(user.getUsername())
+        .avatarPth(user.getAvatarPth())
+        .role(user.getRole())
         .address(user.getAddress())
+        .createTime(user.getCreateTime())
+        .updateTime(user.getUpdateTime())
         .build();
 
   }
@@ -119,15 +127,12 @@ public class UserService{
 
   public LoginVO login(String username , String password) throws LoginErrorException {
 
-
-
     String md5token = DigestUtils.md5DigestAsHex(password.getBytes(StandardCharsets.UTF_8));
 
     CustomUserDetails customUserDetails = customUserDetailsService.loadUserByUsername(username);
     if(!md5token.equals(customUserDetails.getPassword())){
       throw new LoginErrorException();
     }
-
 
     String jwtToken = jwtService.generateToken(customUserDetails);
 

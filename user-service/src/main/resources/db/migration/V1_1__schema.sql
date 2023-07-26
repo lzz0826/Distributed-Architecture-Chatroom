@@ -6,6 +6,7 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
     `id` varchar(40) NOT NULL COMMENT 'userId',
     `password` varchar(40) DEFAULT NULL,
     `username` varchar(40) DEFAULT NULL COMMENT '用戶名增',
+    `avatar_pth` varchar(500) DEFAULT NULL COMMENT '頭像路徑',
     `address` varchar(40) DEFAULT NULL COMMENT '地址',
     `role` varchar(40) DEFAULT NULL,
     `update_time` timestamp NOT NULL,
@@ -15,13 +16,13 @@ CREATE TABLE IF NOT EXISTS `tb_user` (
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='使用者';
 
 -- 插入用户数据
-INSERT INTO tb_user
-(id, password, username, address, `role`, update_time, create_time)
-VALUES('3099538860151615210', '25d55ad283aa400af464c76d713c07ad', 'tom', '', 'ROLE_ADMIN', '2023-06-20 06:40:24', '2023-06-20 06:40:24');
+INSERT INTO cloud_user.tb_user
+(id, password, username, avatar_pth, address, `role`, update_time, create_time)
+VALUES('3099540442310192874', '25d55ad283aa400af464c76d713c07ad', 'tony',NULL, 'efef', 'ROLE_ADMIN', '2023-07-25 07:31:19', '2023-06-20 06:40:24');
+INSERT INTO cloud_user.tb_user
+(id, password, username, avatar_pth, address, `role`, update_time, create_time)
+VALUES('3099538860151615210', '25d55ad283aa400af464c76d713c07ad', 'tom',NULL, 'ffff', 'ROLE_ADMIN', '2023-07-25 07:21:24', '2023-06-20 06:40:24');
 
-INSERT INTO tb_user
-(id, password, username, address, `role`, update_time, create_time)
-VALUES('3099540442310192874', '25d55ad283aa400af464c76d713c07ad', 'tony', '', 'ROLE_ADMIN', '2023-06-20 06:40:24', '2023-06-20 06:40:24');
 
 -- 创建聊天室表
 CREATE TABLE IF NOT EXISTS `tb_chatroom` (
