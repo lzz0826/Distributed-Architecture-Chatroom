@@ -40,7 +40,7 @@ docker network create --subnet=192.168.200.0/24 redis-cluster-net<br />
 
 ### 成功啟動後可以訪問:
 
-#### Swagger UI介面:
+#### Swagger UI介面: *檔案上傳相關請使用 PostMam
 http://localhost:8080/user/swagger-ui.html <br />
 ![image](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/002.png)
 
