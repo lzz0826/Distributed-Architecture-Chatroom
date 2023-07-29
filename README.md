@@ -2,6 +2,9 @@
 
 # 這是一個基於Netty實現的分布式架構聊天室，使用WebSocket作為通信協議。
 
+![image](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/003.png)
+
+
 ## 實現的功能如下：
 - 支持多人同時在線<br />
 - 實現公告.私聊.創建聊天室(群聊)<br />
@@ -11,7 +14,6 @@
 - 與服務器保持長連接,心跳檢測<br />
 - 上傳大頭照<br />
 - 使用貼圖聊天<br />
-![image](https://github.com/lzz0826/Distributed-Architecture-Chatroom/blob/main/images/003.png)
 
 ## 後端技術概覽:
 
