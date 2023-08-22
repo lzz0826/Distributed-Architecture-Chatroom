@@ -2,6 +2,11 @@ version: '3.1'
 services:
     cloud:
         image: picoded/ubuntu-openjdk-8-jdk:16.04
+#        設定日誌大小限制
+#        logging:
+#            driver: "json-file"
+#            options:
+#                max-size: "0.1g"
         volumes:
             - ./opt:/opt
             - ./java/application.yml:/porperties/application.yml
