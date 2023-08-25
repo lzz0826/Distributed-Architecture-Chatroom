@@ -16,6 +16,7 @@ import io.netty.handler.codec.http.cors.CorsHandler;
 import io.netty.handler.codec.http.websocketx.WebSocketServerProtocolHandler;
 import io.netty.handler.stream.ChunkedWriteHandler;
 import lombok.extern.log4j.Log4j2;
+import org.springframework.beans.factory.annotation.Value;
 
 @Log4j2
 public class NettyServer {
@@ -62,7 +63,7 @@ public class NettyServer {
                     });
             // 服務器異步創建綁定
             //TODO 8888 起多台時要換
-            ChannelFuture cf = sb.bind(8888).sync();
+            ChannelFuture cf = sb.bind(port).sync();
             log.info("{} 啟動正在監聽: {}", NettyServer.class, cf.channel().localAddress());
             // 關閉服務器通道
             cf.channel().closeFuture().sync();

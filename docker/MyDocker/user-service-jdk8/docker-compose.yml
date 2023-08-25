@@ -16,6 +16,7 @@ services:
                 ipv4_address: 192.168.200.151
         ports:
             - 8080:8080 # HTTP/1.1
+            - 8888:8888
 
 networks:
     redis-cluster-net:

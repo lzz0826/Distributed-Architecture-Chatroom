@@ -21,4 +21,5 @@ public class NettyInitListen implements CommandLineRunner {
             log.error("Netty 錯誤: {}", e.getMessage());
         }
     }
+    
 }
