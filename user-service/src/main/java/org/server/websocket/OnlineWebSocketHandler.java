@@ -195,7 +195,14 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     String senderUserId = WsChnIdUserIdMap.get(channelId);
     wsReq.setSenderUserId(senderUserId);
     //MQ
-    msgMqSender.send(wsReq);
+
+
+    //TODO EMsgType需要處理空
+    if(wsReq.getEWsMsgType() == null){
+      System.out.println("EMsgType不能為空");
+    }else {
+      msgMqSender.send(wsReq);
+    }
   }
 
   /**
