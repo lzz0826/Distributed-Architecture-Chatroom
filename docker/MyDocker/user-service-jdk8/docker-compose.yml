@@ -6,7 +6,10 @@ services:
 #        logging:
 #            driver: "json-file"
 #            options:
-#                max-size: "0.1g"
+#                max-size: "10m"  # 控制日志文件的大小
+#                max-file: "3"    # 控制保留的日志文件数量
+#                path: "./"       # 指定日志存储路径
+
         volumes:
             - ./opt:/opt
             - ./java/application.yml:/porperties/application.yml
