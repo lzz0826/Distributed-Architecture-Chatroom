@@ -1,4 +1,4 @@
-package org.server.controller.req;
+package org.server.controller.req.chatroom;
 
 
 import io.swagger.annotations.ApiModelProperty;

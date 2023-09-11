@@ -49,9 +49,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
   private final JwtCacheService jwtCacheService = SpringUtil.getBean(JwtCacheService.class);
   private final ChatSilenceCacheService chatSilenceCacheService = SpringUtil.getBean(ChatSilenceCacheService.class);
   private final BlackListService blackListService = SpringUtil.getBean(BlackListService.class);
-
   private final MsgMqSender msgMqSender = SpringUtil.getBean(MsgMqSender.class);
-
 
 
   @Override
@@ -69,7 +67,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
       WsUserIdChnIdMap.del(userId);
       WsChatRoom.removeUserChatRoomAll(userId);
     }
-
     WsChnIdCtxMap.del(chnId);
   }
 
@@ -97,7 +94,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
       log.info("客戶端收到服務器數據：{}", text);
       //聊天室
       setChatroomMq(text,ctx);
-
     }
     super.channelRead(ctx, msg);
     if (msg instanceof FullHttpRequest) {
@@ -195,7 +191,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     String senderUserId = WsChnIdUserIdMap.get(channelId);
     wsReq.setSenderUserId(senderUserId);
     //MQ
-
 
     //TODO EMsgType需要處理空
     if(wsReq.getEWsMsgType() == null){

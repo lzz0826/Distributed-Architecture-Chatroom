@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.server.controller.req.chatroom.UpdateChatroomReq;
 import org.server.dao.ChatroomDAO;
+import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.blackListException.DelBlackListException;
@@ -15,8 +16,12 @@ import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.chatroom.NotFoundChatroomException;
 import org.server.exception.chatroom.UpdateChatroomFailException;
 import org.server.mapper.ChatroomMapper;
+import org.server.mq.ChatRoomEditSender;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.ChatroomVO;
+import org.server.vo.UserVO;
+import org.server.websocket.entity.ChatRoomReq;
+import org.server.websocket.enums.ChatRoomEditType;
 import org.server.websocket.mpa.WsChatRoom;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -30,6 +35,12 @@ public class ChatroomService {
 
   @Resource
   private IdGeneratorService idGeneratorService;
+
+  @Resource
+  private UserService userService;
+
+  @Resource
+  private ChatRoomEditSender chatRoomEditSender;
 
 
 
@@ -50,6 +61,22 @@ public class ChatroomService {
     }
     return vos;
   }
+
+//  public Page<UserVO> getChatroomUsers(String id , int page, int pageSize){
+//    Page<ChatroomVO> vos = new Page<>();
+//
+//
+//
+//
+//
+//
+//    Page<UserDAO> daos = PageHelper.startPage(page,pageSize)
+//        .doSelectPage(() -> chatroomMapper.selectAll());
+//    if(daos.isEmpty()){
+//      return vos;
+//    }
+//
+//  }
 
 
   public ChatroomVO getChatroomById(String id){
@@ -132,16 +159,41 @@ public class ChatroomService {
     if(!vo.getStatus()){
       throw new ChatroomNotOpenException();
     }
-
-    WsChatRoom.addUserToChatRoom(chatroomId,userId);
-
+    ChatRoomReq chatRoomReq = ChatRoomReq
+        .builder()
+        .chatRoomEditType(ChatRoomEditType.Join)
+        .chatRoomId(chatroomId)
+        .userId(userId)
+        .build();
+    chatRoomEditSender.send(chatRoomReq);
     return vo;
 
   }
 
+  public void joinChatroomCache(String chatroomId ,String userId){
+    WsChatRoom.addUserToChatRoom(chatroomId,userId);
+  }
+
+
+
   public void leaveChatroom(String userId){
     WsChatRoom.removeUserChatRoomAll(userId);
   }
+
+  public void leaveChatroomAll(String userId){
+
+    ChatRoomReq chatRoomReq = ChatRoomReq
+        .builder()
+        .chatRoomEditType(ChatRoomEditType.QuitAll)
+        .userId(userId)
+        .build();
+    chatRoomEditSender.send(chatRoomReq);
+  }
+
+  public void leaveChatroomAllCache(String userId){
+    WsChatRoom.removeUserChatRoomAll(userId);
+  }
+
 
   public void delIds(List<String> ids) throws MissingParameterErrorException {
     if(ids == null || ids.isEmpty()){

@@ -19,7 +19,6 @@ public class WsChatRoom {
    */
 
 
-
   public static void addUserToChatRoom(String chatroomId, String userId) {
     Set<String> list = map.get(chatroomId);
     if (list == null) {

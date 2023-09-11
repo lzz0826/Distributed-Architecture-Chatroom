@@ -17,7 +17,6 @@ public class UserVO {
   @ApiModelProperty(value="用戶帳號")
   private String username;
 
-
   @ApiModelProperty(value="頭像地址")
   private String avatarPth;
 

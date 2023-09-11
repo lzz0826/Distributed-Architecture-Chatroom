@@ -32,5 +32,27 @@ public class RabbitMqConfig {
     return BindingBuilder.bind(queueMsg).to(exchangeMsg);
   }
 
+  /**
+   * 聊天室 編輯(加入 退出)
+   */
+  public static final String EXCHANGE_CHATROOM_EDIT_NAME = "chatRoomEdit";
+
+  @Bean
+  public FanoutExchange exchangeChatRoomEdit() {
+    return new FanoutExchange(EXCHANGE_CHATROOM_EDIT_NAME);
+  }
+
+  @Bean
+  public Queue queueChatRoomEdit() {
+    return new AnonymousQueue(new Base64UrlNamingStrategy("queueChatRoomEdit"));
+  }
+  @Bean
+  public Binding bindingChatRoomEdit(
+      @Qualifier("exchangeChatRoomEdit") FanoutExchange exchangeMsg,
+      @Qualifier("queueChatRoomEdit") Queue queueMsg) {
+    return BindingBuilder.bind(queueMsg).to(exchangeMsg);
+  }
+
+
 
 }

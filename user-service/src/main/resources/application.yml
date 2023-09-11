@@ -93,4 +93,5 @@ async:
         prefix: async-service- # 配置线程池中的线程的名称前缀
 
 chatroom:
-  silenceCache_prefix: ChatSilenceCache- #
+  silenceCache_prefix: ChatSilenceCache- # 禁言緩存標頭
+#  cacheRoomUsers_prefix: CacheRoomUsersCache- # 聊天室再線人員緩存標頭

@@ -17,11 +17,11 @@ import org.server.controller.rep.chatroom.GetSilenceCacheRep;
 import org.server.controller.rep.chatroom.JoinChatroomRep;
 import org.server.controller.rep.chatroom.ChatroomListRep;
 import org.server.controller.rep.chatroom.UpdateCacheRoomRep;
-import org.server.controller.req.blackList.BlackListDelIdsReq;
 import org.server.controller.req.chatroom.AddChatroomReq;
 import org.server.controller.req.chatroom.ChatroomDelIdsReq;
 import org.server.controller.req.chatroom.JoinChatroomReq;
-import org.server.controller.req.LeaveChatroomReq;
+import org.server.controller.req.chatroom.LeaveChatroomAllReq;
+import org.server.controller.req.chatroom.LeaveChatroomReq;
 import org.server.controller.req.chatroom.UpdateChatroomReq;
 import org.server.controller.req.chatroomRecord.AddChatSilenceCacheReq;
 import org.server.controller.req.chatroomRecord.DelSilenceCacheReq;
@@ -29,7 +29,6 @@ import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.NotAllowedNullStrException;
 import org.server.exception.NotFoundUserException;
-import org.server.exception.blackListException.DelBlackListException;
 import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.chatroom.NeedChatroomIdException;
@@ -62,6 +61,8 @@ public class ChatroomController extends BaseController {
 
   @Resource
   private UserService userService;
+
+
 
 
   @GetMapping("/list")
@@ -103,6 +104,31 @@ public class ChatroomController extends BaseController {
 
     return BaseResp.ok(rep,StatusCode.Success);
   }
+
+//  @GetMapping("/getChatroomUserList")
+//  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+//      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+//  public BaseResp<GetChatroomUserListRep> getChatroomUserList(@RequestParam("id") @ApiParam("聊天室id(*必須)") String id ,
+//      @RequestParam("page")@ApiParam("頁碼(*必須)") Integer page, @RequestParam("pageSize")
+//      @ApiParam("每頁顯示大小(*必須)") Integer pageSize){
+//
+//
+//    Page<> vos = chatroomService.getChatroomUsers(page,pageSize);
+//
+//    GetChatroomUserListRep rep = GetChatroomUserListRep
+//        .builder()
+//        .id("scsc")
+//        .userVOs()
+//        .build();
+//    rep.setPage(vos.getPageNum());
+//    rep.setPageSize(vos.getPageSize());
+//    rep.setTotal(vos.getTotal());
+//    rep.setTotalPage(vos.getPages());
+//
+//
+//    return 'ee'
+//  }
+
 
 
 
@@ -207,7 +233,21 @@ public class ChatroomController extends BaseController {
 
     String userId = req.getUserId();
 
-    chatroomService.leaveChatroom(userId);
+//    chatroomService.leaveChatroom(userId);
+
+    return BaseResp.ok(StatusCode.Success);
+
+  }
+
+  @PostMapping("/leaveChatroomAll")
+  @ApiOperation("離開聊天室(全部)")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  private BaseResp<String> leaveChatroomAll(@RequestBody @ApiParam("離開聊天室請求") LeaveChatroomAllReq req) {
+
+    String userId = req.getUserId();
+
+    chatroomService.leaveChatroomAll(userId);
 
     return BaseResp.ok(StatusCode.Success);
 
