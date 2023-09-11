@@ -5,9 +5,7 @@ public enum ChatRoomEditType {
 
   Join("join"),
   Quit("quit"),
-  QuitAll("quitAll"),
-
-  Silence("silence")
+  QuitAll("quitAll")
   ;
 
 

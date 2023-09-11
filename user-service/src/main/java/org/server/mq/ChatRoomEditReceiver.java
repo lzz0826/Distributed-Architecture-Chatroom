@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 @Component
 @RabbitListener(queues = "#{queueChatRoomEdit.name}")
 public class ChatRoomEditReceiver {
-  
+
   @Resource
   private ChatroomService chatroomService;
 
@@ -30,19 +30,13 @@ public class ChatRoomEditReceiver {
         chatroomService.joinChatroomCache(chatRoomReq.getChatRoomId(),chatRoomReq.getUserId());
         break;
       case Quit:
-        System.out.println("MQ退出聊天室指定:"+chatRoomReq.getChatRoomId());
-        //TODO
-//        chatroomService
+        System.out.println("MQ退出聊天室指定");
+        chatroomService.leaveChatroomCache(chatRoomReq.getChatRoomId(),chatRoomReq.getUserId());
         break;
       case QuitAll:
         System.out.println("MQ退出聊天室(全)");
         chatroomService.leaveChatroomAllCache(chatRoomReq.getUserId());
         break;
-      case Silence:
-        System.out.println("靜言");
-        //TODO
-
-
     }
 
   }

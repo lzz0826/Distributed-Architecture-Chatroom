@@ -229,11 +229,22 @@ public class ChatroomController extends BaseController {
   @ApiOperation("離開聊天室")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  private BaseResp<String> leaveChatroom(@RequestBody @ApiParam("離開聊天室請求") LeaveChatroomReq req) {
+  private BaseResp<String> leaveChatroom(@RequestBody @ApiParam("離開聊天室請求") LeaveChatroomReq req)
+      throws MissingParameterErrorException {
+    if(StringUtils.isBlank(req.getId())){
+      throw new MissingParameterErrorException();
+    }
+
+    if(StringUtils.isBlank(req.getUserId())){
+      throw new MissingParameterErrorException();
+    }
+
+    String chatRoomId = req.getId();
 
     String userId = req.getUserId();
 
-//    chatroomService.leaveChatroom(userId);
+
+    chatroomService.leaveChatroom(chatRoomId,userId);
 
     return BaseResp.ok(StatusCode.Success);
 

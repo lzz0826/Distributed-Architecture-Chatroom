@@ -175,9 +175,19 @@ public class ChatroomService {
   }
 
 
+  public void leaveChatroom(String chatroomId,String userId){
+    ChatRoomReq chatRoomReq = ChatRoomReq
+        .builder()
+        .chatRoomEditType(ChatRoomEditType.Quit)
+        .chatRoomId(chatroomId)
+        .userId(userId)
+        .build();
+    chatRoomEditSender.send(chatRoomReq);
+  }
 
-  public void leaveChatroom(String userId){
-    WsChatRoom.removeUserChatRoomAll(userId);
+
+  public void leaveChatroomCache(String chatRoomId ,String userId){
+    WsChatRoom.removeUserFromChatRoom(chatRoomId,userId);
   }
 
   public void leaveChatroomAll(String userId){

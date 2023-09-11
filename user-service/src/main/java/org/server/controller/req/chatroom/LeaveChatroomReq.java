@@ -13,7 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LeaveChatroomReq {
 
+
+  @ApiModelProperty(value="聊天室ID(*必須)")
+  private String id;
+
   @ApiModelProperty(value="用户名ID(*必須)")
   private String userId;
+
+
 
 }
