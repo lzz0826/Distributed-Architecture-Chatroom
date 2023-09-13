@@ -3,26 +3,26 @@ package org.server.service;
 
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
 import javax.annotation.Resource;
-import org.server.controller.req.chatroom.UpdateChatroomReq;
 import org.server.dao.ChatroomDAO;
-import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.MissingParameterErrorException;
-import org.server.exception.blackListException.DelBlackListException;
 import org.server.exception.chatroom.ChatroomNotOpenException;
 import org.server.exception.chatroom.NotFoundChatroomException;
 import org.server.exception.chatroom.UpdateChatroomFailException;
 import org.server.mapper.ChatroomMapper;
 import org.server.mq.ChatRoomEditSender;
 import org.server.sercice.IdGeneratorService;
+import org.server.vo.ChatroomOnlineUserVO;
 import org.server.vo.ChatroomVO;
-import org.server.vo.UserVO;
 import org.server.websocket.entity.ChatRoomReq;
 import org.server.websocket.enums.ChatRoomEditType;
-import org.server.websocket.mpa.WsChatRoom;
+import org.server.websocket.mpa.WsChatRoomMap;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -62,21 +62,22 @@ public class ChatroomService {
     return vos;
   }
 
-//  public Page<UserVO> getChatroomUsers(String id , int page, int pageSize){
-//    Page<ChatroomVO> vos = new Page<>();
-//
-//
-//
-//
-//
-//
-//    Page<UserDAO> daos = PageHelper.startPage(page,pageSize)
-//        .doSelectPage(() -> chatroomMapper.selectAll());
-//    if(daos.isEmpty()){
-//      return vos;
-//    }
-//
-//  }
+  public ChatroomOnlineUserVO getChatroomOnlineUserList(String id){
+    ChatroomOnlineUserVO vo = ChatroomOnlineUserVO.builder().build();
+
+    Set<String> userIds = WsChatRoomMap.get(id);
+
+    System.out.println(userIds);
+    if(userIds == null){
+      return vo;
+    }
+
+    vo.setChatroomId(id);
+    vo.setUserIds(userIds.stream().collect(Collectors.toList()));
+
+    return vo;
+
+  }
 
 
   public ChatroomVO getChatroomById(String id){
@@ -171,7 +172,7 @@ public class ChatroomService {
   }
 
   public void joinChatroomCache(String chatroomId ,String userId){
-    WsChatRoom.addUserToChatRoom(chatroomId,userId);
+    WsChatRoomMap.addUserToChatRoom(chatroomId,userId);
   }
 
 
@@ -187,7 +188,7 @@ public class ChatroomService {
 
 
   public void leaveChatroomCache(String chatRoomId ,String userId){
-    WsChatRoom.removeUserFromChatRoom(chatRoomId,userId);
+    WsChatRoomMap.removeUserFromChatRoom(chatRoomId,userId);
   }
 
   public void leaveChatroomAll(String userId){
@@ -201,7 +202,7 @@ public class ChatroomService {
   }
 
   public void leaveChatroomAllCache(String userId){
-    WsChatRoom.removeUserChatRoomAll(userId);
+    WsChatRoomMap.removeUserChatRoomAll(userId);
   }
 
 
@@ -215,7 +216,7 @@ public class ChatroomService {
 
     }
     for (String id : ids) {
-      WsChatRoom.del(id);
+      WsChatRoomMap.del(id);
     }
 
   }

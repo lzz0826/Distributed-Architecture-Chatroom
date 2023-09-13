@@ -1,14 +1,12 @@
 package org.server.websocket.mpa;
 
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Map.Entry;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
-public class WsChatRoom {
+public class WsChatRoomMap {
 
   //TODO 需要處理起多台一致
   private final static ConcurrentHashMap<String, Set<String>> map = new ConcurrentHashMap<>();

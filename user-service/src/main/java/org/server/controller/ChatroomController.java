@@ -13,6 +13,7 @@ import org.server.common.BaseResp;
 import org.server.common.StatusCode;
 import org.server.controller.rep.chatroom.AddCacheRoomRep;
 import org.server.controller.rep.chatroom.GetChatroomByIdRep;
+import org.server.controller.rep.chatroom.GetChatroomOnlineUserListRep;
 import org.server.controller.rep.chatroom.GetSilenceCacheRep;
 import org.server.controller.rep.chatroom.JoinChatroomRep;
 import org.server.controller.rep.chatroom.ChatroomListRep;
@@ -38,6 +39,7 @@ import org.server.exception.chatroom.UpdateChatroomFailException;
 import org.server.service.ChatSilenceCacheService;
 import org.server.service.ChatroomService;
 import org.server.service.UserService;
+import org.server.vo.ChatroomOnlineUserVO;
 import org.server.vo.ChatroomVO;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -105,29 +107,22 @@ public class ChatroomController extends BaseController {
     return BaseResp.ok(rep,StatusCode.Success);
   }
 
-//  @GetMapping("/getChatroomUserList")
-//  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
-//      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-//  public BaseResp<GetChatroomUserListRep> getChatroomUserList(@RequestParam("id") @ApiParam("聊天室id(*必須)") String id ,
-//      @RequestParam("page")@ApiParam("頁碼(*必須)") Integer page, @RequestParam("pageSize")
-//      @ApiParam("每頁顯示大小(*必須)") Integer pageSize){
-//
-//
-//    Page<> vos = chatroomService.getChatroomUsers(page,pageSize);
-//
-//    GetChatroomUserListRep rep = GetChatroomUserListRep
-//        .builder()
-//        .id("scsc")
-//        .userVOs()
-//        .build();
-//    rep.setPage(vos.getPageNum());
-//    rep.setPageSize(vos.getPageSize());
-//    rep.setTotal(vos.getTotal());
-//    rep.setTotalPage(vos.getPages());
-//
-//
-//    return 'ee'
-//  }
+  @GetMapping("/getChatroomOnlineUserList")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<GetChatroomOnlineUserListRep> getChatroomOnlineUserList(@RequestParam("id")
+  @ApiParam("聊天室id(*必須)") String id ){
+
+
+    ChatroomOnlineUserVO vo = chatroomService.getChatroomOnlineUserList(id);
+
+    GetChatroomOnlineUserListRep rep = GetChatroomOnlineUserListRep
+        .builder()
+        .chatroomOnlineUser(vo)
+        .build();
+
+    return BaseResp.ok(rep,StatusCode.Success);
+  }
 
 
 

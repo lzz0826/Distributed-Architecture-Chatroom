@@ -31,7 +31,7 @@ import org.server.websocket.entity.WsRep;
 import org.server.websocket.entity.WsReq;
 import org.server.websocket.enums.EMsgType;
 import org.server.websocket.enums.EWsMsgType;
-import org.server.websocket.mpa.WsChatRoom;
+import org.server.websocket.mpa.WsChatRoomMap;
 import org.server.websocket.mpa.WsChnIdCtxMap;
 import org.server.websocket.mpa.WsChnIdUserIdMap;
 import org.server.websocket.mpa.WsUserIdChnIdMap;
@@ -65,7 +65,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     WsChnIdUserIdMap.del(chnId);
     if (userId != null) {
       WsUserIdChnIdMap.del(userId);
-      WsChatRoom.removeUserChatRoomAll(userId);
+      WsChatRoomMap.removeUserChatRoomAll(userId);
     }
     WsChnIdCtxMap.del(chnId);
   }
@@ -324,7 +324,7 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
       log.error("無法傳送信息，chatroomId為空");
       return;
     }
-    Set<String> users = WsChatRoom.get(chatroomId);
+    Set<String> users = WsChatRoomMap.get(chatroomId);
     if (users != null) {
       for (String user : users) {
         ChannelId channelId = WsUserIdChnIdMap.get(user);
