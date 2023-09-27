@@ -1,6 +1,7 @@
 package org.server.controller;
 
 
+import com.github.pagehelper.Page;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
@@ -12,13 +13,14 @@ import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
 import org.server.controller.rep.LogoutRep;
+import org.server.controller.rep.chatroom.ChatroomListRep;
+import org.server.controller.rep.user.GetAllUserRep;
 import org.server.controller.req.LoginReq;
 import org.server.controller.req.UserAddReq;
 import org.server.exception.AddErrorException;
 import org.server.exception.LoginErrorException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.UserException;
-import org.server.service.ChatroomService;
 import org.server.service.JwtCacheService;
 import org.server.service.UserService;
 import org.server.vo.LoginVO;
@@ -29,6 +31,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -83,17 +86,25 @@ public class UserController{
     return BaseResp.ok(userVO, StatusCode.Success);
   }
 
-  @GetMapping("/gitAllUser")
+  @GetMapping("/getAllUser")
   @ApiOperation("查詢所有用戶")
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
-  public BaseResp<List<UserVO>> gitAllUser(){
+  public BaseResp<GetAllUserRep> getAllUser(@RequestParam("page")@ApiParam("頁碼(*必須)") Integer page,
+      @RequestParam("pageSize")@ApiParam("每頁顯示大小(*必須)") Integer pageSize){
 
-    List<UserVO> allUserVOs = userService.getAllUserVOs();
+    Page<UserVO> vos = userService.getAllUserVOs(page,pageSize);
+    GetAllUserRep rep = GetAllUserRep
+        .builder()
+        .userVOs(vos)
+        .build();
+    rep.setPage(vos.getPageNum());
+    rep.setPageSize(vos.getPageSize());
+    rep.setTotal(vos.getTotal());
+    rep.setTotalPage(vos.getPages());
 
-    return BaseResp.ok(allUserVOs,StatusCode.Success);
 
-
+    return BaseResp.ok(rep,StatusCode.Success);
 
   }
 

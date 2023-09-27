@@ -1,19 +1,25 @@
 package org.server.service;
 
 
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
+import org.server.dao.ChatroomDAO;
 import org.server.entity.CustomUserDetails;
 import org.server.exception.AddErrorException;
 import org.server.exception.LoginErrorException;
 import org.server.mapper.UserMapper;
 import org.server.dao.UserDAO;
 import org.server.sercice.IdGeneratorService;
+import org.server.vo.ChatroomRecordVO;
+import org.server.vo.ChatroomVO;
 import org.server.vo.LoginVO;
 import org.server.vo.UserVO;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.util.DigestUtils;
 
@@ -79,31 +85,23 @@ public class UserService{
   }
 
   public List<UserDAO> getAllUsers(){
-
     return userMapper.selectAllUsers();
   }
 
-  public List<UserVO> getAllUserVOs(){
-    List<UserDAO> allUsers = getAllUsers();
+  public Page<UserVO> getAllUserVOs(Integer page ,Integer pageSize){
+    Page<UserVO> vos = new Page<>();
+    Page<UserDAO> daos = PageHelper.startPage(page,pageSize)
+        .doSelectPage(() -> userMapper.selectAllUsers());
 
-    if (allUsers.size() == 0 || allUsers.isEmpty()) {
-      return null;
+    if(daos.isEmpty()){
+      return vos;
     }
-    List<UserVO> userVOs = new ArrayList<>();
-    for (UserDAO allUser : allUsers) {
-      UserVO userVO = UserVO.builder()
-          .id(allUser.getId())
-          .username(allUser.getUsername())
-          .avatarPth(allUser.getAvatarPth())
-          .address(allUser.getAddress())
-          .role(allUser.getRole())
-          .updateTime(allUser.getUpdateTime())
-          .createTime(allUser.getCreateTime())
-          .build();
-
-      userVOs.add(userVO);
+    BeanUtils.copyProperties(daos,vos);
+    for (UserDAO dao : daos) {
+      UserVO vo = convertDAOToVO(dao);
+      vos.add(vo);
     }
-    return userVOs;
+    return vos;
   }
 
   public UserVO getUserVO(String id){
@@ -145,6 +143,22 @@ public class UserService{
         .build();
 
 
+  }
+
+  public UserVO convertDAOToVO(UserDAO dao){
+    if(dao == null){
+      return null;
+    }
+    UserVO vo = UserVO.builder()
+        .id(dao.getId())
+        .username(dao.getUsername())
+        .avatarPth(dao.getAvatarPth())
+        .address(dao.getAddress())
+        .role(dao.getRole())
+        .updateTime(dao.getUpdateTime())
+        .createTime(dao.getCreateTime())
+        .build();
+    return vo;
   }
 
 
