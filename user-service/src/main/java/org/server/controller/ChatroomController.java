@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.List;
+import java.util.Map;
 import javax.annotation.Resource;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
@@ -25,7 +26,9 @@ import org.server.controller.req.chatroom.LeaveChatroomAllReq;
 import org.server.controller.req.chatroom.LeaveChatroomReq;
 import org.server.controller.req.chatroom.UpdateChatroomReq;
 import org.server.controller.req.chatroomRecord.AddChatSilenceCacheReq;
+import org.server.controller.req.chatroomRecord.DelSilenceCacheAllReq;
 import org.server.controller.req.chatroomRecord.DelSilenceCacheReq;
+import org.server.dao.ChatSilenceCacheDAO;
 import org.server.dao.UserDAO;
 import org.server.exception.AddErrorException;
 import org.server.exception.NotAllowedNullStrException;
@@ -39,6 +42,7 @@ import org.server.exception.chatroom.UpdateChatroomFailException;
 import org.server.service.ChatSilenceCacheService;
 import org.server.service.ChatroomService;
 import org.server.service.UserService;
+import org.server.vo.ChatSilenceCacheVO;
 import org.server.vo.ChatroomOnlineUserVO;
 import org.server.vo.ChatroomVO;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -298,18 +302,14 @@ public class ChatroomController extends BaseController {
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
   public BaseResp<GetSilenceCacheRep> getSilenceCache(@RequestParam @ApiParam("用戶Id*(必須)") String userId)
       throws NotFoundUserException {
-    //TODO 尚未實現針對聊天室靜言(目前全禁)
     if(StringUtils.isBlank(userId)){
       throw new NotFoundUserException();
     }
-    String chatroomId = chatSilenceCacheService.getSilenceCacheByUserId(userId);
+    Map<String, ChatSilenceCacheVO> vos = chatSilenceCacheService.ChatSilenceCacheDaoToVo(userId);
 
     GetSilenceCacheRep rep = GetSilenceCacheRep.builder().build();
-    if(StringUtils.isBlank(chatroomId)){
-      return BaseResp.ok(rep,StatusCode.Success);
-    }
-    rep.setUserId(userId);
-    rep.setChatroomId(chatroomId);
+
+    rep.setSilenceChatroomDatas(vos);
     return BaseResp.ok(rep,StatusCode.Success);
 
   }
@@ -319,17 +319,38 @@ public class ChatroomController extends BaseController {
   @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
       allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
   public BaseResp<String> delSilenceCache(@RequestBody @ApiParam("移除禁言人員請求") DelSilenceCacheReq req)
+      throws NotFoundUserException, MissingParameterErrorException {
+    if(StringUtils.isBlank(req.getUserId())){
+      throw new NotFoundUserException();
+    }
+
+    if(StringUtils.isBlank(req.getChatroomId())){
+      throw new MissingParameterErrorException();
+    }
+    String userId = req.getUserId();
+
+    String chatroomId = req.getChatroomId();
+
+    chatSilenceCacheService.delSilenceCacheByUserId(userId,chatroomId);
+
+    return BaseResp.ok(StatusCode.Success);
+
+  }
+
+  @PostMapping("/delSilenceCacheAll")
+  @ApiOperation("移除禁言人員(全部)")
+  @ApiImplicitParam(name = "Authorization", value = "JWT Token", required = true,
+      allowEmptyValue = false, paramType = "header", dataTypeClass = String.class)
+  public BaseResp<String> delSilenceCacheAll(@RequestBody @ApiParam("移除禁言人員請求(全部)") DelSilenceCacheAllReq req)
       throws NotFoundUserException {
     if(StringUtils.isBlank(req.getUserId())){
       throw new NotFoundUserException();
     }
     String userId = req.getUserId();
 
-    chatSilenceCacheService.delSilenceCacheByUserId(userId);
+    chatSilenceCacheService.delSilenceCacheByUserIdAll(userId);
 
     return BaseResp.ok(StatusCode.Success);
-
-    
 
   }
 

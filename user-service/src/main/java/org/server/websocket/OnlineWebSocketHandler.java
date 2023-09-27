@@ -12,12 +12,14 @@ import io.netty.handler.codec.http.websocketx.TextWebSocketFrame;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Set;
 import lombok.extern.log4j.Log4j2;
 
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.StatusCode;
 import org.server.dao.BlackListDAO;
+import org.server.dao.ChatSilenceCacheDAO;
 import org.server.entity.CustomUserDetails;
 import org.server.mq.MsgMqSender;
 import org.server.service.BlackListService;
@@ -191,7 +193,6 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     String senderUserId = WsChnIdUserIdMap.get(channelId);
     wsReq.setSenderUserId(senderUserId);
     //MQ
-
     //TODO EMsgType需要處理空
     if(wsReq.getEWsMsgType() == null){
       System.out.println("EMsgType不能為空");
@@ -205,12 +206,8 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
    */
   public void getChatroomMq(WsReq<String> wsReq) {
     String senderUserId = wsReq.getSenderUserId();
-    if(isSilenceCache(senderUserId)){
-      ChannelId setUserChannelId = WsUserIdChnIdMap.get(senderUserId);
-      checkChannelId(setUserChannelId,SyncMsgUtil.isSilenceCache());
-    }else {
-      setChatroom(wsReq, senderUserId);
-    }
+    //TODO 聊天室靜言已完成 私聊尚未
+    setChatroom(wsReq, senderUserId);
   }
 
 
@@ -256,7 +253,12 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
     switch (eWsMsgType) {
       case Chatroom:
         System.out.println("聊天室");
-        sendMsgToChatRoom(wsRep);
+        if(isSilenceCacheChatroom(senderUserId,chatroomId)){
+           ChannelId setUserChannelId = WsUserIdChnIdMap.get(senderUserId);
+           checkChannelId(setUserChannelId,SyncMsgUtil.isSilenceCache());
+        }else {
+          sendMsgToChatRoom(wsRep);
+        }
         chatRecordService.addChatRecord(senderUserId, receiverUserId, chatroomId, request,
             EWsMsgType.Chatroom);
         break;
@@ -361,13 +363,15 @@ public class OnlineWebSocketHandler extends SimpleChannelInboundHandler<TextWebS
    *
    * @param userId
    */
-  public Boolean isSilenceCache(String userId){
-    String chatroomId = chatSilenceCacheService.getSilenceCacheByUserId(userId);
-    if(StringUtils.isBlank(chatroomId)){
-      return false;
-    }else {
-      return true;
+  public Boolean isSilenceCacheChatroom(String userId, String chatroomId) {
+    Map<String, ChatSilenceCacheDAO> chatroomIds = chatSilenceCacheService.getSilenceCacheByUserId(userId);
+    if (chatroomIds.containsKey(chatroomId)) {
+      ChatSilenceCacheDAO dao = chatroomIds.get(chatroomId);
+      long timeout = dao.getTimeout();
+      long currentTimeMillis = System.currentTimeMillis();
+      return timeout > currentTimeMillis;
     }
+    return false;
   }
 
 

@@ -16,4 +16,8 @@ public class DelSilenceCacheReq {
   @ApiModelProperty(value="用户id(*必須)")
   private String userId;
 
+
+  @ApiModelProperty(value="聊天室ID(*必須)")
+  private String chatroomId;
+
 }
