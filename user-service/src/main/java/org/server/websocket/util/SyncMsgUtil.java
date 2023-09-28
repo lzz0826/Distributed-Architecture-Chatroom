@@ -11,7 +11,7 @@ public class SyncMsgUtil {
     public static WsRep<Object> getWelcomeMsg() {
         return WsRep.builder()
                 .statusCode(StatusCode.Success)
-                .eWsMsgType(EWsMsgType.Chatroom)
+                .eWsMsgType(EWsMsgType.Welcome)
                 .response("Welcome")
                 .eMsgType(EMsgType.System)
             .build();
@@ -20,7 +20,7 @@ public class SyncMsgUtil {
     public static WsRep<Object> getPongMsg() {
         return WsRep.builder()
                 .statusCode(StatusCode.Success)
-                .eWsMsgType(EWsMsgType.Chatroom)
+                .eWsMsgType(EWsMsgType.HeartBeatPong)
                 .response("pong")
                 .eMsgType(EMsgType.HeartBeat)
             .build();
@@ -28,7 +28,7 @@ public class SyncMsgUtil {
 
     public static WsRep<Object> getNeedTokenMsg() {
         return WsRep.builder()
-                .eWsMsgType(EWsMsgType.Chatroom)
+                .eWsMsgType(EWsMsgType.NotLogin)
                 .statusCode(StatusCode.NeedToken)
                 .eMsgType(EMsgType.System)
             .build();
@@ -37,7 +37,7 @@ public class SyncMsgUtil {
 
     public static WsRep<Object> isSilenceCache() {
         return WsRep.builder()
-            .eWsMsgType(EWsMsgType.Chatroom)
+            .eWsMsgType(EWsMsgType.IsSilence)
             .statusCode(StatusCode.IsSilenceCache)
             .eMsgType(EMsgType.System)
             .build();

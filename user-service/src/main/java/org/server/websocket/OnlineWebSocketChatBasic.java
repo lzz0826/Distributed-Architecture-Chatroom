@@ -44,8 +44,7 @@ public class OnlineWebSocketChatBasic extends SimpleChannelInboundHandler<TextWe
   /**
    * MQ轉發(確保起多個服務,在不同的服務上都能收到)
    */
-  public void setChatroomMq(String text,ChannelHandlerContext ctx) {
-    WsReq<String> wsReq = JSON.parseObject(text, WsReq.class);
+  public void setChatroomMq(WsReq<String> wsReq ,ChannelHandlerContext ctx) {
     ChannelId channelId = ctx.channel().id();
     String senderUserId = WsChnIdUserIdMap.get(channelId);
     wsReq.setSenderUserId(senderUserId);

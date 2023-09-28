@@ -6,7 +6,6 @@ public enum EMsgType {
   System("system"),
 
   App("app"),
-
   HeartBeat("heartBeat");
 
   public final String code;

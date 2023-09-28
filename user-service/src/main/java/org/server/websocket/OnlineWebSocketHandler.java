@@ -1,6 +1,7 @@
 package org.server.websocket;
 
 
+import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -17,6 +18,8 @@ import org.server.service.JwtCacheService;
 import org.server.util.FastJsonUtil;
 import org.server.util.SpringUtil;
 import org.server.websocket.entity.WsRep;
+import org.server.websocket.entity.WsReq;
+import org.server.websocket.enums.EMsgType;
 import org.server.websocket.mpa.WsChatRoomMap;
 import org.server.websocket.mpa.WsChnIdCtxMap;
 import org.server.websocket.mpa.WsChnIdUserIdMap;
@@ -64,6 +67,7 @@ public class OnlineWebSocketHandler extends OnlineWebSocketChatBasic {
         //jwt裡沒有token代表沒登入
         checkIsLogin = false;
       } else {
+        //儲存關係
         String userId = user.getId();
         ChannelId chnId = ctx.channel().id();
         WsUserIdChnIdMap.put(userId, chnId);
@@ -75,10 +79,12 @@ public class OnlineWebSocketHandler extends OnlineWebSocketChatBasic {
       String text = frame.text();
       // 正常的text消息類型
       log.info("客戶端收到服務器數據：{}", text);
-      //聊天室
-      setChatroomMq(text,ctx);
+      WsReq<String> wsReq = JSON.parseObject(text, WsReq.class);
+      judgeEMsgType(wsReq,ctx);
+
     }
     super.channelRead(ctx, msg);
+
     if (msg instanceof FullHttpRequest) {
       if (!checkIsLogin) {
         sendMsgByCtx(ctx, SyncMsgUtil.getNeedTokenMsg());
@@ -87,6 +93,7 @@ public class OnlineWebSocketHandler extends OnlineWebSocketChatBasic {
       }
       sendMsgByCtx(ctx, SyncMsgUtil.getWelcomeMsg());
     } else if (msg instanceof TextWebSocketFrame) {
+      //心跳(只要接收到訊息都發一次心跳)
       sendMsgByCtx(ctx, SyncMsgUtil.getPongMsg());
     }
   }
@@ -156,5 +163,27 @@ public class OnlineWebSocketHandler extends OnlineWebSocketChatBasic {
     String msg = JSONObject.toJSONString(rep, FastJsonUtil.getCommonSerializeConfig());
     ctx.channel().writeAndFlush(new TextWebSocketFrame(msg));
   }
+
+  /**
+   * 判斷消息類型
+   *
+   */
+
+  private void judgeEMsgType(WsReq<String> wsReq,ChannelHandlerContext ctx){
+    EMsgType eMsgType = wsReq.getEMsgType();
+    switch (eMsgType){
+      case System:
+        break;
+      case App:
+        //聊天室主邏輯
+        setChatroomMq(wsReq,ctx);
+        break;
+      case HeartBeat:
+        break;
+    }
+
+  }
+
+
 
 }

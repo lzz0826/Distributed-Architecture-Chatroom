@@ -4,6 +4,14 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum EWsMsgType {
 
+  Welcome("welcome"),
+
+  NotLogin("notLogin"),
+
+  IsSilence("isSilence"),
+
+  HeartBeatPong("heartBeatPong"),
+
   Chatroom("chatroom"),
 
   PrivateChat("privateChat"),
