@@ -50,13 +50,15 @@ CREATE TABLE IF NOT EXISTS `tb_black_list` (
 -- 创建聊天记录表
 CREATE TABLE IF NOT EXISTS `tb_chat_record` (
     `id` varchar(40) NOT NULL COMMENT '聊天紀錄id',
-    `user_id` varchar(40) DEFAULT NULL COMMENT '發送者的userId',
+    `sender_user_id` varchar(40) DEFAULT NULL COMMENT '發送者的userId',
     `receiver_user_id` varchar(40) DEFAULT NULL COMMENT '接收者的userId',
     `chatroom_id` varchar(40) DEFAULT NULL COMMENT '聊天室Id',
     `msg_type` varchar(40) DEFAULT NULL COMMENT '訊息種類chatroom.privateChat.all',
+    `system_msg_type` varchar(40) DEFAULT NULL,
     `content` text COMMENT '內容',
     `status` tinyint(4) DEFAULT NULL COMMENT '狀態',
     `update_time` timestamp NOT NULL COMMENT '更新時間',
     `create_time` timestamp NOT NULL COMMENT '創建時間',
     PRIMARY KEY (`id`)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='聊天記錄';
+

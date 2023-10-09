@@ -2,16 +2,20 @@ package org.server.dao;
 
 
 import java.util.Date;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class ChatRecordDAO {
 
   private String id;
 
-  private String userId;
+  private String senderUserId;
 
   private String receiverUserId;
 
@@ -20,6 +24,8 @@ public class ChatRecordDAO {
   private String content;
 
   private String msgType;
+
+  private String systemMsgType;
 
   private Boolean status;
 

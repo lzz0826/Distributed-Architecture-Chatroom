@@ -13,7 +13,7 @@ public class ListReq {
   private String id;
 
   @ApiModelProperty(value="發送者userId(非必須)")
-  private String userId;
+  private String senderUserId;
 
   @ApiModelProperty(value="接收者userId(非必須)")
   private String receiverUserId;
@@ -26,6 +26,9 @@ public class ListReq {
 
   @ApiModelProperty(value="聊天類型(非必須) 私聊:privateChat 公告:all 聊天室:chatroom")
   private String msgType;
+
+  @ApiModelProperty(value="訊息類型(非必須 System . App . HeartBeat )")
+  private String systemMsgType;
 
   @ApiModelProperty(value="狀態(非必須)")
   private Boolean status;

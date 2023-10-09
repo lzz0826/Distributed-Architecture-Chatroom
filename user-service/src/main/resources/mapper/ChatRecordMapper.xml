@@ -6,10 +6,11 @@
 
   <resultMap id="BaseResultMap" type="org.server.dao.ChatRecordDAO">
     <id property="id" column="id" jdbcType="VARCHAR"/>
-    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="senderUserId" column="sender_user_id" jdbcType="VARCHAR"/>
     <result property="receiverUserId" column="receiver_user_id" jdbcType="VARCHAR"/>
     <result property="chatroomId" column="chatroom_id" jdbcType="VARCHAR"/>
     <result property="msgType" column="msg_type" jdbcType="VARCHAR"/>
+    <result property="systemMsgType" column="system_msg_type" jdbcType="VARCHAR"/>
     <result property="content" column="content" jdbcType="LONGNVARCHAR"/>
     <result property="status" column="status" jdbcType="INTEGER"/>
     <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
@@ -20,10 +21,11 @@
     insert into tb_chat_record
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">id,</if>
-      <if test="userId != null">user_id,</if>
+      <if test="senderUserId != null">sender_user_id,</if>
       <if test="receiverUserId != null">receiver_user_id,</if>
       <if test="chatroomId != null">chatroom_id,</if>
       <if test="msgType != null">msg_type,</if>
+      <if test="systemMsgType != null">system_msg_type,</if>
       <if test="content != null">content,</if>
       <if test="status != null">status,</if>
       <if test="updateTime != null">update_time,</if>
@@ -32,10 +34,11 @@
     values
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">#{id,jdbcType=VARCHAR},</if>
-      <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+      <if test="senderUserId != null">#{senderUserId,jdbcType=VARCHAR},</if>
       <if test="receiverUserId != null">#{receiverUserId,jdbcType=VARCHAR},</if>
       <if test="chatroomId != null">#{chatroomId,jdbcType=VARCHAR},</if>
       <if test="msgType != null">#{msgType,jdbcType=VARCHAR},</if>
+      <if test="systemMsgType != null">#{systemMsgType,jdbcType=VARCHAR},</if>
       <if test="content != null">#{content,jdbcType=LONGVARCHAR},</if>
       <if test="status != null">#{status,jdbcType=INTEGER},</if>
       <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
@@ -45,14 +48,14 @@
   </insert>
 
 
-  <select id="selectChatRecords" resultType="org.server.dao.ChatRecordDAO">
+  <select resultMap="BaseResultMap" id="selectChatRecords" resultType="org.server.dao.ChatRecordDAO">
     SELECT * FROM tb_chat_record
     <where>
       <if test="id != null and id != ''">
         AND id = #{id}
       </if>
-      <if test="userId != null and userId != ''">
-        AND user_id = #{userId}
+      <if test="senderUserId != null and senderUserId != ''">
+        AND sender_user_id = #{senderUserId}
       </if>
       <if test="receiverUserId != null and receiverUserId != ''">
         AND receiver_user_id = #{receiverUserId}
@@ -62,6 +65,9 @@
       </if>
       <if test="msgType != null and msgType != ''">
         AND msg_type = #{msgType}
+      </if>
+      <if test="systemMsgType != null and systemMsgType != ''">
+        AND system_msg_type = #{systemMsgType}
       </if>
       <if test="content != null and content != ''">
         AND content LIKE CONCAT('%', #{content}, '%')

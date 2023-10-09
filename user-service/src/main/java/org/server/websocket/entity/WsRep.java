@@ -45,7 +45,6 @@ public class WsRep<T> {
   private String senderUserId;
 
 
-
   /**
    * 聊天室ID
    */

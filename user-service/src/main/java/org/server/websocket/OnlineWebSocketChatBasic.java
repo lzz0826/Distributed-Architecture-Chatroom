@@ -116,19 +116,19 @@ public class OnlineWebSocketChatBasic extends SimpleChannelInboundHandler<TextWe
           sendMsgToChatRoom(wsRep);
         }
         chatRecordService.addChatRecord(senderUserId, receiverUserId, chatroomId, request,
-            EWsMsgType.Chatroom);
+            EWsMsgType.Chatroom,EMsgType.App);
         break;
       case PrivateChat:
         System.out.println("私聊");
         sendMsgToUser(wsRep);
         chatRecordService.addChatRecord(senderUserId, receiverUserId, chatroomId, request,
-            EWsMsgType.PrivateChat);
+            EWsMsgType.PrivateChat,EMsgType.App);
         break;
       case All:
         System.out.println("公告");
         sendMsgToAll(wsRep);
         chatRecordService.addChatRecord(senderUserId, receiverUserId, chatroomId, request,
-            EWsMsgType.All);
+            EWsMsgType.All,EMsgType.System);
         break;
       default:
         log.error("無法發送信息，其他錯誤");

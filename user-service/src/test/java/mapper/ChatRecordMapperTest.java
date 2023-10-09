@@ -4,9 +4,10 @@ import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
 import org.junit.Test;
+import org.server.controller.req.chatroomRecord.ListReq;
 import org.server.dao.ChatRecordDAO;
-import org.server.dao.ChatroomDAO;
 import org.server.mapper.ChatRecordMapper;
+import org.server.websocket.enums.EMsgType;
 import org.server.websocket.enums.EWsMsgType;
 
 public class ChatRecordMapperTest extends BaseTest {
@@ -36,18 +37,35 @@ public class ChatRecordMapperTest extends BaseTest {
 
     ChatRecordDAO build = ChatRecordDAO
         .builder()
-        .id("22442")
-        .userId("333")
-        .receiverUserId("4444")
-        .chatroomId("2222")
-        .content("test9999")
-        .msgType(EWsMsgType.PrivateChat.code)
+        .id("TEED")
+        .senderUserId("aaaa")
+        .receiverUserId("bbbb")
+        .chatroomId("vvvv")
+        .content("ddddd")
         .status(true)
         .updateTime(new Date())
         .createTime(new Date())
         .build();
 
     int i = chatRecordMapper.insertChatRecord(build);
+
+  }
+
+
+  @Test
+  public void selectChatRecordsTest(){
+
+    ListReq build = ListReq.builder()
+        .id("3587852724376419744")
+        .build();
+
+    List<ChatRecordDAO> daos = chatRecordMapper.selectChatRecords(build);
+
+    for (ChatRecordDAO dao : daos) {
+      System.out.println(dao);
+
+    }
+
 
   }
 
