@@ -18,6 +18,8 @@ public enum StatusCode {
 
   NotAllowedNullStr(14,"不允許空的字串"),
 
+  BindExceptionError(15,"數據綁定錯誤,參數型別錯誤"),
+
 
  /**
    * User 1000
