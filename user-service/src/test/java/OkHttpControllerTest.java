@@ -4,6 +4,7 @@ import org.junit.Test;
 import org.server.client.controller.OkHttpController;
 import org.server.client.obj.Order;
 import org.server.client.obj.Results;
+import org.server.common.BaseResp;
 
 public class OkHttpControllerTest extends BaseTest {
 
@@ -28,8 +29,26 @@ public class OkHttpControllerTest extends BaseTest {
     OkHttpController okHttpController = new OkHttpController();
     String msg = okHttpController.sendForm();
     System.out.println(msg);
-    Order o = JSON.parseObject(msg, Order.class);
-    System.out.println(o.getUserId());
+    BaseResp<Object> baseResp = BaseResp.builder().build();
+    Order order = Order.builder().build();
+    try{
+      baseResp = JSON.parseObject(msg, BaseResp.class);
+    }catch (Exception e){
+      System.out.println("解析JSON BaseResp失敗");
+    }
+    try{
+      order = JSON.parseObject(msg, Order.class);
+
+    }catch (Exception e){
+      System.out.println("解析JSON Order失敗");
+
+    }
+    Integer statusCode = baseResp.getStatusCode();
+    String mst = baseResp.getMst();
+
+    System.out.println(order.toString());
+    System.out.println(statusCode);
+    System.out.println(mst);
 
   }
 
@@ -56,7 +75,19 @@ public class OkHttpControllerTest extends BaseTest {
     }
     System.out.println(order.getUserVO().getId());
 
-
   }
+  @Test
+  public void testSendImg (){
+    OkHttpController okHttpController = new OkHttpController();
+    String s = okHttpController.sendImg();
+    System.out.println(s);
+  }
+
+  @Test
+  public void testSendSyncImg (){
+    OkHttpController okHttpController = new OkHttpController();
+    okHttpController.sendSyncImg();
+  }
+
 
 }

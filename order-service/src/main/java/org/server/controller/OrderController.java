@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
 import org.server.common.BaseResp;
+import org.server.controller.rep.OrderRep;
 import org.server.controller.rep.Results;
 import org.server.controller.req.OrderReq;
 import org.server.exception.NotOrderUserException;
@@ -59,14 +60,21 @@ public class OrderController {
    * form表单
    */
   @PostMapping("/test/form")
-  public String getFormMsg(OrderReq req) {
+  public BaseResp<OrderRep> getFormMsg(OrderReq req) {
     System.out.println("/test/form 收到");
     System.out.println(req.toString());
-    req.setId("9999");
-    req.setUserId("8888");
-    req.setPrice(100+req.getPrice());
-    log.info(JSON.toJSONString(req));
-    return JSON.toJSONString(req);
+
+    OrderRep rep = OrderRep
+        .builder()
+        .id("9999")
+        .userId("8888")
+        .price(100+req.getPrice())
+        .build();
+//    log.info(JSON.toJSONString(req));
+
+    return BaseResp.ok(rep);
+
+//    return JSON.toJSONString(req);
   }
 
   /**
@@ -119,8 +127,9 @@ public class OrderController {
   @PostMapping("/test/img")
   public void getResult(HttpServletRequest request,
       HttpServletResponse response) {
+    System.out.println("回照片啟動..");
     try {
-      File file = new File("/Users/yexuerui/Downloads/二维码池改造.png");
+      File file = new File("/Users/sai/Desktop/截圖 2023-11-06 上午11.42.52.png");
       FileInputStream inputStream = new FileInputStream(file);
       byte[] data = new byte[(int) file.length()];
       //信息从文件输入到JVM的数组中
@@ -131,6 +140,7 @@ public class OrderController {
       //信息从JVM的数组输出到
       outputStream.write(data);
       outputStream.close();
+      System.out.println("返返回照片結束..");
     } catch (FileNotFoundException e) {
       log.error("", e);
     } catch (IOException e) {

@@ -1,12 +1,24 @@
 package org.server.controller.rep;
 
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
-import org.server.vo.OrderVO;
+import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class OrderRep {
-  private OrderVO orderVO;
+
+  private String id;
+
+  private String userId;
+
+  private String name;
+
+  private int price;
+
+  private int num ;
 
 }

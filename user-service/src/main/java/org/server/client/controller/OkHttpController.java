@@ -64,14 +64,14 @@ public class OkHttpController {
   }
 
 
-  //TODO
-
   @GetMapping("/test/img")
   public String sendImg() {
     System.out.println("sendImg啟動");
     String url = "http://localhost:8081/order/order/test/img";
     return OkHttpUtil.postImg(url, null, "{}");
   }
+
+
   //异步调用
   @GetMapping("/test/sync/img")
   public void sendSyncImg() {
