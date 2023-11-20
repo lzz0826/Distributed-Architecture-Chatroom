@@ -52,6 +52,12 @@ spring:
       config:
         server-addr: 127.0.0.1:8848
 
+#log4j2
+logging:
+  config: classpath:log4j2.xml
+  level:
+    cn.jay.repository: trace
+
 #檔案上傳
 tmp:
   upload:

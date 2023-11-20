@@ -20,6 +20,13 @@ spring:
         namespace: public
       config:
         server-addr: 127.0.0.1:8848
+
+#log4j2
+logging:
+  config: classpath:log4j2.xml
+  level:
+    cn.jay.repository: trace
+
 mybatis:
   mapper-locations: classpath*:mapper/*.xml #MyBatis映射文件的位置
   configuration:
