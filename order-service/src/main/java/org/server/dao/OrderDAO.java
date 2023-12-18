@@ -1,6 +1,7 @@
 package org.server.dao;
 
 
+import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
 
@@ -12,11 +13,19 @@ public class OrderDAO {
 
   private String userId;
 
-  private String name;
+  private String walletId;
 
   private int price;
 
-  private int num ;
+  private String paymentMethod;
+
+  private int type;
+
+  private int status;
+
+  private Date updateTime;
+
+  private Date createTime;
 
 
 

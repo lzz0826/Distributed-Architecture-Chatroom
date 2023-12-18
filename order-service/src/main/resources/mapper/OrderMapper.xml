@@ -6,11 +6,15 @@
   <resultMap id="BaseResultMap" type="org.server.dao.OrderDAO">
     <id property="id" column="id" jdbcType="VARCHAR"/>
     <result property="userId" column="user_id" jdbcType="VARCHAR"/>
-    <result property="name" column="name" jdbcType="VARCHAR"/>
+    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="walletId" column="wallet_id" jdbcType="VARCHAR"/>
     <result property="price" column="price" jdbcType="INTEGER"/>
-    <result property="num" column="num" jdbcType="INTEGER"/>
+    <result property="paymentMethod" column="payment_method" jdbcType="VARCHAR"/>
+    <result property="type" column="status" jdbcType="INTEGER"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
   </resultMap>
-
 
 
   <insert id="insertOrder">
@@ -18,17 +22,24 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">id,</if>
       <if test="userId != null">user_id,</if>
-      <if test="name != null">name,</if>
+      <if test="walletId != null">wallet_id,</if>
       <if test="price != null">price,</if>
-      <if test="num != null">num,</if>
+      <if test="paymentMethod != null">payment_method,</if>
+      <if test="status != null">status,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+
     </trim>
     values
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">#{id,jdbcType=VARCHAR},</if>
       <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
-      <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+      <if test="walletId != null">#{walletId,jdbcType=VARCHAR},</if>
       <if test="price != null">#{price,jdbcType=INTEGER},</if>
-      <if test="num != null">#{num,jdbcType=INTEGER},</if>
+      <if test="paymentMethod != null">#{paymentMethod,jdbcType=VARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
     </trim>
   </insert>
 

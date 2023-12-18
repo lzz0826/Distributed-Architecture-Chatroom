@@ -1,6 +1,7 @@
 package mapper;
 
 
+import java.util.Date;
 import org.server.mapper.OrderMapper;
 import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
@@ -47,9 +48,13 @@ public class OrderMapperTest extends BaseTest{
         .builder()
         .id(idGeneratorService.getNextId())
         .userId(idGeneratorService.getNextId())
-        .name("tony22")
+        .walletId(idGeneratorService.getNextId())
         .price(200)
-        .num(1)
+        .paymentMethod("paymentMethod")
+        .type(1)
+        .status(2)
+        .createTime(new Date())
+        .updateTime(new Date())
         .build();
     int i = orderMapper.insertOrder(tony);
     System.out.println(i);

@@ -7,3 +7,4 @@
 /eureka-server/target/
 /uploadTmp/
 /logs/
+/order-service/logs/

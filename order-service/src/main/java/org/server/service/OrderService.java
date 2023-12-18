@@ -56,10 +56,15 @@ public class OrderService {
         .builder()
         .id(order.getId())
         .userId(order.getUserId())
-        .name(order.getName())
+        .walletId(order.getWalletId())
         .price(order.getPrice())
-        .num(order.getNum())
+        .paymentMethod(order.getPaymentMethod())
+        .type(order.getType())
+        .status(order.getStatus())
+        .price(order.getPrice())
         .userVO(userVO)
+        .createTime(order.getCreateTime())
+        .updateTime(order.getUpdateTime())
         .build();
 
 

@@ -1,5 +1,6 @@
 package org.server.vo;
 
+import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
 
@@ -11,12 +12,19 @@ public class OrderVO {
 
   private String userId;
 
-  private String name;
+  private String walletId;
 
   private int price;
 
-  private int num ;
+  private String paymentMethod;
 
+  private int type;
+
+  private int status;
+
+  private Date updateTime;
+
+  private Date createTime;
   private UserVO userVO;
 
 }
