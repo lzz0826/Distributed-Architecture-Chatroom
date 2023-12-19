@@ -44,6 +44,9 @@
 
 
   </select>
+  <select resultMap = "BaseResultMap" id="selectByIdUserID" resultType="org.server.dao.WalletsDAO">
+    SELECT * FROM tb_wallets WHERE user_id = #{userId}
+  </select>
 
 
 </mapper>

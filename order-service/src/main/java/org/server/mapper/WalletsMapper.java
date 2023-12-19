@@ -16,6 +16,9 @@ public interface WalletsMapper {
 
   WalletsDAO selectById(@Param("walletId") String walletId);
 
+  WalletsDAO selectByIdUserID(@Param("userId") String userId);
+
+
 
 
 }

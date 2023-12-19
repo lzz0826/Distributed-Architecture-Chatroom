@@ -40,10 +40,16 @@ public enum StatusCode {
 
 
  /**
-   * Order 2000
-   */
+  * Order 2000
+  */
 
   NotFoundOrder(2000,"找不到訂單"),
+
+
+ /**
+  * Wallet 2500
+  */
+ AddUserWalletFail(2500,"新增錢包失敗"),
 
 
 

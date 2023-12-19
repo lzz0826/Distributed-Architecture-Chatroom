@@ -44,7 +44,16 @@ public class WalletsMapperTest extends BaseTest{
   @Test
   public void selectByIdTest(){
 
-    WalletsDAO walletsDAO = walletsMapper.selectById("4159499042618433944");
+    WalletsDAO walletsDAO = walletsMapper.selectById("456");
+    System.out.println(walletsDAO);
+  }
+
+  @Test
+  public void selectByIdUserIDTest(){
+    WalletsDAO walletsDAO = walletsMapper.selectByIdUserID("456");
+    if(walletsDAO == null){
+      System.out.println("空");
+    }
     System.out.println(walletsDAO);
   }
 
