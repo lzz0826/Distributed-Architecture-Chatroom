@@ -1,5 +1,6 @@
 package org.server.mapper;
 
+import java.math.BigDecimal;
 import org.server.dao.OrderDAO;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
@@ -15,7 +16,7 @@ public interface OrderMapper {
 
    OrderDAO selectById(@Param("id") String id);
 
-   int updateByName(@Param("name") String name ,@Param("price") int price);
+   int updateByUserId(@Param("userId") String name ,@Param("price") BigDecimal price);
 
 
 }

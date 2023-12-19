@@ -12,29 +12,11 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDAO {
-
-  private String id;
-
-  private String userId;
-
+public class WalletsDAO {
   private String walletId;
-
-  private BigDecimal price; // 改為 BigDecimal
-
-  private String paymentMethod;
-
-  private int type;
-
-  private int status;
-
+  private String userId;
+  private BigDecimal balance;
+  private Integer status;
   private Date updateTime;
-
   private Date createTime;
-
-
-
-
-
-
 }

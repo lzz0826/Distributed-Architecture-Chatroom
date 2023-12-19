@@ -1,6 +1,7 @@
 package mapper;
 
 
+import java.math.BigDecimal;
 import java.util.Date;
 import org.server.mapper.OrderMapper;
 import org.server.dao.OrderDAO;
@@ -21,10 +22,10 @@ public class OrderMapperTest extends BaseTest{
   @Test
   public void test(){
 
-    String name= "to3333ny";
+    String userId= "4159389780461786807";
 
-    int price = 500;
-    int i = orderMapper.updateByName(name,price);
+    BigDecimal bigDecimal = new BigDecimal(55.5551);
+    int i = orderMapper.updateByUserId(userId,bigDecimal);
 
     System.out.println(i);
 
@@ -32,7 +33,7 @@ public class OrderMapperTest extends BaseTest{
 
   @Test
   public void selectByIdTest(){
-    OrderDAO order = orderMapper.selectById("2890589042718397264");
+    OrderDAO order = orderMapper.selectById("4159387311728139580");
     System.out.println(order);
   }
 
@@ -49,7 +50,7 @@ public class OrderMapperTest extends BaseTest{
         .id(idGeneratorService.getNextId())
         .userId(idGeneratorService.getNextId())
         .walletId(idGeneratorService.getNextId())
-        .price(200)
+        .price(new BigDecimal(100.222222))
         .paymentMethod("paymentMethod")
         .type(1)
         .status(2)

@@ -1,5 +1,6 @@
 package org.server.vo;
 
+import java.math.BigDecimal;
 import java.util.Date;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +15,7 @@ public class OrderVO {
 
   private String walletId;
 
-  private int price;
+  private BigDecimal price; // 改為 BigDecimal
 
   private String paymentMethod;
 

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.WalletsMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.dao.WalletsDAO">
+    <id property="walletId" column="wallet_id" jdbcType="VARCHAR"/>
+    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="balance" column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <insert id="insertWallets">
+    insert into tb_wallets
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="walletId != null">wallet_id,</if>
+      <if test="userId != null">user_id,</if>
+      <if test="balance != null">balance,</if>
+      <if test="status != null">status,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="walletId != null">#{walletId,jdbcType=VARCHAR},</if>
+      <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
+      <if test="balance != null">#{balance,jdbcType=DECIMAL,javaType=java.math.BigDecimal},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+  <select resultMap = "BaseResultMap"  id="selectAll" resultType="org.server.dao.WalletsDAO">
+    SELECT * FROM tb_wallets
+  </select>
+
+  <select resultMap = "BaseResultMap" id="selectById" resultType="org.server.dao.WalletsDAO">
+
+    SELECT * FROM tb_wallets WHERE wallet_id = #{walletId}
+
+
+  </select>
+
+
+</mapper>
