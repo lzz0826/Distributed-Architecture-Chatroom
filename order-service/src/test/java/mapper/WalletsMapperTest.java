@@ -58,6 +58,40 @@ public class WalletsMapperTest extends BaseTest{
   }
 
 
+  @Test
+  public void updateByUserIdTest(){
+
+    WalletsDAO build = WalletsDAO
+        .builder()
+        .walletId("33")
+        .userId("4159499042618433945")
+        .status(2)
+        .balance(new BigDecimal(120.44))
+        .createTime(new Date())
+        .updateTime(new Date())
+        .build();
+
+    walletsMapper.updateByUserId(build);
+
+  }
+
+  @Test
+  public void increaseBalanceByUserIdTest(){
+    String userId = "4159499042618433945";
+    BigDecimal bigDecimal = new BigDecimal(44.5);
+    walletsMapper.increaseBalanceByWalletId(userId,bigDecimal,new Date());
+  }
+
+  @Test
+  public void reduceBalanceByUserIdTest(){
+    String userId = "4159499042618433945";
+    BigDecimal bigDecimal = new BigDecimal(434.5);
+    walletsMapper.reduceBalanceByWalletId(userId,bigDecimal,new Date());
+  }
+
+
+
+
 
 
 }

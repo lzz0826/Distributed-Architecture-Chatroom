@@ -1,37 +1,26 @@
 package org.server.service;
 
-import com.alibaba.fastjson2.JSON;
-import java.lang.reflect.Field;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.annotation.Resource;
-import org.apache.commons.lang3.StringUtils;
-import org.server.common.BaseResp;
-import org.server.dao.OrderDAO;
 import org.server.dao.WalletsDAO;
 import org.server.exception.AddUserWalletFailException;
-import org.server.exception.NotOrderUserException;
-import org.server.mapper.OrderMapper;
+import org.server.exception.IncreaseBalanceException;
+import org.server.exception.MissingParameterErrorException;
 import org.server.mapper.WalletsMapper;
 import org.server.sercice.IdGeneratorService;
-import org.server.vo.OrderVO;
-import org.server.vo.UserVO;
 import org.server.vo.WalletsVO;
 import org.springframework.beans.BeanUtils;
-import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.client.RestTemplate;
 
 @Service
 public class WalletService {
 
-
   @Resource
   private WalletsMapper walletsMapper;
-
 
   @Resource
   private IdGeneratorService idGeneratorService;
@@ -44,18 +33,12 @@ public class WalletService {
     System.out.println(userId);
 
     WalletsDAO repDao = getWalletByUserId(userId);
-    System.out.println("1111");
-
     System.out.println(repDao);
 
-
     if(repDao != null){
-      System.out.println("5555");
       BeanUtils.copyProperties(repDao,vo);
       return vo;
     }
-    System.out.println("666");
-
     WalletsDAO dao = WalletsDAO
         .builder()
         .walletId(idGeneratorService.getNextId())
@@ -68,7 +51,7 @@ public class WalletService {
 
     int i = walletsMapper.insertWallets(dao);
 
-    if(i < 1){
+    if(i == 0){
       throw new AddUserWalletFailException();
     }
     BeanUtils.copyProperties(dao,vo);
@@ -76,8 +59,37 @@ public class WalletService {
 
   }
 
+  @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
+  public WalletsVO increaseBalanceByUserId(String walletId , BigDecimal balance)
+      throws MissingParameterErrorException, IncreaseBalanceException {
+    if(walletId.isEmpty()){
+      throw new MissingParameterErrorException();
+    }
+    if(balance == null){
+      throw new MissingParameterErrorException();
+    }
+
+    WalletsVO vo = new WalletsVO();
+
+    int i = walletsMapper.increaseBalanceByWalletId(walletId, balance , new Date());
+
+
+    if(i == 0){
+      throw  new IncreaseBalanceException();
+    }
+    WalletsDAO dao = getWalletByWalletId(walletId);
+
+    BeanUtils.copyProperties(dao,vo);
+    return vo;
+
+  }
+
   public WalletsDAO getWalletByUserId(String userId){
     return walletsMapper.selectByIdUserID(userId);
+  }
+
+  public WalletsDAO getWalletByWalletId(String walletId){
+    return walletsMapper.selectById(walletId);
   }
 
   public boolean checkUserHasWallet(String userId){

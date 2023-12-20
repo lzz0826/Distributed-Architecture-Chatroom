@@ -51,6 +51,8 @@ public enum StatusCode {
   */
  AddUserWalletFail(2500,"新增錢包失敗"),
 
+ IncreaseBalanceFail(2501,"添加餘額失敗"),
+
 
 
   /**

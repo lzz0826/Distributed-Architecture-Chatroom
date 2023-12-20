@@ -49,4 +49,29 @@
   </select>
 
 
+  <update  id="updateByUserId">
+    UPDATE `tb_wallets`
+    <trim prefix='set' suffixOverrides=','>
+      <if test="walletId != null"> wallet_id = #{walletId},</if>
+      <if test="userId != null"> user_id = #{userId},</if>
+      <if test="balance != null"> balance = #{balance},</if>
+      <if test="status != null"> status = #{status},</if>
+      <if test="createTime != null"> create_time = #{createTime},</if>
+      <if test="updateTime != null"> update_time = #{updateTime},</if>
+    </trim>
+    WHERE user_id = #{userId}
+  </update>
+  <update id="increaseBalanceByWalletId">
+    update tb_wallets
+    set balance = balance + #{increase} ,update_time = #{updateTime}
+    where wallet_id = #{walletId}
+
+  </update>
+  <update id="reduceBalanceByWalletId">
+    update tb_wallets
+    set balance = balance - #{reduce} ,update_time = #{updateTime}
+    where wallet_id = #{walletId}
+  </update>
+
+
 </mapper>
