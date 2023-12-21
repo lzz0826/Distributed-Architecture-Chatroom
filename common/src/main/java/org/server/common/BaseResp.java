@@ -63,7 +63,7 @@ public class BaseResp<T> {
     return (BaseResp<T>) BaseResp
         .builder()
         .data(data)
-        .data(statusCode)
+        .statusCode(statusCode)
         .build();
   }
 
@@ -73,6 +73,13 @@ public class BaseResp<T> {
         .builder()
         .data(statusCode)
         .statusCode(statusCode)
+        .build();
+  }
+
+  public static <T> BaseResp<T> fail(T data){
+    return (BaseResp<T>) BaseResp
+        .builder()
+        .data(data)
         .build();
   }
 

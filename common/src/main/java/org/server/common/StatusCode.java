@@ -57,7 +57,10 @@ public enum StatusCode {
 
  UserNotHasWallet(2504,"使用者尚未有錢包"),
 
-  /**
+ InsufficientBalance(2505,"餘額不足"),
+
+
+ /**
    * 權限 3000
    */
   AccessDenied(3000, "沒有權限"),

@@ -60,18 +60,12 @@ public class WalletService {
   }
 
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
-  public WalletsVO increaseBalanceByWalletId(String walletId , BigDecimal balance)
-      throws MissingParameterErrorException, IncreaseBalanceException {
-    if(walletId.isEmpty()){
-      throw new MissingParameterErrorException();
-    }
-    if(balance == null){
-      throw new MissingParameterErrorException();
-    }
+  public WalletsVO increaseBalanceByWalletId(String walletId , BigDecimal increase)
+      throws IncreaseBalanceException {
 
     WalletsVO vo = new WalletsVO();
 
-    int i = walletsMapper.increaseBalanceByWalletId(walletId, balance , new Date());
+    int i = walletsMapper.increaseBalanceByWalletId(walletId, increase , new Date());
 
 
     if(i == 0){
@@ -85,18 +79,12 @@ public class WalletService {
   }
 
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
-  public WalletsVO reduceBalanceByWalletId(String walletId , BigDecimal balance)
-      throws MissingParameterErrorException, IncreaseBalanceException {
-    if(walletId.isEmpty()){
-      throw new MissingParameterErrorException();
-    }
-    if(balance == null){
-      throw new MissingParameterErrorException();
-    }
+  public WalletsVO reduceBalanceByWalletId(String walletId , BigDecimal reduce)
+      throws IncreaseBalanceException {
 
     WalletsVO vo = new WalletsVO();
 
-    int i = walletsMapper.reduceBalanceByWalletId(walletId, balance , new Date());
+    int i = walletsMapper.reduceBalanceByWalletId(walletId, reduce , new Date());
 
 
     if(i == 0){
