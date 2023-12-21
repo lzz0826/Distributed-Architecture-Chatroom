@@ -102,8 +102,8 @@ public class WalletService {
     return add;
   }
 
-  public boolean checkReduceBalanceEnough(BigDecimal balance, BigDecimal reduce) {
-    BigDecimal lastBalance = balance.subtract(reduce);
+  public boolean checkReduceBalanceEnough(BigDecimal balance, BigDecimal price) {
+    BigDecimal lastBalance = balance.subtract(price);
     return lastBalance.compareTo(BigDecimal.ZERO) > 0;
   }
 

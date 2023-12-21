@@ -4,6 +4,8 @@ package mapper;
 import base.BaseTest;
 import java.math.BigDecimal;
 import java.util.Date;
+import org.server.enums.OrderType;
+import org.server.enums.PaymentMethod;
 import org.server.mapper.OrderMapper;
 import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
@@ -52,8 +54,8 @@ public class OrderMapperTest extends BaseTest {
         .userId(idGeneratorService.getNextId())
         .walletId(idGeneratorService.getNextId())
         .price(new BigDecimal(100.222222))
-        .paymentMethod("paymentMethod")
-        .type(1)
+        .paymentMethod(PaymentMethod.CREDIT_CARD.code)
+        .type(OrderType.REDUCE.code)
         .status(2)
         .createTime(new Date())
         .updateTime(new Date())
@@ -61,5 +63,6 @@ public class OrderMapperTest extends BaseTest {
     int i = orderMapper.insertOrder(tony);
     System.out.println(i);
   }
+
 
 }

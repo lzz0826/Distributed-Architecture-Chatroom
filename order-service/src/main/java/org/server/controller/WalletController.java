@@ -15,6 +15,7 @@ import org.server.exception.wallet.AddUserWalletFailException;
 import org.server.exception.wallet.IncreaseBalanceException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.exception.wallet.UserNotHasWalletException;
+import org.server.sercice.IdGeneratorService;
 import org.server.service.WalletService;
 import org.server.vo.WalletsVO;
 import org.springframework.beans.BeanUtils;
@@ -26,8 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/wallets")
 @Log4j2
 public class WalletController {
-
-
 
   @Resource
   private WalletService walletService;
