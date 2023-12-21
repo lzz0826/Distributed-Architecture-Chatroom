@@ -1,6 +1,7 @@
 package mapper;
 
 
+import base.BaseTest;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
@@ -10,7 +11,7 @@ import org.server.dao.WalletsDAO;
 import org.server.mapper.WalletsMapper;
 import org.server.sercice.IdGeneratorService;
 
-public class WalletsMapperTest extends BaseTest{
+public class WalletsMapperTest extends BaseTest {
 
   @Resource
   private WalletsMapper walletsMapper;

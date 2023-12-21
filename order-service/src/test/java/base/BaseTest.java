@@ -1,4 +1,4 @@
-package mapper;
+package base;
 
 import org.server.OrderApplication;
 import org.junit.runner.RunWith;

@@ -4,8 +4,8 @@ import java.math.BigDecimal;
 import java.util.Date;
 import javax.annotation.Resource;
 import org.server.dao.WalletsDAO;
-import org.server.exception.AddUserWalletFailException;
-import org.server.exception.IncreaseBalanceException;
+import org.server.exception.wallet.AddUserWalletFailException;
+import org.server.exception.wallet.IncreaseBalanceException;
 import org.server.exception.MissingParameterErrorException;
 import org.server.mapper.WalletsMapper;
 import org.server.sercice.IdGeneratorService;
@@ -60,7 +60,7 @@ public class WalletService {
   }
 
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
-  public WalletsVO increaseBalanceByUserId(String walletId , BigDecimal balance)
+  public WalletsVO increaseBalanceByWalletId(String walletId , BigDecimal balance)
       throws MissingParameterErrorException, IncreaseBalanceException {
     if(walletId.isEmpty()){
       throw new MissingParameterErrorException();
@@ -82,6 +82,41 @@ public class WalletService {
     BeanUtils.copyProperties(dao,vo);
     return vo;
 
+  }
+
+  @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
+  public WalletsVO reduceBalanceByWalletId(String walletId , BigDecimal balance)
+      throws MissingParameterErrorException, IncreaseBalanceException {
+    if(walletId.isEmpty()){
+      throw new MissingParameterErrorException();
+    }
+    if(balance == null){
+      throw new MissingParameterErrorException();
+    }
+
+    WalletsVO vo = new WalletsVO();
+
+    int i = walletsMapper.reduceBalanceByWalletId(walletId, balance , new Date());
+
+
+    if(i == 0){
+      throw  new IncreaseBalanceException();
+    }
+    WalletsDAO dao = getWalletByWalletId(walletId);
+
+    BeanUtils.copyProperties(dao,vo);
+    return vo;
+
+  }
+
+  public BigDecimal calculateAddBalance(BigDecimal balance , BigDecimal calculate){
+    BigDecimal add = balance.add(calculate);
+    return add;
+  }
+
+  public boolean checkReduceBalanceEnough(BigDecimal balance, BigDecimal reduce) {
+    BigDecimal lastBalance = balance.subtract(reduce);
+    return lastBalance.compareTo(BigDecimal.ZERO) > 0;
   }
 
   public WalletsDAO getWalletByUserId(String userId){

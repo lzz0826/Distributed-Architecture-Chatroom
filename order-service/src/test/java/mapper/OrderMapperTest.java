@@ -1,6 +1,7 @@
 package mapper;
 
 
+import base.BaseTest;
 import java.math.BigDecimal;
 import java.util.Date;
 import org.server.mapper.OrderMapper;
@@ -10,7 +11,7 @@ import java.util.List;
 import javax.annotation.Resource;
 import org.junit.Test;
 
-public class OrderMapperTest extends BaseTest{
+public class OrderMapperTest extends BaseTest {
 
   @Resource
   private OrderMapper orderMapper;

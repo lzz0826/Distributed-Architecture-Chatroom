@@ -53,7 +53,9 @@ public enum StatusCode {
 
  IncreaseBalanceFail(2501,"添加餘額失敗"),
 
+ ReduceBalanceFail(2502,"減少餘額失敗"),
 
+ UserNotHasWallet(2504,"使用者尚未有錢包"),
 
   /**
    * 權限 3000
