@@ -1,27 +1,25 @@
 package org.server.controller;
 
 
-import com.alibaba.fastjson.JSON;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.math.BigDecimal;
 import javax.annotation.Resource;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import lombok.extern.log4j.Log4j2;
+import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
-import org.server.controller.rep.OrderRep;
-import org.server.controller.rep.Results;
-import org.server.controller.req.OrderReq;
-import org.server.exception.NotOrderUserException;
+import org.server.controller.req.order.increaseBalanceOrderReq;
+import org.server.dao.WalletsDAO;
+import org.server.enums.OrderTypeEnums;
+import org.server.enums.PaymentMethodEnum;
+import org.server.exception.ErrorParameterErrorException;
+import org.server.exception.MissingParameterErrorException;
+import org.server.exception.order.CreateOrderException;
+import org.server.exception.order.OrderTypeException;
+import org.server.exception.wallet.IncreaseBalanceException;
+import org.server.exception.wallet.InsufficientBalanceException;
+import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.service.OrderService;
+import org.server.service.WalletService;
 import org.server.vo.OrderVO;
-import org.server.vo.UserVO;
-import org.springframework.beans.BeanUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +31,50 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
 
 
-
   @Resource
   private OrderService orderService;
+
+  @Resource
+  private WalletService walletService;
+
+  @PostMapping("/increaseBalanceOrder")
+  public BaseResp<OrderVO> increaseBalanceOrder(@RequestBody increaseBalanceOrderReq req)
+      throws MissingParameterErrorException, ErrorParameterErrorException,
+      UserNotHasWalletException, CreateOrderException, IncreaseBalanceException,
+      InsufficientBalanceException, OrderTypeException {
+
+    if(StringUtils.isBlank(req.getUserId())
+        || req.getPrice() == null
+        || StringUtils.isBlank(req.getPaymentMethod())
+        || StringUtils.isBlank(req.getOrderType())) {
+      throw new MissingParameterErrorException();
+    }
+
+    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.parse(req.getPaymentMethod());
+    OrderTypeEnums orderTypeEnums = OrderTypeEnums.parse(req.getOrderType());
+
+    if(paymentMethodEnum == null || orderTypeEnums == null){
+      throw new ErrorParameterErrorException();
+    }
+
+    String userId = req.getUserId();
+    BigDecimal price = req.getPrice();
+
+    WalletsDAO walletsDAO = walletService.getWalletByUserId(userId);
+
+    if(walletsDAO == null){
+      throw new UserNotHasWalletException();
+    }
+
+    String walletId = walletsDAO.getWalletId();
+    OrderVO order = orderService.createOrder(userId,walletId,price,paymentMethodEnum,orderTypeEnums);
+
+    return BaseResp.ok(order);
+  }
+
+
+
+
 
 
 

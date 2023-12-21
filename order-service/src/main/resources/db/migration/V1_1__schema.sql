@@ -6,6 +6,8 @@ CREATE TABLE IF NOT EXISTS `tb_order` (
     `id` VARCHAR(40) NOT NULL COMMENT 'orderId',
     `user_id` VARCHAR(40) DEFAULT NULL COMMENT 'userID',
     `wallet_id` VARCHAR(40) DEFAULT NULL COMMENT 'walletID',
+    `target_user_id` VARCHAR(40) DEFAULT NULL COMMENT '接收用户ID',
+    `target_wallet_id` VARCHAR(40) DEFAULT NULL COMMENT '接收钱包ID',
     `price` DECIMAL(10, 2) NOT NULL NOT NULL COMMENT '交易金額',
     `payment_method` VARCHAR(50) DEFAULT NULL COMMENT '支付方式',
     `type` TINYINT(1) DEFAULT NULL COMMENT '訂單類型',

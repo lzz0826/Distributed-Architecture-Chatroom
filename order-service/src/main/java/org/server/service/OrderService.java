@@ -5,8 +5,8 @@ import java.util.Date;
 import javax.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.server.dao.WalletsDAO;
-import org.server.enums.OrderType;
-import org.server.enums.PaymentMethod;
+import org.server.enums.OrderTypeEnums;
+import org.server.enums.PaymentMethodEnum;
 import org.server.exception.order.CreateOrderException;
 import org.server.exception.order.OrderTypeException;
 import org.server.exception.wallet.IncreaseBalanceException;
@@ -37,20 +37,20 @@ public class OrderService {
 
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
   public OrderVO createOrder(String userId , String walletId , BigDecimal price ,
-      PaymentMethod paymentMethod , OrderType orderType)
+      PaymentMethodEnum paymentMethodEnum, OrderTypeEnums orderTypeEnums)
       throws InsufficientBalanceException, IncreaseBalanceException, OrderTypeException, CreateOrderException {
 
     WalletsDAO walletsDao = walletService.getWalletByWalletId(walletId);
-    //TODO 訂單支付時需要負數? walletsDao null 尚未處理
+    //TODO 訂單支付時需要負數? walletsDao null 尚未處理 紀錄
 
     BigDecimal balance = walletsDao.getBalance();
 
-    if (orderType == OrderType.REDUCE && !walletService.checkReduceBalanceEnough(balance,price)) {
+    if (orderTypeEnums == OrderTypeEnums.REDUCE && !walletService.checkReduceBalanceEnough(balance,price)) {
       log.error("InsufficientBalanceException");
       throw new InsufficientBalanceException();
     }
 
-    switch (orderType) {
+    switch (orderTypeEnums) {
       case INCREASE:
         walletService.increaseBalanceByWalletId(walletId,price);
         break;
@@ -66,8 +66,8 @@ public class OrderService {
         .userId(userId)
         .walletId(walletId)
         .price(price)
-        .paymentMethod(paymentMethod.code)
-        .type(orderType.code)
+        .paymentMethod(paymentMethodEnum.code)
+        .type(orderTypeEnums.code)
         .status(1)
         .updateTime(new Date())
         .createTime(new Date())

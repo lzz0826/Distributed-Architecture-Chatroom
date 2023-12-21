@@ -7,8 +7,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.server.enums.OrderType;
-import org.server.enums.PaymentMethod;
 
 @Data
 @Builder
@@ -21,6 +19,10 @@ public class OrderDAO {
   private String userId;
 
   private String walletId;
+
+  private String targetUserId;
+
+  private String targetWalletId;
 
   private BigDecimal price;
 

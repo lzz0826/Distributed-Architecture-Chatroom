@@ -9,6 +9,8 @@
     <id property="id" column="id" jdbcType="VARCHAR"/>
     <result property="userId" column="user_id" jdbcType="VARCHAR"/>
     <result property="walletId" column="wallet_id" jdbcType="VARCHAR"/>
+    <result property="targetUserId" column="target_user_id" jdbcType="VARCHAR"/>
+    <result property="targetWalletId" column="target_wallet_id" jdbcType="VARCHAR"/>
     <result property="price" column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
     <result property="paymentMethod" column="payment_method" jdbcType="VARCHAR"/>
     <result property="type" column="type" jdbcType="INTEGER"/>
@@ -24,6 +26,8 @@
       <if test="id != null">id,</if>
       <if test="userId != null">user_id,</if>
       <if test="walletId != null">wallet_id,</if>
+      <if test="targetUserId != null">target_user_id,</if>
+      <if test="targetWalletId != null">target_wallet_id,</if>
       <if test="price != null">price,</if>
       <if test="paymentMethod != null">payment_method,</if>
       <if test="type != null">type,</if>
@@ -37,6 +41,8 @@
       <if test="id != null">#{id,jdbcType=VARCHAR},</if>
       <if test="userId != null">#{userId,jdbcType=VARCHAR},</if>
       <if test="walletId != null">#{walletId,jdbcType=VARCHAR},</if>
+      <if test="targetUserId != null">#{targetUserId,jdbcType=VARCHAR},</if>
+      <if test="targetWalletId != null">#{targetWalletId,jdbcType=VARCHAR},</if>
       <if test="price != null">#{price,jdbcType=DECIMAL,javaType=java.math.BigDecimal},</if>
       <if test="paymentMethod != null">#{paymentMethod,jdbcType=VARCHAR},</if>
       <if test="type != null">#{type,jdbcType=INTEGER},</if>

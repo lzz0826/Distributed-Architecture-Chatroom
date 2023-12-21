@@ -11,14 +11,16 @@ public enum StatusCode {
 
   MissingParameter(10,"缺少必要參數"),
 
-  AddFail(11,"新增失敗"),
+  ErrorParameter(11,"參數錯誤"),
 
-  NeedPage(12,"需要頁碼"),
-  NeedPageSize(13,"需要頁碼大小"),
+  AddFail(12,"新增失敗"),
 
-  NotAllowedNullStr(14,"不允許空的字串"),
+  NeedPage(13,"需要頁碼"),
+  NeedPageSize(14,"需要頁碼大小"),
 
-  BindExceptionError(15,"數據綁定錯誤,參數型別錯誤"),
+  NotAllowedNullStr(15,"不允許空的字串"),
+
+  BindExceptionError(16,"數據綁定錯誤,參數型別錯誤"),
 
 
  /**
