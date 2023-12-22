@@ -11,6 +11,7 @@ import org.server.exception.order.CreateOrderException;
 import org.server.exception.order.OrderTypeException;
 import org.server.exception.wallet.IncreaseBalanceException;
 import org.server.exception.wallet.InsufficientBalanceException;
+import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.mapper.OrderMapper;
 import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
@@ -36,13 +37,17 @@ public class OrderService {
 
 
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
-  public OrderVO createOrder(String userId , String walletId , BigDecimal price ,
+  public OrderVO createOrder(String walletId , BigDecimal price ,
       PaymentMethodEnum paymentMethodEnum, OrderTypeEnums orderTypeEnums)
-      throws InsufficientBalanceException, IncreaseBalanceException, OrderTypeException, CreateOrderException {
+      throws InsufficientBalanceException, IncreaseBalanceException, OrderTypeException, CreateOrderException, UserNotHasWalletException {
 
     WalletsDAO walletsDao = walletService.getWalletByWalletId(walletId);
     //TODO 訂單支付時需要負數? walletsDao null 尚未處理 紀錄
+    if(walletsDao == null){
+      throw new UserNotHasWalletException();
+    }
 
+    String userId = walletsDao.getUserId();
     BigDecimal balance = walletsDao.getBalance();
 
     if (orderTypeEnums == OrderTypeEnums.REDUCE && !walletService.checkReduceBalanceEnough(balance,price)) {

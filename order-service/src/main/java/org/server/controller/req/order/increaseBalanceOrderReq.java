@@ -20,6 +20,5 @@ public class increaseBalanceOrderReq {
 
   String paymentMethod;
 
-  String orderType;
 
 }

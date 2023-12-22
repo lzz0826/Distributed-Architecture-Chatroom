@@ -11,6 +11,7 @@ import org.server.exception.order.CreateOrderException;
 import org.server.exception.order.OrderTypeException;
 import org.server.exception.wallet.IncreaseBalanceException;
 import org.server.exception.wallet.InsufficientBalanceException;
+import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.sercice.IdGeneratorService;
 import org.server.service.OrderService;
 import org.server.vo.OrderVO;
@@ -26,7 +27,7 @@ public class OrderServiceTest extends BaseTest {
 
   @Test
   public void reduceBalanceByWalletIdTest()
-      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException {
+      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException, UserNotHasWalletException {
 
     String userId = "4159394896707931412";
     String walletId = "4174129606516002722";
@@ -35,7 +36,7 @@ public class OrderServiceTest extends BaseTest {
     OrderTypeEnums orderTypeEnums = OrderTypeEnums.REDUCE;
 
 
-    OrderVO order = orderService.createOrder(userId,walletId,price, paymentMethodEnum,
+    OrderVO order = orderService.createOrder(walletId,price, paymentMethodEnum,
         orderTypeEnums);
 
     System.out.println(order);
@@ -44,7 +45,7 @@ public class OrderServiceTest extends BaseTest {
 
   @Test
   public void increaseBalanceByWalletIdTest()
-      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException {
+      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException, UserNotHasWalletException {
 
     String userId = "4159394896707931412";
     String walletId = "4174129606516002722";
@@ -53,7 +54,7 @@ public class OrderServiceTest extends BaseTest {
     OrderTypeEnums orderTypeEnums = OrderTypeEnums.INCREASE;
 
 
-    OrderVO order = orderService.createOrder(userId,walletId,price, paymentMethodEnum,
+    OrderVO order = orderService.createOrder(walletId,price, paymentMethodEnum,
         orderTypeEnums);
 
     System.out.println(order);

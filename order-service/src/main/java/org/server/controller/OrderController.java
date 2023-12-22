@@ -46,12 +46,12 @@ public class OrderController {
     if(StringUtils.isBlank(req.getUserId())
         || req.getPrice() == null
         || StringUtils.isBlank(req.getPaymentMethod())
-        || StringUtils.isBlank(req.getOrderType())) {
+    ) {
       throw new MissingParameterErrorException();
     }
 
     PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.parse(req.getPaymentMethod());
-    OrderTypeEnums orderTypeEnums = OrderTypeEnums.parse(req.getOrderType());
+    OrderTypeEnums orderTypeEnums = OrderTypeEnums.INCREASE;
 
     if(paymentMethodEnum == null || orderTypeEnums == null){
       throw new ErrorParameterErrorException();
@@ -67,7 +67,42 @@ public class OrderController {
     }
 
     String walletId = walletsDAO.getWalletId();
-    OrderVO order = orderService.createOrder(userId,walletId,price,paymentMethodEnum,orderTypeEnums);
+    OrderVO order = orderService.createOrder(walletId,price,paymentMethodEnum,orderTypeEnums);
+
+    return BaseResp.ok(order);
+  }
+
+  @PostMapping("/reduceBalanceOrder")
+  public BaseResp<OrderVO> reduceBalanceOrder(@RequestBody increaseBalanceOrderReq req)
+      throws MissingParameterErrorException, ErrorParameterErrorException,
+      UserNotHasWalletException, CreateOrderException, IncreaseBalanceException,
+      InsufficientBalanceException, OrderTypeException {
+
+    if(StringUtils.isBlank(req.getUserId())
+        || req.getPrice() == null
+        || StringUtils.isBlank(req.getPaymentMethod())
+    ) {
+      throw new MissingParameterErrorException();
+    }
+
+    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.parse(req.getPaymentMethod());
+    OrderTypeEnums orderTypeEnums = OrderTypeEnums.REDUCE;
+
+    if(paymentMethodEnum == null || orderTypeEnums == null){
+      throw new ErrorParameterErrorException();
+    }
+
+    String userId = req.getUserId();
+    BigDecimal price = req.getPrice();
+
+    WalletsDAO walletsDAO = walletService.getWalletByUserId(userId);
+
+    if(walletsDAO == null){
+      throw new UserNotHasWalletException();
+    }
+
+    String walletId = walletsDAO.getWalletId();
+    OrderVO order = orderService.createOrder(walletId,price,paymentMethodEnum,orderTypeEnums);
 
     return BaseResp.ok(order);
   }
