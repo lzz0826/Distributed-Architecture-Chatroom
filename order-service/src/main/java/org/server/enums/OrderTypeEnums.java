@@ -7,13 +7,12 @@ public enum OrderTypeEnums {
 
   INCREASE("increase",1),
   REDUCE("reduce",2),
-  TRANSDER("transfer",3);
+  LOCAL_TRANSFER("localTransfer",3);
 
 
   public final String name;
 
   public final int code;
-
 
 
   OrderTypeEnums(String name , int code) {

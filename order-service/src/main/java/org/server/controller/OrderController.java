@@ -105,10 +105,9 @@ public class OrderController {
     return BaseResp.ok(order);
   }
 
-  //TODO
-  @PostMapping("/transferOrder")
-  public BaseResp<String> transferOrder(@RequestBody TransferOrderReq req)
-      throws MissingParameterErrorException {
+  @PostMapping("/localTransferOrder")
+  public BaseResp<OrderVO> localTransferOrder(@RequestBody TransferOrderReq req)
+      throws MissingParameterErrorException, ErrorParameterErrorException, CreateOrderException, ReduceBalanceException, IncreaseBalanceException, InsufficientBalanceException, UserNotHasWalletException {
     if(StringUtils.isBlank(req.getUserId())
         || StringUtils.isBlank(req.getWalletId())
         || StringUtils.isBlank(req.getTargetUserId())
@@ -118,8 +117,17 @@ public class OrderController {
     ) {
       throw new MissingParameterErrorException();
     }
+    String userId = req.getUserId();
+    String walletId = req.getWalletId();
+    String targetUserId = req.getTargetUserId();
+    String targetWalletId = req.getTargetWalletId();
+    BigDecimal price = req.getPrice();
+    PaymentMethodEnum paymentMethodEnum = checkPayment(req.getPaymentMethod());
 
-    return BaseResp.ok("order");
+    OrderVO orderVO = orderService.localTransferOrder(userId, walletId, targetUserId, targetWalletId,
+         price, paymentMethodEnum);
+
+    return BaseResp.ok(orderVO,StatusCode.Success);
   }
 
   @PostMapping("/orderCallback")

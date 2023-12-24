@@ -2,7 +2,6 @@ package org.server.service;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.server.dao.WalletsDAO;
@@ -51,7 +50,7 @@ public class OrderService {
       throws InsufficientBalanceException,  CreateOrderException, UserNotHasWalletException {
 
     WalletsDAO walletsDao = walletService.getWalletByWalletId(walletId);
-    //TODO 訂單支付時需要負數? walletsDao null 尚未處理 紀錄
+    //TODO 訂單支付時需要負數?
     if(walletsDao == null){
       throw new UserNotHasWalletException();
     }
@@ -94,9 +93,10 @@ public class OrderService {
 
   }
 
+  //本地錢包轉戰
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
-  public OrderVO transferOrder(String userId,String walletId,String targetUserId,String targetWalletId,
-      BigDecimal price,PaymentMethodEnum paymentMethodEnum, OrderTypeEnums orderTypeEnums)
+  public OrderVO localTransferOrder(String userId,String walletId,String targetUserId,String targetWalletId,
+      BigDecimal price,PaymentMethodEnum paymentMethodEnum)
       throws UserNotHasWalletException, InsufficientBalanceException, IncreaseBalanceException, CreateOrderException, ReduceBalanceException {
 
     WalletsDAO walletsDao = walletService.getWalletByWalletId(walletId);
@@ -122,8 +122,8 @@ public class OrderService {
         .targetWalletId(targetWalletId)
         .price(price)
         .paymentMethod(paymentMethodEnum.code)
-        .type(orderTypeEnums.code)
-        .status(1)
+        .type(OrderTypeEnums.LOCAL_TRANSFER.code)
+        .status(OrderStatusEnums.SUCCESS.code)
         .updateTime(new Date())
         .createTime(new Date())
         .build();
@@ -134,7 +134,6 @@ public class OrderService {
       throw new CreateOrderException();
     }
     OrderVO vo = OrderVO.builder().build();
-
     BeanUtils.copyProperties(dao,vo);
 
     return vo;

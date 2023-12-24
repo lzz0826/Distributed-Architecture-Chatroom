@@ -64,7 +64,7 @@ public class OrderServiceTest extends BaseTest {
 
   @Test
   public void transferOrderTest()
-      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, UserNotHasWalletException {
+      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, UserNotHasWalletException, ReduceBalanceException {
 
     String userId = "4159394896707931412";
     String walletId = "4174129606516002722";
@@ -72,10 +72,10 @@ public class OrderServiceTest extends BaseTest {
     String targetWalletId = "4179097822283610237";
     BigDecimal price = new BigDecimal(999);
     PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.CREDIT_CARD;
-    OrderTypeEnums orderTypeEnums = OrderTypeEnums.TRANSDER;
+    OrderTypeEnums orderTypeEnums = OrderTypeEnums.LOCAL_TRANSFER;
 
-    OrderVO orderVO = orderService.transferOrder(
-        userId,walletId,targetUserId,targetWalletId,price,paymentMethodEnum,orderTypeEnums);
+    OrderVO orderVO = orderService.localTransferOrder(
+        userId,walletId,targetUserId,targetWalletId,price,paymentMethodEnum);
 
     System.out.println(orderVO);
 
