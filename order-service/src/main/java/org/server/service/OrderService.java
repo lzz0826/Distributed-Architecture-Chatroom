@@ -2,20 +2,27 @@ package org.server.service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.server.dao.WalletsDAO;
+import org.server.enums.OrderStatusEnums;
 import org.server.enums.OrderTypeEnums;
 import org.server.enums.PaymentMethodEnum;
 import org.server.exception.order.CreateOrderException;
+import org.server.exception.order.NotFoundOderIdException;
+import org.server.exception.order.OrderStatusException;
 import org.server.exception.order.OrderTypeException;
 import org.server.exception.wallet.IncreaseBalanceException;
 import org.server.exception.wallet.InsufficientBalanceException;
+import org.server.exception.wallet.ReduceBalanceException;
 import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.mapper.OrderMapper;
 import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
+import org.server.vo.CallBackOrderVO;
 import org.server.vo.OrderVO;
+import org.server.vo.WalletsVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -39,7 +46,7 @@ public class OrderService {
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
   public OrderVO createOrder(String walletId , BigDecimal price ,
       PaymentMethodEnum paymentMethodEnum, OrderTypeEnums orderTypeEnums)
-      throws InsufficientBalanceException, IncreaseBalanceException, OrderTypeException, CreateOrderException, UserNotHasWalletException {
+      throws InsufficientBalanceException, IncreaseBalanceException, OrderTypeException, CreateOrderException, UserNotHasWalletException, ReduceBalanceException {
 
     WalletsDAO walletsDao = walletService.getWalletByWalletId(walletId);
     //TODO 訂單支付時需要負數? walletsDao null 尚未處理 紀錄
@@ -55,21 +62,63 @@ public class OrderService {
       throw new InsufficientBalanceException();
     }
 
-    switch (orderTypeEnums) {
-      case INCREASE:
-        walletService.increaseBalanceByWalletId(walletId,price);
-        break;
-      case REDUCE:
-        walletService.reduceBalanceByWalletId(walletId,price);
-        break;
-      default:
-        throw new OrderTypeException();
+    String orderId = idGeneratorService.getNextId();
+    //這裏可以添加 打其他服務 確認等回調後再對本地錢包進行操作
+    callOtherServer(orderId,userId,price);
+    walletService.increaseOrReduceBalance(orderTypeEnums,walletId,price);
+
+    OrderDAO dao = OrderDAO
+        .builder()
+        .id(orderId)
+        .userId(userId)
+        .walletId(walletId)
+        .price(price)
+        .paymentMethod(paymentMethodEnum.code)
+        .type(orderTypeEnums.code)
+        .status(OrderStatusEnums.PAYING.code)
+        .updateTime(new Date())
+        .createTime(new Date())
+        .build();
+    int i = orderMapper.insertOrder(dao);
+
+    if( i == 0){
+      log.error("CreateOrderException");
+      throw new CreateOrderException();
     }
+    OrderVO vo = OrderVO.builder().build();
+
+    BeanUtils.copyProperties(dao,vo);
+
+    return vo;
+
+  }
+
+  @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
+  public OrderVO transferOrder(String userId,String walletId,String targetUserId,String targetWalletId,
+      BigDecimal price,PaymentMethodEnum paymentMethodEnum, OrderTypeEnums orderTypeEnums)
+      throws UserNotHasWalletException, InsufficientBalanceException, IncreaseBalanceException, CreateOrderException, ReduceBalanceException {
+
+    WalletsDAO walletsDao = walletService.getWalletByWalletId(walletId);
+    WalletsDAO targetWalletsDao = walletService.getWalletByWalletId(targetWalletId);
+
+    if(walletsDao == null || targetWalletsDao == null){
+      throw new UserNotHasWalletException();
+    }
+    BigDecimal balance = walletsDao.getBalance();
+
+    if (!walletService.checkReduceBalanceEnough(balance,price)) {
+      throw new InsufficientBalanceException();
+    }
+    walletService.reduceBalanceByWalletId(walletId,price);
+    walletService.increaseBalanceByWalletId(targetWalletId,price);
+
     OrderDAO dao = OrderDAO
         .builder()
         .id(idGeneratorService.getNextId())
         .userId(userId)
         .walletId(walletId)
+        .targetUserId(targetUserId)
+        .targetWalletId(targetWalletId)
         .price(price)
         .paymentMethod(paymentMethodEnum.code)
         .type(orderTypeEnums.code)
@@ -88,9 +137,80 @@ public class OrderService {
     BeanUtils.copyProperties(dao,vo);
 
     return vo;
+  }
+
+  public OrderDAO getOrderById(String orderId){
+    return orderMapper.selectById(orderId);
+  }
+
+
+
+  public void callOtherServer(String orderId,String userId , BigDecimal price) {
+    System.out.println("模擬其他服務等待.......");
+    try {
+      TimeUnit.SECONDS.sleep(5000);
+    } catch (InterruptedException e) {
+      throw new RuntimeException(e);
+    }
 
   }
 
+  @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
+  public CallBackOrderVO callBackOrder(String orderId , BigDecimal price,OrderStatusEnums orderStatusEnums)
+      throws IncreaseBalanceException, OrderTypeException, NotFoundOderIdException, OrderStatusException, ReduceBalanceException, UserNotHasWalletException {
+
+    OrderDAO dao = getOrderById(orderId);
+    OrderTypeEnums orderTypeEnums = OrderTypeEnums.parse(dao.getType());
+    String walletId = dao.getWalletId();
+
+
+    switch (orderStatusEnums) {
+      case CREATE:
+        updateOrderStatue(orderId , orderStatusEnums);
+        break;
+      case PAYING:
+        updateOrderStatue(orderId , orderStatusEnums);
+        break;
+      case SUCCESS:
+        walletService.increaseOrReduceBalance(orderTypeEnums, walletId, price);
+        updateOrderStatue(orderId , orderStatusEnums);
+        break;
+      case FAIL:
+        updateOrderStatue(orderId , orderStatusEnums);
+        break;
+      default:
+        throw new OrderStatusException();
+    }
+
+    OrderDAO orderDAO = getOrderById(orderId);
+
+    CallBackOrderVO vo = CallBackOrderVO
+        .builder()
+        .orderId(orderDAO.getId())
+        .price(orderDAO.getPrice())
+        .type(orderDAO.getType())
+        .status(orderDAO.getStatus())
+        .updateTime(orderDAO.getUpdateTime())
+        .build();
+
+    return vo;
+  }
+
+  @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
+  public void updateOrderStatue(String orderId , OrderStatusEnums orderStatusEnums)
+      throws NotFoundOderIdException {
+    OrderDAO dao = OrderDAO
+        .builder()
+        .id(orderId)
+        .status(orderStatusEnums.code)
+        .updateTime(new Date())
+        .build();
+    int i = orderMapper.updateByOrderId(dao);
+    if(i == 0){
+      throw new NotFoundOderIdException();
+    }
+
+  }
 
 
 

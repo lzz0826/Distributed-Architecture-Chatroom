@@ -10,13 +10,16 @@ import org.apache.ibatis.annotations.Param;
 @Mapper
 public interface OrderMapper {
 
-   int insertOrder(OrderDAO order);
+   int insertOrder(OrderDAO orderDAO);
 
    List<OrderDAO> selectAll();
 
    OrderDAO selectById(@Param("id") String id);
 
    int updateByUserId(@Param("userId") String name ,@Param("price") BigDecimal price);
+
+   int updateByOrderId(OrderDAO orderDAO);
+
 
 
 }

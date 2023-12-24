@@ -64,5 +64,25 @@ public class OrderMapperTest extends BaseTest {
     System.out.println(i);
   }
 
+  @Test
+  public void updateByOrderIdTest(){
+    OrderDAO tony = OrderDAO
+        .builder()
+        .id("4174409193049763562")
+        .userId("9999")
+        .walletId("9999")
+        .targetWalletId("9999")
+        .targetUserId("99999")
+        .price(new BigDecimal(100.222222))
+        .paymentMethod(PaymentMethodEnum.CREDIT_CARD.code)
+        .type(OrderTypeEnums.REDUCE.code)
+        .status(2)
+        .createTime(new Date())
+        .updateTime(new Date())
+        .build();
+    int i = orderMapper.updateByOrderId(tony);
+    System.out.println(i);
+  }
+
 
 }

@@ -11,6 +11,7 @@ import org.server.exception.order.CreateOrderException;
 import org.server.exception.order.OrderTypeException;
 import org.server.exception.wallet.IncreaseBalanceException;
 import org.server.exception.wallet.InsufficientBalanceException;
+import org.server.exception.wallet.ReduceBalanceException;
 import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.sercice.IdGeneratorService;
 import org.server.service.OrderService;
@@ -27,7 +28,7 @@ public class OrderServiceTest extends BaseTest {
 
   @Test
   public void reduceBalanceByWalletIdTest()
-      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException, UserNotHasWalletException {
+      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException, UserNotHasWalletException, ReduceBalanceException {
 
     String userId = "4159394896707931412";
     String walletId = "4174129606516002722";
@@ -45,7 +46,7 @@ public class OrderServiceTest extends BaseTest {
 
   @Test
   public void increaseBalanceByWalletIdTest()
-      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException, UserNotHasWalletException {
+      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, OrderTypeException, UserNotHasWalletException, ReduceBalanceException {
 
     String userId = "4159394896707931412";
     String walletId = "4174129606516002722";
@@ -60,6 +61,30 @@ public class OrderServiceTest extends BaseTest {
     System.out.println(order);
 
   }
+
+  @Test
+  public void transferOrderTest()
+      throws CreateOrderException, IncreaseBalanceException, InsufficientBalanceException, UserNotHasWalletException {
+
+    String userId = "4159394896707931412";
+    String walletId = "4174129606516002722";
+    String targetUserId = "456";
+    String targetWalletId = "4179097822283610237";
+    BigDecimal price = new BigDecimal(999);
+    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.CREDIT_CARD;
+    OrderTypeEnums orderTypeEnums = OrderTypeEnums.TRANSDER;
+
+    OrderVO orderVO = orderService.transferOrder(
+        userId,walletId,targetUserId,targetWalletId,price,paymentMethodEnum,orderTypeEnums);
+
+    System.out.println(orderVO);
+
+  }
+
+
+
+
+
 
 
 

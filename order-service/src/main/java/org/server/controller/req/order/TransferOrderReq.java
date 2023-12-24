@@ -1,5 +1,4 @@
-package org.server.dao;
-
+package org.server.controller.req.order;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -8,13 +7,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@Data
 @Builder
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class OrderDAO {
-
-  private String id;
+public class TransferOrderReq {
 
   private String userId;
 
@@ -26,20 +23,7 @@ public class OrderDAO {
 
   private BigDecimal price;
 
-  private int paymentMethod;
-
-  private Integer type;
-
-  private Integer status;
-
-  private Date updateTime;
-
-  private Date createTime;
-
-
-
-
-
+  private String paymentMethod;
 
 
 }

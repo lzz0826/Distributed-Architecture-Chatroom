@@ -5,14 +5,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.server.enums.OrderTypeEnums;
-import org.server.enums.PaymentMethodEnum;
 
 @Builder
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class increaseBalanceOrderReq {
+public class IncreaseBalanceOrderReq {
 
   String userId ;
 

@@ -14,6 +14,7 @@ import org.server.dao.WalletsDAO;
 import org.server.exception.wallet.AddUserWalletFailException;
 import org.server.exception.wallet.IncreaseBalanceException;
 import org.server.exception.MissingParameterErrorException;
+import org.server.exception.wallet.ReduceBalanceException;
 import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.sercice.IdGeneratorService;
 import org.server.service.WalletService;
@@ -75,7 +76,7 @@ public class WalletController {
 
   @PostMapping("/reduceBalance")
   public BaseResp<ReduceBalanceRep> reduceBalance(String userID, BigDecimal reduce)
-      throws IncreaseBalanceException, MissingParameterErrorException, UserNotHasWalletException {
+      throws IncreaseBalanceException, MissingParameterErrorException, UserNotHasWalletException, ReduceBalanceException {
 
     if(StringUtils.isBlank(userID)){
       throw new MissingParameterErrorException();

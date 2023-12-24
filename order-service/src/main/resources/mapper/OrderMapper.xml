@@ -56,6 +56,24 @@
     update tb_order set price = #{price} where user_id = #{userId}
   </update>
 
+  <update id="updateByOrderId">
+    UPDATE `tb_order`
+    <trim prefix='set' suffixOverrides=','>
+      <if test="id != null"> id = #{id},</if>
+      <if test="userId != null"> user_id = #{userId},</if>
+      <if test="walletId != null"> wallet_id = #{walletId},</if>
+      <if test="targetUserId != null"> target_user_id = #{targetUserId},</if>
+      <if test="targetWalletId != null"> target_wallet_id = #{targetWalletId},</if>
+      <if test="price != null"> price = #{price},</if>
+      <if test="paymentMethod != null"> payment_method = #{paymentMethod},</if>
+      <if test="type != null"> type = #{type},</if>
+      <if test="status != null"> status = #{status},</if>
+      <if test="createTime != null"> create_time = #{createTime},</if>
+      <if test="updateTime != null"> update_time = #{updateTime},</if>
+    </trim>
+    WHERE id = #{id}
+  </update>
+
 
   <select resultMap ="BaseResultMap" id="selectAll" resultType="org.server.dao.OrderDAO">
      select * from tb_order;

@@ -1,4 +1,4 @@
-package org.server.exception;
+package org.server.exception.order;
 
 public class NotOrderUserException extends Exception{
 

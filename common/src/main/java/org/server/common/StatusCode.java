@@ -48,7 +48,11 @@ public enum StatusCode {
   NotFoundOrder(2000,"找不到訂單"),
   OrderTypeError(2001,"訂單類型異常"),
 
-  CreateOrderFail(2002,"新增訂單失敗"),
+  OrderStatusError(2002,"訂單狀態異常"),
+
+  CreateOrderFail(2003,"新增訂單失敗"),
+
+
 
 
  /**

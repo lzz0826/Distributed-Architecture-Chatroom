@@ -61,12 +61,14 @@
     </trim>
     WHERE user_id = #{userId}
   </update>
+
   <update id="increaseBalanceByWalletId">
     update tb_wallets
     set balance = balance + #{increase} ,update_time = #{updateTime}
     where wallet_id = #{walletId}
 
   </update>
+
   <update id="reduceBalanceByWalletId">
     update tb_wallets
     set balance = balance - #{reduce} ,update_time = #{updateTime}
