@@ -7,6 +7,11 @@ import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
 import org.server.common.BaseResp;
 import org.server.common.StatusCode;
+import org.server.controller.rep.order.IncreaseBalanceOrderRep;
+import org.server.controller.rep.order.LocalTransferOrderRep;
+import org.server.controller.rep.order.OrderCallbackRep;
+import org.server.controller.rep.order.OrderCallbackRep.OrderCallbackRepBuilder;
+import org.server.controller.rep.order.ReduceBalanceOrderRep;
 import org.server.controller.req.order.IncreaseBalanceOrderReq;
 import org.server.controller.req.order.OrderCallbackReq;
 import org.server.controller.req.order.TransferOrderReq;
@@ -38,7 +43,6 @@ import org.springframework.web.bind.annotation.RestController;
 @Log4j2
 public class OrderController {
 
-
   @Resource
   private OrderService orderService;
 
@@ -46,7 +50,7 @@ public class OrderController {
   private WalletService walletService;
 
   @PostMapping("/increaseBalanceOrder")
-  public BaseResp<OrderVO> increaseBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
+  public BaseResp<IncreaseBalanceOrderRep> increaseBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
       throws MissingParameterErrorException, ErrorParameterErrorException,
       UserNotHasWalletException, CreateOrderException, InsufficientBalanceException {
     if(StringUtils.isBlank(req.getUserId())
@@ -67,15 +71,19 @@ public class OrderController {
     if(walletsDAO == null){
       throw new UserNotHasWalletException();
     }
-
     String walletId = walletsDAO.getWalletId();
-    OrderVO order = orderService.createOrder(walletId,price,paymentMethodEnum,orderTypeEnums);
+    OrderVO vo = orderService.createOrder(walletId,price,paymentMethodEnum,orderTypeEnums);
 
-    return BaseResp.ok(order);
+    IncreaseBalanceOrderRep rep = IncreaseBalanceOrderRep
+        .builder()
+        .orderVO(vo)
+        .build();
+
+    return BaseResp.ok(rep,StatusCode.Success);
   }
 
   @PostMapping("/reduceBalanceOrder")
-  public BaseResp<OrderVO> reduceBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
+  public BaseResp<ReduceBalanceOrderRep> reduceBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
       throws MissingParameterErrorException, ErrorParameterErrorException,
       UserNotHasWalletException, CreateOrderException, InsufficientBalanceException {
 
@@ -100,13 +108,17 @@ public class OrderController {
     }
 
     String walletId = walletsDAO.getWalletId();
-    OrderVO order = orderService.createOrder(walletId,price,paymentMethodEnum,orderTypeEnums);
+    OrderVO vo = orderService.createOrder(walletId,price,paymentMethodEnum,orderTypeEnums);
+    ReduceBalanceOrderRep rep = ReduceBalanceOrderRep
+        .builder()
+        .orderVO(vo)
+        .build();
 
-    return BaseResp.ok(order);
+    return BaseResp.ok(rep);
   }
 
   @PostMapping("/localTransferOrder")
-  public BaseResp<OrderVO> localTransferOrder(@RequestBody TransferOrderReq req)
+  public BaseResp<LocalTransferOrderRep> localTransferOrder(@RequestBody TransferOrderReq req)
       throws MissingParameterErrorException, ErrorParameterErrorException, CreateOrderException, ReduceBalanceException, IncreaseBalanceException, InsufficientBalanceException, UserNotHasWalletException {
     if(StringUtils.isBlank(req.getUserId())
         || StringUtils.isBlank(req.getWalletId())
@@ -124,14 +136,18 @@ public class OrderController {
     BigDecimal price = req.getPrice();
     PaymentMethodEnum paymentMethodEnum = checkPayment(req.getPaymentMethod());
 
-    OrderVO orderVO = orderService.localTransferOrder(userId, walletId, targetUserId, targetWalletId,
+    OrderVO vo = orderService.localTransferOrder(userId, walletId, targetUserId, targetWalletId,
          price, paymentMethodEnum);
+    LocalTransferOrderRep rep = LocalTransferOrderRep
+        .builder()
+        .orderVO(vo)
+        .build();
 
-    return BaseResp.ok(orderVO,StatusCode.Success);
+    return BaseResp.ok(rep,StatusCode.Success);
   }
 
   @PostMapping("/orderCallback")
-  public BaseResp<CallBackOrderVO> orderCallback(@RequestBody OrderCallbackReq req )
+  public BaseResp<OrderCallbackRep> orderCallback(@RequestBody OrderCallbackReq req )
       throws MissingParameterErrorException, IncreaseBalanceException, OrderTypeException, OrderStatusException, NotFoundOderIdException, ReduceBalanceException, UserNotHasWalletException {
     if(StringUtils.isBlank(req.getOrderId())
         || req.getPrice() == null
@@ -150,7 +166,12 @@ public class OrderController {
     }
 
     CallBackOrderVO vo = orderService.callBackOrder(orderId, price, orderStatusEnums);
-    return BaseResp.ok(vo, StatusCode.Success);
+
+    OrderCallbackRep rep = OrderCallbackRep
+        .builder()
+        .callBackOrderVO(vo)
+        .build();
+    return BaseResp.ok(rep, StatusCode.Success);
   }
 
 

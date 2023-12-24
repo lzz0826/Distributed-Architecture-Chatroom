@@ -9,6 +9,7 @@ import lombok.Data;
 @Builder
 @Data
 public class CallBackOrderVO {
+
   private String orderId;
 
   private BigDecimal price;
