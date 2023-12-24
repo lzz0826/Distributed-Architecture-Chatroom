@@ -22,7 +22,6 @@ import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
 import org.server.vo.CallBackOrderVO;
 import org.server.vo.OrderVO;
-import org.server.vo.WalletsVO;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Isolation;
@@ -42,11 +41,14 @@ public class OrderService {
   @Resource
   private WalletService walletService;
 
+  @Resource
+  private AsyncService asyncService;
+
 
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
   public OrderVO createOrder(String walletId , BigDecimal price ,
       PaymentMethodEnum paymentMethodEnum, OrderTypeEnums orderTypeEnums)
-      throws InsufficientBalanceException, IncreaseBalanceException, OrderTypeException, CreateOrderException, UserNotHasWalletException, ReduceBalanceException {
+      throws InsufficientBalanceException,  CreateOrderException, UserNotHasWalletException {
 
     WalletsDAO walletsDao = walletService.getWalletByWalletId(walletId);
     //TODO 訂單支付時需要負數? walletsDao null 尚未處理 紀錄
@@ -63,9 +65,8 @@ public class OrderService {
     }
 
     String orderId = idGeneratorService.getNextId();
-    //這裏可以添加 打其他服務 確認等回調後再對本地錢包進行操作
-    callOtherServer(orderId,userId,price);
-    walletService.increaseOrReduceBalance(orderTypeEnums,walletId,price);
+    //添加訂單 打其他服務 確認等回調後再對本地錢包進行操作
+    asyncService.callOtherServer(orderId,userId,price);
 
     OrderDAO dao = OrderDAO
         .builder()
@@ -75,7 +76,7 @@ public class OrderService {
         .price(price)
         .paymentMethod(paymentMethodEnum.code)
         .type(orderTypeEnums.code)
-        .status(OrderStatusEnums.PAYING.code)
+        .status(OrderStatusEnums.CREATE.code)
         .updateTime(new Date())
         .createTime(new Date())
         .build();
@@ -143,17 +144,6 @@ public class OrderService {
     return orderMapper.selectById(orderId);
   }
 
-
-
-  public void callOtherServer(String orderId,String userId , BigDecimal price) {
-    System.out.println("模擬其他服務等待.......");
-    try {
-      TimeUnit.SECONDS.sleep(5000);
-    } catch (InterruptedException e) {
-      throw new RuntimeException(e);
-    }
-
-  }
 
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
   public CallBackOrderVO callBackOrder(String orderId , BigDecimal price,OrderStatusEnums orderStatusEnums)

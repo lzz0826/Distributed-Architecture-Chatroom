@@ -48,8 +48,7 @@ public class OrderController {
   @PostMapping("/increaseBalanceOrder")
   public BaseResp<OrderVO> increaseBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
       throws MissingParameterErrorException, ErrorParameterErrorException,
-      UserNotHasWalletException, CreateOrderException, IncreaseBalanceException,
-      InsufficientBalanceException, OrderTypeException, ReduceBalanceException {
+      UserNotHasWalletException, CreateOrderException, InsufficientBalanceException {
     if(StringUtils.isBlank(req.getUserId())
         || req.getPrice() == null
         || StringUtils.isBlank(req.getPaymentMethod())
@@ -78,8 +77,7 @@ public class OrderController {
   @PostMapping("/reduceBalanceOrder")
   public BaseResp<OrderVO> reduceBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
       throws MissingParameterErrorException, ErrorParameterErrorException,
-      UserNotHasWalletException, CreateOrderException, IncreaseBalanceException,
-      InsufficientBalanceException, OrderTypeException, ReduceBalanceException {
+      UserNotHasWalletException, CreateOrderException, InsufficientBalanceException {
 
     if(StringUtils.isBlank(req.getUserId())
         || req.getPrice() == null
@@ -137,10 +135,7 @@ public class OrderController {
     String orderId = req.getOrderId();
     BigDecimal price = req.getPrice();
 
-
     OrderStatusEnums orderStatusEnums = OrderStatusEnums.parse(req.getOrderStatusEnums());
-
-
 
     if(orderStatusEnums == null){
       throw new OrderStatusException();
