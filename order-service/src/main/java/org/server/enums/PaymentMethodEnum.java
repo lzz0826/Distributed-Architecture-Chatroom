@@ -1,6 +1,7 @@
 package org.server.enums;
 
 import org.apache.commons.lang3.StringUtils;
+import org.server.exception.ErrorParameterErrorException;
 
 public enum PaymentMethodEnum {
 
@@ -45,5 +46,15 @@ public enum PaymentMethodEnum {
     }
     return null;
   }
+
+  public static PaymentMethodEnum checkPayment(String paymentMethod) throws ErrorParameterErrorException {
+    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.parse(paymentMethod);
+    if(paymentMethodEnum == null){
+      throw new ErrorParameterErrorException();
+    }
+    return paymentMethodEnum;
+  }
+
+
 
 }

@@ -10,7 +10,6 @@ import org.server.common.StatusCode;
 import org.server.controller.rep.order.IncreaseBalanceOrderRep;
 import org.server.controller.rep.order.LocalTransferOrderRep;
 import org.server.controller.rep.order.OrderCallbackRep;
-import org.server.controller.rep.order.OrderCallbackRep.OrderCallbackRepBuilder;
 import org.server.controller.rep.order.ReduceBalanceOrderRep;
 import org.server.controller.req.order.IncreaseBalanceOrderReq;
 import org.server.controller.req.order.OrderCallbackReq;
@@ -49,6 +48,7 @@ public class OrderController {
   @Resource
   private WalletService walletService;
 
+  //創建儲值訂單 需要回調才會改訂單狀態
   @PostMapping("/increaseBalanceOrder")
   public BaseResp<IncreaseBalanceOrderRep> increaseBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
       throws MissingParameterErrorException, ErrorParameterErrorException,
@@ -60,7 +60,7 @@ public class OrderController {
       throw new MissingParameterErrorException();
     }
 
-    PaymentMethodEnum paymentMethodEnum = checkPayment(req.getPaymentMethod());
+    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.checkPayment(req.getPaymentMethod());
     OrderTypeEnums orderTypeEnums = OrderTypeEnums.INCREASE;
 
     String userId = req.getUserId();
@@ -82,6 +82,7 @@ public class OrderController {
     return BaseResp.ok(rep,StatusCode.Success);
   }
 
+  //創建扣款訂單 需要回調才會改訂單狀態
   @PostMapping("/reduceBalanceOrder")
   public BaseResp<ReduceBalanceOrderRep> reduceBalanceOrder(@RequestBody IncreaseBalanceOrderReq req)
       throws MissingParameterErrorException, ErrorParameterErrorException,
@@ -94,7 +95,7 @@ public class OrderController {
       throw new MissingParameterErrorException();
     }
 
-    PaymentMethodEnum paymentMethodEnum = checkPayment(req.getPaymentMethod());
+    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.checkPayment(req.getPaymentMethod());
     OrderTypeEnums orderTypeEnums = OrderTypeEnums.REDUCE;
 
 
@@ -134,7 +135,7 @@ public class OrderController {
     String targetUserId = req.getTargetUserId();
     String targetWalletId = req.getTargetWalletId();
     BigDecimal price = req.getPrice();
-    PaymentMethodEnum paymentMethodEnum = checkPayment(req.getPaymentMethod());
+    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.checkPayment(req.getPaymentMethod());
 
     OrderVO vo = orderService.localTransferOrder(userId, walletId, targetUserId, targetWalletId,
          price, paymentMethodEnum);
@@ -173,20 +174,6 @@ public class OrderController {
         .build();
     return BaseResp.ok(rep, StatusCode.Success);
   }
-
-
-  private PaymentMethodEnum checkPayment(String paymentMethod) throws ErrorParameterErrorException {
-    PaymentMethodEnum paymentMethodEnum = PaymentMethodEnum.parse(paymentMethod);
-    if(paymentMethodEnum == null){
-      throw new ErrorParameterErrorException();
-    }
-    return paymentMethodEnum;
-  }
-
-
-
-
-
 
 
 }
