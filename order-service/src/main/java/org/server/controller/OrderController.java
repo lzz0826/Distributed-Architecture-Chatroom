@@ -20,6 +20,7 @@ import org.server.enums.OrderTypeEnums;
 import org.server.enums.PaymentMethodEnum;
 import org.server.exception.ErrorParameterErrorException;
 import org.server.exception.MissingParameterErrorException;
+import org.server.exception.order.CallBackProcessingException;
 import org.server.exception.order.CreateOrderException;
 import org.server.exception.order.NotFoundOderIdException;
 import org.server.exception.order.OrderStatusException;
@@ -147,9 +148,15 @@ public class OrderController {
     return BaseResp.ok(rep,StatusCode.Success);
   }
 
+
+  /**
+   * 回調 :
+   * 目前是直接修改
+   * 實際情況因該是要反查後在更新訂單狀態和修改錢包
+   */
   @PostMapping("/orderCallback")
   public BaseResp<OrderCallbackRep> orderCallback(@RequestBody OrderCallbackReq req )
-      throws MissingParameterErrorException, IncreaseBalanceException, OrderTypeException, OrderStatusException, NotFoundOderIdException, ReduceBalanceException, UserNotHasWalletException {
+      throws MissingParameterErrorException, IncreaseBalanceException, OrderTypeException, OrderStatusException, NotFoundOderIdException, ReduceBalanceException, UserNotHasWalletException, CallBackProcessingException {
     if(StringUtils.isBlank(req.getOrderId())
         || req.getPrice() == null
         || req.getOrderStatusEnums() == null
@@ -166,7 +173,7 @@ public class OrderController {
       throw new OrderStatusException();
     }
 
-    CallBackOrderVO vo = orderService.callBackOrder(orderId, price, orderStatusEnums);
+    CallBackOrderVO vo = orderService.orderCallback(orderId, price, orderStatusEnums);
 
     OrderCallbackRep rep = OrderCallbackRep
         .builder()

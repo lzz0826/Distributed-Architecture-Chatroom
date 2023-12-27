@@ -2,12 +2,15 @@ package org.server.service;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.server.dao.WalletsDAO;
+import org.server.enums.OrderLockEnums;
 import org.server.enums.OrderStatusEnums;
 import org.server.enums.OrderTypeEnums;
 import org.server.enums.PaymentMethodEnum;
+import org.server.exception.order.CallBackProcessingException;
 import org.server.exception.order.CreateOrderException;
 import org.server.exception.order.NotFoundOderIdException;
 import org.server.exception.order.OrderStatusException;
@@ -19,6 +22,7 @@ import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.mapper.OrderMapper;
 import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
+import org.server.util.DistributedLock;
 import org.server.vo.CallBackOrderVO;
 import org.server.vo.OrderVO;
 import org.springframework.beans.BeanUtils;
@@ -43,7 +47,13 @@ public class OrderService {
   @Resource
   private AsyncService asyncService;
 
+  @Resource
+  private DistributedLock distributedLock;
 
+
+  /**
+   * 創建定單(只創建 不修改錢包)
+   */
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
   public OrderVO createOrder(String walletId , BigDecimal price ,
       PaymentMethodEnum paymentMethodEnum, OrderTypeEnums orderTypeEnums)
@@ -93,7 +103,9 @@ public class OrderService {
 
   }
 
-  //本地錢包轉戰
+  /**
+   * 本地錢包轉帳 (包含更新錢包)
+   */
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
   public OrderVO localTransferOrder(String userId,String walletId,String targetUserId,String targetWalletId,
       BigDecimal price,PaymentMethodEnum paymentMethodEnum)
@@ -144,8 +156,29 @@ public class OrderService {
   }
 
 
+  /**
+   * 訂單回調 (以訂單號作為分布式鎖)
+   */
+  public CallBackOrderVO  v(String orderId , BigDecimal price,OrderStatusEnums orderStatusEnums)
+      throws CallBackProcessingException, ReduceBalanceException, IncreaseBalanceException, OrderStatusException, UserNotHasWalletException, OrderTypeException, NotFoundOderIdException {
+    if(distributedLock.isLock(OrderLockEnums.CALLBACK.name + orderId)){
+      log.info("訂單號={}, 時間段内重複回調",orderId);
+      throw new CallBackProcessingException();
+    }
+    try {
+      distributedLock.lock(OrderLockEnums.CALLBACK.name + orderId);
+      return jugeAndUpdateOrder(orderId,price,orderStatusEnums);
+    }finally {
+      distributedLock.unlock(OrderLockEnums.CALLBACK.name + orderId);
+    }
+  }
+
+
+  /**
+   * 判斷訂單狀態 (包含更新錢包)
+   */
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
-  public CallBackOrderVO callBackOrder(String orderId , BigDecimal price,OrderStatusEnums orderStatusEnums)
+  public CallBackOrderVO jugeAndUpdateOrder(String orderId , BigDecimal price,OrderStatusEnums orderStatusEnums)
       throws IncreaseBalanceException, OrderTypeException, NotFoundOderIdException, OrderStatusException, ReduceBalanceException, UserNotHasWalletException {
 
     OrderDAO dao = getOrderById(orderId);
@@ -185,6 +218,11 @@ public class OrderService {
     return vo;
   }
 
+
+
+  /**
+   * 更新訂單狀態
+   */
   @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.REPEATABLE_READ , rollbackFor = Exception.class)
   public void updateOrderStatue(String orderId , OrderStatusEnums orderStatusEnums)
       throws NotFoundOderIdException {

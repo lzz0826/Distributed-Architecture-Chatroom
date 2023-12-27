@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 @Service
 public class AsyncService {
 
+  //模擬打銀行業務
   @Async("orderServiceExecutor")
   public void callOtherServer(String orderId,String userId , BigDecimal price) {
     System.out.println("模擬其他服務等待.......開始");

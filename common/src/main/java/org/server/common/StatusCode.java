@@ -52,7 +52,7 @@ public enum StatusCode {
 
   CreateOrderFail(2003,"新增訂單失敗"),
 
-
+  CallBackProcessing(2004,"回調處理中"),
 
 
  /**
