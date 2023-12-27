@@ -159,7 +159,7 @@ public class OrderService {
   /**
    * 訂單回調 (以訂單號作為分布式鎖)
    */
-  public CallBackOrderVO  v(String orderId , BigDecimal price,OrderStatusEnums orderStatusEnums)
+  public CallBackOrderVO orderCallback(String orderId , BigDecimal price,OrderStatusEnums orderStatusEnums)
       throws CallBackProcessingException, ReduceBalanceException, IncreaseBalanceException, OrderStatusException, UserNotHasWalletException, OrderTypeException, NotFoundOderIdException {
     if(distributedLock.isLock(OrderLockEnums.CALLBACK.name + orderId)){
       log.info("訂單號={}, 時間段内重複回調",orderId);
