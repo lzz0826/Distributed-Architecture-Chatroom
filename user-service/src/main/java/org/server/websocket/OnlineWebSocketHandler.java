@@ -15,8 +15,8 @@ import lombok.extern.log4j.Log4j2;
 import org.server.entity.CustomUserDetails;
 import org.server.service.JwtCacheService;
 
-import org.server.util.FastJsonUtil;
-import org.server.util.SpringUtil;
+import org.server.utils.FastJsonUtil;
+import org.server.utils.SpringUtil;
 import org.server.websocket.entity.WsRep;
 import org.server.websocket.entity.WsReq;
 import org.server.websocket.enums.EMsgType;

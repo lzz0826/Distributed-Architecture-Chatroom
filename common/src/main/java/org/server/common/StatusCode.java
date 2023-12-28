@@ -40,7 +40,6 @@ public enum StatusCode {
 
 
 
-
  /**
   * Order 2000
   */
@@ -56,26 +55,29 @@ public enum StatusCode {
 
 
  /**
-  * Wallet 2500
+  * Wallet 2200
   */
- AddUserWalletFail(2500,"新增錢包失敗"),
+ AddUserWalletFail(2200,"新增錢包失敗"),
 
- IncreaseBalanceFail(2501,"添加餘額失敗"),
+ IncreaseBalanceFail(2201,"添加餘額失敗"),
 
- ReduceBalanceFail(2502,"減少餘額失敗"),
+ ReduceBalanceFail(2202,"減少餘額失敗"),
 
- UserNotHasWallet(2504,"使用者尚未有錢包"),
+ UserNotHasWallet(2203,"使用者尚未有錢包"),
 
- InsufficientBalance(2505,"餘額不足"),
+ InsufficientBalance(2204,"餘額不足"),
+
+ /**
+  * Bank 2400
+  */
+
+ GetBalanceFail(2400,"查詢銀行餘額失敗"),
+
+
+
 
 
  /**
-   * 權限 3000
-   */
-  AccessDenied(3000, "沒有權限"),
-
-
-  /**
    * 聊天室 3000
    */
 
@@ -112,6 +114,10 @@ public enum StatusCode {
  NonSupportExt(4001,"不支援的檔案類型"),
 
 
+ /**
+  * 權限 8000
+  */
+ AccessDenied(8000, "沒有權限"),
   /**
    * WS 9000
    */

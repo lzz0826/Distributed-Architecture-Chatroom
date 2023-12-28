@@ -1,6 +1,6 @@
 package org.server.sercice;
 
-import org.server.util.IdGenerator;
+import org.server.utils.IdGenerator;
 import javax.annotation.PostConstruct;
 import org.springframework.stereotype.Service;
 

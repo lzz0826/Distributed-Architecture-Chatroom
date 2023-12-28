@@ -1,4 +1,4 @@
-package org.server.util;
+package org.server.utils;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;

@@ -2,7 +2,6 @@ package org.server.websocket;
 
 import static org.server.websocket.OnlineWebSocketHandler.checkChannelId;
 
-import com.alibaba.fastjson.JSON;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelId;
 import io.netty.channel.SimpleChannelInboundHandler;
@@ -19,7 +18,7 @@ import org.server.mq.MsgMqSender;
 import org.server.service.BlackListService;
 import org.server.service.ChatRecordService;
 import org.server.service.ChatSilenceCacheService;
-import org.server.util.SpringUtil;
+import org.server.utils.SpringUtil;
 import org.server.websocket.entity.WsRep;
 import org.server.websocket.entity.WsReq;
 import org.server.websocket.enums.EMsgType;

@@ -1,4 +1,4 @@
-package org.server.util;
+package org.server.utils;
 
 import com.alibaba.fastjson.serializer.SerializeConfig;
 import org.server.common.StatusCode;

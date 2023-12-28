@@ -8,8 +8,8 @@ import lombok.extern.log4j.Log4j2;
 import org.server.client.obj.Order;
 import org.server.client.obj.Results;
 import org.server.client.uitl.OkHttpUtil;
-import org.server.util.LogUtils;
-import org.server.util.LogUtils.LogType;
+import org.server.utils.LogUtils;
+import org.server.utils.LogUtils.LogType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 

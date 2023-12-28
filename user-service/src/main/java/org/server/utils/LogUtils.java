@@ -1,4 +1,4 @@
-package org.server.util;
+package org.server.utils;
 import javax.validation.constraints.NotNull;
 import java.util.Map;
 import org.apache.logging.log4j.LogManager;

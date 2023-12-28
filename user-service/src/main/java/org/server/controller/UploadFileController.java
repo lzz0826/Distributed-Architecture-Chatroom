@@ -1,9 +1,9 @@
 package org.server.controller;
 
 
-import static org.server.util.FileUtil.getExtByFileName;
-import static org.server.util.FileUtil.supportedComImages;
-import static org.server.util.FileUtil.supportedCompZip;
+import static org.server.utils.FileUtil.getExtByFileName;
+import static org.server.utils.FileUtil.supportedComImages;
+import static org.server.utils.FileUtil.supportedCompZip;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;

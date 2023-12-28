@@ -5,7 +5,7 @@ import com.alibaba.nacos.api.naming.NamingFactory;
 import com.alibaba.nacos.api.naming.NamingService;
 import javax.annotation.PostConstruct;
 import lombok.extern.log4j.Log4j2;
-import org.server.util.IpUtil;
+import org.server.utils.IpUtil;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 

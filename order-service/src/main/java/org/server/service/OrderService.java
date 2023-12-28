@@ -2,7 +2,6 @@ package org.server.service;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.server.dao.WalletsDAO;
@@ -22,7 +21,7 @@ import org.server.exception.wallet.UserNotHasWalletException;
 import org.server.mapper.OrderMapper;
 import org.server.dao.OrderDAO;
 import org.server.sercice.IdGeneratorService;
-import org.server.util.DistributedLock;
+import org.server.utils.DistributedLock;
 import org.server.vo.CallBackOrderVO;
 import org.server.vo.OrderVO;
 import org.springframework.beans.BeanUtils;
