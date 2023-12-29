@@ -17,8 +17,6 @@ public class WithdrawOrder {
     public final static int STATUS_FAILED_ON_PROCESSING = -2; // 提交處理失敗
     public final static int STATUS_FAILED_ON_MERCHANT_CONFIRM = -1; // 商戶確認失敗
     public final static int STATUS_CREATED = 0; // 訂單生成
-    public final static int STATUS_MERCHANT_CONFIRMED = 1; // 商戶確認成功
-    public final static int STATUS_PENDING = 2; // 待分配渠道
     public final static int STATUS_PROCESSING = 3; // 提交處理中
     public final static int STATUS_WITHDRAWING = 4; // 代付支付中
     public final static int STATUS_WITHDRAWN = 5; // 代付支付完成
@@ -33,11 +31,7 @@ public class WithdrawOrder {
     public Integer getExposedStatus() {
         switch (status) {
             case STATUS_CREATED:
-            case STATUS_MERCHANT_CONFIRMED:
-                return STATUS_MERCHANT_CONFIRMED;
 
-            case STATUS_PENDING:
-                return STATUS_PENDING;
 
             case STATUS_PROCESSING:
             case STATUS_WITHDRAWING:
@@ -67,10 +61,6 @@ public class WithdrawOrder {
     	switch (status) {
         case STATUS_CREATED:
         	return "代付支付中";
-        case STATUS_MERCHANT_CONFIRMED:
-            return "代付支付中";
-        case STATUS_PENDING:
-            return "待分配渠道";
         case STATUS_PROCESSING:
         	return "提交處理中";
         case STATUS_WITHDRAWING:
@@ -102,25 +92,9 @@ public class WithdrawOrder {
 
     private String withdrawOrderId; // 代付訂單號
 
-    private String merchantId; // 商戶ID
-
-    private String merchantOrderNo; // 商戶方的訂單號
-
-    private Long accountId; // 渠道ID
-
-    private String catchId; //代付渠道編碼
-
+    private Long accountId; // 帳戶ID
     private Integer status; // 狀態
 
-    private String channelOrderNo; // 渠道方的訂單號
-
-    private Double channelRate; // 渠道方的手續費費率
-
-    private BigDecimal channelRateFixedAmount; // 渠道方的手續費，固定金額，單位分
-
-    private String channelReturnCode; // 渠道方回傳Code
-
-    private String channelReturnMessage; // 渠道方回傳信息
 
     private String remark; // 備註訊息
 

@@ -13,15 +13,13 @@ import lombok.ToString;
 @AllArgsConstructor
 @ToString
 public class WithdrawMethodResponse {
-    private String returnCode; // 第三方返回碼
+    private String returnCode; // 銀行方返回碼
 
-    private String returnMessage; // 第三方返回信息
+    private String returnMessage; // 銀行方返回信息
 
-    private String withdrawOrderId; // 代付訂單號, null if order not found
+    private String withdrawOrderId; // 出款訂單號, null if order not found
 
-    private String channelOrderNo; // 代付渠道訂單號
-
-    private BigDecimal amount; // 訂單金額，單位分
+    private BigDecimal amount; // 訂單金額
 
     private Integer orderStatus; // 訂單狀態, null if order not found
 

@@ -42,7 +42,9 @@ public class WithdrawChannel {
     /**
      * 出款銀行代碼(我方)
      */
-    private String bankId;
+    private String bankCode;
+
+
     /**
      * 出款銀行名稱(我方)
      */
@@ -61,7 +63,7 @@ public class WithdrawChannel {
     /**
      * 收款銀行代碼(對方)
      */
-    private String targetBankId;
+    private String targetBankCode;
     /**
      * 收款銀行名稱(對方)
      */
@@ -146,5 +148,8 @@ public class WithdrawChannel {
     private String balanceQueryUrl;
 
 
-    
+
+
+
+
 }
