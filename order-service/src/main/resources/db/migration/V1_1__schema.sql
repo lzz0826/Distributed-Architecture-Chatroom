@@ -45,19 +45,20 @@ CREATE TABLE IF NOT EXISTS `tb_transactions` (
 
 
 
--- 銀行卡列表
+-- 銀行卡列表 bank_card_account_id(相當於銀行帳號) 一個人在一家銀行只會有一個帳戶
 CREATE TABLE IF NOT EXISTS  `tb_bankcard_account` (
-                                                      `bank_card_account_id` VARCHAR(40) NOT NULL COMMENT '存款卡ID',
-                                                      `card_id` varchar(100) DEFAULT NULL COMMENT '卡片編號',
+                                                      `bank_card_account_id` VARCHAR(40) NOT NULL COMMENT '存款卡ID(相當於銀行帳號)',
+                                                      `bank_id` VARCHAR(40) DEFAULT NULL COMMENT '銀行ID',
+                                                      `card_id` varchar(100) DEFAULT NULL COMMENT '存款卡編號(相當於銀行帳號)',
                                                       `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '類型: 0:收款卡, 1:中轉卡, 2:安全卡, 3:付款卡',
                                                       `payee_card_name` varchar(100) DEFAULT NULL COMMENT '用戶名',
-                                                      `payee_card_no` varchar(100) DEFAULT NULL COMMENT '銀行卡號',
+                                                      `payee_card_no` varchar(100) DEFAULT NULL COMMENT '銀行卡號(相當於信用卡)',
                                                       `bank_name` varchar(100) DEFAULT NULL COMMENT '銀行名稱',
                                                       `bank_area` varchar(100) DEFAULT NULL COMMENT '地區名稱',
                                                       `branch_name` varchar(100) DEFAULT NULL COMMENT '分行名稱',
                                                       `status` int(11) NOT NULL DEFAULT '0' COMMENT '狀態 0:下架 1:啟用 2:達標 3:風控 4:暫時禁用 5:冷卻 6:金額冷卻',
                                                       `memo` varchar(255) DEFAULT NULL COMMENT '備註',
-                                                      `balance` bigint(20) NOT NULL DEFAULT '0' COMMENT '卡片餘額',
+                                                      `balance` DECIMAL(10, 2) NOT NULL NOT NULL COMMENT '卡片餘額',
                                                       `login_username` varchar(100) DEFAULT NULL COMMENT '登入帳號',
                                                       `login_password` varchar(100) DEFAULT NULL COMMENT '登入密碼',
                                                       `transaction_password` varchar(30) DEFAULT NULL COMMENT '交易密碼',
@@ -71,12 +72,11 @@ CREATE TABLE IF NOT EXISTS  `tb_bankcard_account` (
 
 
 -- 銀行代碼列表
-CREATE TABLE IF NOT EXISTS `tb_pay_bank_code` (
-                                                  `id` VARCHAR(40) NOT NULL COMMENT '銀行名稱縮寫ID',
-                                                  `bank_abbreviation` varchar(10) DEFAULT NULL COMMENT '銀行名稱縮寫',
-                                                  `bank_code_id` varchar(20) DEFAULT NULL COMMENT '銀行代碼ID',
-                                                  `bank_name` varchar(20) DEFAULT NULL COMMENT '銀行名稱',
+CREATE TABLE IF NOT EXISTS `tb_bank_code` (
+                                                  `bank_id` VARCHAR(40) NOT NULL COMMENT 'bankId',
                                                   `bank_code` varchar(20) DEFAULT NULL COMMENT '銀行聯行碼',
-                                                  PRIMARY KEY (`id`)
+                                                  `bank_abbreviation` varchar(10) DEFAULT NULL COMMENT '銀行名稱縮寫',
+                                                  `bank_name` varchar(20) DEFAULT NULL COMMENT '銀行名稱',
+                                                  PRIMARY KEY (`bank_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='銀行代碼列表';
 

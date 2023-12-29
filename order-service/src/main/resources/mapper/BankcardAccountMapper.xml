@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.BankAccountMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.dao.BankcardAccountDAO">
+    <id column="bank_card_account_id" property="bankCardAccountId" jdbcType="VARCHAR"/>
+    <result column="bank_id" property="bankId" jdbcType="VARCHAR"/>
+    <result column="card_id" property="cardId" jdbcType="VARCHAR"/>
+    <result column="type" property="type" jdbcType="TINYINT"/>
+    <result column="payee_card_name" property="payeeCardName" jdbcType="VARCHAR"/>
+    <result column="payee_card_no" property="payeeCardNo" jdbcType="VARCHAR"/>
+    <result column="bank_name" property="bankName" jdbcType="VARCHAR"/>
+    <result column="bank_area" property="bankArea" jdbcType="VARCHAR"/>
+    <result column="branch_name" property="branchName" jdbcType="VARCHAR"/>
+    <result column="status" property="status" jdbcType="INTEGER"/>
+    <result column="memo" property="memo" jdbcType="VARCHAR"/>
+    <result column="balance" property="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+    <result column="login_username" property="loginUsername" jdbcType="VARCHAR"/>
+    <result column="login_password" property="loginPassword" jdbcType="VARCHAR"/>
+    <result column="transaction_password" property="transactionPassword" jdbcType="VARCHAR"/>
+    <result column="mobile" property="mobile" jdbcType="VARCHAR"/>
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP"/>
+    <result column="creator" property="creator" jdbcType="VARCHAR"/>
+    <result column="updater" property="updater" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <insert id="insertBankAccount">
+    INSERT INTO tb_bankcard_account
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bankCardAccountId != null">bank_card_account_id,</if>
+      <if test="bankId != null">bank_id,</if>
+      <if test="cardId != null">card_id,</if>
+      <if test="type != null">type,</if>
+      <if test="payeeCardName != null">payee_card_name,</if>
+      <if test="payeeCardNo != null">payee_card_no,</if>
+      <if test="bankName != null">bank_name,</if>
+      <if test="bankArea != null">bank_area,</if>
+      <if test="branchName != null">branch_name,</if>
+      <if test="status != null">status,</if>
+      <if test="memo != null">memo,</if>
+      <if test="balance != null">balance,</if>
+      <if test="loginUsername != null">login_username,</if>
+      <if test="loginPassword != null">login_password,</if>
+      <if test="transactionPassword != null">transaction_password,</if>
+      <if test="mobile != null">mobile,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="creator != null">creator,</if>
+      <if test="updater != null">updater,</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bankCardAccountId != null">#{bankCardAccountId,jdbcType=VARCHAR},</if>
+      <if test="bankId != null">#{bankId,jdbcType=VARCHAR},</if>
+      <if test="cardId != null">#{cardId,jdbcType=VARCHAR},</if>
+      <if test="type != null">#{type,jdbcType=TINYINT},</if>
+      <if test="payeeCardName != null">#{payeeCardName,jdbcType=VARCHAR},</if>
+      <if test="payeeCardNo != null">#{payeeCardNo,jdbcType=VARCHAR},</if>
+      <if test="bankName != null">#{bankName,jdbcType=VARCHAR},</if>
+      <if test="bankArea != null">#{bankArea,jdbcType=VARCHAR},</if>
+      <if test="branchName != null">#{branchName,jdbcType=VARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+      <if test="balance != null">#{balance,jdbcType=DECIMAL,javaType=java.math.BigDecimal},</if>
+      <if test="loginUsername != null">#{loginUsername,jdbcType=VARCHAR},</if>
+      <if test="loginPassword != null">#{loginPassword,jdbcType=VARCHAR},</if>
+      <if test="transactionPassword != null">#{transactionPassword,jdbcType=VARCHAR},</if>
+      <if test="mobile != null">#{mobile,jdbcType=VARCHAR},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="creator != null">#{creator,jdbcType=VARCHAR},</if>
+      <if test="updater != null">#{updater,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+
+
+  <select resultMap="BaseResultMap" id="selectAll" resultType="org.server.dao.BankcardAccountDAO">
+    select * from tb_bankcard_account ;
+  </select>
+
+
+  <select resultMap="BaseResultMap" id="selectByBankCardAccountId" resultType="org.server.dao.BankcardAccountDAO">
+    select * from tb_bankcard_account where bank_card_account_id = #{id} ;
+  </select>
+
+  <update id="updateByBankcardAccount">
+    UPDATE tb_bankcard_account
+    <set>
+      <if test="bankId != null">bank_id = #{bankId,jdbcType=VARCHAR},</if>
+      <if test="cardId != null">card_id = #{cardId,jdbcType=VARCHAR},</if>
+      <if test="type != null">type = #{type,jdbcType=TINYINT},</if>
+      <if test="payeeCardName != null">payee_card_name = #{payeeCardName,jdbcType=VARCHAR},</if>
+      <if test="payeeCardNo != null">payee_card_no = #{payeeCardNo,jdbcType=VARCHAR},</if>
+      <if test="bankName != null">bank_name = #{bankName,jdbcType=VARCHAR},</if>
+      <if test="bankArea != null">bank_area = #{bankArea,jdbcType=VARCHAR},</if>
+      <if test="branchName != null">branch_name = #{branchName,jdbcType=VARCHAR},</if>
+      <if test="status != null">status = #{status,jdbcType=INTEGER},</if>
+      <if test="memo != null">memo = #{memo,jdbcType=VARCHAR},</if>
+      <if test="balance != null">balance = #{balance,jdbcType=DECIMAL,javaType=java.math.BigDecimal},</if>
+      <if test="loginUsername != null">login_username = #{loginUsername,jdbcType=VARCHAR},</if>
+      <if test="loginPassword != null">login_password = #{loginPassword,jdbcType=VARCHAR},</if>
+      <if test="transactionPassword != null">transaction_password = #{transactionPassword,jdbcType=VARCHAR},</if>
+      <if test="mobile != null">mobile = #{mobile,jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">update_time = #{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="creator != null">creator = #{creator,jdbcType=VARCHAR},</if>
+      <if test="updater != null">updater = #{updater,jdbcType=VARCHAR},</if>
+    </set>
+    WHERE bank_card_account_id = #{bankCardAccountId,jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>

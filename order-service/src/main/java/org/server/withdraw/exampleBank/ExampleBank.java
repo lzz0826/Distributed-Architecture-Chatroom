@@ -197,7 +197,7 @@ public class ExampleBank implements org.server.withdraw.WithdrawBank {
       System.out.println("解析JSON responseStr失敗");
     }
     log.info("{}下單結果={}", LOG_PREFIX, response);
-    log.info("{}查詢訂單結果 response: {}", LOG_PREFIX, response);
+    log.info("{}取款查詢訂單結果 response: {}", LOG_PREFIX, response);
 
     // 判斷回應碼
     String resultCode = String.valueOf(response.get(RESPONSE_CODE));
@@ -209,7 +209,7 @@ public class ExampleBank implements org.server.withdraw.WithdrawBank {
       if (RESPONSE_MESSAGE_WITHDRAW_ORDER_NOT_EXIST.equals(responseMessage)) {
         throw new WithdrawOrderNotExistException();
       } else {
-        log.info("{}訂單查詢失敗 reposne status code={} message={}", LOG_PREFIX, resultCode,
+        log.info("{}取款訂單查詢失敗 reposne status code={} message={}", LOG_PREFIX, resultCode,
             responseMessage);
         throw new InquireWithdrawOrderRequestFailException();
       }
@@ -238,7 +238,7 @@ public class ExampleBank implements org.server.withdraw.WithdrawBank {
 
     Map<String, Object> map = objectMapper.convertValue(params,Map.class);
     if (!verifySign(map, withdrawBank.getBankSign())) {
-      log.info("{}訂單回調驗簽失敗 params :{}", LOG_PREFIX, params);
+      log.info("{}取款訂單回調驗簽失敗 params :{}", LOG_PREFIX, params);
       throw new WithdrawCallbackSignFailException();
     }
     return WithdrawNotifyResponse.builder()
