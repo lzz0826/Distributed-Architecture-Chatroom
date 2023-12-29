@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WithdrawChannel {
+public class WithdrawBank {
     public static final String CHANNEL_CODE = "WITHDRAW";
     public static final String CATCH_ID_TEST = "TEST";
     public static final String CATCH_ID_TEST_FAILE = "TEST_FAIL";
@@ -43,7 +43,6 @@ public class WithdrawChannel {
      * 出款銀行代碼(我方)
      */
     private String bankCode;
-
 
     /**
      * 出款銀行名稱(我方)

@@ -3,7 +3,6 @@ package org.server.withdraw;
 import java.math.BigDecimal;
 import java.util.Map;
 import org.server.withdraw.model.HttpRequestEnum;
-import org.server.withdraw.model.WithdrawChannel;
 import org.server.withdraw.model.WithdrawMethodResponse;
 import org.server.withdraw.model.WithdrawNotifyResponse;
 import org.server.withdraw.model.WithdrawOrder;
@@ -26,20 +25,20 @@ public interface WithdrawBank {
 
   /**
    * 向銀行查詢餘額 並更新本地餘額
-   * @param withdrawChannel
+   * @param withdrawBank
    * @return
    * @throws Exception
    */
-  BigDecimal getBalance(WithdrawChannel withdrawChannel) throws Exception;
+  BigDecimal getBalance(org.server.withdraw.model.WithdrawBank withdrawBank) throws Exception;
 
   /**
    * 向銀行發起取款(轉帳)請求
-   * @param withdrawChannel
+   * @param withdrawBank
    * @param withdrawOrder
    * @return
    * @throws Exception
    */
-  WithdrawMethodResponse execute(WithdrawChannel withdrawChannel, WithdrawOrder withdrawOrder)
+  WithdrawMethodResponse execute(org.server.withdraw.model.WithdrawBank withdrawBank, WithdrawOrder withdrawOrder)
       throws Exception;
 
   /**
@@ -49,22 +48,22 @@ public interface WithdrawBank {
    * (後台MGR代付訂單手動更新時調用)
    *
    * @param withdrawOrder
-   * @param withdrawChannel
+   * @param withdrawBank
    * @return
    * @throws Exception
    */
-  WithdrawMethodResponse getOrder(WithdrawOrder withdrawOrder, WithdrawChannel withdrawChannel,
+  WithdrawMethodResponse getOrder(WithdrawOrder withdrawOrder, org.server.withdraw.model.WithdrawBank withdrawBank,
       HttpRequestEnum enums) throws Exception;
 
   /**
    * 僅驗回調簽名
    *
-   * @param withdrawChannel
+   * @param withdrawBank
    * @param params
    * @return
    * @throws Exception
    */
-  WithdrawNotifyResponse checkNotifySign(WithdrawChannel withdrawChannel,
+  WithdrawNotifyResponse checkNotifySign(org.server.withdraw.model.WithdrawBank withdrawBank,
       Map<String, String> params)
       throws Exception;
 

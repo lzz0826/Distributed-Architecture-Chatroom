@@ -11,9 +11,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class WithdrawNotifyResponse {
-    private String withdrawOrderId;
 
-    private String channelOrderNo;
+    private String withdrawOrderId;
 
     private BigDecimal amount;
 

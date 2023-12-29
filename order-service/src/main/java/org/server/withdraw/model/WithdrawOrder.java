@@ -22,11 +22,6 @@ public class WithdrawOrder {
     public final static int STATUS_WITHDRAWN = 5; // 代付支付完成
     public final static int STATUS_COMPLETED = 6; // 業務處理完成
 
-    public static final int CHECK_WITHDRAWN_FROM_NOTIFY = 0;
-    public static final int CHECK_WITHDRAWN_FROM_PULL = 1;
-
-    public final static String MEMO_NOT_FIND_CHANNEL = "目前無可用渠道";
-    public final static String MEMO_NOT_FIND_MERCHANT = "商戶異常";
 
     public Integer getExposedStatus() {
         switch (status) {
@@ -90,11 +85,10 @@ public class WithdrawOrder {
     	return getStatusDesc(this.status);
     }
 
-    private String withdrawOrderId; // 代付訂單號
+    private String withdrawOrderId; // 出款訂單號
 
     private Long accountId; // 帳戶ID
     private Integer status; // 狀態
-
 
     private String remark; // 備註訊息
 

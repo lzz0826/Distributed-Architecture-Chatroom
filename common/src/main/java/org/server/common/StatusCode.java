@@ -71,9 +71,15 @@ public enum StatusCode {
   * Bank 2400
   */
 
- GetBalanceFail(2400,"查詢銀行餘額失敗"),
+ GetBalanceRequestFail(2400,"查詢銀行餘額請求失敗(銀行方)"),
 
+ WithdrawOrderNotExist(2401,"出款訂單不存在(銀行方)"),
 
+ InquireWithdrawOrderRequestFail(2402,"查詢出款訂單失敗(銀行方)"),
+
+ WithdrawRequestFail(2403,"取款請求失敗(銀行方)"),
+
+ WithdrawCallbackSignFail(2404,"回調驗籤失敗"),
 
 
 
