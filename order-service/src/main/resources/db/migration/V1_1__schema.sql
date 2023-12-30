@@ -77,6 +77,10 @@ CREATE TABLE IF NOT EXISTS `tb_bank_code` (
                                                   `bank_code` varchar(20) DEFAULT NULL COMMENT '銀行聯行碼',
                                                   `bank_abbreviation` varchar(10) DEFAULT NULL COMMENT '銀行名稱縮寫',
                                                   `bank_name` varchar(20) DEFAULT NULL COMMENT '銀行名稱',
+                                                  `update_time` TIMESTAMP NOT NULL,
+                                                  `create_time` TIMESTAMP NOT NULL,
+                                                  `creator` varchar(30) DEFAULT NULL COMMENT '創建人',
+                                                  `updater` varchar(30) DEFAULT NULL COMMENT '更新人',
                                                   PRIMARY KEY (`bank_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='銀行代碼列表';
 

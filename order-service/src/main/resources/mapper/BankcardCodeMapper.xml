@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.BankCodeMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.dao.BankCodeDAO">
+    <id property="bankId" column="bank_id" jdbcType="VARCHAR"/>
+    <result property="bankCode" column="bank_code" jdbcType="VARCHAR"/>
+    <result property="bankAbbreviationn" column="bank_abbreviation" jdbcType="VARCHAR"/>
+    <result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <result property="creator" column="creator" jdbcType="VARCHAR"/>
+    <result property="updater" column="updater" jdbcType="VARCHAR"/>
+  </resultMap>
+
+  <insert id="insertOrder">
+    INSERT INTO tb_bank_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bankId != null">bank_id,</if>
+      <if test="bankCode != null">bank_code,</if>
+      <if test="bankAbbreviationn != null">bank_abbreviation,</if>
+      <if test="bankName != null">bank_name,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="creator != null">creator,</if>
+      <if test="updater != null">updater,</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bankId != null">#{bankId, jdbcType=VARCHAR},</if>
+      <if test="bankCode != null">#{bankCode, jdbcType=VARCHAR},</if>
+      <if test="bankAbbreviationn != null">#{bankAbbreviationn, jdbcType=VARCHAR},</if>
+      <if test="bankName != null">#{bankName, jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">#{updateTime, jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+      <if test="creator != null">#{creator, jdbcType=VARCHAR},</if>
+      <if test="updater != null">#{updater, jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+
+  <select resultMap="BaseResultMap" id="selectAll" resultType="org.server.dao.BankCodeDAO">
+    select * from tb_bank_code ;
+  </select>
+
+  <select resultMap="BaseResultMap" id="selectById" resultType="org.server.dao.BankCodeDAO">
+    select * from tb_bank_code where bank_id = #{id};
+  </select>
+
+  <update id="updateById">
+    UPDATE tb_bank_code
+    <set>
+      <if test="bankCode != null">bank_code = #{bankCode, jdbcType=VARCHAR},</if>
+      <if test="bankAbbreviationn != null">bank_abbreviation = #{bankAbbreviationn, jdbcType=VARCHAR},</if>
+      <if test="bankName != null">bank_name = #{bankName, jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">update_time = #{updateTime, jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">create_time = #{createTime, jdbcType=TIMESTAMP},</if>
+      <if test="creator != null">creator = #{creator, jdbcType=VARCHAR},</if>
+      <if test="updater != null">updater = #{updater, jdbcType=VARCHAR},</if>
+    </set>
+    WHERE bank_id = #{bankId, jdbcType=VARCHAR}
+  </update>
+
+
+</mapper>

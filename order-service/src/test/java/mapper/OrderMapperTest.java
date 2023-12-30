@@ -28,7 +28,7 @@ public class OrderMapperTest extends BaseTest {
     String userId= "4159389780461786807";
 
     BigDecimal bigDecimal = new BigDecimal(55.5551);
-    int i = orderMapper.updateByUserId(userId,bigDecimal);
+    int i = orderMapper.updatePriceByUserId(userId,bigDecimal);
 
     System.out.println(i);
 

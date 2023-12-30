@@ -52,7 +52,7 @@
     </trim>
   </insert>
 
-  <update id="updateByUserId">
+  <update id="updatePriceByUserId">
     update tb_order set price = #{price} where user_id = #{userId}
   </update>
 
