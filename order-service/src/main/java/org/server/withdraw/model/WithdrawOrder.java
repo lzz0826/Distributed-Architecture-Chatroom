@@ -23,6 +23,13 @@ public class WithdrawOrder {
     public final static int STATUS_COMPLETED = 6; // 業務處理完成
 
 
+
+    public final static int STATUS_COMPLETED_ING = 9 ; // 訂單生成中
+
+
+
+
+
     public Integer getExposedStatus() {
         switch (status) {
             case STATUS_CREATED:
@@ -87,7 +94,9 @@ public class WithdrawOrder {
 
     private String withdrawOrderId; // 出款訂單號
 
-    private Long accountId; // 帳戶ID
+    private String userId; //使用者ID
+
+    private Long accountId; // 帳戶ID()
     private Integer status; // 狀態
 
     private String remark; // 備註訊息

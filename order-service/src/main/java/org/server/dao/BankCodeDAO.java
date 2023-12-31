@@ -14,6 +14,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class BankCodeDAO {
 
+  public static final int STATUS_DISABLED = 0;
+
+
   private String bankId;
 
   private String bankCode;
@@ -21,6 +24,16 @@ public class BankCodeDAO {
   private String bankAbbreviationn;
 
   private String bankName;
+
+  //请求私钥
+  //TODO DB mapper
+  private String requestKey;
+
+  private String publicKey; // rsa公钥
+
+  private String privateKey; // rsa私钥
+
+  private Integer status; //銀行狀態 0 停用
 
   private Date updateTime;
 

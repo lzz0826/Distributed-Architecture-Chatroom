@@ -85,4 +85,20 @@
   </select>
 
 
+  <select id="selectByIdOrUserId" resultType="org.server.dao.OrderDAO">
+    SELECT * FROM tb_order
+    <where>
+      <if test="walletId != null">
+        AND id = #{id}
+      </if>
+      <if test="userId != null">
+        AND user_id = #{userId}
+      </if>
+]    </where>
+
+
+
+  </select>
+
+
 </mapper>

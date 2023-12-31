@@ -1,4 +1,4 @@
-package org.server.withdraw.model;
+package org.server.withdraw.enums;
 
 public enum HttpRequestEnum {
     GENERAL(60),

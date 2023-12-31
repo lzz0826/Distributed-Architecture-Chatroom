@@ -16,6 +16,8 @@ public interface OrderMapper {
 
    OrderDAO selectById(@Param("id") String id);
 
+   List<OrderDAO> selectByIdOrUserId(@Param("id")String id , @Param("userId")String userId);
+
    int updatePriceByUserId(@Param("userId") String name ,@Param("price") BigDecimal price);
 
    int updateByOrderId(OrderDAO orderDAO);

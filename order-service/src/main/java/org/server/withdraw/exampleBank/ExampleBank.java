@@ -23,11 +23,11 @@ import org.server.utils.ConverterUtils;
 import org.server.utils.FormatUtil;
 import org.server.utils.OkHttpUtil;
 import org.server.utils.SignUtil;
-import org.server.withdraw.model.HttpRequestEnum;
+import org.server.withdraw.enums.HttpRequestEnum;
 import org.server.withdraw.model.TraderResponseCode;
 import org.server.withdraw.model.WithdrawBank;
-import org.server.withdraw.model.WithdrawMethodResponse;
-import org.server.withdraw.model.WithdrawNotifyResponse;
+import org.server.withdraw.rep.WithdrawMethodResponse;
+import org.server.withdraw.rep.WithdrawNotifyResponse;
 import org.server.withdraw.model.WithdrawOrder;
 
 @Log4j2

@@ -88,3 +88,10 @@ ribbon:
     enabled: true #開啟飢餓加載
     clients: #指定飢餓加載的服務名
       -user-service
+
+
+#取款系統
+withdraw:
+  order:
+    verify:
+      enable: true #是否開啟驗籤

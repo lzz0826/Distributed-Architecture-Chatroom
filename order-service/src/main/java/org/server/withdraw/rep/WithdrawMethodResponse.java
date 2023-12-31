@@ -1,4 +1,4 @@
-package org.server.withdraw.model;
+package org.server.withdraw.rep;
 
 import java.math.BigDecimal;
 import lombok.AllArgsConstructor;

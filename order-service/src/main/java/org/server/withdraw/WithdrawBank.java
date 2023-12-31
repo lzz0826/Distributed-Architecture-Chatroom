@@ -2,9 +2,9 @@ package org.server.withdraw;
 
 import java.math.BigDecimal;
 import java.util.Map;
-import org.server.withdraw.model.HttpRequestEnum;
-import org.server.withdraw.model.WithdrawMethodResponse;
-import org.server.withdraw.model.WithdrawNotifyResponse;
+import org.server.withdraw.enums.HttpRequestEnum;
+import org.server.withdraw.rep.WithdrawMethodResponse;
+import org.server.withdraw.rep.WithdrawNotifyResponse;
 import org.server.withdraw.model.WithdrawOrder;
 
 public interface WithdrawBank {

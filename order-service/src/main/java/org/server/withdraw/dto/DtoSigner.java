@@ -151,7 +151,7 @@ public abstract class DtoSigner {
      * 驗證當前對象的簽名是否有效 依照首字母的ASCII碼進行排序。
      * 實現類物件必須要有值,且sign屬性必須先執行簽名過
      *
-     * @param key 用於簽名的密鑰。(我方提供給對方的公鑰,對方回傳)
+     * @param key 用於簽名的密鑰。(我方提供給對方的公鑰對方回傳,使用私鑰解密)
      * @return 如果簽名有效，則返回true；否則返回false。
      * @throws NoSuchFieldException   如果在對象中找不到 'sign' 字段。
      * @throws IllegalAccessException 如果訪問 'sign' 字段時出現問題。
