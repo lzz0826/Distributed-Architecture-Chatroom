@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.WithdrawOrderMapper">
+
+
+  <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawOrder">
+    <id property="withdrawOrderId" column="withdraw_order_id" jdbcType="VARCHAR"/>
+    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="bankOrderNo" column="bank_order_no" jdbcType="VARCHAR"/>
+    <result property="bankReturnCode" column="bank_return_code" jdbcType="VARCHAR"/>
+    <result property="bankReturnMessage" column="bank_return_message" jdbcType="VARCHAR"/>
+    <result property="remark" column="remark" jdbcType="BLOB"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="payeeCardNo" column="payee_card_no" jdbcType="VARCHAR"/>
+    <result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
+    <result property="branchName" column="branch_name" jdbcType="VARCHAR"/>
+    <result property="payeeCardName" column="payee_card_name" jdbcType="VARCHAR"/>
+    <result property="bankProvince" column="bank_province" jdbcType="VARCHAR"/>
+    <result property="bankCity" column="bank_city" jdbcType="VARCHAR"/>
+    <result property="bankCode" column="bank_code" jdbcType="VARCHAR"/>
+    <result property="amount" column="amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+    <result property="actualAmount" column="actual_amount" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+    <result property="rate" column="rate" jdbcType="DOUBLE"/>
+    <result property="rateFixedAmount" column="rate_fixed_amount" jdbcType="BIGINT"/>
+    <result property="notifyUrl" column="notify_url" jdbcType="VARCHAR"/>
+    <result property="successTime" column="success_time" jdbcType="TIMESTAMP"/>
+    <result property="clientIp" column="client_ip" jdbcType="VARCHAR"/>
+    <result property="clientDevice" column="client_device" jdbcType="VARCHAR"/>
+    <result property="clientExtra" column="client_extra" jdbcType="BLOB"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+
+  <insert id="insertWithdrawOrder" parameterType="org.server.withdraw.model.WithdrawOrder">
+    INSERT INTO t_withdraw_order
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="withdrawOrderId != null">withdraw_order_id,</if>
+      <if test="userId != null">user_id,</if>
+      <if test="bankOrderNo != null">bank_order_no,</if>
+      <if test="bankReturnCode != null">bank_return_code,</if>
+      <if test="bankReturnMessage != null">bank_return_message,</if>
+      <if test="remark != null">remark,</if>
+      <if test="status != null">status,</if>
+      <if test="payeeCardNo != null">payee_card_no,</if>
+      <if test="bankName != null">bank_name,</if>
+      <if test="branchName != null">branch_name,</if>
+      <if test="payeeCardName != null">payee_card_name,</if>
+      <if test="bankProvince != null">bank_province,</if>
+      <if test="bankCity != null">bank_city,</if>
+      <if test="bankCode != null">bank_code,</if>
+      <if test="amount != null">amount,</if>
+      <if test="actualAmount != null">actual_amount,</if>
+      <if test="rate != null">rate,</if>
+      <if test="rateFixedAmount != null">rate_fixed_amount,</if>
+      <if test="notifyUrl != null">notify_url,</if>
+      <if test="successTime != null">success_time,</if>
+      <if test="clientIp != null">client_ip,</if>
+      <if test="clientDevice != null">client_device,</if>
+      <if test="clientExtra != null">client_extra,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="updateTime != null">update_time,</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="withdrawOrderId != null">#{withdrawOrderId, jdbcType=VARCHAR},</if>
+      <if test="userId != null">#{userId, jdbcType=VARCHAR},</if>
+      <if test="bankOrderNo != null">#{bankOrderNo, jdbcType=VARCHAR},</if>
+      <if test="bankReturnCode != null">#{bankReturnCode, jdbcType=VARCHAR},</if>
+      <if test="bankReturnMessage != null">#{bankReturnMessage, jdbcType=VARCHAR},</if>
+      <if test="remark != null">#{remark, jdbcType=BLOB},</if>
+      <if test="status != null">#{status, jdbcType=INTEGER},</if>
+      <if test="payeeCardNo != null">#{payeeCardNo, jdbcType=VARCHAR},</if>
+      <if test="bankName != null">#{bankName, jdbcType=VARCHAR},</if>
+      <if test="branchName != null">#{branchName, jdbcType=VARCHAR},</if>
+      <if test="payeeCardName != null">#{payeeCardName, jdbcType=VARCHAR},</if>
+      <if test="bankProvince != null">#{bankProvince, jdbcType=VARCHAR},</if>
+      <if test="bankCity != null">#{bankCity, jdbcType=VARCHAR},</if>
+      <if test="bankCode != null">#{bankCode, jdbcType=VARCHAR},</if>
+      <if test="amount != null">#{amount, jdbcType=DECIMAL, javaType=java.math.BigDecimal},</if>
+      <if test="actualAmount != null">#{actualAmount, jdbcType=DECIMAL, javaType=java.math.BigDecimal},</if>
+      <if test="rate != null">#{rate, jdbcType=DOUBLE},</if>
+      <if test="rateFixedAmount != null">#{rateFixedAmount, jdbcType=BIGINT},</if>
+      <if test="notifyUrl != null">#{notifyUrl, jdbcType=VARCHAR},</if>
+      <if test="successTime != null">#{successTime, jdbcType=TIMESTAMP},</if>
+      <if test="clientIp != null">#{clientIp, jdbcType=VARCHAR},</if>
+      <if test="clientDevice != null">#{clientDevice, jdbcType=VARCHAR},</if>
+      <if test="clientExtra != null">#{clientExtra, jdbcType=BLOB},</if>
+      <if test="createTime != null">#{createTime, jdbcType=TIMESTAMP},</if>
+      <if test="updateTime != null">#{updateTime, jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+
+
+  <select id="findVerifyPayeeCardNoCount"  resultType="java.lang.Integer">
+    SELECT
+      COUNT(1)
+    FROM t_withdraw_order
+    WHERE payee_card_no = #{payeeCardNo}
+      AND user_id = #{userId}
+      AND create_time >= NOW() - INTERVAL 1000 MINUTE
+  </select>
+
+  <select resultMap="BaseResultMap" id="selectAll" resultType="org.server.withdraw.model.WithdrawOrder">
+    SELECT * FROM t_withdraw_order
+  </select>
+
+
+</mapper>

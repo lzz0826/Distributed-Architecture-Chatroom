@@ -22,6 +22,9 @@ public class CreateWithdrawRequest extends DtoSigner {
     private String userId; //使用者ID
 
     @NotBlank
+    private String accountId; //TODO 銀行帳號Id  暫時重這取
+
+    @NotBlank
     private String orderNo; //单号
 
     @NotNull

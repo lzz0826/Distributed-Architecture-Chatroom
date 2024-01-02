@@ -62,11 +62,14 @@ logging:
   config: classpath:log4j2.xml
   level:
     cn.jay.repository: trace
+    com.lucifer.springboot.cache.mapper: debug
+
 
 mybatis:
   mapper-locations: classpath*:mapper/*.xml #MyBatis映射文件的位置
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl #開啟SQL語句打印
+
 
 #分页插件
 pagehelper:
@@ -93,5 +96,8 @@ ribbon:
 #取款系統
 withdraw:
   order:
+    continuous:
+      minute: 10 #配置同一張卡在某段最大請求數的 (時間 分)
+      count: 3 #同一張卡在某段時間的最大請求的 (數)
     verify:
       enable: true #是否開啟驗籤

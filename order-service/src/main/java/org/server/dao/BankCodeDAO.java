@@ -27,7 +27,7 @@ public class BankCodeDAO {
 
   //请求私钥
   //TODO DB mapper
-  private String requestKey;
+  private String requestKey; //簽名key
 
   private String publicKey; // rsa公钥
 

@@ -88,3 +88,34 @@ CREATE TABLE IF NOT EXISTS `tb_bank_code` (
                                                   PRIMARY KEY (`bank_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='銀行代碼列表';
 
+
+-- 取款訂單列表
+CREATE TABLE IF NOT EXISTS `t_withdraw_order` (
+                                                  `withdraw_order_id` varchar(30) NOT NULL COMMENT '取款訂單號',
+                                                  `user_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
+                                                  `bank_order_no` varchar(30) DEFAULT NULL COMMENT '銀行方的訂單號',
+                                                  `bank_return_code` varchar(10) DEFAULT NULL COMMENT '銀行方回傳Cod',
+                                                  `bank_return_message` text COMMENT '銀行方回傳信息',
+                                                  `remark` blob COMMENT '備註信息',
+                                                  `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '代付狀態，-4:驗證失敗，-3:代付支付失敗，-2:代付申請失敗，-1:商戶確認失敗，0:訂單生成，1:商戶確認成功，2:代付申請成功，3:代付支付完成，4:業務處理完成',
+                                                  `payee_card_no` varchar(20) DEFAULT NULL COMMENT '銀行卡卡號',
+                                                  `bank_name` varchar(20) DEFAULT NULL COMMENT '銀行名稱',
+                                                  `branch_name` varchar(20) DEFAULT NULL COMMENT '銀行支行名稱',
+                                                  `payee_card_name` varchar(40) DEFAULT NULL COMMENT '銀行卡姓名',
+                                                  `bank_province` varchar(20) DEFAULT NULL COMMENT '銀行所在省',
+                                                  `bank_city` varchar(20) DEFAULT NULL COMMENT '銀行所在市',
+                                                  `bank_code` varchar(20) DEFAULT NULL COMMENT '我方銀行聯行碼',
+                                                  `amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '取款金額，單位分',
+                                                  `actual_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '實際取款金額，單位分',
+                                                  `rate` double NOT NULL DEFAULT '0' COMMENT '手續費費率',
+                                                  `rate_fixed_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '手續費固定金額，單位分',
+                                                  `notify_url` varchar(128) DEFAULT NULL COMMENT '通知地址',
+                                                  `success_time` timestamp NULL DEFAULT NULL COMMENT '訂單代付成功時間',
+                                                  `client_ip` varchar(32) DEFAULT NULL COMMENT '客戶端IP',
+                                                  `client_device` varchar(64) DEFAULT NULL COMMENT '客戶端設備',
+                                                  `client_extra` blob COMMENT '渠道方要求的額外參數（JSON格式）',
+                                                  `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
+                                                  `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
+                                                  PRIMARY KEY (`withdraw_order_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付訂單';
+

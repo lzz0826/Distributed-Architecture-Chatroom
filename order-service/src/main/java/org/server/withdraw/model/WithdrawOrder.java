@@ -92,60 +92,34 @@ public class WithdrawOrder {
     	return getStatusDesc(this.status);
     }
 
+    private String accountId; // 帳戶ID() ˊ存款款卡
     private String withdrawOrderId; // 出款訂單號
-
-    private String userId; //使用者ID
-
-    private Long accountId; // 帳戶ID()
-    private Integer status; // 狀態
-
+    private String userId;  //使用者ID
+    private String bankOrderNo;
+    private String bankReturnCode;
+    private String bankReturnMessage;
     private String remark; // 備註訊息
-
-    private String payeeCardNo; // 銀行卡卡號
-
-    private String bankName; // 銀行名稱
-
-    private String branchName; // 銀行支行名稱
-
-    private String payeeCardName; // 銀行卡姓名
-
-    private String bankProvince; // 銀行所在省
-
-    private String bankCity; // 銀行所在市
-
-    private BigDecimal amount; // 支付金額，單位分
-
-    private BigDecimal actualAmount; // 實際支付金額，單位分
-
-    private BigDecimal discountAmount; // 優惠金額，單位分
-
-    private Double rate; // 手續費費率
-
-    private BigDecimal rateFixedAmount; // 手續費，固定金額，單位分
-
-    private BigDecimal fee; // 手續費，單位分
-
-    private String rateDifferences; // 整個代理結構的費率差列表，JSON格式
-
     private String currency; // 三位貨幣代碼, 人民幣: cny
-
+    private Integer status; // 狀態
+    private String payeeCardNo; // 銀行卡卡號
+    private String bankName; // 銀行名稱
+    private String branchName; // 銀行支行名稱
+    private String payeeCardName; // 銀行卡姓名
+    private String bankProvince; // 銀行所在省
+    private String bankCity; // 銀行所在市
+    private String bankCode;
+    private BigDecimal amount; // 支付金額，單位分
+    private BigDecimal actualAmount; // 實際支付金額，單位分
+    private Double rate; // 手續費費率
+    private BigDecimal rateFixedAmount; // 手續費，固定金額，單位分
     private String notifyUrl; // 通知地址
-
     private Date successTime; // 訂單支付成功時間
-
     private String clientIp; // 客戶端IP
-
     private String clientDevice; // 客戶端設備
-
     private String clientExtra; // 客戶端發起時額外參數
-
-    private Integer checkWithdrawnProcess; // 指出，是走哪個流程將訂單狀態設為WITHDRAWN
-
     private Date createTime; // 創建時間
-
     private Date updateTime; // 更新時間
 
-    private String merchantUserId; //商戶的用戶ID
+    private Integer withdrawMinute; // 提款分钟连续请求
 
-    private Integer withdrawMinute; // 提款分鐘連續請求
 }
