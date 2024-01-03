@@ -100,4 +100,8 @@ withdraw:
       minute: 10 #配置同一張卡在某段最大請求數的 (時間 分)
       count: 3 #同一張卡在某段時間的最大請求的 (數)
     verify:
-      enable: true #是否開啟驗籤
+      secondary:
+        enable: true #是否開啟驗籤
+      minute:
+        enable: true #是否開啟 限制同一卡號3分鐘內只能發一單
+

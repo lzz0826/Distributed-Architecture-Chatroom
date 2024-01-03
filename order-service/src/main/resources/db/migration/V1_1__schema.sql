@@ -119,3 +119,43 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_order` (
                                                   PRIMARY KEY (`withdraw_order_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付訂單';
 
+
+-- 銀行渠道 (我方能使用的銀行渠道 餘額是實際帳戶餘額 不是錢包)
+CREATE TABLE IF NOT EXISTS `t_withdraw_bank_channel` (
+                                           `withdraw_bank_channel_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '賬號ID',
+                                           `withdraw_bank_channel_name` varchar(30) DEFAULT NULL COMMENT '賬號名稱',
+                                           `withdraw_bank_channel_code` varchar(30) DEFAULT NULL COMMENT '出款渠道代碼',
+                                           `user_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
+                                           `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0:下架 1:启用 2:达标 3:风控 4:暫時禁用 5:冷却 6:金额冷却',
+                                           `bank_channel_merchant_id` varchar(20) DEFAULT NULL COMMENT '銀行方提供給我方的ID',
+                                           `bank_channel_merchant_name` varchar(30) DEFAULT NULL COMMENT '銀行方提供給我方的名稱',
+                                           `bank_channel_extra` blob COMMENT '渠道額外參數，JSON格式',
+                                           `public_key` blob COMMENT '出款公鑰',
+                                           `private_key` blob COMMENT '出付私鑰',
+                                           `login_username` varchar(30) DEFAULT NULL COMMENT '登入賬號',
+                                           `login_password` varchar(30) DEFAULT NULL COMMENT '登入密碼',
+                                           `min_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '單筆最低金額，單位分',
+                                           `max_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '單筆最高金額，單位分',
+                                           `day_max_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '單日最高金額 - 達標金額，單位分',
+                                           `day_max_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '單日最多筆數 - 達標筆數',
+                                           `total_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '累積收款金額，單位分',
+                                           `total_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '累積收款筆數',
+                                           `today_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '當日累績收款金額，單位分',
+                                           `today_count` bigint(20) NOT NULL DEFAULT '0' COMMENT '當日累積收款筆數',
+                                           `memo` text COMMENT '備註',
+                                           `cost_rate` double NOT NULL DEFAULT '0' COMMENT '成本，費率',
+                                           `cost_fixed_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '成本，固定金額，單位分',
+                                           `balance` DECIMAL(10, 2) NOT NULL COMMENT  '賬號餘額，單位分',
+                                           `notify_url` varchar(128) DEFAULT NULL COMMENT '回調地址',
+                                           `bank_area_code` int(11) DEFAULT NULL COMMENT '第三方銀行地區碼',
+                                           `bank_code` varchar(30) DEFAULT NULL COMMENT '第三方銀行聯行碼',
+                                           `open_start_time` time DEFAULT NULL COMMENT '渠道開啟時段',
+                                           `open_end_time` time DEFAULT NULL COMMENT '渠道開啟時段',
+                                           `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
+                                           `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
+                                           `creator` varchar(30) DEFAULT NULL COMMENT '創建人',
+                                           `updater` varchar(30) DEFAULT NULL COMMENT '更新人',
+                                           PRIMARY KEY (`withdraw_bank_channel_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款銀行渠道表';
+
+

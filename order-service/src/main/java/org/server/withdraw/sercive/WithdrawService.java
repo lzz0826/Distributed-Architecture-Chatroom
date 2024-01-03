@@ -14,18 +14,19 @@ import org.apache.http.util.EntityUtils;
 import org.server.dao.BankCodeDAO;
 import org.server.dao.OrderDAO;
 import org.server.dao.WalletsDAO;
+import org.server.dao.WithdrawChannelDao;
 import org.server.mapper.BankCodeMapper;
 import org.server.mapper.OrderMapper;
+import org.server.mapper.WithdrawBankChannelMapper;
 import org.server.mapper.WithdrawOrderMapper;
+import org.server.service.OrderIdService;
 import org.server.service.WalletService;
-import org.server.utils.FormDataUtil;
 import org.server.withdraw.dto.TraderResponseDto;
-import org.server.withdraw.dto.WithdrawVerifyOrderDto;
-import org.server.withdraw.model.Merchant;
 import org.server.withdraw.model.TraderResponseCode;
 import org.server.withdraw.model.WithdrawOrder;
 import org.server.withdraw.req.CreateWithdrawRequest;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
 
@@ -39,13 +40,24 @@ public class WithdrawService {
   private OrderMapper orderMapper;
 
   @Resource
+  private WithdrawBankChannelMapper withdrawBankChannelMapper;
+
+  @Resource
   private WalletService walletService;
 
   @Resource
   private WithdrawOrderMapper withdrawOrderMapper;
 
-  //如果有配置使用配置(:true 預設 false)
-  @Value("${withdraw.order.verify.enable:false}")
+  @Resource
+  private RedisTemplate<String, String> redisTemplate;
+
+  @Resource
+  private OrderIdService orderIdService;
+
+
+
+  //二次驗籤 (第三方API)
+  @Value("${withdraw.order.verify.secondary.enable:false}")
   private Boolean withdrawOrderVerifyEnable;
 
   //配置同一張卡在某段最大請求數的 (時間 分)限制
@@ -56,15 +68,15 @@ public class WithdrawService {
   @Value("${withdraw.order.continuous.count:3}")
   private Integer withdrawContinuousCount;
 
+  //限制同一卡號3分鐘內只能發一單
   @Value("${withdraw.order.verify.minute.enable:true}")
   private Boolean withdrawOrderVerifyMinuteEnable;
 
+  private final String REDIS_KEY_PREFIX = "withdrawOrder:PayeeCardNo:";
 
-
-
-  private void createWithdraw(CreateWithdrawRequest request, String ip)
+  private TraderResponseDto createWithdraw(CreateWithdrawRequest request, String ip)
       throws NoSuchFieldException, IllegalAccessException {
-    String logPrefix = "【用戶提现下单】";
+    String logPrefix = "【用戶提現下單】";
     log.info("{}createWithdraw: {}", logPrefix, request);
 
     // 商戶驗證(驗商戶代碼/驗簽)
@@ -85,7 +97,7 @@ public class WithdrawService {
 //        throw new XxPayTraderException(TraderResponseCode.WITHDRAW_CHANNEL_BANK_NAME_IS_REQUIRED);
       }
 
-      // 检查订单是否存在
+      // 檢查訂單是否存在
       checkIfUserOrderNoAlreadyExists(request.getUserId(), request.getOrderNo());
       TraderResponseCode responseCode = checkIfAmountIsSupported(request.getUserId(), request.getAmount());
 
@@ -99,9 +111,9 @@ public class WithdrawService {
         status = WithdrawOrder.STATUS_FAILED_ON_PROCESSING;
         remark = responseCode.getMessage();
 
-        // SUCCESS 後是否驗籤
+        // SUCCESS 後是否二次驗籤
       } else {
-        //是否在二次驗籤 (二次验证接口) 暫時無
+        //是否在二次驗籤 (二次驗證接口) 暫時無
         if (withdrawOrderVerifyEnable) {
           //使用 orderNo 來驗證簽名
 //          WithdrawVerifyOrderDto verifyOrderDto = WithdrawVerifyOrderDto.builder()
@@ -124,9 +136,6 @@ public class WithdrawService {
 //            log.error("平台 merchantOrderNo: {}, msg: {}", request.getMerchantOrderNo(), responseCode.getMessage());
 //          }
 //        }
-
-
-
         }
       }
 
@@ -145,35 +154,70 @@ public class WithdrawService {
         }
       }
 
-      //TODO
-      //限制同一卡号3分钟内只能发一单
-//      log.info("限制同一卡号3分钟内只能发一单检查开启:{}", withdrawOrderVerifyMinuteEnable);
-//      if(withdrawOrderVerifyMinuteEnable){
-//        String redisKey = "withdrawOrder:PayeeCardNo:" + request.getPayeeCardNo();
-//        String payeeCardNo = redisTemplate.opsForValue().get(redisKey);
-//        if(StringUtils.isNotBlank(payeeCardNo)){
-//          log.info("{} merchant=[{}],PayeeCardNo is:{}, please try again after 3 min.", logPrefix, merchant.getMerchantId(), payeeCardNo);
-//          status = WithdrawOrder.STATUS_FAILED_ON_PROCESSING;
-//          remark = TraderResponseCode.WITHDRAW_METHOD_PAYEE_CARD_NO_BANK_CONTINUOUS.getMessage();
-//          responseCode = TraderResponseCode.WITHDRAW_METHOD_PAYEE_CARD_NO_BANK_CONTINUOUS;
-//        }else{
-//          if (status == WithdrawOrder.STATUS_PENDING) {
-//            redisTemplate.opsForValue().set(redisKey, request.getPayeeCardNo());
-//            redisTemplate.expire(redisKey, 3, TimeUnit.MINUTES);
-//            log.info("{} set redis key:{} 3min", logPrefix, redisKey);
-//          }
-//        }
-//      }
+//      限制同一卡號3分鐘內只能發一單
+      log.info("限制同一卡號3分鐘內只能發一單檢查開啟:{}", withdrawOrderVerifyMinuteEnable);
+      if(withdrawOrderVerifyMinuteEnable){
+        String redisKey = REDIS_KEY_PREFIX + request.getPayeeCardNo();
+        String payeeCardNo = redisTemplate.opsForValue().get(redisKey);
+        //Redis 檢查key
+        if(StringUtils.isNotBlank(payeeCardNo)){
+          log.info("{} merchant=[{}],PayeeCardNo is:{}, please try again after 3 min.", logPrefix, request.getUserId(), payeeCardNo);
+          status = WithdrawOrder.STATUS_FAILED_ON_PROCESSING;
+          remark = TraderResponseCode.WITHDRAW_METHOD_PAYEE_CARD_NO_BANK_CONTINUOUS.getMessage();
+          responseCode = TraderResponseCode.WITHDRAW_METHOD_PAYEE_CARD_NO_BANK_CONTINUOUS;
+        }else{
+          if (status == WithdrawOrder.STATUS_COMPLETED_ING) {
+            redisTemplate.opsForValue().set(redisKey, request.getPayeeCardNo());
+            redisTemplate.expire(redisKey, 3, TimeUnit.MINUTES);
+            log.info("{} set redis key:{} 3min", logPrefix, redisKey);
+          }
+        }
+      }
+      WithdrawOrder withdrawOrder = WithdrawOrder.builder()
+          .withdrawOrderId(orderIdService.getWithdrawId())
+          .userId(request.getUserId())
+          .bankOrderNo(request.getOrderNo())
+          .amount(request.getAmount())
+          .actualAmount(BigDecimal.ZERO)
+          .rateFixedAmount(BigDecimal.ZERO)
+          .rate(0.0)
+          .currency(request.getCurrency())
+          .clientIp(request.getClientIp())
+          .clientDevice(request.getClientDevice())
+          .clientExtra(request.getClientExtra())
+          .notifyUrl(request.getNotifyUrl())
+          .payeeCardNo(request.getPayeeCardNo())
+          .payeeCardName(request.getPayeeCardName())
+          .bankName(request.getBankName())
+          .branchName(request.getBranchName())
+          .bankProvince(request.getBankProvince())
+          .bankCity(request.getBankCity())
+          .status(status)// 先收單待Job分配渠道
+          .remark(remark)
+          .build();
 
+      // 建立支付中订单
+      int result = withdrawOrderMapper.insertWithdrawOrder(withdrawOrder);
+      log.info("{}【創建withdraw Order】===> merchantId:{}, withdrawOrder:{}, insert result:{}", logPrefix, request.getUserId(), withdrawOrder, result);
+      dto = TraderResponseDto.success();
+      //回覆mpa.put withdrawOrderId
+      dto.put("withdrawOrderId", withdrawOrder.getWithdrawOrderId());
+      log.info("{} WithdrawOrderId=[{}] is created status:{}", logPrefix, withdrawOrder.getWithdrawOrderId(), status);
 
-
-
+      //處理 失敗的返回
+      if(!responseCode.getCode().equals(TraderResponseCode.SUCCESS.getCode())){
+        dto = new TraderResponseDto();
+        dto.setCode(responseCode);
+      }
     }catch (Exception e){
-      e.printStackTrace();
+      log.error("{} create exception:{}", logPrefix, e.getMessage(), e);
+
+      dto = new TraderResponseDto();
+      dto.setCode(TraderResponseCode.UNKNOWN_ERROR, e.getMessage());
+      dto.sign(dao.getRequestKey());
     }
-
-
-
+    dto.sign(dao.getRequestKey());
+    return dto;
   }
 
   private BankCodeDAO verifyRequest(CreateWithdrawRequest request)
@@ -205,7 +249,7 @@ public class WithdrawService {
     //使用orderNo 和 userId 查尋是否有重複的訂單
     List<OrderDAO> orderDAOS = orderMapper.selectByIdOrUserId(orderNo, userId);
     if(orderDAOS != null && !orderDAOS.isEmpty()){
-      log.info("{}使用者订单号重复试: {}", userId, orderNo);
+      log.info("{}使用者訂單號重複試: {}", userId, orderNo);
 //      拋異常
 //      TraderResponseCode.MERCHANT_ORDER_NO_DUPLICATE,
     }
@@ -215,17 +259,18 @@ public class WithdrawService {
   //查詢是否可出款 包含餘額
   private TraderResponseCode checkIfAmountIsSupported(String userId, BigDecimal amount) {
 
-    WalletsDAO walletsDAO = walletService.getWalletByUserId(userId);
-    if(walletsDAO != null ){
-      //找不到 錢包
+    WithdrawChannelDao dao = withdrawBankChannelMapper.getWithdrawChannelDaoByUserId(
+        userId);
+    if(dao != null ){
+      //找不到 渠道
       return TraderResponseCode.WITHDRAW_CHANNEL_NOT_FOUND_USABLE;
     }
 
-    if(walletsDAO.getBalance().compareTo(BigDecimal.ZERO) <= 0){
+    if(dao.getBalance().compareTo(BigDecimal.ZERO) <= 0){
       return TraderResponseCode.WITHDRAW_CHANNEL_BALANCE_NOT_ENOUGH;
     }
 
-    if(walletsDAO.getBalance().compareTo(amount)  <= 0){
+    if(dao.getBalance().compareTo(amount)  <= 0){
       return TraderResponseCode.WITHDRAW_CHANNEL_BALANCE_NOT_ENOUGH;
     }
 

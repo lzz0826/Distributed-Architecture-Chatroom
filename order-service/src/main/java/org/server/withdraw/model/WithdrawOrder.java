@@ -119,7 +119,6 @@ public class WithdrawOrder {
     private String clientExtra; // 客戶端發起時額外參數
     private Date createTime; // 創建時間
     private Date updateTime; // 更新時間
-
     private Integer withdrawMinute; // 提款分钟连续请求
 
 }

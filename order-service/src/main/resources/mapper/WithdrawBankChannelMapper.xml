@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.WithdrawBankChannelMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.dao.WithdrawChannelDao">
+    <id property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="BIGINT"/>
+    <result property="withdrawBankChannelName" column="withdraw_bank_channel_name" jdbcType="VARCHAR"/>
+    <result property="withdrawBankChannelCode" column="withdraw_bank_channel_code" jdbcType="VARCHAR"/>
+    <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="status" column="status" jdbcType="TINYINT"/>
+    <result property="bankChannelMerchantId" column="bank_channel_merchant_id" jdbcType="VARCHAR"/>
+    <result property="bankChannelMerchantName" column="bank_channel_merchant_name" jdbcType="VARCHAR"/>
+    <result property="bankChannelExtra" column="bank_channel_extra" jdbcType="BLOB"/>
+    <result property="publicKey" column="public_key" jdbcType="BLOB"/>
+    <result property="privateKey" column="private_key" jdbcType="BLOB"/>
+    <result property="loginUsername" column="login_username" jdbcType="VARCHAR"/>
+    <result property="loginPassword" column="login_password" jdbcType="VARCHAR"/>
+    <result property="minAmount" column="min_amount" jdbcType="BIGINT"/>
+    <result property="maxAmount" column="max_amount" jdbcType="BIGINT"/>
+    <result property="dayMaxAmount" column="day_max_amount" jdbcType="BIGINT"/>
+    <result property="dayMaxCount" column="day_max_count" jdbcType="BIGINT"/>
+    <result property="totalAmount" column="total_amount" jdbcType="BIGINT"/>
+    <result property="totalCount" column="total_count" jdbcType="BIGINT"/>
+    <result property="todayAmount" column="today_amount" jdbcType="BIGINT"/>
+    <result property="todayCount" column="today_count" jdbcType="BIGINT"/>
+    <result property="memo" column="memo" jdbcType="VARCHAR"/>
+    <result property="costRate" column="cost_rate" jdbcType="DOUBLE"/>
+    <result property="costFixedAmount" column="cost_fixed_amount" jdbcType="BIGINT"/>
+    <result property="balance" column="balance" jdbcType="DECIMAL" javaType="java.math.BigDecimal"/>
+    <result property="notifyUrl" column="notify_url" jdbcType="VARCHAR"/>
+    <result property="bankAreaCode" column="bank_area_code" jdbcType="INTEGER"/>
+    <result property="bankCode" column="bank_code" jdbcType="VARCHAR"/>
+    <result property="openStartTime" column="open_start_time" jdbcType="TIME"/>
+    <result property="openEndTime" column="open_end_time" jdbcType="TIME"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="creator" column="creator" jdbcType="VARCHAR"/>
+    <result property="updater" column="updater" jdbcType="VARCHAR"/>
+  </resultMap>
+
+
+  <insert id="insertWithdrawBankChannel">
+    insert into t_withdraw_bank_channel
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="withdrawBankChannelId != null">withdraw_bank_channel_id,</if>
+      <if test="withdrawBankChannelName != null">withdraw_bank_channel_name,</if>
+      <if test="withdrawBankChannelCode != null">withdraw_bank_channel_code,</if>
+      <if test="userId != null">user_id,</if>
+      <if test="status != null">status,</if>
+      <if test="bankChannelMerchantId != null">bank_channel_merchant_id,</if>
+      <if test="bankChannelMerchantName != null">bank_channel_merchant_name,</if>
+      <if test="bankChannelExtra != null">bank_channel_extra,</if>
+      <if test="publicKey != null">public_key,</if>
+      <if test="privateKey != null">private_key,</if>
+      <if test="loginUsername != null">login_username,</if>
+      <if test="loginPassword != null">login_password,</if>
+      <if test="minAmount != null">min_amount,</if>
+      <if test="maxAmount != null">max_amount,</if>
+      <if test="dayMaxAmount != null">day_max_amount,</if>
+      <if test="dayMaxCount != null">day_max_count,</if>
+      <if test="totalAmount != null">total_amount,</if>
+      <if test="totalCount != null">total_count,</if>
+      <if test="todayAmount != null">today_amount,</if>
+      <if test="todayCount != null">today_count,</if>
+      <if test="memo != null">memo,</if>
+      <if test="costRate != null">cost_rate,</if>
+      <if test="costFixedAmount != null">cost_fixed_amount,</if>
+      <if test="balance != null">balance,</if>
+      <if test="notifyUrl != null">notify_url,</if>
+      <if test="bankAreaCode != null">bank_area_code,</if>
+      <if test="bankCode != null">bank_code,</if>
+      <if test="openStartTime != null">open_start_time,</if>
+      <if test="openEndTime != null">open_end_time,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="creator != null">creator,</if>
+      <if test="updater != null">updater,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=BIGINT},</if>
+      <if test="withdrawBankChannelName != null">#{withdrawBankChannelName,jdbcType=VARCHAR},</if>
+      <if test="withdrawBankChannelCode != null">#{withdrawBankChannelCode,jdbcType=VARCHAR},</if>
+      <if test="userId != null">#{userId, jdbcType=VARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=TINYINT},</if>
+      <if test="bankChannelMerchantId != null">#{bankChannelMerchantId,jdbcType=VARCHAR},</if>
+      <if test="bankChannelMerchantName != null">#{bankChannelMerchantName,jdbcType=VARCHAR},</if>
+      <if test="bankChannelExtra != null">#{bankChannelExtra,jdbcType=BLOB},</if>
+      <if test="publicKey != null">#{publicKey,jdbcType=BLOB},</if>
+      <if test="privateKey != null">#{privateKey,jdbcType=BLOB},</if>
+      <if test="loginUsername != null">#{loginUsername,jdbcType=VARCHAR},</if>
+      <if test="loginPassword != null">#{loginPassword,jdbcType=VARCHAR},</if>
+      <if test="minAmount != null">#{minAmount,jdbcType=BIGINT},</if>
+      <if test="maxAmount != null">#{maxAmount,jdbcType=BIGINT},</if>
+      <if test="dayMaxAmount != null">#{dayMaxAmount,jdbcType=BIGINT},</if>
+      <if test="dayMaxCount != null">#{dayMaxCount,jdbcType=BIGINT},</if>
+      <if test="totalAmount != null">#{totalAmount,jdbcType=BIGINT},</if>
+      <if test="totalCount != null">#{totalCount,jdbcType=BIGINT},</if>
+      <if test="todayAmount != null">#{todayAmount,jdbcType=BIGINT},</if>
+      <if test="todayCount != null">#{todayCount,jdbcType=BIGINT},</if>
+      <if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+      <if test="costRate != null">#{costRate,jdbcType=DOUBLE},</if>
+      <if test="costFixedAmount != null">#{costFixedAmount,jdbcType=BIGINT},</if>
+      <if test="balance != null">#{balance,jdbcType=DECIMAL,javaType=java.math.BigDecimal},</if>
+      <if test="notifyUrl != null">#{notifyUrl,jdbcType=VARCHAR},</if>
+      <if test="bankAreaCode != null">#{bankAreaCode,jdbcType=INTEGER},</if>
+      <if test="bankCode != null">#{bankCode,jdbcType=VARCHAR},</if>
+      <if test="openStartTime != null">#{openStartTime,jdbcType=TIME},</if>
+      <if test="openEndTime != null">#{openEndTime,jdbcType=TIME},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="creator != null">#{creator,jdbcType=VARCHAR},</if>
+      <if test="updater != null">#{updater,jdbcType=VARCHAR},</if>
+    </trim>
+  </insert>
+  <select resultMap="BaseResultMap" id="getWithdrawChannelDaoById" resultType="org.server.dao.WithdrawChannelDao">
+    SELECT * FROM t_withdraw_bank_channel WHERE withdraw_bank_channel_id = #{id}
+  </select>
+
+  <select resultMap="BaseResultMap" id="getWithdrawChannelDaoByUserId" resultType="org.server.dao.WithdrawChannelDao">
+    SELECT * FROM t_withdraw_bank_channel WHERE user_iD = #{userID}
+  </select>
+
+
+
+
+
+</mapper>
