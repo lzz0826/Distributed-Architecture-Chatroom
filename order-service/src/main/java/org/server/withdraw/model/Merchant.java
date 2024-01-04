@@ -1,11 +1,12 @@
 package org.server.withdraw.model;
 
-import java.math.BigDecimal;
-import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+import java.util.Date;
 
 @Data
 @Builder
@@ -24,16 +25,12 @@ public class Merchant {
 
     private String merchantName; // 商戶名称
 
-    private String username; // 管理者帳號
-
-    private String parentId; // 父商戶ID
-
-    private String fullPath; // 代理階層路徑，含自己，並且斜線結尾
+    private String userId; // 管理者帳號(使用者)
 
     private String requestKey; // 请求私钥
-    
+
     private String publicKey; // rsa公钥
-    
+
     private String privateKey; // rsa私钥
 
     private BigDecimal balance; //余额
@@ -62,13 +59,10 @@ public class Merchant {
 
     private String updater; // 更新人
 
-    private Boolean isAgent; // 是否是代理
-
     private Integer isBackendLogin; //是否為後台可登
-    
+
     private String password;
 
     private String sort;
 
-    private String packagename;
 }

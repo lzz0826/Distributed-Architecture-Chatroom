@@ -2,6 +2,7 @@ package org.server.withdraw.sercive;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
@@ -15,13 +16,20 @@ import org.server.dao.BankCodeDAO;
 import org.server.dao.OrderDAO;
 import org.server.dao.WalletsDAO;
 import org.server.dao.WithdrawChannelDao;
+import org.server.exception.withdraw.MerchantDisabledException;
+import org.server.exception.withdraw.MerchantNotFoundException;
+import org.server.exception.withdraw.MerchantOrderNoDuplicateException;
+import org.server.exception.withdraw.SignVerificationFailedException;
+import org.server.exception.withdraw.WithdrawChannelBankNameIsRequiredException;
 import org.server.mapper.BankCodeMapper;
+import org.server.mapper.MerchantMapper;
 import org.server.mapper.OrderMapper;
 import org.server.mapper.WithdrawBankChannelMapper;
 import org.server.mapper.WithdrawOrderMapper;
 import org.server.service.OrderIdService;
 import org.server.service.WalletService;
 import org.server.withdraw.dto.TraderResponseDto;
+import org.server.withdraw.model.Merchant;
 import org.server.withdraw.model.TraderResponseCode;
 import org.server.withdraw.model.WithdrawOrder;
 import org.server.withdraw.req.CreateWithdrawRequest;
@@ -29,21 +37,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
-
 @Log4j2
 @Service
 public class WithdrawService {
 
   @Resource
-  private BankCodeMapper bankCodeMapper;
-  @Resource
-  private OrderMapper orderMapper;
+  private MerchantMapper merchantMapper;
 
   @Resource
   private WithdrawBankChannelMapper withdrawBankChannelMapper;
-
-  @Resource
-  private WalletService walletService;
 
   @Resource
   private WithdrawOrderMapper withdrawOrderMapper;
@@ -53,8 +55,6 @@ public class WithdrawService {
 
   @Resource
   private OrderIdService orderIdService;
-
-
 
   //二次驗籤 (第三方API)
   @Value("${withdraw.order.verify.secondary.enable:false}")
@@ -74,33 +74,32 @@ public class WithdrawService {
 
   private final String REDIS_KEY_PREFIX = "withdrawOrder:PayeeCardNo:";
 
-  private TraderResponseDto createWithdraw(CreateWithdrawRequest request, String ip)
-      throws NoSuchFieldException, IllegalAccessException {
+  public TraderResponseDto createWithdraw(CreateWithdrawRequest request, String ip)
+      throws NoSuchFieldException, IllegalAccessException, MerchantNotFoundException, SignVerificationFailedException {
     String logPrefix = "【用戶提現下單】";
     log.info("{}createWithdraw: {}", logPrefix, request);
 
     // 商戶驗證(驗商戶代碼/驗簽)
-    BankCodeDAO dao = verifyRequest(request);
+    Merchant merchant = verifyRequest(request);
 
     TraderResponseDto dto;
     try {
 
-      if (dao.getStatus() == BankCodeDAO.STATUS_DISABLED) {
+      if (merchant.getStatus() == BankCodeDAO.STATUS_DISABLED) {
         log.info("{} merchant=[{}],merchant status is DISABLED", logPrefix,request.getUserId());
-        //TODO 拋異常 停用
-//        throw new XxPayTraderException(TraderResponseCode.MERCHANT_DISABLED);
+        throw new MerchantDisabledException();
       }
 
       if(StringUtil.isBlank(request.getBankName())){
         log.info("{} merchant=[{}],bankName is:{} ", logPrefix, request.getUserId() , request.getBankName());
-        //TODO  拋異常 找不到銀行
-//        throw new XxPayTraderException(TraderResponseCode.WITHDRAW_CHANNEL_BANK_NAME_IS_REQUIRED);
+        throw new WithdrawChannelBankNameIsRequiredException();
       }
 
       // 檢查訂單是否存在
-      checkIfUserOrderNoAlreadyExists(request.getUserId(), request.getOrderNo());
-      TraderResponseCode responseCode = checkIfAmountIsSupported(request.getUserId(), request.getAmount());
+      checkIfMerchantOrderNoAlreadyExists(request.getUserId(), request.getOrderNo());
 
+      //檢查餘額
+      TraderResponseCode responseCode = checkIfAmountIsSupported(merchant.getMerchantId(), request.getAmount());
 
       //初始 status 生成中
       int status = WithdrawOrder.STATUS_COMPLETED_ING;
@@ -154,7 +153,7 @@ public class WithdrawService {
         }
       }
 
-//      限制同一卡號3分鐘內只能發一單
+//    限制同一卡號3分鐘內只能發一單
       log.info("限制同一卡號3分鐘內只能發一單檢查開啟:{}", withdrawOrderVerifyMinuteEnable);
       if(withdrawOrderVerifyMinuteEnable){
         String redisKey = REDIS_KEY_PREFIX + request.getPayeeCardNo();
@@ -194,6 +193,8 @@ public class WithdrawService {
           .bankCity(request.getBankCity())
           .status(status)// 先收單待Job分配渠道
           .remark(remark)
+          .createTime(new Date())
+          .updateTime(new Date())
           .build();
 
       // 建立支付中订单
@@ -211,57 +212,57 @@ public class WithdrawService {
       }
     }catch (Exception e){
       log.error("{} create exception:{}", logPrefix, e.getMessage(), e);
-
       dto = new TraderResponseDto();
       dto.setCode(TraderResponseCode.UNKNOWN_ERROR, e.getMessage());
-      dto.sign(dao.getRequestKey());
+      dto.sign(merchant.getRequestKey());
     }
-    dto.sign(dao.getRequestKey());
+    dto.sign(merchant.getRequestKey());
     return dto;
   }
 
-  private BankCodeDAO verifyRequest(CreateWithdrawRequest request)
-      throws  NoSuchFieldException, IllegalAccessException {
+  private Merchant verifyRequest(CreateWithdrawRequest request)
+      throws NoSuchFieldException, IllegalAccessException, MerchantNotFoundException, SignVerificationFailedException {
 
-    BankCodeDAO dao = bankCodeMapper.selectById(request.getUserId());
+    Merchant merchant = merchantMapper.selectByUserId(request.getUserId());
 
     //Merchant對照
-//    Merchan
-    if (dao == null) {
-      //TODO 拋異常 沒有該銀行
-//      throw new XxPayTraderException(TraderResponseCode.MERCHANT_NOT_FOUND);
+    if (merchant == null) {
+      System.out.println("拋異常 沒有該商戶 銀行");
+      throw new MerchantNotFoundException();
     }
 
     //暫時無
 //    request.setVerifyCode(withdrawOrderVerifyCode);
 
     //驗證傳來的 簽名(對方已將物件屬性簽名) 核對 我們db裡存的 requestKey(依照物件屬性重簽)
-    if (!request.verify(dao.getRequestKey())) {
+    if (!request.verify(merchant.getRequestKey())) {
       log.info("本地 OrderNo: {}, msg: {}", request.getOrderNo(), TraderResponseCode.SIGN_VERIFICATION_FAILED.getMessage());
-      //TODO 拋異常 驗籤失敗
-      //      throw new XxPayTraderException(TraderResponseCode.SIGN_VERIFICATION_FAILED);
+      throw new SignVerificationFailedException();
     }
-    return dao;
+    return merchant;
   }
 
-  private void checkIfUserOrderNoAlreadyExists(String userId, String orderNo) {
+  private void checkIfMerchantOrderNoAlreadyExists(String merchantId, String orderNo)
+      throws MerchantOrderNoDuplicateException {
 
-    //使用orderNo 和 userId 查尋是否有重複的訂單
-    List<OrderDAO> orderDAOS = orderMapper.selectByIdOrUserId(orderNo, userId);
-    if(orderDAOS != null && !orderDAOS.isEmpty()){
-      log.info("{}使用者訂單號重複試: {}", userId, orderNo);
-//      拋異常
-//      TraderResponseCode.MERCHANT_ORDER_NO_DUPLICATE,
+    List<WithdrawOrder> withdrawOrders = withdrawOrderMapper.selectByMerchantIdAndBankOrderNo(
+        merchantId, orderNo);
+
+    if(withdrawOrders != null && !withdrawOrders.isEmpty()){
+      log.info("{}訂單號重複試: {}", merchantId, orderNo);
+      throw new MerchantOrderNoDuplicateException();
+
     }
   }
+
 
 
   //查詢是否可出款 包含餘額
-  private TraderResponseCode checkIfAmountIsSupported(String userId, BigDecimal amount) {
+  private TraderResponseCode checkIfAmountIsSupported(String merchantId, BigDecimal amount) {
 
-    WithdrawChannelDao dao = withdrawBankChannelMapper.getWithdrawChannelDaoByUserId(
-        userId);
-    if(dao != null ){
+    WithdrawChannelDao dao = withdrawBankChannelMapper.getWithdrawChannelDaoByMerchantId(merchantId);
+
+    if(dao == null ){
       //找不到 渠道
       return TraderResponseCode.WITHDRAW_CHANNEL_NOT_FOUND_USABLE;
     }

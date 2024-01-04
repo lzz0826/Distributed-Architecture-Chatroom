@@ -13,6 +13,9 @@ public interface WithdrawBankChannelMapper {
 
   WithdrawChannelDao getWithdrawChannelDaoByUserId(String userId);
 
+  WithdrawChannelDao getWithdrawChannelDaoByMerchantId(String merchantId);
+
+
 
 
 

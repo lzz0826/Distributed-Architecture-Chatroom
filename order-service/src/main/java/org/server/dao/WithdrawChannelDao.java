@@ -28,6 +28,10 @@ public class WithdrawChannelDao {
    */
   private String withdrawBankChannelCode;
 
+  /**
+   * 商戶ID
+   */
+  private String merchantId;
 
   /**
    * 使用者帳號

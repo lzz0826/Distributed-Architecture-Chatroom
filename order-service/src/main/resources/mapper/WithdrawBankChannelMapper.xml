@@ -8,6 +8,7 @@
     <id property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="BIGINT"/>
     <result property="withdrawBankChannelName" column="withdraw_bank_channel_name" jdbcType="VARCHAR"/>
     <result property="withdrawBankChannelCode" column="withdraw_bank_channel_code" jdbcType="VARCHAR"/>
+    <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
     <result property="userId" column="user_id" jdbcType="VARCHAR"/>
     <result property="status" column="status" jdbcType="TINYINT"/>
     <result property="bankChannelMerchantId" column="bank_channel_merchant_id" jdbcType="VARCHAR"/>
@@ -47,6 +48,7 @@
       <if test="withdrawBankChannelId != null">withdraw_bank_channel_id,</if>
       <if test="withdrawBankChannelName != null">withdraw_bank_channel_name,</if>
       <if test="withdrawBankChannelCode != null">withdraw_bank_channel_code,</if>
+      <if test="merchantId != null">merchant_id,</if>
       <if test="userId != null">user_id,</if>
       <if test="status != null">status,</if>
       <if test="bankChannelMerchantId != null">bank_channel_merchant_id,</if>
@@ -83,6 +85,7 @@
       <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=BIGINT},</if>
       <if test="withdrawBankChannelName != null">#{withdrawBankChannelName,jdbcType=VARCHAR},</if>
       <if test="withdrawBankChannelCode != null">#{withdrawBankChannelCode,jdbcType=VARCHAR},</if>
+      <if test="merchantId != null">#{merchantId, jdbcType=VARCHAR},</if>
       <if test="userId != null">#{userId, jdbcType=VARCHAR},</if>
       <if test="status != null">#{status,jdbcType=TINYINT},</if>
       <if test="bankChannelMerchantId != null">#{bankChannelMerchantId,jdbcType=VARCHAR},</if>
@@ -120,11 +123,13 @@
   </select>
 
   <select resultMap="BaseResultMap" id="getWithdrawChannelDaoByUserId" resultType="org.server.dao.WithdrawChannelDao">
-    SELECT * FROM t_withdraw_bank_channel WHERE user_iD = #{userID}
+    SELECT * FROM t_withdraw_bank_channel WHERE user_id = #{userId}
   </select>
 
-
-
+  <select resultMap="BaseResultMap" id="getWithdrawChannelDaoByMerchantId"
+          resultType="org.server.dao.WithdrawChannelDao">
+    SELECT * FROM t_withdraw_bank_channel WHERE merchant_id = #{merchant_Id}
+  </select>
 
 
 </mapper>

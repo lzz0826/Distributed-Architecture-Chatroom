@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `tb_transactions` (
 
 
 
--- 銀行卡列表 bank_card_account_id(相當於銀行帳號) 一個人在一家銀行只會有一個帳戶
+-- 銀行卡列表 bank_card_account_id(相當於銀行帳號) 暫無使用
 CREATE TABLE IF NOT EXISTS  `tb_bankcard_account` (
                                                       `bank_card_account_id` VARCHAR(40) NOT NULL COMMENT '存款卡ID(相當於銀行帳號)',
                                                       `bank_id` VARCHAR(40) DEFAULT NULL COMMENT '銀行ID',
@@ -71,7 +71,7 @@ CREATE TABLE IF NOT EXISTS  `tb_bankcard_account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='銀行卡列表';
 
 
--- 銀行代碼列表
+-- 銀行代碼列表 暫無使用
 CREATE TABLE IF NOT EXISTS `tb_bank_code` (
                                                   `bank_id` VARCHAR(40) NOT NULL COMMENT 'bankId',
                                                   `bank_code` varchar(20) DEFAULT NULL COMMENT '銀行聯行碼',
@@ -92,6 +92,7 @@ CREATE TABLE IF NOT EXISTS `tb_bank_code` (
 -- 取款訂單列表
 CREATE TABLE IF NOT EXISTS `t_withdraw_order` (
                                                   `withdraw_order_id` varchar(30) NOT NULL COMMENT '取款訂單號',
+                                                  `merchant_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
                                                   `user_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
                                                   `bank_order_no` varchar(30) DEFAULT NULL COMMENT '銀行方的訂單號',
                                                   `bank_return_code` varchar(10) DEFAULT NULL COMMENT '銀行方回傳Cod',
@@ -120,11 +121,12 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_order` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付訂單';
 
 
--- 銀行渠道 (我方能使用的銀行渠道 餘額是實際帳戶餘額 不是錢包)
+-- 銀行渠道 (我方能使用的銀行渠道 餘額是實際銀行帳戶餘額 不是錢包)
 CREATE TABLE IF NOT EXISTS `t_withdraw_bank_channel` (
                                            `withdraw_bank_channel_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '賬號ID',
                                            `withdraw_bank_channel_name` varchar(30) DEFAULT NULL COMMENT '賬號名稱',
                                            `withdraw_bank_channel_code` varchar(30) DEFAULT NULL COMMENT '出款渠道代碼',
+                                           `merchant_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
                                            `user_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
                                            `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0:下架 1:启用 2:达标 3:风控 4:暫時禁用 5:冷却 6:金额冷却',
                                            `bank_channel_merchant_id` varchar(20) DEFAULT NULL COMMENT '銀行方提供給我方的ID',
@@ -158,4 +160,26 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_bank_channel` (
                                            PRIMARY KEY (`withdraw_bank_channel_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款銀行渠道表';
 
+
+-- 商戶表(一個商戶可以有多個銀行(渠道))
+CREATE TABLE `t_merchant` (
+                              `merchant_id` varchar(40) NOT NULL DEFAULT '' COMMENT '商戶ID',
+                              `merchant_name` varchar(30) DEFAULT NULL COMMENT '商戶名称',
+                              `user_id` varchar(40) NOT NULL DEFAULT '' COMMENT '只用者ID',
+                              `request_key` varchar(128) DEFAULT '' COMMENT '请求私钥',
+                              `balance` DECIMAL(10, 2) NOT NULL COMMENT  '余额',
+                              `frozen_amount` bigint(20) NOT NULL DEFAULT '0' COMMENT '冻结金额',
+                              `bank_name` varchar(255) DEFAULT NULL COMMENT '銀行名稱',
+                              `payee_card_name` varchar(100) DEFAULT NULL COMMENT '銀行賬戶名',
+                              `payee_card_no` varchar(100) DEFAULT NULL COMMENT '銀行卡號',
+                              `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0:关闭 1:启用',
+                              `memo` varchar(255) DEFAULT NULL COMMENT '備註',
+                              `mobile` varchar(30) DEFAULT NULL COMMENT '手機號碼',
+                              `email` varchar(255) DEFAULT NULL COMMENT '電子郵箱',
+                              `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
+                              `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
+                              `updater` varchar(30) DEFAULT NULL COMMENT '更新人',
+                              `creator` varchar(30) DEFAULT NULL COMMENT '創建人',
+                              PRIMARY KEY (`merchant_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户信息表';
 

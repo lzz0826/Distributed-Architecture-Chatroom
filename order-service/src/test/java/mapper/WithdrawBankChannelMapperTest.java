@@ -20,7 +20,8 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
         .withdrawBankChannelId(1L)
         .withdrawBankChannelName("Channel Name")
         .withdrawBankChannelCode("Channel Code")
-        .userId("123456")
+        .merchantId("merchantId123")
+        .userId("userId123")
         .status(1)
         .bankChannelMerchantId("Merchant ID")
         .bankChannelMerchantName("Merchant Name")
@@ -60,7 +61,7 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
 
   @Test
   public void getWithdrawChannelDaoByIdTest(){
-    WithdrawChannelDao withdrawChannelDaoById = withdrawBankChannelMapper.getWithdrawChannelDaoById("1");
+    WithdrawChannelDao withdrawChannelDaoById = withdrawBankChannelMapper.getWithdrawChannelDaoById("2");
     System.out.println(withdrawChannelDaoById);
   }
 
@@ -71,5 +72,11 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
   }
 
 
+
+  @Test
+  public void getWithdrawChannelDaoByMerchantIdTest(){
+    WithdrawChannelDao withdrawChannelDaoById = withdrawBankChannelMapper.getWithdrawChannelDaoByMerchantId("merchantId123");
+    System.out.println(withdrawChannelDaoById);
+  }
 
 }

@@ -94,6 +94,8 @@ public class WithdrawOrder {
 
     private String accountId; // 帳戶ID() ˊ存款款卡
     private String withdrawOrderId; // 出款訂單號
+
+    private String merchantId;//商戶ID
     private String userId;  //使用者ID
     private String bankOrderNo;
     private String bankReturnCode;

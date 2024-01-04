@@ -15,6 +15,9 @@ public interface WithdrawOrderMapper {
 
   List<WithdrawOrder> selectAll();
 
+  List<WithdrawOrder> selectByMerchantIdAndBankOrderNo(@Param("merchantId") String merchantId ,
+      @Param("bankOrderNo") String bankOrderNo);
+
 
 
 

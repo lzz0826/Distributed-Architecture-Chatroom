@@ -88,7 +88,7 @@
   <select id="selectByIdOrUserId" resultType="org.server.dao.OrderDAO">
     SELECT * FROM tb_order
     <where>
-      <if test="walletId != null">
+      <if test="id != null">
         AND id = #{id}
       </if>
       <if test="userId != null">

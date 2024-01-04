@@ -8,6 +8,7 @@
   <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawOrder">
     <id property="withdrawOrderId" column="withdraw_order_id" jdbcType="VARCHAR"/>
     <result property="userId" column="user_id" jdbcType="VARCHAR"/>
+    <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
     <result property="bankOrderNo" column="bank_order_no" jdbcType="VARCHAR"/>
     <result property="bankReturnCode" column="bank_return_code" jdbcType="VARCHAR"/>
     <result property="bankReturnMessage" column="bank_return_message" jdbcType="VARCHAR"/>
@@ -39,6 +40,7 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="withdrawOrderId != null">withdraw_order_id,</if>
       <if test="userId != null">user_id,</if>
+      <if test="merchantId != null">merchant_id,</if>
       <if test="bankOrderNo != null">bank_order_no,</if>
       <if test="bankReturnCode != null">bank_return_code,</if>
       <if test="bankReturnMessage != null">bank_return_message,</if>
@@ -67,6 +69,7 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="withdrawOrderId != null">#{withdrawOrderId, jdbcType=VARCHAR},</if>
       <if test="userId != null">#{userId, jdbcType=VARCHAR},</if>
+      <if test="merchantId != null">#{merchantId, jdbcType=VARCHAR},</if>
       <if test="bankOrderNo != null">#{bankOrderNo, jdbcType=VARCHAR},</if>
       <if test="bankReturnCode != null">#{bankReturnCode, jdbcType=VARCHAR},</if>
       <if test="bankReturnMessage != null">#{bankReturnMessage, jdbcType=VARCHAR},</if>
@@ -106,6 +109,12 @@
 
   <select resultMap="BaseResultMap" id="selectAll" resultType="org.server.withdraw.model.WithdrawOrder">
     SELECT * FROM t_withdraw_order
+  </select>
+
+
+  <select resultMap="BaseResultMap" id="selectByMerchantIdAndBankOrderNo"
+    resultType="org.server.withdraw.model.WithdrawOrder">
+    SELECT * FROM t_withdraw_order WHERE merchant_id = #{merchantId} AND bank_order_no = #{bankOrderNo}
   </select>
 
 

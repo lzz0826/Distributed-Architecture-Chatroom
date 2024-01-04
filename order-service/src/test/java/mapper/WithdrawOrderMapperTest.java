@@ -18,6 +18,7 @@ public class WithdrawOrderMapperTest extends BaseTest {
   public void insertWithdrawOrderTest(){
     WithdrawOrder build = WithdrawOrder.builder()
         .withdrawOrderId("123456") // Replace with an actual withdraw order ID
+        .merchantId("merchantId123")
         .userId("user123") // Replace with an actual user ID
         .bankOrderNo("BANK123") // Replace with an actual bank order number
         .bankReturnCode("SUCCESS") // Replace with an actual bank return code
@@ -62,9 +63,27 @@ public class WithdrawOrderMapperTest extends BaseTest {
   }
 
   @Test
-  public void test(){
+  public void selectAllTest(){
     List<WithdrawOrder> withdrawOrders = withdrawOrderMapper.selectAll();
     System.out.println(withdrawOrders);
+  }
+
+  @Test
+  public void selectByMerchantIdAndBankOrderNoTest(){
+
+    String merchantId = "merchantId123";
+
+    String orderNo = "BANK123";
+
+
+    List<WithdrawOrder> withdrawOrders =
+        withdrawOrderMapper.selectByMerchantIdAndBankOrderNo(merchantId,orderNo);
+    if(withdrawOrders.isEmpty()){
+      System.out.println("nnn");
+    }
+    for (WithdrawOrder withdrawOrder : withdrawOrders) {
+      System.out.println(withdrawOrder);
+    }
   }
 
 }
