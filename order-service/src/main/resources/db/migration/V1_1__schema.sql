@@ -162,7 +162,7 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_bank_channel` (
 
 
 -- 商戶表(一個商戶可以有多個銀行(渠道))
-CREATE TABLE `t_merchant` (
+CREATE TABLE IF NOT EXISTS `t_merchant` (
                               `merchant_id` varchar(40) NOT NULL DEFAULT '' COMMENT '商戶ID',
                               `merchant_name` varchar(30) DEFAULT NULL COMMENT '商戶名称',
                               `user_id` varchar(40) NOT NULL DEFAULT '' COMMENT '只用者ID',
@@ -182,4 +182,12 @@ CREATE TABLE `t_merchant` (
                               `creator` varchar(30) DEFAULT NULL COMMENT '創建人',
                               PRIMARY KEY (`merchant_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户信息表';
+
+-- 出款渠道銀行代碼
+CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank_code` (
+                                                `bank_code_id` bigint(20) DEFAULT NULL COMMENT '代付渠道方的銀行代碼ID',
+                                                `withdraw_channel_id` bigint(20) DEFAULT NULL COMMENT '代付渠道ID',
+                                                `bank_code` varchar(30) DEFAULT NULL COMMENT '銀行聯行碼',
+                                                `bank_name` varchar(60) DEFAULT NULL COMMENT '銀行名稱'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付渠道方的銀行代碼列表';
 
