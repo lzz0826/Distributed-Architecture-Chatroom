@@ -105,3 +105,9 @@ withdraw:
       minute:
         enable: true #是否開啟 限制同一卡號3分鐘內只能發一單
 
+#分布式鎖
+distributed:
+  redis:
+    lock:
+      seconds:
+        timeout: 500

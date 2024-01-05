@@ -41,6 +41,9 @@ import org.springframework.stereotype.Service;
 @Service
 public class WithdrawService {
 
+  private static final String logPrefix = "【用戶提現下單】";
+
+
   @Resource
   private MerchantMapper merchantMapper;
 
@@ -76,7 +79,6 @@ public class WithdrawService {
 
   public TraderResponseDto createWithdraw(CreateWithdrawRequest request, String ip)
       throws NoSuchFieldException, IllegalAccessException, MerchantNotFoundException, SignVerificationFailedException {
-    String logPrefix = "【用戶提現下單】";
     log.info("{}createWithdraw: {}", logPrefix, request);
 
     // 商戶驗證(驗商戶代碼/驗簽)
@@ -223,6 +225,8 @@ public class WithdrawService {
   private Merchant verifyRequest(CreateWithdrawRequest request)
       throws NoSuchFieldException, IllegalAccessException, MerchantNotFoundException, SignVerificationFailedException {
 
+
+    //TODO 一個 user 可以有多個商戶號 需要處理 (可能用商戶ID)
     Merchant merchant = merchantMapper.selectByUserId(request.getUserId());
 
     //Merchant對照
@@ -260,6 +264,7 @@ public class WithdrawService {
   //查詢是否可出款 包含餘額
   private TraderResponseCode checkIfAmountIsSupported(String merchantId, BigDecimal amount) {
 
+    //TODO 可跟銀行code關聯
     WithdrawChannelDao dao = withdrawBankChannelMapper.getWithdrawChannelDaoByMerchantId(merchantId);
 
     if(dao == null ){

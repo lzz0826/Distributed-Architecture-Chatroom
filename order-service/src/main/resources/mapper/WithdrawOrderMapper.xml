@@ -97,7 +97,6 @@
   </insert>
 
 
-
   <select id="findVerifyPayeeCardNoCount"  resultType="java.lang.Integer">
     SELECT
       COUNT(1)
@@ -116,6 +115,55 @@
     resultType="org.server.withdraw.model.WithdrawOrder">
     SELECT * FROM t_withdraw_order WHERE merchant_id = #{merchantId} AND bank_order_no = #{bankOrderNo}
   </select>
+
+
+  <select resultMap="BaseResultMap" id="selectByStatusAndDay" resultType="org.server.withdraw.model.WithdrawOrder">
+    SELECT * FROM t_withdraw_order WHERE status = #{status} AND create_time >= CURRENT_TIMESTAMP - INTERVAL #{day} DAY;
+  </select>
+
+  <select resultMap="BaseResultMap" id="selectByWithdrawOrderId"
+          resultType="org.server.withdraw.model.WithdrawOrder">
+    SELECT * FROM t_withdraw_order WHERE withdraw_order_id = #{withdrawOrderId}
+  </select>
+
+  <update id="updateWithdrawOrderStatus">
+      UPDATE t_withdraw_order
+      SET status     = #{status},
+          update_time = NOW()
+      WHERE withdraw_order_id = #{withdrawOrderId}
+  </update>
+
+
+  <update id="updateWithdrawOrder" parameterType="org.server.withdraw.model.WithdrawOrder">
+    UPDATE t_withdraw_order
+    <set>
+      <if test="userId != null">user_id = #{userId},</if>
+      <if test="bankOrderNo != null">bank_order_no = #{bankOrderNo},</if>
+      <if test="bankReturnCode != null">bank_return_code = #{bankReturnCode},</if>
+      <if test="bankReturnMessage != null">bank_return_message = #{bankReturnMessage},</if>
+      <if test="remark != null">remark = #{remark},</if>
+      <if test="status != null">status = #{status},</if>
+      <if test="payeeCardNo != null">payee_card_no = #{payeeCardNo},</if>
+      <if test="bankName != null">bank_name = #{bankName},</if>
+      <if test="branchName != null">branch_name = #{branchName},</if>
+      <if test="payeeCardName != null">payee_card_name = #{payeeCardName},</if>
+      <if test="bankProvince != null">bank_province = #{bankProvince},</if>
+      <if test="bankCity != null">bank_city = #{bankCity},</if>
+      <if test="bankCode != null">bank_code = #{bankCode},</if>
+      <if test="amount != null">amount = #{amount},</if>
+      <if test="actualAmount != null">actual_amount = #{actualAmount},</if>
+      <if test="rate != null">rate = #{rate},</if>
+      <if test="rateFixedAmount != null">rate_fixed_amount = #{rateFixedAmount},</if>
+      <if test="notifyUrl != null">notify_url = #{notifyUrl},</if>
+      <if test="successTime != null">success_time = #{successTime},</if>
+      <if test="clientIp != null">client_ip = #{clientIp},</if>
+      <if test="clientDevice != null">client_device = #{clientDevice},</if>
+      <if test="clientExtra != null">client_extra = #{clientExtra},</if>
+      <if test="updateTime != null">update_time = #{updateTime},</if>
+    </set>
+    WHERE withdraw_order_id = #{withdrawOrderId}
+  </update>
+
 
 
 </mapper>

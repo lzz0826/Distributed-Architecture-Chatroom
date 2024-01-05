@@ -69,6 +69,13 @@ public class WithdrawOrderMapperTest extends BaseTest {
   }
 
   @Test
+  public void withdrawOrderMapperTest(){
+    String withdrawOrderId = "w4254456175125623440";
+    WithdrawOrder withdrawOrder = withdrawOrderMapper.selectByWithdrawOrderId(withdrawOrderId);
+    System.out.println(withdrawOrder);
+  }
+
+  @Test
   public void selectByMerchantIdAndBankOrderNoTest(){
 
     String merchantId = "merchantId123";
@@ -85,5 +92,64 @@ public class WithdrawOrderMapperTest extends BaseTest {
       System.out.println(withdrawOrder);
     }
   }
+
+  @Test
+  public void selectByStatusAndDayTest(){
+
+    List<WithdrawOrder>  withdrawOrder = withdrawOrderMapper.selectByStatusAndDay(9,3);
+    System.out.println(withdrawOrder);
+  }
+
+  @Test
+  public void updateWithdrawOrderStatusTest(){
+    WithdrawOrder build = WithdrawOrder
+        .builder()
+        .withdrawOrderId("w4254456175125623440")
+        .status(WithdrawOrder.STATUS_FAILED_ON_MERCHANT_CONFIRM)
+        .build();
+    int i = withdrawOrderMapper.updateWithdrawOrderStatus(build);
+    System.out.println(i);
+  }
+
+  @Test
+  public void updateWithdrawOrderTest(){
+    WithdrawOrder build = WithdrawOrder.builder()
+        .withdrawOrderId("w4254398053614971437") // Replace with an actual withdraw order ID
+        .merchantId("xxxmerchantId123")
+        .userId("xxxuser123") // Replace with an actual user ID
+        .bankOrderNo("xxxBANK123") // Replace with an actual bank order number
+        .bankReturnCode("xxxSUCCESS") // Replace with an actual bank return code
+        .bankReturnMessage("xxxTransaction successful") // Replace with an actual bank return message
+        .remark("xxxWithdrawal request") // Replace with an actual remark
+        .currency("xxxUSD") // Replace with an actual currency code
+        .status(8) // Replace with an actual status code
+        .payeeCardNo("xxx1234567890123456") // Replace with an actual payee card number
+        .bankName("xxxBank of Example") // Replace with an actual bank name
+        .branchName("xxxExample Branch") // Replace with an actual branch name
+        .payeeCardName("xxxJohn Doe") // Replace with an actual payee card name
+        .bankProvince("xxxExample Province") // Replace with an actual bank province
+        .bankCity("xxxExample City") // Replace with an actual bank city
+        .bankCode("xxx123456") // Replace with an actual bank code
+        .amount(new BigDecimal("8000.50")) // Replace with an actual withdrawal amount
+        .actualAmount(new BigDecimal("8000.00")) // Replace with an actual actual amount
+        .rate(8.5) // Replace with an actual rate
+        .rateFixedAmount(new BigDecimal("2.50")) // Replace with an actual rate fixed amount
+        .notifyUrl("http://xxxxexample.com/notify") // Replace with an actual notify URL
+        .successTime(new Date()) // Replace with an actual success time
+        .clientIp("827.0.0.1") // Replace with an actual client IP
+        .clientDevice("xxxMobile") // Replace with an actual client device
+        .clientExtra("{'key':'xxxxvalue'}") // Replace with an actual client extra information
+        .createTime(new Date()) // Replace with an actual create time
+        .updateTime(new Date()) // Replace with an actual update time
+        .build();
+
+    int i = withdrawOrderMapper.updateWithdrawOrder(build);
+
+    System.out.println(i);
+
+
+  }
+
+
 
 }

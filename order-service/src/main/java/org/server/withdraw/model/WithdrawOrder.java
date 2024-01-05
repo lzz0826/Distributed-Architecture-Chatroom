@@ -24,6 +24,7 @@ public class WithdrawOrder {
 
 
 
+    //TODO 可能需要改渠道
     public final static int STATUS_COMPLETED_ING = 9 ; // 訂單生成中
 
 
