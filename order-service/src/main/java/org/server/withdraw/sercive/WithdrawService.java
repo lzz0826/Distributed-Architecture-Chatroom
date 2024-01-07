@@ -1,33 +1,24 @@
 package org.server.withdraw.sercive;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import java.math.BigDecimal;
 import java.util.Date;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.annotation.Resource;
 import jodd.util.StringUtil;
 import lombok.extern.log4j.Log4j2;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.HttpResponse;
-import org.apache.http.util.EntityUtils;
 import org.server.dao.BankCodeDAO;
-import org.server.dao.OrderDAO;
-import org.server.dao.WalletsDAO;
-import org.server.dao.WithdrawChannelDao;
+import org.server.withdraw.model.WithdrawChannel;
 import org.server.exception.withdraw.MerchantDisabledException;
 import org.server.exception.withdraw.MerchantNotFoundException;
 import org.server.exception.withdraw.MerchantOrderNoDuplicateException;
 import org.server.exception.withdraw.SignVerificationFailedException;
 import org.server.exception.withdraw.WithdrawChannelBankNameIsRequiredException;
-import org.server.mapper.BankCodeMapper;
 import org.server.mapper.MerchantMapper;
-import org.server.mapper.OrderMapper;
 import org.server.mapper.WithdrawBankChannelMapper;
 import org.server.mapper.WithdrawOrderMapper;
 import org.server.service.OrderIdService;
-import org.server.service.WalletService;
 import org.server.withdraw.dto.TraderResponseDto;
 import org.server.withdraw.model.Merchant;
 import org.server.withdraw.model.TraderResponseCode;
@@ -265,7 +256,7 @@ public class WithdrawService {
   private TraderResponseCode checkIfAmountIsSupported(String merchantId, BigDecimal amount) {
 
     //TODO 可跟銀行code關聯
-    WithdrawChannelDao dao = withdrawBankChannelMapper.getWithdrawChannelDaoByMerchantId(merchantId);
+    WithdrawChannel dao = withdrawBankChannelMapper.getWithdrawChannelDaoByMerchantId(merchantId);
 
     if(dao == null ){
       //找不到 渠道

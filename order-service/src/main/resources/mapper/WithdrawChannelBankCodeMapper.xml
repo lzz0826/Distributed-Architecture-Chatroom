@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.WithdrawChannelBankCodeMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawChannelBankCode">
+    <id property="bankCodeId" column="bank_code_id" jdbcType="VARCHAR"/>
+    <result property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="VARCHAR"/>
+    <result property="bankCode" column="bank_code" jdbcType="VARCHAR"/>
+    <result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <insert id="insertWithdrawChannelBankCode">
+    insert into t_withdraw_channel_bank_code
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bankCodeId != null">bank_code_id,</if>
+      <if test="withdrawBankChannelId != null">withdraw_bank_channel_id,</if>
+      <if test="bankCode != null">bank_code,</if>
+      <if test="bankName != null">bank_name,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="bankCodeId != null">#{bankCodeId,jdbcType=VARCHAR},</if>
+      <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=VARCHAR},</if>
+      <if test="bankCode != null">#{bankCode,jdbcType=VARCHAR},</if>
+      <if test="bankName != null">#{bankName,jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+
+
+
+  </insert>
+
+  <select resultMap="BaseResultMap" id="findByBankName"
+          resultType="org.server.withdraw.model.WithdrawChannelBankCode">
+    SELECT * FROM t_withdraw_channel_bank_code WHERE bank_name = #{bankName}
+  </select>
+
+
+</mapper>

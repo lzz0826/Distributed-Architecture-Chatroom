@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.server.mapper.WithdrawBankChannelMapper">
 
-  <resultMap id="BaseResultMap" type="org.server.dao.WithdrawChannelDao">
+  <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawChannel">
     <id property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="BIGINT"/>
     <result property="withdrawBankChannelName" column="withdraw_bank_channel_name" jdbcType="VARCHAR"/>
     <result property="withdrawBankChannelCode" column="withdraw_bank_channel_code" jdbcType="VARCHAR"/>
@@ -118,17 +118,22 @@
       <if test="updater != null">#{updater,jdbcType=VARCHAR},</if>
     </trim>
   </insert>
-  <select resultMap="BaseResultMap" id="getWithdrawChannelDaoById" resultType="org.server.dao.WithdrawChannelDao">
+  <select resultMap="BaseResultMap" id="getWithdrawChannelDaoById" resultType="org.server.withdraw.model.WithdrawChannel">
     SELECT * FROM t_withdraw_bank_channel WHERE withdraw_bank_channel_id = #{id}
   </select>
 
-  <select resultMap="BaseResultMap" id="getWithdrawChannelDaoByUserId" resultType="org.server.dao.WithdrawChannelDao">
+  <select resultMap="BaseResultMap" id="getWithdrawChannelDaoByUserId" resultType="org.server.withdraw.model.WithdrawChannel">
     SELECT * FROM t_withdraw_bank_channel WHERE user_id = #{userId}
   </select>
 
   <select resultMap="BaseResultMap" id="getWithdrawChannelDaoByMerchantId"
-          resultType="org.server.dao.WithdrawChannelDao">
-    SELECT * FROM t_withdraw_bank_channel WHERE merchant_id = #{merchant_Id}
+          resultType="org.server.withdraw.model.WithdrawChannel">
+    SELECT * FROM t_withdraw_bank_channel WHERE merchant_id = #{merchantId}
+  </select>
+
+
+  <select resultMap="BaseResultMap" id="findByMerchantIds" resultType="org.server.withdraw.model.WithdrawChannel">
+    SELECT * FROM t_withdraw_bank_channel WHERE merchant_id = #{merchantId}
   </select>
 
 

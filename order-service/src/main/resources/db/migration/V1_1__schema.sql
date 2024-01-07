@@ -185,9 +185,12 @@ CREATE TABLE IF NOT EXISTS `t_merchant` (
 
 -- 出款渠道銀行代碼
 CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank_code` (
-                                                `bank_code_id` bigint(20) DEFAULT NULL COMMENT '代付渠道方的銀行代碼ID',
-                                                `withdraw_channel_id` bigint(20) DEFAULT NULL COMMENT '代付渠道ID',
+                                                `bank_code_id` varchar(40) NOT NULL DEFAULT '' COMMENT '代付渠道方的銀行代碼ID',
+                                                `withdraw_bank_channel_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款渠道ID() t_withdraw_bank_channel ID',
                                                 `bank_code` varchar(30) DEFAULT NULL COMMENT '銀行聯行碼',
-                                                `bank_name` varchar(60) DEFAULT NULL COMMENT '銀行名稱'
+                                                `bank_name` varchar(60) DEFAULT NULL COMMENT '銀行名稱',
+                                                `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
+                                                `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
+                                                PRIMARY KEY (`bank_code_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付渠道方的銀行代碼列表';
 

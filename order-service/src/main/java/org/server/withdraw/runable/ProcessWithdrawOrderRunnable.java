@@ -3,10 +3,17 @@ package org.server.withdraw.runable;
 
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.apache.http.conn.ConnectTimeoutException;
+import org.server.mapper.WithdrawChannelBankCodeMapper;
+import org.server.withdraw.model.WithdrawChannel;
+import org.server.mapper.WithdrawBankChannelMapper;
 import org.server.mapper.WithdrawOrderMapper;
+import org.server.withdraw.model.WithdrawChannelBankCode;
 import org.server.withdraw.model.WithdrawOrder;
 import org.server.withdraw.sercive.ExecuteWithdrawService;
 import org.springframework.transaction.annotation.Isolation;
@@ -19,6 +26,12 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
 
   @Resource
   private WithdrawOrderMapper withdrawOrderMapper;
+
+  @Resource
+  private WithdrawBankChannelMapper withdrawBankChannelMapper;
+
+  @Resource
+  private WithdrawChannelBankCodeMapper withdrawChannelBankCodeMapper;
 
   private WithdrawOrder withdrawOrder;
 
@@ -34,7 +47,7 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
     try {
       log.info("{} WithdrawOrderId:{}, 开始送单", ExecuteWithdrawService.logPrefix, withdrawOrder.getWithdrawOrderId());
       // 檢查代付銀行是否可用
-      checkIfBankIsSupported(withdrawOrder.getMerchantId(),withdrawOrder.getBankCode());
+      checkIfBankIsSupported(withdrawOrder.getMerchantId(),withdrawOrder.getBankName());
       // 過濾商戶所設置的銀行卡黑名單
       // 檢查帳號下的渠道可接受此訂單金額,若無則拋exception
       // 检查银行卡号是否合法
@@ -60,18 +73,36 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
     }
   }
 
-  private void checkIfBankIsSupported(String merchantId, String bankCode) {
+
+
+  /**
+   * 检查银行是否支援
+   *
+   * @param merchantId	商户号
+   * @param bankName		银行名
+   */
+  private void checkIfBankIsSupported(String merchantId, String bankName) {
 
     //TODO
 
+    // 依merchant找出所有的代付帳號並檢查是否可用銀行
+    List<WithdrawChannel> channelList = withdrawBankChannelMapper.findByMerchantIds(merchantId);
 
+    //ˊ找不到可使用渠道
+    if (channelList == null || channelList.size()==0) {
+      //TODO  找不到可使用渠道異常
+//      throw new XxPayTraderException(TraderResponseCode.WITHDRAW_CHANNEL_NOT_FOUND_USABLE);
+    }
 
+    for(WithdrawChannel channel: channelList) {
+      List<WithdrawChannelBankCode> bankList = withdrawChannelBankCodeMapper.findByBankName(bankName);
 
-
-
-
+    }
 
   }
+
+
+
 
   /**
    * 提款訂單处理失败

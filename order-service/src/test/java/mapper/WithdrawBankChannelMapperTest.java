@@ -3,9 +3,10 @@ package mapper;
 import base.BaseTest;
 import java.math.BigDecimal;
 import java.sql.Timestamp;
+import java.util.List;
 import javax.annotation.Resource;
 import org.junit.Test;
-import org.server.dao.WithdrawChannelDao;
+import org.server.withdraw.model.WithdrawChannel;
 import org.server.mapper.WithdrawBankChannelMapper;
 
 public class WithdrawBankChannelMapperTest extends BaseTest {
@@ -16,10 +17,10 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
 
   @Test
   public void insertWithdrawBankChannelTest(){
-    WithdrawChannelDao dao = WithdrawChannelDao.builder()
+    WithdrawChannel dao = WithdrawChannel.builder()
         .withdrawBankChannelId(1L)
         .withdrawBankChannelName("Channel Name")
-        .withdrawBankChannelCode("Channel Code")
+        .withdrawBankChannelCode("BBK")
         .merchantId("merchantId123")
         .userId("userId123")
         .status(1)
@@ -61,22 +62,31 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
 
   @Test
   public void getWithdrawChannelDaoByIdTest(){
-    WithdrawChannelDao withdrawChannelDaoById = withdrawBankChannelMapper.getWithdrawChannelDaoById("2");
-    System.out.println(withdrawChannelDaoById);
+    WithdrawChannel withdrawChannelById = withdrawBankChannelMapper.getWithdrawChannelDaoById("2");
+    System.out.println(withdrawChannelById);
   }
 
   @Test
   public void getWithdrawChannelDaoByUserIdTest(){
-    WithdrawChannelDao withdrawChannelDaoById = withdrawBankChannelMapper.getWithdrawChannelDaoByUserId("123456");
-    System.out.println(withdrawChannelDaoById);
+    WithdrawChannel withdrawChannelById = withdrawBankChannelMapper.getWithdrawChannelDaoByUserId("123456");
+    System.out.println(withdrawChannelById);
   }
 
 
 
   @Test
   public void getWithdrawChannelDaoByMerchantIdTest(){
-    WithdrawChannelDao withdrawChannelDaoById = withdrawBankChannelMapper.getWithdrawChannelDaoByMerchantId("merchantId123");
-    System.out.println(withdrawChannelDaoById);
+    WithdrawChannel withdrawChannelById = withdrawBankChannelMapper.getWithdrawChannelDaoByMerchantId("merchantId123");
+    System.out.println(withdrawChannelById);
+  }
+
+  @Test
+  public void findByMerchantIdsTest(){
+
+    String merchantId = "merchantId123";
+
+    List<WithdrawChannel> withdrawChannels = withdrawBankChannelMapper.findByMerchantIds(merchantId);
+    System.out.println(withdrawChannels);
   }
 
 }

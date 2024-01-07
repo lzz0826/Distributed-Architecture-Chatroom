@@ -1,4 +1,4 @@
-package org.server.dao;
+package org.server.withdraw.model;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class WithdrawChannelDao {
+public class WithdrawChannel {
 
   /**
    * 賬號ID
