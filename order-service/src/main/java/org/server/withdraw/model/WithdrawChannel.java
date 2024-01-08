@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 public class WithdrawChannel {
 
   /**
-   * 賬號ID
+   * 出款渠道ID
    */
   private Long withdrawBankChannelId;
 

@@ -13,13 +13,15 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class WithdrawChannelBankCode {
 
-  private String bankCodeId;
+  private String bankCodeId; // 出款銀行代碼ID
 
-  private String withdrawBankChannelId;
+  private String bankCode; // 銀行聯行碼
 
-  private String bankCode;
+  private String bankName; // 銀行名稱
 
-  private String bankName;
+  private Integer status; // 狀態 0:禁用 1:啟用
+
+  private String memo; //備註
 
   private Date updateTime;
 

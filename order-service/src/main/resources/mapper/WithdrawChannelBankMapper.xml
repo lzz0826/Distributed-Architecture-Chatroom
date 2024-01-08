@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.WithdrawChannelBankMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawChannelBank">
+    <id property="withdrawChannelBankId" column="withdraw_channel_bank_id" jdbcType="VARCHAR"/>
+    <result property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="VARCHAR"/>
+    <result property="bankCodeId" column="bank_code_id" jdbcType="VARCHAR"/>
+    <result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
+    <result property="bankCode" column="bank_code" jdbcType="VARCHAR"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="orderOriginationUrl" column="order_origination_url" jdbcType="VARCHAR"/>
+    <result property="orderQueryUrl" column="order_query_url" jdbcType="VARCHAR"/>
+    <result property="balanceQueryUrl" column="balance_query_url" jdbcType="VARCHAR"/>
+    <result property="updater" column="updater" jdbcType="VARCHAR"/>
+    <result property="creator" column="creator" jdbcType="VARCHAR"/>
+    <result property="createIp" column="create_ip" jdbcType="VARCHAR"/>
+    <result property="updateIp" column="update_ip" jdbcType="VARCHAR"/>
+    <result property="ourNotifyUrl" column="our_notify_url" jdbcType="VARCHAR"/>
+    <result property="memo" column="memo" jdbcType="VARCHAR"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <insert id="insertWithdrawChannelBank">
+    insert into t_withdraw_channel_bank
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="withdrawChannelBankId != null">withdraw_channel_bank_id,</if>
+      <if test="withdrawBankChannelId != null">withdraw_bank_channel_id,</if>
+      <if test="bankCodeId != null">bank_code_id,</if>
+      <if test="bankName != null">bank_name,</if>
+      <if test="bankCode != null">bank_code,</if>
+      <if test="status != null">status,</if>
+      <if test="orderOriginationUrl != null">order_origination_url,</if>
+      <if test="orderQueryUrl != null">order_query_url,</if>
+      <if test="balanceQueryUrl != null">balance_query_url,</if>
+      <if test="updater != null">updater,</if>
+      <if test="creator != null">creator,</if>
+      <if test="createIp != null">create_ip,</if>
+      <if test="updateIp != null">update_ip,</if>
+      <if test="ourNotifyUrl != null">our_notify_url,</if>
+      <if test="memo != null">memo,</if>
+      <if test="updateTime != null">update_time,</if>
+      <if test="createTime != null">create_time,</if>
+    </trim>
+    values
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="withdrawChannelBankId != null">#{withdrawChannelBankId,jdbcType=VARCHAR},</if>
+      <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=VARCHAR},</if>
+      <if test="bankCodeId != null">#{bankCodeId,jdbcType=VARCHAR},</if>
+      <if test="bankName != null">#{bankName,jdbcType=VARCHAR},</if>
+      <if test="bankCode != null">#{bankCode,jdbcType=VARCHAR},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="orderOriginationUrl != null">#{orderOriginationUrl,jdbcType=VARCHAR},</if>
+      <if test="orderQueryUrl != null">#{orderQueryUrl,jdbcType=VARCHAR},</if>
+      <if test="balanceQueryUrl != null">#{balanceQueryUrl,jdbcType=VARCHAR},</if>
+      <if test="updater != null">#{updater,jdbcType=VARCHAR},</if>
+      <if test="creator != null">#{creator,jdbcType=VARCHAR},</if>
+      <if test="createIp != null">#{createIp,jdbcType=VARCHAR},</if>
+      <if test="updateIp != null">#{updateIp,jdbcType=VARCHAR},</if>
+      <if test="ourNotifyUrl != null">#{ourNotifyUrl,jdbcType=VARCHAR},</if>
+      <if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+  <select resultMap="BaseResultMap" id="findWithdrawChannelBankById"
+          resultType="org.server.withdraw.model.WithdrawChannelBank">
+    SELECT * FROM t_withdraw_channel_bank WHERE withdraw_channel_bank_id = #{withdrawChannelBankId}
+  </select>
+
+
+  <select resultMap="BaseResultMap" id="findByWithdrawBankChannelId"
+          resultType="org.server.withdraw.model.WithdrawChannelBank">
+  SELECT * FROM t_withdraw_channel_bank WHERE withdraw_bank_channel_id = #{withdrawBankChannelId}
+</select>
+
+
+</mapper>

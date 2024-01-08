@@ -18,10 +18,11 @@ public class WithdrawChannelBankCodeMapperTest extends BaseTest {
   public void insertWithdrawChannelBankCodeTest(){
     WithdrawChannelBankCode withdrawChannelBankCode = WithdrawChannelBankCode
         .builder()
-        .bankCodeId("999")
-        .withdrawBankChannelId("1")
+        .bankCodeId("9993")
         .bankCode("BBK")
         .bankName("testBank")
+        .status(1)
+        .memo("memo")
         .updateTime(new Date())
         .createTime(new Date())
         .build();

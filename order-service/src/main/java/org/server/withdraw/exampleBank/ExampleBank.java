@@ -120,6 +120,9 @@ public class ExampleBank implements org.server.withdraw.WithdrawBank {
   public WithdrawMethodResponse execute(WithdrawBank withdrawBank,
       WithdrawOrder withdrawOrder) throws Exception {
 
+//    String notifyUrl = withdrawVendorMapper.findOneByCatchId(withdrawChannel.getCatchId()).getOurNotifyUrl();
+
+
     //須核對銀行文件
     // 簽名規則  字段字典排序後拼接"&"符號字串 FROM表單
     // 簽名參數 假裝銀行方要是 出款帳戶id 出款帳戶名 目標帳戶id 目標帳戶名 和時間 +密鑰

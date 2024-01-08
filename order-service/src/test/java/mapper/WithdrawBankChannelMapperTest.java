@@ -18,7 +18,7 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
   @Test
   public void insertWithdrawBankChannelTest(){
     WithdrawChannel dao = WithdrawChannel.builder()
-        .withdrawBankChannelId(1L)
+        .withdrawBankChannelId(0204L)
         .withdrawBankChannelName("Channel Name")
         .withdrawBankChannelCode("BBK")
         .merchantId("merchantId123")

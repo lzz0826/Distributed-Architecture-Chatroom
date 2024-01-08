@@ -183,14 +183,57 @@ CREATE TABLE IF NOT EXISTS `t_merchant` (
                               PRIMARY KEY (`merchant_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户信息表';
 
--- 出款渠道銀行代碼
+-- 渠道方 出款渠道方銀行  銀行資訊
+CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank` (
+                                                              `withdraw_channel_bank_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款銀行代碼ID',
+                                                              `withdraw_bank_channel_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款渠道ID對應 t_withdraw_bank_channel ID',
+                                                              `bank_code_id` varchar(30) DEFAULT NULL COMMENT '銀行代碼對應 t_withdraw_channel_bank_code id',
+                                                              `bank_name` varchar(60) DEFAULT NULL COMMENT '銀行名稱',
+                                                              `bank_code` varchar(60) DEFAULT NULL COMMENT '銀行聯行碼',
+                                                              `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0:关闭 1:启用',
+                                                              `order_origination_url` varchar(60) DEFAULT NULL COMMENT '訂單發起URL',
+                                                              `order_query_url` varchar(60) DEFAULT NULL COMMENT '訂單查詢URL',
+                                                              `balance_query_url` varchar(60) DEFAULT NULL COMMENT '餘額查詢URL',
+                                                              `updater` varchar(60) DEFAULT NULL COMMENT '更新人',
+                                                              `creator` varchar(60) DEFAULT NULL COMMENT '創建人',
+                                                              `create_ip` varchar(60) DEFAULT NULL COMMENT '新增IP',
+                                                              `update_ip` varchar(60) DEFAULT NULL COMMENT '更新者IP',
+                                                              `our_notify_url` varchar(60) DEFAULT NULL COMMENT '我方回調 url',
+                                                              `memo` varchar(255) DEFAULT NULL COMMENT '備註',
+                                                              `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
+                                                              `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
+                                                              PRIMARY KEY (`withdraw_channel_bank_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付渠道方的銀行代碼列表';
+
+
+
+
+-- 出款銀行代碼
 CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank_code` (
-                                                `bank_code_id` varchar(40) NOT NULL DEFAULT '' COMMENT '代付渠道方的銀行代碼ID',
-                                                `withdraw_bank_channel_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款渠道ID() t_withdraw_bank_channel ID',
+                                                `bank_code_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款銀行代碼ID',
                                                 `bank_code` varchar(30) DEFAULT NULL COMMENT '銀行聯行碼',
                                                 `bank_name` varchar(60) DEFAULT NULL COMMENT '銀行名稱',
+                                                `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0:关闭 1:启用',
+                                                `memo` varchar(255) DEFAULT NULL COMMENT '備註',
                                                 `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
                                                 `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
                                                 PRIMARY KEY (`bank_code_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付渠道方的銀行代碼列表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款渠道方的銀行代碼列表';
+
+
+-- 出款銀行卡 黑名單
+CREATE TABLE IF NOT EXISTS `t_withdraw_bank_card_black` (
+                                                              `id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款銀行卡黑名單ID',
+                                                              `merchant_id` varchar(40) NOT NULL DEFAULT '' COMMENT '商戶ID',
+                                                              `bank_card_no` varchar(60) DEFAULT NULL COMMENT '銀行卡卡號',
+                                                              `memo` varchar(255) DEFAULT NULL COMMENT '備註',
+                                                              `updater` varchar(60) DEFAULT NULL COMMENT '更新人',
+                                                              `creator` varchar(60) DEFAULT NULL COMMENT '創建人',
+                                                              `create_ip` varchar(60) DEFAULT NULL COMMENT '新增IP',
+                                                              `update_ip` varchar(60) DEFAULT NULL COMMENT '更新者IP',
+                                                              `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
+                                                              `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
+                                                              PRIMARY KEY (`id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款渠道方的銀行代碼列表';
+
 

@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.WithdrawBankCardBlackMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawBankCardBlack">
+    <id property="id" column="id" jdbcType="VARCHAR"/>
+    <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
+    <result property="bankCardNo" column="bank_card_no" jdbcType="VARCHAR"/>
+    <result property="memo" column="memo" jdbcType="VARCHAR"/>
+    <result property="createIp" column="create_ip" jdbcType="VARCHAR"/>
+    <result property="updateIp" column="update_ip" jdbcType="VARCHAR"/>
+    <result property="creator" column="creator" jdbcType="VARCHAR"/>
+    <result property="updater" column="updater" jdbcType="VARCHAR"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+  <insert id="insertWithdrawBankCardBlack" parameterType="org.server.withdraw.model.WithdrawBankCardBlack">
+    INSERT INTO t_withdraw_bank_card_black
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">id,</if>
+      <if test="merchantId != null">merchant_id,</if>
+      <if test="bankCardNo != null">bank_card_no,</if>
+      <if test="memo != null">memo,</if>
+      <if test="createIp != null">create_ip,</if>
+      <if test="updateIp != null">update_ip,</if>
+      <if test="creator != null">creator,</if>
+      <if test="updater != null">updater,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="updateTime != null">update_time</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">#{id,jdbcType=VARCHAR},</if>
+      <if test="merchantId != null">#{merchantId,jdbcType=VARCHAR},</if>
+      <if test="bankCardNo != null">#{bankCardNo,jdbcType=VARCHAR},</if>
+      <if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+      <if test="createIp != null">#{createIp,jdbcType=VARCHAR},</if>
+      <if test="updateIp != null">#{updateIp,jdbcType=VARCHAR},</if>
+      <if test="creator != null">#{creator,jdbcType=VARCHAR},</if>
+      <if test="updater != null">#{updater,jdbcType=VARCHAR},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP}</if>
+    </trim>
+  </insert>
+
+
+  <select resultMap="BaseResultMap" id="findByMerchantIdBankCardNo"
+          resultType="org.server.withdraw.model.WithdrawBankCardBlack">
+    SELECT * FROM t_withdraw_bank_card_black WHERE merchant_id = #{merchantId} AND bank_card_no = #{bankCardNo}
+  </select>
+
+
+</mapper>
