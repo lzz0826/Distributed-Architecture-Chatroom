@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.server.mapper.SecurityMapper">
+
+  <resultMap id="BaseResultMap" type="org.server.withdraw.model.Security">
+    <id property="securityId" column="security_id" jdbcType="VARCHAR"/>
+    <result property="type" column="type" jdbcType="INTEGER"/>
+    <result property="status" column="status" jdbcType="INTEGER"/>
+    <result property="securityKey" column="security_key" jdbcType="VARCHAR"/>
+    <result property="securityValue" column="security_value" jdbcType="VARCHAR"/>
+    <result property="memo" column="memo" jdbcType="VARCHAR"/>
+    <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+    <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+  </resultMap>
+
+
+  <insert id="insertSecurity" parameterType="org.server.withdraw.model.Security">
+    INSERT INTO t_security
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="securityId != null">security_id,</if>
+      <if test="type != null">type,</if>
+      <if test="status != null">status,</if>
+      <if test="securityKey != null">security_key,</if>
+      <if test="securityValue != null">security_value,</if>
+      <if test="memo != null">memo,</if>
+      <if test="createTime != null">create_time,</if>
+      <if test="updateTime != null">update_time,</if>
+    </trim>
+    VALUES
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="securityId != null">#{securityId,jdbcType=VARCHAR},</if>
+      <if test="type != null">#{type,jdbcType=INTEGER},</if>
+      <if test="status != null">#{status,jdbcType=INTEGER},</if>
+      <if test="securityKey != null">#{securityKey,jdbcType=VARCHAR},</if>
+      <if test="securityValue != null">#{securityValue,jdbcType=VARCHAR},</if>
+      <if test="memo != null">#{memo,jdbcType=VARCHAR},</if>
+      <if test="createTime != null">#{createTime,jdbcType=TIMESTAMP},</if>
+      <if test="updateTime != null">#{updateTime,jdbcType=TIMESTAMP},</if>
+    </trim>
+  </insert>
+
+
+  <select resultMap="BaseResultMap" id="findSecurity" resultType="org.server.withdraw.model.Security" >
+    SELECT *
+    FROM t_security
+    <where>
+      <if test="securityId != null and securityId != ''">
+        AND security_id = #{securityId}
+      </if>
+      <if test="type != null">
+        AND type = #{type}
+      </if>
+      <if test="status != null">
+        AND status = #{status}
+      </if>
+      <if test="securityKey != null and securityKey != ''">
+        AND `security_key` = #{securityKey}
+      </if>
+      <if test="securityValue != null and securityValue != ''">
+        AND `security_value` = #{securityValue}
+      </if>
+    </where>
+    ORDER BY create_time DESC
+
+  </select>
+
+
+</mapper>

@@ -4,6 +4,7 @@ package org.server.withdraw.runable;
 import java.math.BigDecimal;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -13,6 +14,7 @@ import org.apache.http.conn.ConnectTimeoutException;
 import org.server.mapper.WithdrawBankCardBlackMapper;
 import org.server.mapper.WithdrawChannelBankCodeMapper;
 import org.server.mapper.WithdrawChannelBankDetailMapper;
+import org.server.security.SecurityValidator;
 import org.server.withdraw.model.WithdrawBankCardBlack;
 import org.server.withdraw.model.WithdrawChannel;
 import org.server.mapper.WithdrawBankChannelMapper;
@@ -44,6 +46,9 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
   @Resource
   private WithdrawBankCardBlackMapper withdrawBankCardBlackMapper;
 
+  @Resource
+  private SecurityValidator securityValidator;
+
   private WithdrawOrder withdrawOrder;
 
   public ProcessWithdrawOrderRunnable(WithdrawOrder withdrawOrder) {
@@ -64,10 +69,9 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
       // 檢查帳號下的渠道可接受此訂單金額,若無則拋exception
       checkIfAmountIsSupported(withdrawOrder.getMerchantId(), withdrawOrder.getAmount());
       // 檢查銀行卡號是否合法
+      checkIfCardNoIsAllowed(withdrawOrder.getPayeeCardNo());
       log.info("{} WithdrawOrderId:{}, 檢查參數完成", ExecuteWithdrawService.logPrefix, withdrawOrder.getWithdrawOrderId());
-
-
-
+      //TODO
 
       isLegalData = true;
 
@@ -159,10 +163,45 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
     }
   }
 
+  /**
+   * 检查金额是否支持
+   *
+   * @param merchantId	商户号
+   * @param amount		交易金额
+   * @throws
+   */
   private void checkIfAmountIsSupported(String merchantId , BigDecimal amount){
+
+    List<WithdrawChannel> withdrawChannelList1 = withdrawBankChannelMapper.findByMerchantIdAndAndAmount(
+        merchantId,
+        amount);
+
+    if (withdrawChannelList1 == null || withdrawChannelList1.size() == 0) {
+      //TODO 拋異常 渠道金額限制或餘額不足
+//      throw new XxPayTraderException(TraderResponseCode.WITHDRAW_CHANNEL_UNAVAILABLE_AMOUNT);
+    }
+
 
 
   }
+
+
+  /**
+   * 確認銀行卡是否合法 (包含黑名單)
+   *
+   * @param payeeCardNo	銀行卡號
+   */
+  private void checkIfCardNoIsAllowed(String payeeCardNo) {
+    if (!securityValidator.verifyCardNo(payeeCardNo)) {
+//      TODO 拋異常 不合法卡號
+//      throw new XxPayTraderRuntimeException(
+//          TraderResponseCode.WITHDRAW_CHANNEL_INVALID_CARD_NO,
+//          payeeCardNo);
+
+          }
+  }
+
+
 
 
 

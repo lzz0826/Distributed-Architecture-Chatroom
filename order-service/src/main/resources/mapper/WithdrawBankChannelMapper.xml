@@ -137,4 +137,22 @@
   </select>
 
 
+<!-- <![CDATA[]]>  告訴 XML 解析器不要解析其中的內容
+可以在 SQL 片段中自由地使用 <, >, &, ', ", 等特殊字符，而不用擔心 XML 解析錯誤 -->
+  <select resultMap="BaseResultMap" id="findByMerchantIdAndAndAmount"
+          resultType="org.server.withdraw.model.WithdrawChannel">
+    SELECT * FROM t_withdraw_bank_channel
+    WHERE merchant_id = #{merchantId}
+<!--    <if test="amount != null and amount.compareTo('0') != 0">-->
+    <if test="@org.server.utils.Ognl@check(amount)">
+      <![CDATA[
+      		AND min_amount <= #{amount}
+      		AND max_amount >= #{amount}
+      		AND balance >= #{amount}
+      	]]>
+    </if>
+    ORDER BY balance DESC
+  </select>
+
+
 </mapper>

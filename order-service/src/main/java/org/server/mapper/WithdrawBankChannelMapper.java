@@ -1,5 +1,6 @@
 package org.server.mapper;
 
+import java.math.BigDecimal;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.server.withdraw.model.WithdrawChannel;
@@ -16,6 +17,8 @@ public interface WithdrawBankChannelMapper {
   WithdrawChannel getWithdrawChannelDaoByUserId(String userId);
 
   WithdrawChannel getWithdrawChannelDaoByMerchantId(String merchantId);
+
+  List<WithdrawChannel> findByMerchantIdAndAndAmount(String merchantId, BigDecimal amount);
 
 
 

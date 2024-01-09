@@ -44,8 +44,23 @@ CREATE TABLE IF NOT EXISTS `tb_transactions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='交易記錄表';
 
 
+# 銀行相關------
 
--- 銀行卡列表 bank_card_account_id(相當於銀行帳號) 暫無使用
+-- 安全黑白名單表
+CREATE TABLE `t_security` (
+                              `security_id` VARCHAR(40) NOT NULL COMMENT '名單ID',
+                              `type` tinyint(4) NOT NULL DEFAULT '0' COMMENT '安全類型, 0:商戶接口(含支付和代付), 1:系統賬戶, 2:代付卡號',
+                              `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '狀態, 0:禁用, 1:啟用',
+                              `security_key` varchar(50) NOT NULL COMMENT 'Key, 商戶接口:IP, 系統賬戶:Username, 代付卡號:CardNo',
+                              `security_value` text COMMENT 'Value, 商戶接口:empty, 系統賬戶:IP list, 代付卡號:Cardholder name',
+                              `memo` text COMMENT '備註',
+                              `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
+                              `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
+                              PRIMARY KEY (`security_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='安全黑白名單表';
+
+
+-- 銀行卡列表 bank_card_account_id(相當於銀行帳號) 暫無使用需要改tb_ t_
 CREATE TABLE IF NOT EXISTS  `tb_bankcard_account` (
                                                       `bank_card_account_id` VARCHAR(40) NOT NULL COMMENT '存款卡ID(相當於銀行帳號)',
                                                       `bank_id` VARCHAR(40) DEFAULT NULL COMMENT '銀行ID',
@@ -71,7 +86,7 @@ CREATE TABLE IF NOT EXISTS  `tb_bankcard_account` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='銀行卡列表';
 
 
--- 銀行代碼列表 暫無使用
+-- 銀行代碼列表 暫無使用 暫無使用需要改tb_ t_
 CREATE TABLE IF NOT EXISTS `tb_bank_code` (
                                                   `bank_id` VARCHAR(40) NOT NULL COMMENT 'bankId',
                                                   `bank_code` varchar(20) DEFAULT NULL COMMENT '銀行聯行碼',

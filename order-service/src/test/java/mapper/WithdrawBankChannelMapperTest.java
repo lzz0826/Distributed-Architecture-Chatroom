@@ -31,8 +31,8 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
         .privateKey("privateKey") // Assuming it's a BLOB and setting it to null for this example
         .loginUsername("Login User")
         .loginPassword("Login Password")
-        .minAmount(100L)
-        .maxAmount(1000L)
+        .minAmount(600L)
+        .maxAmount(6000L)
         .dayMaxAmount(5000L)
         .dayMaxCount(10L)
         .totalAmount(100000L)
@@ -42,7 +42,7 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
         .memo("Test Memo")
         .costRate(0.05)
         .costFixedAmount(500L)
-        .balance(new BigDecimal(222.3))
+        .balance(new BigDecimal(5000))
         .notifyUrl("http://example.com/callback")
         .bankAreaCode(123)
         .bankCode("ABC123")
@@ -88,5 +88,17 @@ public class WithdrawBankChannelMapperTest extends BaseTest {
     List<WithdrawChannel> withdrawChannels = withdrawBankChannelMapper.findByMerchantIds(merchantId);
     System.out.println(withdrawChannels);
   }
+
+  @Test
+  public void findByMerchantIdAndAndAmountTest(){
+    String merchantId = "merchantId123";
+    BigDecimal amount = new BigDecimal(5100);
+
+    List<WithdrawChannel> byMerchantIdAndAndAmount = withdrawBankChannelMapper.findByMerchantIdAndAndAmount(merchantId,amount);
+    for (WithdrawChannel withdrawChannel : byMerchantIdAndAndAmount) {
+      System.out.println(withdrawChannel);
+    }
+  }
+
 
 }

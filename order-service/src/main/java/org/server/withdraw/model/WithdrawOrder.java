@@ -124,4 +124,6 @@ public class WithdrawOrder {
     private Date updateTime; // 更新時間
     private Integer withdrawMinute; // 提款分钟连续请求
 
+
+
 }
