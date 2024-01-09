@@ -4,24 +4,22 @@ import base.BaseTest;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
-import jodd.util.CsvUtil;
 import org.junit.Test;
-import org.server.mapper.WithdrawChannelBankMapper;
-import org.server.withdraw.model.WithdrawChannelBank;
-import org.server.withdraw.model.WithdrawChannelBank.WithdrawChannelBankBuilder;
+import org.server.mapper.WithdrawChannelBankDetailMapper;
+import org.server.withdraw.model.WithdrawChannelBankDetail;
 
-public class WithdrawChannelBankMapperTest extends BaseTest {
+public class WithdrawChannelBankDetailMapperTest extends BaseTest {
 
 
   @Resource
-  private WithdrawChannelBankMapper withdrawChannelBankMapper;
+  private WithdrawChannelBankDetailMapper withdrawChannelBankDetailMapper;
 
   @Test
   public void insertWithdrawChannelBankTest(){
 
-    WithdrawChannelBank build = WithdrawChannelBank
+    WithdrawChannelBankDetail build = WithdrawChannelBankDetail
         .builder()
-        .withdrawChannelBankId("88812")
+        .withdrawChannelBankDetailId("88812")
         .withdrawBankChannelId("0204")
         .bankCodeId("9993")
         .bankName("BBK銀行")
@@ -40,7 +38,7 @@ public class WithdrawChannelBankMapperTest extends BaseTest {
         .createTime(new Date()) // or provide an appropriate date
         .build();
 
-    int i = withdrawChannelBankMapper.insertWithdrawChannelBank(build);
+    int i = withdrawChannelBankDetailMapper.insertWithdrawChannelBankDetail(build);
 
     System.out.println(i);
   }
@@ -49,20 +47,20 @@ public class WithdrawChannelBankMapperTest extends BaseTest {
   @Test
   public void findWithdrawChannelBankByIdTest(){
 
-    String withdrawChannelBankId = "888812";
-    WithdrawChannelBank withdrawChannelBankById = withdrawChannelBankMapper.findWithdrawChannelBankById(withdrawChannelBankId);
+    String withdrawChannelBankDetailId = "88812";
+    WithdrawChannelBankDetail withdrawChannelBankDetailById = withdrawChannelBankDetailMapper.findWithdrawChannelBankDetailById(withdrawChannelBankDetailId);
 
-    System.out.println(withdrawChannelBankId);
+    System.out.println(withdrawChannelBankDetailById);
   }
 
   @Test
   public void findByWithdrawBankChannelIdTest(){
 
     String withdrawBankChannelId = "0204";
-    List<WithdrawChannelBank> withdrawChannelBanks = withdrawChannelBankMapper.findByWithdrawBankChannelId(withdrawBankChannelId);
-    for (WithdrawChannelBank withdrawChannelBank : withdrawChannelBanks) {
+    List<WithdrawChannelBankDetail> withdrawChannelBankDetails = withdrawChannelBankDetailMapper.findByWithdrawBankChannelId(withdrawBankChannelId);
+    for (WithdrawChannelBankDetail withdrawChannelBankDetail : withdrawChannelBankDetails) {
 
-      System.out.println(withdrawChannelBank);
+      System.out.println(withdrawChannelBankDetail);
     }
   }
 

@@ -1,23 +1,23 @@
 package org.server.withdraw.runable;
 
 
+import java.math.BigDecimal;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
 import javax.annotation.Resource;
 import lombok.extern.log4j.Log4j2;
 import org.apache.http.conn.ConnectTimeoutException;
 import org.server.mapper.WithdrawBankCardBlackMapper;
 import org.server.mapper.WithdrawChannelBankCodeMapper;
-import org.server.mapper.WithdrawChannelBankMapper;
+import org.server.mapper.WithdrawChannelBankDetailMapper;
 import org.server.withdraw.model.WithdrawBankCardBlack;
 import org.server.withdraw.model.WithdrawChannel;
 import org.server.mapper.WithdrawBankChannelMapper;
 import org.server.mapper.WithdrawOrderMapper;
-import org.server.withdraw.model.WithdrawChannelBank;
+import org.server.withdraw.model.WithdrawChannelBankDetail;
 import org.server.withdraw.model.WithdrawChannelBankCode;
 import org.server.withdraw.model.WithdrawOrder;
 import org.server.withdraw.sercive.ExecuteWithdrawService;
@@ -39,7 +39,7 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
   private WithdrawChannelBankCodeMapper withdrawChannelBankCodeMapper;
 
   @Resource
-  private WithdrawChannelBankMapper withdrawChannelBankMapper;
+  private WithdrawChannelBankDetailMapper withdrawChannelBankDetailMapper;
 
   @Resource
   private WithdrawBankCardBlackMapper withdrawBankCardBlackMapper;
@@ -62,6 +62,7 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
       // 過濾商戶所設置的銀行卡黑名單
       checkBankCardBlackList(withdrawOrder.getMerchantId(),withdrawOrder.getPayeeCardNo());
       // 檢查帳號下的渠道可接受此訂單金額,若無則拋exception
+      checkIfAmountIsSupported(withdrawOrder.getMerchantId(), withdrawOrder.getAmount());
       // 檢查銀行卡號是否合法
       log.info("{} WithdrawOrderId:{}, 檢查參數完成", ExecuteWithdrawService.logPrefix, withdrawOrder.getWithdrawOrderId());
 
@@ -110,13 +111,13 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
       List<WithdrawChannelBankCode> bankList = withdrawChannelBankCodeMapper.findByBankName(bankName);
       // 1.比對銀行名稱是否匹配
       if(bankList.size() > 0) {
-        List<WithdrawChannelBank> list = withdrawChannelBankMapper.findByWithdrawBankChannelId(String.valueOf(channel.getWithdrawBankChannelId()));
+        List<WithdrawChannelBankDetail> list = withdrawChannelBankDetailMapper.findByWithdrawBankChannelId(String.valueOf(channel.getWithdrawBankChannelId()));
         // 2.比對渠道是否有支援該銀行
         if(list.size() > 0) {
           Map<String, String> map  = new HashMap<>();
-          for (WithdrawChannelBank withdrawChannelBank : list) {
-            String withdrawChannelBankName = withdrawChannelBank.getBankName();
-            String withdrawChannelBankCode = withdrawChannelBank.getBankCode();
+          for (WithdrawChannelBankDetail withdrawChannelBankDetail : list) {
+            String withdrawChannelBankName = withdrawChannelBankDetail.getBankName();
+            String withdrawChannelBankCode = withdrawChannelBankDetail.getBankCode();
             if(withdrawChannelBankName.equals(bankName)){
               if(map.containsKey(bankName)){
                 String oldValue = map.get(bankName);
@@ -156,6 +157,11 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
       // TODO 拋異常 卡號是黑名單
 //      throw new XxPayTraderException(TraderResponseCode.WITHDRAW_CHANNEL_INVALID_CARD_NO, bankCardNo);
     }
+  }
+
+  private void checkIfAmountIsSupported(String merchantId , BigDecimal amount){
+
+
   }
 
 

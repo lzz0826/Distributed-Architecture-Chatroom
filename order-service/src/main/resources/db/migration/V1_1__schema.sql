@@ -184,8 +184,8 @@ CREATE TABLE IF NOT EXISTS `t_merchant` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='商户信息表';
 
 -- 渠道方 出款渠道方銀行  銀行資訊
-CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank` (
-                                                              `withdraw_channel_bank_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款銀行代碼ID',
+CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank_detail` (
+                                                              `withdraw_channel_bank_detail_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款銀行代碼ID',
                                                               `withdraw_bank_channel_id` varchar(40) NOT NULL DEFAULT '' COMMENT '出款渠道ID對應 t_withdraw_bank_channel ID',
                                                               `bank_code_id` varchar(30) DEFAULT NULL COMMENT '銀行代碼對應 t_withdraw_channel_bank_code id',
                                                               `bank_name` varchar(60) DEFAULT NULL COMMENT '銀行名稱',
@@ -202,9 +202,8 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank` (
                                                               `memo` varchar(255) DEFAULT NULL COMMENT '備註',
                                                               `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
                                                               `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
-                                                              PRIMARY KEY (`withdraw_channel_bank_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='代付渠道方的銀行代碼列表';
-
+                                                              PRIMARY KEY (`withdraw_channel_bank_detail_id`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='付款渠道方的銀行詳細資訊';
 
 
 
@@ -218,7 +217,7 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_channel_bank_code` (
                                                 `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
                                                 `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
                                                 PRIMARY KEY (`bank_code_id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款渠道方的銀行代碼列表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款銀行代碼';
 
 
 -- 出款銀行卡 黑名單
@@ -234,6 +233,6 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_bank_card_black` (
                                                               `update_time` timestamp NULL DEFAULT NULL COMMENT '更新時間',
                                                               `create_time` timestamp NULL DEFAULT NULL COMMENT '創建時間',
                                                               PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款渠道方的銀行代碼列表';
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='出款銀行卡黑名單';
 
 

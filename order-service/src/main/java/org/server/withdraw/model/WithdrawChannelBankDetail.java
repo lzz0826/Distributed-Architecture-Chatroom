@@ -10,10 +10,10 @@ import lombok.NoArgsConstructor;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class WithdrawChannelBank {
+public class WithdrawChannelBankDetail {
     //渠道方 的銀行資訊
 
-    private String withdrawChannelBankId; // 代付銀行表ID
+    private String withdrawChannelBankDetailId; // 代付銀行表ID
 
     private String withdrawBankChannelId; // 對應到t_withdraw_bank_channel.id
 

@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="org.server.mapper.WithdrawChannelBankMapper">
+<mapper namespace="org.server.mapper.WithdrawChannelBankDetailMapper">
 
-  <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawChannelBank">
-    <id property="withdrawChannelBankId" column="withdraw_channel_bank_id" jdbcType="VARCHAR"/>
+  <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawChannelBankDetail">
+    <id property="withdrawChannelBankDetailId" column="withdraw_channel_bank_detail_id" jdbcType="VARCHAR"/>
     <result property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="VARCHAR"/>
     <result property="bankCodeId" column="bank_code_id" jdbcType="VARCHAR"/>
     <result property="bankName" column="bank_name" jdbcType="VARCHAR"/>
@@ -24,10 +24,10 @@
     <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
   </resultMap>
 
-  <insert id="insertWithdrawChannelBank">
-    insert into t_withdraw_channel_bank
+  <insert id="insertWithdrawChannelBankDetail">
+    insert into t_withdraw_channel_bank_detail
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="withdrawChannelBankId != null">withdraw_channel_bank_id,</if>
+      <if test="withdrawChannelBankDetailId != null">withdraw_channel_bank_detail_id,</if>
       <if test="withdrawBankChannelId != null">withdraw_bank_channel_id,</if>
       <if test="bankCodeId != null">bank_code_id,</if>
       <if test="bankName != null">bank_name,</if>
@@ -47,7 +47,7 @@
     </trim>
     values
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="withdrawChannelBankId != null">#{withdrawChannelBankId,jdbcType=VARCHAR},</if>
+      <if test="withdrawChannelBankDetailId != null">#{withdrawChannelBankDetailId,jdbcType=VARCHAR},</if>
       <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=VARCHAR},</if>
       <if test="bankCodeId != null">#{bankCodeId,jdbcType=VARCHAR},</if>
       <if test="bankName != null">#{bankName,jdbcType=VARCHAR},</if>
@@ -67,15 +67,15 @@
     </trim>
   </insert>
 
-  <select resultMap="BaseResultMap" id="findWithdrawChannelBankById"
-          resultType="org.server.withdraw.model.WithdrawChannelBank">
-    SELECT * FROM t_withdraw_channel_bank WHERE withdraw_channel_bank_id = #{withdrawChannelBankId}
+  <select resultMap="BaseResultMap" id="findWithdrawChannelBankDetailById"
+          resultType="org.server.withdraw.model.WithdrawChannelBankDetail">
+    SELECT * FROM t_withdraw_channel_bank_detail WHERE withdraw_channel_bank_detail_id = #{withdrawChannelBankDetailId}
   </select>
 
 
   <select resultMap="BaseResultMap" id="findByWithdrawBankChannelId"
-          resultType="org.server.withdraw.model.WithdrawChannelBank">
-  SELECT * FROM t_withdraw_channel_bank WHERE withdraw_bank_channel_id = #{withdrawBankChannelId}
+          resultType="org.server.withdraw.model.WithdrawChannelBankDetail">
+  SELECT * FROM t_withdraw_channel_bank_detail WHERE withdraw_bank_channel_id = #{withdrawBankChannelId}
 </select>
 
 
