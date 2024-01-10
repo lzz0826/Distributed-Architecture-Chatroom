@@ -93,11 +93,12 @@ public class WithdrawOrder {
     	return getStatusDesc(this.status);
     }
 
-    private String accountId; // 帳戶ID() ˊ存款款卡
     private String withdrawOrderId; // 出款訂單號
-
     private String merchantId;//商戶ID
     private String userId;  //使用者ID
+    private String accountId; // 帳戶ID() ˊ存款款卡
+
+
     private String bankOrderNo;
     private String bankReturnCode;
     private String bankReturnMessage;
@@ -123,6 +124,14 @@ public class WithdrawOrder {
     private Date createTime; // 創建時間
     private Date updateTime; // 更新時間
     private Integer withdrawMinute; // 提款分钟连续请求
+
+
+    //----不存DB的屬性
+    private String withdrawBankChannelId; //出款渠道ID
+
+    private String catchId; //代付渠道編碼
+
+
 
 
 

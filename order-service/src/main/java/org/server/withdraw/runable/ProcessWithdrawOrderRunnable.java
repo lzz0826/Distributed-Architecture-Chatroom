@@ -6,6 +6,7 @@ import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,7 +86,20 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
 
 
 
+      // 设置支付渠道计算后的参数
+      withdrawOrder.setWithdrawBankChannelId(withdrawChannel.getWithdrawBankChannelId());
+      withdrawOrder.setCatchId(withdrawChannel.getWithdrawBankChannelCode());
+      withdrawOrder.setActualAmount(BigDecimal.ZERO);// XPAY-598
+      withdrawOrder.setUpdateTime(new Date());
+
+      int result = withdrawOrderMapper.updateWithdrawOrder(withdrawOrder);
+      log.info("{} WithdrawOrderId:{}, 进入送单流程, 将订单状态改为\"提交处理中\", 订单更新结果:{}", ExecuteWithdrawService.logPrefix, withdrawOrder.getWithdrawOrderId(), result);
+
+      // 资料正确
       isLegalData = true;
+
+      processWithdrawOrder(withdrawOrder, withdrawChannel);
+      log.info("{} WithdrawOrderId:{}, 送单成功", ExecuteWithdrawService.logPrefix, withdrawOrder.getWithdrawOrderId());
 
 
     } catch (Exception e) {
@@ -103,13 +117,19 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
   }
 
 
+  private void processWithdrawOrder(WithdrawOrder withdrawOrder, WithdrawChannel withdrawChannel) {
+    //TODO
+  }
 
-  /**
-   * 檢查銀行是否支援
-   *
-   * @param merchantId	商戶號
-   * @param bankName		銀行名
-   */
+
+
+
+    /**
+     * 檢查銀行是否支援
+     *
+     * @param merchantId	商戶號
+     * @param bankName		銀行名
+     */
   private void checkIfBankIsSupported(String merchantId, String bankName) throws Exception {
 
     // 依merchant找出所有的代付帳號並檢查是否可用銀行
