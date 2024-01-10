@@ -138,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_order` (
 
 -- 銀行渠道 (我方能使用的銀行渠道 餘額是實際銀行帳戶餘額 不是錢包)
 CREATE TABLE IF NOT EXISTS `t_withdraw_bank_channel` (
-                                           `withdraw_bank_channel_id` bigint(20) NOT NULL AUTO_INCREMENT COMMENT '賬號ID',
+                                           `withdraw_bank_channel_id`varchar(40) NOT NULL COMMENT '賬號ID',
                                            `withdraw_bank_channel_name` varchar(30) DEFAULT NULL COMMENT '賬號名稱',
                                            `withdraw_bank_channel_code` varchar(30) DEFAULT NULL COMMENT '出款渠道代碼',
                                            `merchant_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',

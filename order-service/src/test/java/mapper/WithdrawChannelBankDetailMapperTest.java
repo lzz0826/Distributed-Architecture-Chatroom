@@ -65,4 +65,5 @@ public class WithdrawChannelBankDetailMapperTest extends BaseTest {
   }
 
 
+
 }

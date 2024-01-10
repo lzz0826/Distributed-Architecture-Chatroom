@@ -5,6 +5,7 @@ import java.math.BigDecimal;
 import java.net.SocketException;
 import java.net.SocketTimeoutException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,7 @@ import org.server.withdraw.model.WithdrawChannelBankDetail;
 import org.server.withdraw.model.WithdrawChannelBankCode;
 import org.server.withdraw.model.WithdrawOrder;
 import org.server.withdraw.sercive.ExecuteWithdrawService;
+import org.server.withdraw.sercive.JoinService;
 import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
@@ -49,6 +51,9 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
   @Resource
   private SecurityValidator securityValidator;
 
+  @Resource
+  private JoinService joinService;
+
   private WithdrawOrder withdrawOrder;
 
   public ProcessWithdrawOrderRunnable(WithdrawOrder withdrawOrder) {
@@ -72,6 +77,13 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
       checkIfCardNoIsAllowed(withdrawOrder.getPayeeCardNo());
       log.info("{} WithdrawOrderId:{}, 檢查參數完成", ExecuteWithdrawService.logPrefix, withdrawOrder.getWithdrawOrderId());
       //TODO
+
+      String merchantId = withdrawOrder.getMerchantId();
+      // 不指定代付渠道
+      BigDecimal amount = withdrawOrder.getAmount();
+      WithdrawChannel withdrawChannel = getWithdrawChannel(merchantId, amount, withdrawOrder.getBankName());
+
+
 
       isLegalData = true;
 
@@ -100,7 +112,6 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
    */
   private void checkIfBankIsSupported(String merchantId, String bankName) throws Exception {
 
-    //TODO
     // 依merchant找出所有的代付帳號並檢查是否可用銀行
     List<WithdrawChannel> channelList = withdrawBankChannelMapper.findByMerchantIds(merchantId);
 
@@ -199,6 +210,70 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
 //          payeeCardNo);
 
           }
+  }
+
+  /**
+   * 从商户所设置的代付帐号中取得一个可来进行代付发起的渠道
+   *
+   * @param merchantId	商户号
+   * @param amount		交易金额
+   * @param bankName		银行名称
+   * @return
+   */
+  private WithdrawChannel getWithdrawChannel(String merchantId, BigDecimal amount, String bankName) {
+
+
+    // 依merchant找出所有的代付帳號並檢查是否可用銀行
+    List<WithdrawChannel> channelList = withdrawBankChannelMapper.findByMerchantIds(merchantId);
+
+    //ˊ找不到可使用渠道
+    if (channelList == null || channelList.size()==0) {
+      //TODO  找不到可使用渠道異常
+//      throw new XxPayTraderException(TraderResponseCode.WITHDRAW_CHANNEL_NOT_FOUND_USABLE);
+    }
+
+    // 部份金流商未提供余额查询，但仍可做为代付渠道之使用
+    List<WithdrawChannel> canUseWithdrawChannelList = new ArrayList<WithdrawChannel>();
+
+    for (WithdrawChannel withdrawChannel : channelList) {
+      log.info("getWithdrawChannel 找到代付渠道withdrawChannel={}, catchId={}", withdrawChannel.getWithdrawBankChannelId(), withdrawChannel.getWithdrawBankChannelCode());
+
+      //渠道的方銀行訊息
+      List<WithdrawChannelBankDetail> canSupportBanks = joinService.bankDetailJoinBankCode(withdrawChannel.getWithdrawBankChannelId());
+//      List<WithdrawChannelBankDetail> channelBankDetails = withdrawChannelBankDetailMapper.findByWithdrawBankChannelId(withdrawChannel.getWithdrawBankChannelId());
+      //有記錄的銀行
+//      List<WithdrawChannelBankCode> canSupportBanks = withdrawChannelBankCodeMapper.findByBankCode(withdrawChannel.getWithdrawBankChannelId());
+      log.info("getWithdrawChannel canSupportBanks size: {}", canSupportBanks.size());
+      if(canSupportBanks.size() > 0){
+        boolean isSupportBankName = false;
+        for(WithdrawChannelBankDetail model : canSupportBanks){
+          WithdrawChannelBankCode withdrawChannelBankCode = model.getWithdrawChannelBankCode();
+          if(bankName.equals(withdrawChannelBankCode.getBankName())){
+            withdrawChannel.setChannelBankCode(model.getBankCode());
+            isSupportBankName = true;
+            break;
+          }
+        }
+        if(!isSupportBankName){
+          // 此代付渠道不支援银行
+          log.info("getWithdrawChannel merchantId={}, WithdrawChannel={}, not support bank={}, ignore this withdraw channel", merchantId, withdrawChannel.getBankChannelMerchantName(), bankName);
+          continue;
+        }
+      }
+      canUseWithdrawChannelList.add(withdrawChannel);
+    }
+
+    if(canUseWithdrawChannelList.isEmpty()) {
+      log.info("getWithdrawChannel merchantId={}, can use WithdrawChannel is empty", merchantId);
+      // TODOb 拋異常 未有任何可用的accountChannel
+//      throw new XxPayTraderException(TraderResponseCode.WITHDRAW_CHANNEL_NOT_FOUND_USABLE , bankName);
+    }
+    //重新排列 list
+    WithdrawChannel before = canUseWithdrawChannelList.get(0);
+    Collections.shuffle(canUseWithdrawChannelList);
+    WithdrawChannel withdrawChannel = canUseWithdrawChannelList.get(0);
+    log.info("find WithdrawChannel random result, before=[{}], after=[{}]", before.getBankChannelMerchantName(), withdrawChannel.getBankChannelMerchantName());
+    return withdrawChannel;
   }
 
 

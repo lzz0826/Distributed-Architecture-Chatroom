@@ -42,5 +42,21 @@
     SELECT * FROM t_withdraw_channel_bank_code WHERE bank_name = #{bankName}
   </select>
 
+  <select resultMap="BaseResultMap" id="findByBankCode"
+          resultType="org.server.withdraw.model.WithdrawChannelBankCode">
+    SELECT * FROM  t_withdraw_channel_bank_code WHERE bank_code = #{bankCode}
+  </select>
+
+
+  <select resultMap="BaseResultMap" id="findByIBankCodeIds" resultType="org.server.withdraw.model.WithdrawChannelBankCode">
+    SELECT *
+    FROM t_withdraw_channel_bank_code
+    WHERE bank_code_id IN
+    <foreach collection="bankCodeIds" item="bankCodeId" open="(" separator="," close=")">
+      #{bankCodeId}
+    </foreach>
+  </select>
+
+
 
 </mapper>

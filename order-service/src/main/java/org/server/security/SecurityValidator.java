@@ -23,6 +23,7 @@ public class SecurityValidator {
 
     private Set<String> cardNoSet;
 
+    //須確認DB是否已創好
     @PostConstruct
     public void loadSecurityData() {
         log.info("Initializing security IP list");

@@ -47,6 +47,7 @@ public class WithdrawChannelBankDetail {
 
     private Date createTime; // 創建時間
 
+    private WithdrawChannelBankCode withdrawChannelBankCode;
 
 
 }

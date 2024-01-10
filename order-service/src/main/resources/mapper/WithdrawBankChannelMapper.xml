@@ -5,7 +5,7 @@
 <mapper namespace="org.server.mapper.WithdrawBankChannelMapper">
 
   <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawChannel">
-    <id property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="BIGINT"/>
+    <id property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="VARCHAR"/>
     <result property="withdrawBankChannelName" column="withdraw_bank_channel_name" jdbcType="VARCHAR"/>
     <result property="withdrawBankChannelCode" column="withdraw_bank_channel_code" jdbcType="VARCHAR"/>
     <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
@@ -82,7 +82,7 @@
     </trim>
     values
     <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=BIGINT},</if>
+      <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=VARCHAR},</if>
       <if test="withdrawBankChannelName != null">#{withdrawBankChannelName,jdbcType=VARCHAR},</if>
       <if test="withdrawBankChannelCode != null">#{withdrawBankChannelCode,jdbcType=VARCHAR},</if>
       <if test="merchantId != null">#{merchantId, jdbcType=VARCHAR},</if>

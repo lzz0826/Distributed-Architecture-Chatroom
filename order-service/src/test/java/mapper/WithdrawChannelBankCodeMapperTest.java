@@ -1,6 +1,7 @@
 package mapper;
 
 import base.BaseTest;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.Resource;
@@ -41,6 +42,26 @@ public class WithdrawChannelBankCodeMapperTest extends BaseTest {
     String bankName = "testBank";
     List<WithdrawChannelBankCode> byBankName = withdrawChannelBankCodeMapper.findByBankName(bankName);
     System.out.println(byBankName);
+  }
+
+  @Test
+  public void findByBankCodeTest(){
+
+    String bankCode = "BBK";
+
+    List<WithdrawChannelBankCode> byBankCode = withdrawChannelBankCodeMapper.findByBankCode(bankCode);
+    for (WithdrawChannelBankCode withdrawChannelBankCode : byBankCode) {
+      System.out.println(withdrawChannelBankCode);
+    }
+  }
+
+  @Test
+  public void findByIBankCodeIdsTest(){
+    List<String> s = new ArrayList<>();
+    s.add("9993");
+    s.add("");
+    List<WithdrawChannelBankCode> byIBankCodeIds = withdrawChannelBankCodeMapper.findByIBankCodeIds(s);
+    System.out.println(byIBankCodeIds);
   }
 
 }

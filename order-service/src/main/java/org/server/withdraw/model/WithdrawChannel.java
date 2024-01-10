@@ -16,7 +16,7 @@ public class WithdrawChannel {
   /**
    * 出款渠道ID
    */
-  private Long withdrawBankChannelId;
+  private String withdrawBankChannelId;
 
   /**
    * 賬號名稱
@@ -24,7 +24,7 @@ public class WithdrawChannel {
   private String withdrawBankChannelName;
 
   /**
-   * 代付渠道代碼
+   * 出款渠道代碼
    */
   private String withdrawBankChannelCode;
 
@@ -182,4 +182,10 @@ public class WithdrawChannel {
    * 更新人
    */
   private String updater;
+
+
+
+  private String channelBankCode; // 渠道銀行代碼
+
+
 }

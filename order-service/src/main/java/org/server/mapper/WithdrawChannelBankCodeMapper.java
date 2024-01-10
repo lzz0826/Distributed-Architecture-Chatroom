@@ -12,6 +12,12 @@ public interface WithdrawChannelBankCodeMapper {
 
   List<WithdrawChannelBankCode> findByBankName(String bankName);
 
+  List<WithdrawChannelBankCode> findByBankCode(String bankCode);
+
+  List<WithdrawChannelBankCode> findByIBankCodeIds(List<String> bankCodeIds);
+
+
+
 
 
 }
