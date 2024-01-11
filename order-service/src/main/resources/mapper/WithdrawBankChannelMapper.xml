@@ -7,7 +7,7 @@
   <resultMap id="BaseResultMap" type="org.server.withdraw.model.WithdrawChannel">
     <id property="withdrawBankChannelId" column="withdraw_bank_channel_id" jdbcType="VARCHAR"/>
     <result property="withdrawBankChannelName" column="withdraw_bank_channel_name" jdbcType="VARCHAR"/>
-    <result property="withdrawBankChannelCode" column="withdraw_bank_channel_code" jdbcType="VARCHAR"/>
+    <result property="withdrawBankChannelCatchId" column="withdraw_bank_channel_catchId" jdbcType="VARCHAR"/>
     <result property="merchantId" column="merchant_id" jdbcType="VARCHAR"/>
     <result property="userId" column="user_id" jdbcType="VARCHAR"/>
     <result property="status" column="status" jdbcType="TINYINT"/>
@@ -47,7 +47,7 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="withdrawBankChannelId != null">withdraw_bank_channel_id,</if>
       <if test="withdrawBankChannelName != null">withdraw_bank_channel_name,</if>
-      <if test="withdrawBankChannelCode != null">withdraw_bank_channel_code,</if>
+      <if test="withdrawBankChannelCatchId != null">withdraw_bank_channel_catchId,</if>
       <if test="merchantId != null">merchant_id,</if>
       <if test="userId != null">user_id,</if>
       <if test="status != null">status,</if>
@@ -84,7 +84,7 @@
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="withdrawBankChannelId != null">#{withdrawBankChannelId,jdbcType=VARCHAR},</if>
       <if test="withdrawBankChannelName != null">#{withdrawBankChannelName,jdbcType=VARCHAR},</if>
-      <if test="withdrawBankChannelCode != null">#{withdrawBankChannelCode,jdbcType=VARCHAR},</if>
+      <if test="withdrawBankChannelCatchId != null">#{withdrawBankChannelCatchId,jdbcType=VARCHAR},</if>
       <if test="merchantId != null">#{merchantId, jdbcType=VARCHAR},</if>
       <if test="userId != null">#{userId, jdbcType=VARCHAR},</if>
       <if test="status != null">#{status,jdbcType=TINYINT},</if>

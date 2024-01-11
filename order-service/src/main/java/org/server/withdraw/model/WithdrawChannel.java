@@ -24,9 +24,9 @@ public class WithdrawChannel {
   private String withdrawBankChannelName;
 
   /**
-   * 出款渠道代碼
+   * 出款渠道代碼(緩存和 實現抽象後的銀行代碼)
    */
-  private String withdrawBankChannelCode;
+  private String withdrawBankChannelCatchId;
 
   /**
    * 商戶ID

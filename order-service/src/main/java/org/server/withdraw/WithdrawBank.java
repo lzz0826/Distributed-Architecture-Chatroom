@@ -12,10 +12,10 @@ public interface WithdrawBank {
   /**
    * 判定是否可以使用此銀行
    *
-   * @param bankId 代付渠道代碼(tb_pay_bank_code.bank_code_id)
+   * @param catchId 代付渠道代碼(t_withdraw_bank_channel.withdraw_bank_channel_catchId)
    * @return
    */
-  boolean canSupport(String bankId);
+  boolean canSupport(String catchId);
 
   /**
    * 是否支持餘額查詢

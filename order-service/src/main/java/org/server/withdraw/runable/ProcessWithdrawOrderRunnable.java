@@ -17,6 +17,7 @@ import org.server.mapper.WithdrawBankCardBlackMapper;
 import org.server.mapper.WithdrawChannelBankCodeMapper;
 import org.server.mapper.WithdrawChannelBankDetailMapper;
 import org.server.security.SecurityValidator;
+import org.server.withdraw.WithdrawBank;
 import org.server.withdraw.model.WithdrawBankCardBlack;
 import org.server.withdraw.model.WithdrawChannel;
 import org.server.mapper.WithdrawBankChannelMapper;
@@ -24,6 +25,7 @@ import org.server.mapper.WithdrawOrderMapper;
 import org.server.withdraw.model.WithdrawChannelBankDetail;
 import org.server.withdraw.model.WithdrawChannelBankCode;
 import org.server.withdraw.model.WithdrawOrder;
+import org.server.withdraw.rep.WithdrawMethodResponse;
 import org.server.withdraw.sercive.ExecuteWithdrawService;
 import org.server.withdraw.sercive.JoinService;
 import org.springframework.transaction.annotation.Isolation;
@@ -77,7 +79,6 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
       // 檢查銀行卡號是否合法
       checkIfCardNoIsAllowed(withdrawOrder.getPayeeCardNo());
       log.info("{} WithdrawOrderId:{}, 檢查參數完成", ExecuteWithdrawService.logPrefix, withdrawOrder.getWithdrawOrderId());
-      //TODO
 
       String merchantId = withdrawOrder.getMerchantId();
       // 不指定代付渠道
@@ -88,7 +89,7 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
 
       // 设置支付渠道计算后的参数
       withdrawOrder.setWithdrawBankChannelId(withdrawChannel.getWithdrawBankChannelId());
-      withdrawOrder.setCatchId(withdrawChannel.getWithdrawBankChannelCode());
+      withdrawOrder.setCatchId(withdrawChannel.getWithdrawBankChannelCatchId());
       withdrawOrder.setActualAmount(BigDecimal.ZERO);// XPAY-598
       withdrawOrder.setUpdateTime(new Date());
 
@@ -117,8 +118,19 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
   }
 
 
+
   private void processWithdrawOrder(WithdrawOrder withdrawOrder, WithdrawChannel withdrawChannel) {
-    //TODO
+
+    WithdrawBank withdrawBank;
+    WithdrawMethodResponse withdrawMethodResponse;
+    try {
+      /* 发起第三方代付订单 */
+
+    }catch (Exception e){
+
+    }
+
+
   }
 
 
@@ -256,7 +268,7 @@ public class ProcessWithdrawOrderRunnable implements Runnable {
     List<WithdrawChannel> canUseWithdrawChannelList = new ArrayList<WithdrawChannel>();
 
     for (WithdrawChannel withdrawChannel : channelList) {
-      log.info("getWithdrawChannel 找到代付渠道withdrawChannel={}, catchId={}", withdrawChannel.getWithdrawBankChannelId(), withdrawChannel.getWithdrawBankChannelCode());
+      log.info("getWithdrawChannel 找到代付渠道withdrawChannel={}, catchId={}", withdrawChannel.getWithdrawBankChannelId(), withdrawChannel.getWithdrawBankChannelCatchId());
 
       //渠道的方銀行訊息
       List<WithdrawChannelBankDetail> canSupportBanks = joinService.bankDetailJoinBankCode(withdrawChannel.getWithdrawBankChannelId());

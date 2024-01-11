@@ -140,7 +140,7 @@ CREATE TABLE IF NOT EXISTS `t_withdraw_order` (
 CREATE TABLE IF NOT EXISTS `t_withdraw_bank_channel` (
                                            `withdraw_bank_channel_id`varchar(40) NOT NULL COMMENT '賬號ID',
                                            `withdraw_bank_channel_name` varchar(30) DEFAULT NULL COMMENT '賬號名稱',
-                                           `withdraw_bank_channel_code` varchar(30) DEFAULT NULL COMMENT '出款渠道代碼',
+                                           `withdraw_bank_channel_catchId` varchar(30) DEFAULT NULL COMMENT '出款渠道代碼(實現的出款代碼)',
                                            `merchant_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
                                            `user_id` varchar(30) DEFAULT NULL COMMENT '商戶ID',
                                            `status` tinyint(4) NOT NULL DEFAULT '0' COMMENT '状态 0:下架 1:启用 2:达标 3:风控 4:暫時禁用 5:冷却 6:金额冷却',

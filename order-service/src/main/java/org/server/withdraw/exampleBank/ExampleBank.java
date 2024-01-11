@@ -29,8 +29,10 @@ import org.server.withdraw.model.WithdrawBank;
 import org.server.withdraw.rep.WithdrawMethodResponse;
 import org.server.withdraw.rep.WithdrawNotifyResponse;
 import org.server.withdraw.model.WithdrawOrder;
+import org.springframework.stereotype.Component;
 
 @Log4j2
+@Component
 public class ExampleBank implements org.server.withdraw.WithdrawBank {
 
   private static final String LOG_PREFIX = "ExampleBank出款";
@@ -59,8 +61,8 @@ public class ExampleBank implements org.server.withdraw.WithdrawBank {
 
 
   @Override
-  public boolean canSupport(String bankId) {
-    return false;
+  public boolean canSupport(String catchId) {
+    return "EXAMPLEBANK".equals(catchId);
   }
 
   @Override

@@ -129,7 +129,7 @@ public class WithdrawOrder {
     //----不存DB的屬性
     private String withdrawBankChannelId; //出款渠道ID
 
-    private String catchId; //代付渠道編碼
+    private String catchId; //代付渠道編碼 = (t_withdraw_bank_channel.withdraw_bank_channel_catchId)
 
 
 
