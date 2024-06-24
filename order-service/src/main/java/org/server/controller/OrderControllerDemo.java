@@ -6,6 +6,8 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.nio.ByteBuffer;
+import java.nio.channels.FileChannel;
 import javax.annotation.Resource;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
@@ -143,6 +145,39 @@ public class OrderControllerDemo {
       log.error("", e);
     } catch (IOException e) {
       log.error("", e);
+    }
+  }
+
+
+  @PostMapping("/test/img/nio")
+  public void getResultNIO(HttpServletRequest request, HttpServletResponse response) {
+    System.out.println("回照片啟動..");
+    try {
+      File file = new File("/Users/sai/Desktop/截圖 2023-11-06 上午11.42.52.png");
+      FileInputStream inputStream = new FileInputStream(file);
+      FileChannel fileChannel = inputStream.getChannel();
+      ByteBuffer buffer = ByteBuffer.allocate((int) file.length());
+
+      // 从文件通道读取数据到缓冲区
+      while (fileChannel.read(buffer) > 0) {
+        // 读取数据到缓冲区
+      }
+      buffer.flip();
+
+      response.setContentType("image/png");
+      ServletOutputStream outputStream = response.getOutputStream();
+
+      // 将缓冲区中的数据写入到响应输出流
+      while (buffer.hasRemaining()) {
+        outputStream.write(buffer.get());
+      }
+
+      fileChannel.close();
+      inputStream.close();
+      outputStream.close();
+      System.out.println("返返回照片結束..");
+    } catch (IOException e) {
+      e.printStackTrace();
     }
   }
 }
