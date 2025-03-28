@@ -75,6 +75,25 @@ public class OkHttpUtil {
     return null;
   }
 
+  /**
+   * 支持嵌套泛型的get請求。
+   * <pre>
+   *   Type type = new TypeToken<Results<User>>() {}.getType();
+   * <pre/>
+   *
+   * @param url     鏈接
+   * @param headers 請求頭
+   * @param type    嵌套泛型
+   * @return 響應對象, 可進行強轉。
+   */
+  public static <T> T get(String url, Map<String, String> headers, Type type) {
+    String result = get(url, headers);
+    if (Objects.nonNull(result) && Objects.nonNull(type)) {
+      return GSON.fromJson(result, type);
+    }
+    return null;
+  }
+
 
   /**
    * Form表单提交
