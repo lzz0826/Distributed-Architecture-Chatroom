@@ -7,7 +7,6 @@ import lombok.Data;
 @Builder
 public class Results<T> {
 
-
   private int code;
 
   private String status;
