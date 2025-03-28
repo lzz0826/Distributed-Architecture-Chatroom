@@ -7,7 +7,7 @@ public class WsChnIdUserIdMap {
 
 
 
-  private final static ConcurrentHashMap<ChannelId,String> map = new ConcurrentHashMap();
+  private final static ConcurrentHashMap<ChannelId,String> map = new ConcurrentHashMap<>();
   /**
    * key:       value:
    * channelId, userId

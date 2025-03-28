@@ -2,6 +2,7 @@ package org.server.dao;
 
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,6 +36,8 @@ public class OrderDAO {
   private Date updateTime;
 
   private Date createTime;
+
+  private LocalDateTime localDateTime;
 
 
 
